@@ -20,10 +20,11 @@ A fully offline, single-player version of the English Card Battle game — origi
 2. Install `English_offline.apk` (repo root — the output of `scripts/build_and_verify.py`)
 3. Launch — the game starts as a guest, fully offline
 
-> ⚠️ Do NOT install `build/English_offline.apk`: it is a stale build that
-> predates the battle standby handshake and hangs the tutorial battle on the
-> "player vs Will" loading screen forever. The current APK is always the one
-> at the repo root.
+> ⚠️ The checked-in APKs predate the latest fixes: `build/English_offline.apk`
+> contains an earlier loading-screen fix but is still missing the battle
+> identity/desync fixes, and the repo-root `English_offline.apk` predates all
+> of them. Rebuild with `scripts/build_and_verify.py` (requires Java 17) and
+> install the `English_offline.apk` it writes to the repo root.
 
 ### Play the Web Prototype
 
@@ -100,7 +101,7 @@ monster-battle-ccg/
 ├── csv_data/                     # Game configuration (plain CSV)
 ├── English_offline.apk           # Final installable APK (~55 MB) — install THIS one
 ├── build/
-│   ├── English_offline.apk       # STALE build — do not install (see Quick Start)
+│   ├── English_offline.apk       # Earlier build — see Quick Start (rebuild first)
 │   └── web/
 │       ├── game.html             # Browser-playable card battle prototype
 │       └── game_data.json        # Card and PvE data for the prototype

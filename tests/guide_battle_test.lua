@@ -438,11 +438,12 @@ check(battle_logic.is_first == true, "player is first actor")
 check(battle_logic.own_player.user_name == login_name,
     "own actor carries the player's name (" .. tostring(battle_logic.own_player.user_name) .. ")")
 
--- enemy name: server sends the text key "guide_name_1"; the match panel
--- translates it via text_loader (as modules/battle/match_panel.lua does)
+-- enemy name: the server sends "[AI] Will" (battle 1).  The match panel runs
+-- it through text_loader:GetText, which passes non-keys through unchanged.
 local raw_enemy_name = battle_logic.enemy_player.user_name
-check(raw_enemy_name == "guide_name_1", "server sent enemy name text key, got " .. tostring(raw_enemy_name))
-check(text_loader:GetText(raw_enemy_name) == "Will", "enemy name translates to Will")
+check(raw_enemy_name == "[AI] Will", "server sent enemy name, got " .. tostring(raw_enemy_name))
+check(text_loader:GetText(raw_enemy_name) == "[AI] Will", "enemy name displays as-is (text_loader passthrough)")
+check(text_loader:GetText("guide_name_1") == "Will", "text key guide_name_1 still resolves to Will")
 
 -- ---------------------------------------------------------------------------
 -- SECTION 3: standby handshake (the part that hung on "loading" forever)
@@ -472,7 +473,7 @@ check(battle_logic.own_player.is_sacrifice == true, "player sacrifice phase acti
 section("4. Turn window")
 
 local turn_seconds_left = time:GetDiffSecond(battle_logic.own_player.last_oper_time or 0)
-check(turn_seconds_left > 10, "server grants a turn window (last_oper_time in the future, " .. turn_seconds_left .. "s left)")
+check(turn_seconds_left > 3000, "server grants an effectively unlimited turn window (last_oper_time in the future, " .. turn_seconds_left .. "s left)")
 check(battle_logic.cur_stage == battle_logic.STAGE.own, "no instant auto-attack (stage still own after prepa)")
 
 -- ---------------------------------------------------------------------------
@@ -524,8 +525,8 @@ frame_model.run(m2, 300, function(m) return m.observed.init_player_info ~= nil e
 check(battle_logic.own_player ~= nil and battle_logic.own_player.user_id == login_user_id,
     "second battle: no side swap")
 local raw_enemy_name2 = battle_logic.enemy_player.user_name
-check(raw_enemy_name2 == "guide_name_2", "second battle enemy key is guide_name_2, got " .. tostring(raw_enemy_name2))
-check(text_loader:GetText(raw_enemy_name2) == "Challenger", "second battle enemy translates to Challenger")
+check(raw_enemy_name2 == "[AI] Challenger", "second battle enemy name, got " .. tostring(raw_enemy_name2))
+check(text_loader:GetText(raw_enemy_name2) == "[AI] Challenger", "second battle enemy displays as-is")
 
 frame_model.run(m2, 6000, function(m) return battle_logic.battle_result ~= nil end)
 

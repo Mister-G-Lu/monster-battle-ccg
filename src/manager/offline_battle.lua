@@ -17,11 +17,13 @@ local IMMOLATION = constants.CARD_IMMOLATION_CRYSTAL
 local MAX_ROUNDS = 50  -- force game over after this many rounds to prevent infinite battles
 
 -- Seconds the client gives the human to act each turn.  The client computes
--- GetDiffSecond(last_oper_time) and auto-attacks when it hits 0, so the
--- server must send a future timestamp (os.time() + window).  Sending 0 made
--- the client auto-attack immediately every turn, skipping the player's
--- deployment phase entirely.
-local TURN_TIME = 30
+-- GetDiffSecond(last_oper_time) and auto-attacks when it hits 0.  Sending 0
+-- made the client auto-attack immediately every turn, skipping the player's
+-- deployment phase entirely.  The offline edition uses a far-future window
+-- (effectively unlimited): the player must manually sacrifice/deploy and end
+-- the turn, and is never rushed mid-sacrifice.  The client also skips its
+-- auto-attack entirely while own_player.is_sacrifice is true.
+local TURN_TIME = 3600
 
 local offline_battle = {}
 
@@ -481,6 +483,8 @@ end
 function offline_battle:BeginPrep(user_id)
     local actor = user_id == self.own.user_id and self.own or self.enemy
     actor.is_sacrifice = true
+    -- Far-future timestamp: prevents auto-attack during sacrifice phase.
+    -- Player must manually sacrifice/deploy/end turn.
     self:PushCommand("cmd_battle_prepa", {
         user_id = actor.user_id,
         sync_crystal = actor.cur_crystal,
