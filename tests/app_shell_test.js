@@ -145,6 +145,9 @@ console.log('== app_shell_test: ' + path.relative(ROOT, HTML) + ' ==');
   assert(markup.includes('viewport-fit=cover'), 'viewport must opt into the display cutout / safe areas');
   assert(/display-mode:\s*standalone/.test(markup), 'CSS must adapt to the installed standalone display mode');
   assert(markup.includes('safe-area-inset-bottom'), 'HUD must respect the bottom safe-area inset');
+  assert(markup.includes('100dvh'), 'page must use dynamic viewport height so mobile chrome does not clip');
+  assert(markup.includes('orientation: landscape'), 'CSS must compact the battle chrome in landscape');
+  assert(markup.includes('touch-action: pan-x pan-y'), 'page must allow pan/drag when content still overflows');
   // the campaign engine script must stay the FIRST bare <script> (campaign_sim.js slices on it)
   assert(html.indexOf('<script>') > markup.indexOf('<script data-shell-icons>'),
          'the head bootstrap must not be a bare <script> before the game script');
