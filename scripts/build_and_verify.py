@@ -146,6 +146,35 @@ def step_apktool_build():
     mu_dst = os.path.join(assets_dir, "src.mu")
     shutil.copy2(os.path.join(WORK, "build", "assets", "src.mu"), mu_dst)
 
+    # Patch smali: nop third-party SDK calls that crash on modern Android
+    smali_path = os.path.join(DECODED_APK, "smali", "org", "cocos2dx", "lua", "AppActivity.smali")
+    if os.path.exists(smali_path):
+        with open(smali_path, "r") as f:
+            smali = f.read()
+        patched = False
+        # Nop PlatformSDK.init (calls Google Play Services which crashes)
+        old = 'invoke-static {p0, p1}, Lorg/cocos2dx/lua/PlatformSDK;->init(Landroid/app/Activity;Landroid/os/Bundle;)V'
+        if old in smali:
+            smali = smali.replace(old, 'nop')
+            patched = True
+        # Nop TalkingData calls (MODE_WORLD_READABLE removed in Android 7+)
+        for td_call in [
+            'invoke-static {p0, v2, v1}, Lcom/tendcloud/tenddata/TalkingDataGA;->init(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)V',
+            'invoke-static {p0}, Lcom/tendcloud/tenddata/TalkingDataGA;->onPause(Landroid/app/Activity;)V',
+            'invoke-static {p0}, Lcom/tendcloud/tenddata/TalkingDataGA;->onResume(Landroid/app/Activity;)V',
+        ]:
+            if td_call in smali:
+                smali = smali.replace(td_call, 'nop')
+                patched = True
+        if patched:
+            with open(smali_path, "w") as f:
+                f.write(smali)
+            ok("Smali patched: PlatformSDK.init + TalkingData nopped")
+        else:
+            ok("Smali: no third-party SDK calls to patch")
+    else:
+        warn(f"AppActivity.smali not found at {smali_path}")
+
     unsigned = os.path.join(WORK, "build", "English_offline_unsigned.apk")
     result = subprocess.run(
         ["java", "-jar", APKTOOL, "b", "-f", "-o", unsigned, DECODED_APK],
