@@ -15,8 +15,19 @@ require "config"
 require "cocos.init"
 local json = require "utils.json"
 
-local error_tracer = require "manager.error_tracer"
-error_tracer:Init()
+-- The original error tracer uploads failures over the retired game service.  Load
+-- it only after the runtime is available and never let diagnostics abort startup.
+local error_tracer = nil
+local function init_error_tracer()
+    local ok, tracer = pcall(require, "manager.error_tracer")
+    if ok and tracer then
+        error_tracer = tracer
+        pcall(function() error_tracer:Init() end)
+        dbg("Legacy error tracer initialized (remote uploads disabled)")
+    else
+        dbg("Legacy error tracer unavailable: " .. tostring(tracer))
+    end
+end
 
 function __G__TRACKBACK__(msg)
     dbg("CRASH: " .. tostring(msg))
@@ -31,17 +42,35 @@ function __G__TRACKBACK__(msg)
     str = str .. debug.traceback()
 
     if error_tracer then
-        error_tracer:PushErrorInfo(str)
-        if error_tracer:GetUpdateDelay() == 0 then
-            pcall(function() error_tracer:UploadCrash() end)
-        end
+        pcall(function() error_tracer:PushErrorInfo(str) end)
+        -- Keep the diagnostic locally.  The original upload endpoint is retired,
+        -- and invoking its native upload path during an exception can terminate
+        -- the process before the useful local log has been written.
+        dbg("Crash recorded locally; remote upload intentionally disabled")
     end
+
+    -- A native log is difficult to retrieve from BlueStacks after a launch
+    -- failure.  Show the same failure on-screen whenever Cocos is usable.
+    pcall(function()
+        local scene = cc.Scene:create()
+        local layer = cc.LayerColor:create(cc.Color(55, 15, 20, 255))
+        scene:addChild(layer)
+        local size = cc.Director:getInstance():getWinSize()
+        local text = "Startup error. A report was saved to offline_debug.log.\n\n" .. tostring(msg)
+        local label = cc.Label:createWithSystemFont(text, "Helvetica", 16)
+        label:setDimensions(size.width * 0.9, size.height * 0.8)
+        label:setAlignment(cc.TEXT_ALIGNMENT_LEFT)
+        label:setPosition(cc.p(size.width / 2, size.height / 2))
+        scene:addChild(label)
+        cc.Director:getInstance():replaceScene(scene)
+    end)
 
     return msg
 end
 
 function main()
     dbg("=== main() START ===")
+    init_error_tracer()
     local cc_app = cc.Application:getInstance()
     dbg("Platform: " .. tostring(cc_app and cc_app:getTargetPlatform() or "nil"))
     local file_util = cc.FileUtils:getInstance()
@@ -158,7 +187,7 @@ function main()
                         end
                     end
 
-                    pcall(function() error_tracer:UploadCrash() end)
+                    dbg("Decompression completed; remote crash upload disabled")
 
                     pcall(function()
                         local str = cc.FileUtils:getInstance():getStringFromFile("assets.manifest")
