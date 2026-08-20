@@ -59,6 +59,16 @@ so cards, the battlefield and the campaign map look like the Android game
 instead of plain text. See `docs/ART_INTEGRATION.md` for how it works and the
 alternatives evaluated (generated art, free asset sites).
 
+### Consolidation (Android engine + Web campaign)
+
+The Shadow Road campaign is now defined **once** in
+`content/campaign_data.json`, and `scripts/refresh_campaign_data.py` regenerates
+every platform's copy from it: the `CAMPAIGN_DATA` blob in `index.html` /
+`build/web/game.html`, the `build/web/campaign_data.json` mirror, and the native
+`src/manager/campaign_data_generated.lua`. Edit the JSON, re-run the generator —
+never hand-edit the copies. See `docs/CONSOLIDATION_PLAN.md` for the
+decision and the architecture map.
+
 ### Rebuild from Source
 
 ```bash
