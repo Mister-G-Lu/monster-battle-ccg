@@ -51,6 +51,14 @@ skirmishes sit at ~85–100% first-try for a greedy bot, elites ~85%, bosses
 ~30–60% — real players retry freely and pick rewards, so the campaign
 completes in a few boss-attempt cycles.
 
+### Art
+
+The prototype now renders the original game's own artwork (extracted from
+`English_offline.apk` into `build/web/assets/` by `scripts/extract_web_art.py`),
+so cards, the battlefield and the campaign map look like the Android game
+instead of plain text. See `docs/ART_INTEGRATION.md` for how it works and the
+alternatives evaluated (generated art, free asset sites).
+
 ### Rebuild from Source
 
 ```bash
