@@ -56,6 +56,7 @@ CHANGED = {
     "src/logic/battle.lua": os.path.join(DECRYPTED, "logic", "battle.lua"),
     "src/modules/battle/match_panel.lua": os.path.join(DECRYPTED, "modules", "battle", "match_panel.lua"),
     "src/manager/text_loader.lua": os.path.join(DECRYPTED, "manager", "text_loader.lua"),
+    "src/utils/csv.lua": os.path.join(DECRYPTED, "utils", "csv.lua"),
 }
 
 errors = []

@@ -79,7 +79,7 @@ function meta:Load(lang)
 
     local table_info = {}
     local str = nil
-    pcall(function() str = aandm.loadConfig(string.format("res/data/client_lang_%s.csv", lang)) end)
+    pcall(function() str = cc.FileUtils:getInstance():getStringFromFile(string.format("res/data/client_lang_%s.csv", lang)) end)
     if not str or str == "" then
         print("[TEXT_LOADER] WARNING: language CSV not found for lang=" .. tostring(lang))
         return table_info
