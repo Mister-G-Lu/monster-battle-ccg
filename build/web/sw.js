@@ -20,7 +20,7 @@
  */
 'use strict';
 
-const CACHE = 'mbccg-shell-v2';
+const CACHE = 'mbccg-shell-v3';
 const SHELL = [
   './',
   './game.html',

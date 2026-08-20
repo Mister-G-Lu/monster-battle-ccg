@@ -55,6 +55,7 @@
   --safe-r: env(safe-area-inset-right, 0px);
   --app-h: 100dvh;
 }
+
 /* Full-viewport flex shell. A second `overflow-x: hidden` on body used to
    reset overflow-y to auto (CSS overflow pairing), which made Android Chrome
    scroll the document, fire pull-to-refresh, and unstick the tab strip. */
@@ -63,21 +64,26 @@ html {
   width: 100%; overflow: hidden; overscroll-behavior: none;
   -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
 }
-body { height: 100%; width: 100%; max-width: 100%; background: #07070f;
+body {
+  height: 100%; width: 100%; max-width: 100%; background: #07070f;
   color: var(--md-on-surface); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   overflow: hidden; overscroll-behavior: none; -webkit-tap-highlight-color: transparent;
   touch-action: pan-x pan-y; display: flex; flex-direction: column; position: relative;
-  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}
 img, .card, .hero-logo { -webkit-user-drag: none; user-select: none; }
 button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .howto-body, .intro-meta, .power-card, #result-detail { -webkit-user-select: text; user-select: text; }
+[hidden] { display: none !important; }
 
 /* --- in-game HUD (title + back + menu) --- */
-.game-hud { flex: 0 0 auto; height: calc(var(--hud-h) + var(--safe-t));
+.game-hud {
+  flex: 0 0 auto; height: calc(var(--hud-h) + var(--safe-t));
   padding-top: var(--safe-t); padding-left: var(--safe-l); padding-right: var(--safe-r);
   display: flex; align-items: center; gap: 2px;
   background: linear-gradient(180deg, rgba(10,10,20,.92), rgba(12,12,24,.86));
-  border-bottom: 1px solid rgba(255,255,255,.06); z-index: 30; }
+  border-bottom: 1px solid rgba(255,255,255,.06); z-index: 30;
+}
 .game-hud.battle-mode { background: linear-gradient(180deg, rgba(42,18,32,.96), rgba(22,22,39,.9)); }
 .hud-titles { flex: 1 1 auto; min-width: 0; padding-left: 6px; }
 .hud-title { font-size: 1em; font-weight: 700; line-height: 1.25;
@@ -89,25 +95,31 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
   justify-content: center; flex: 0 0 auto; transition: background .15s; padding: 0; }
 .hud-btn:active { background: rgba(255,255,255,.13); }
 .hud-btn[hidden] { display: none; }
-[hidden] { display: none !important; }
 .glyph-back { width: 16px; height: 16px; border-left: 2px solid #dcdcea;
   border-bottom: 2px solid #dcdcea; transform: rotate(45deg); margin-left: 4px; }
 .glyph-dots { width: 4px; height: 4px; border-radius: 50%; background: #dcdcea;
   box-shadow: 0 -6px 0 #dcdcea, 0 6px 0 #dcdcea; }
 
 /* --- scrolling game content --- */
-.app-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden;
+.app-body {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden;
   -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
   padding-left: var(--safe-l); padding-right: var(--safe-r);
-  scrollbar-width: thin; scrollbar-color: #2c2c46 transparent; }
+  scrollbar-width: thin; scrollbar-color: #2c2c46 transparent;
+  display: flex; flex-direction: column;
+}
 .app-body::-webkit-scrollbar { width: 5px; }
 .app-body::-webkit-scrollbar-thumb { background: #2c2c46; border-radius: 3px; }
+/* Battle is a full-bleed board: lock document scroll and let the board flex. */
+.app-body:has(#battle.active) { overflow: hidden; }
 
 /* --- campaign tab strip (game navigation, not a fake OS nav bar) --- */
-.game-tabs { flex: 0 0 auto; height: calc(var(--tabs-h) + var(--safe-b));
+.game-tabs {
+  flex: 0 0 auto; height: calc(var(--tabs-h) + var(--safe-b));
   padding-bottom: var(--safe-b); padding-left: var(--safe-l); padding-right: var(--safe-r);
   display: flex; background: var(--md-surface);
-  border-top: 1px solid var(--md-outline); z-index: 30; }
+  border-top: 1px solid var(--md-outline); z-index: 30;
+}
 .game-tabs.hidden { display: none; }
 .game-tab { position: relative; flex: 1 1 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 3px; border: none;
@@ -144,9 +156,6 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .glyph-sword { -webkit-mask: var(--m) center/contain no-repeat; mask: var(--m) center/contain no-repeat;
   --m: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 3v5l-8.5 8.5 1.6 1.6-1.4 1.4-1.6-1.6-1.3 1.3 1.6 1.6L8.9 22l-1.6-1.6L5.8 22l-1.4-1.4 1.6-1.5-1.6-1.6 1.4-1.4 1.6 1.6L15 8.9V3h5z'/></svg>"); }
 
-/* --- cold-start splash is gone: the game appears as soon as it renders.
-   The browser/launcher draws the real cold-start screen. --- */
-
 /* --- hero header on the campaign screen --- */
 .hero { position: relative; width: 100%; height: 168px; display: flex;
   flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
@@ -179,21 +188,8 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .screen-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,18,31,.25), rgba(18,18,31,.72)); }
 h1, h2, h3 { letter-spacing: 0.02em; }
 
-/* ============ LOGO / TITLE BANNER ============ */
-.logo-banner { width: 100%; max-width: 920px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.logo-banner .logo { height: 84px; width: auto; filter: drop-shadow(0 4px 10px rgba(0,0,0,.5)); }
-.logo-banner .logo-text { display: flex; flex-direction: column; }
-.logo-banner .logo-title { font-size: 1.9em; font-weight: 900; color: #fff; letter-spacing: 0.04em; text-shadow: 0 2px 8px rgba(0,0,0,.7); }
-.logo-banner .logo-sub { color: #c9a6ff; font-size: 0.9em; letter-spacing: 0.05em; text-shadow: 0 1px 4px rgba(0,0,0,.7); }
-
 /* ============ CAMPAIGN MAP (world screen) ============ */
 #world { justify-content: flex-start; padding-top: 0; }
-.world-head { width: 100%; max-width: 920px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-.world-head h1 { font-size: 1.6em; color: #e94560; }
-.world-head .subtitle { color: #8b8ba7; font-size: 0.9em; }
-.world-actions { display: flex; gap: 8px; }
-.btn-ghost { background: #1c1c30; border: 1px solid #33334d; color: #bbb; padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85em; transition: all 0.15s; }
-
 .statsbar { display: flex; gap: 7px; flex-wrap: wrap; margin: 0 12px 4px; width: calc(100% - 24px); max-width: 920px; }
 .statsbar span { background: var(--md-surface); border: 1px solid var(--md-outline); padding: 6px 11px; border-radius: 999px; font-size: 0.76em; color: #b0b0c6; display: inline-flex; align-items: center; }
 .statsbar b { color: #eee; }
@@ -203,7 +199,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   border: 1px solid #2d7a3f; color: #7ee692; font-size: 0.95em; display: none; }
 .completion-banner.show { display: block; }
 
-/* Region blocks */
 .region { width: calc(100% - 24px); max-width: 920px; margin-top: 12px; border-radius: 16px; overflow: hidden;
   background: #161627; border: 1px solid #23233a; opacity: 0.62; transition: opacity 0.3s; }
 .region.unlocked,.region.in-progress { opacity: 1; }
@@ -242,8 +237,15 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 @keyframes pulse { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 
 /* ============ BATTLE SCREEN ============ */
-#battle { justify-content: flex-start; padding: 10px 8px 16px; }
-.battle-header { display: flex; justify-content: space-between; align-items: stretch; width: 100%; max-width: 720px; padding: 10px 12px; background: #161627; border: 1px solid #23233a; border-radius: 12px; gap: 8px; }
+/* Full-height Android board: header / field / hand / log / actions, no page scroll. */
+#battle { justify-content: flex-start; padding: 8px 8px 10px; }
+#battle.active {
+  flex: 1 1 auto; min-height: 0; height: 100%; width: 100%;
+  overflow: hidden; padding-bottom: 8px;
+}
+.battle-header { display: flex; justify-content: space-between; align-items: stretch;
+  width: 100%; max-width: 720px; padding: 10px 12px; background: #161627;
+  border: 1px solid #23233a; border-radius: 12px; gap: 8px; flex: 0 0 auto; }
 .side { flex: 1; min-width: 0; }
 .side .who { font-weight: 700; font-size: 0.95em; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .hp-bar { height: 16px; background: #0c0c18; border-radius: 8px; overflow: hidden; margin: 5px 0 2px; }
@@ -257,16 +259,17 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .power-chip { display: inline-block; font-size: 0.66em; background: #2a1220; border: 1px solid #7a2a44; color: #ff9db1;
   padding: 1px 8px; border-radius: 999px; cursor: help; font-weight: 600; }
 
-.field { display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 720px; margin-top: 10px; }
-.field-row { display: flex; justify-content: center; gap: 8px; min-height: 72px; flex-wrap: nowrap; overflow-x: auto; max-width: 100%; }
-.field-label { text-align: center; color: #666; font-size: 0.72em; text-transform: uppercase; letter-spacing: 0.12em; margin: 2px 0; }
+.field { display: flex; flex-direction: column; gap: 4px; width: 100%; max-width: 720px; margin-top: 8px;
+  flex: 1 1 auto; min-height: 0; justify-content: space-evenly; }
+.field-row { display: flex; justify-content: center; align-items: flex-end; gap: 8px; min-height: 0; flex-wrap: nowrap; overflow-x: auto; max-width: 100%; }
+.field-label { text-align: center; color: #666; font-size: 0.72em; text-transform: uppercase; letter-spacing: 0.12em; margin: 2px 0; flex: 0 0 auto; }
 
-.crystal-bar { display: flex; align-items: center; gap: 4px; justify-content: center; margin: 2px 0; }
+.crystal-bar { display: flex; align-items: center; gap: 4px; justify-content: center; margin: 2px 0; flex: 0 0 auto; }
 .crystal { width: 16px; height: 16px; background: #e94560; border-radius: 50%; background-size: contain; background-repeat: no-repeat; background-position: center; }
 .crystal.has-art { background-color: transparent; filter: drop-shadow(0 1px 1px rgba(0,0,0,.6)); }
 .crystal.empty { background: #2a2a3a; opacity: .35; filter: grayscale(1); }
 
-.card { width: min(88px, 28%, 22vmin); height: min(118px, 38vmin); border-radius: 6px; font-size: 0.72em; cursor: default; transition: transform 0.15s, box-shadow 0.15s; position: relative; border: none; overflow: hidden; background: #14142a; box-shadow: 0 2px 6px rgba(0,0,0,.55); flex: 0 0 auto; }
+.card { width: 84px; height: 112px; border-radius: 6px; font-size: 0.72em; cursor: default; transition: transform 0.15s, box-shadow 0.15s; position: relative; border: none; overflow: hidden; background: #14142a; box-shadow: 0 2px 6px rgba(0,0,0,.55); flex: 0 0 auto; }
 .card.hand { cursor: pointer; }
 .card.token { filter: saturate(.85); }
 
@@ -289,15 +292,21 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .card.empty { border: 2px dashed #2a2a3a; opacity: 0.3; cursor: default; color: #555; display: flex; align-items: center; justify-content: center; }
 .card.ready-glow { box-shadow: 0 0 10px currentColor; }
 .card.dead { filter: grayscale(1) brightness(.55); }
+.card.item-card .card-name { font-size: 0.7em; }
+.item-slot { background: linear-gradient(135deg, #2a1a0a, #4a2a10) !important; border-color: #8B7355 !important; }
+.item-slot .card-cost { background: #8B7355; }
 
-.battle-log { width: 100%; max-width: 720px; height: 84px; overflow-y: auto; background: #0a0a16; border: 1px solid #1e1e30; border-radius: 8px; padding: 6px 8px; font-size: 0.76em; color: #9a9ab0; margin-top: 8px; }
+#player-hand { flex: 0 0 auto; width: 100%; max-width: 720px; margin: 6px auto 0;
+  flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; min-height: 0; }
+
+.battle-log { width: 100%; max-width: 720px; height: 64px; flex: 0 0 64px; overflow-y: auto; background: #0a0a16; border: 1px solid #1e1e30; border-radius: 8px; padding: 6px 8px; font-size: 0.76em; color: #9a9ab0; margin-top: 6px; }
 .battle-log div { margin: 1px 0; }
 .battle-log .damage { color: #e94560; }
 .battle-log .heal { color: #53d769; }
 .battle-log .info { color: #539cd5; }
 .battle-log .power { color: #d4a5f5; font-weight: 600; }
 
-.battle-actions { display: flex; gap: 8px; margin-top: 10px; width: 100%; padding: 0 4px; }
+.battle-actions { display: flex; gap: 8px; margin-top: 8px; width: 100%; max-width: 720px; padding: 0 4px; flex: 0 0 auto; }
 .battle-actions .btn { flex: 1 1 auto; }
 .battle-actions .retreat-btn { flex: 0 0 auto; }
 
@@ -305,13 +314,11 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   font-size: 0.92em; font-weight: 600; font-family: inherit; cursor: pointer; margin: 4px 0;
   transition: background .15s, transform .1s, box-shadow .15s; box-shadow: 0 2px 8px rgba(233,69,96,.28); }
 .btn:active { transform: scale(.97); }
-.btn:disabled { background: #333; cursor: default; }
+.btn:disabled { background: #333; cursor: default; box-shadow: none; }
 .btn.end-turn { background: #0f3460; }
-.btn.secondary { background: #33334d; }
+.btn.secondary { background: #33334d; box-shadow: none; }
 
 /* ============ OVERLAYS ============ */
-/* Game panels: centered modals over the board — the Android game's own
-   result/reward screens, not OS-style bottom sheets. */
 .overlay { position: fixed; inset: 0; background: rgba(6,6,14,0.78); backdrop-filter: blur(3px);
   display: none; flex-direction: column; align-items: center; justify-content: center;
   z-index: 100; overflow: hidden;
@@ -319,7 +326,7 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .overlay.active { display: flex; animation: scrimIn .2s ease-out; }
 @keyframes scrimIn { from { opacity: 0; } to { opacity: 1; } }
 .overlay .panel { background: var(--md-surface); border: 1px solid var(--md-outline);
-  border-radius: 18px; padding: 18px 20px calc(20px + var(--safe-b));
+  border-radius: 18px; padding: 18px 20px 20px;
   max-width: 640px; width: 100%; text-align: center; max-height: 92%; overflow-y: auto;
   box-shadow: 0 18px 60px rgba(0,0,0,.7); animation: panelIn .22s ease-out; }
 @keyframes panelIn { from { transform: scale(.96); opacity: .4; } to { transform: none; opacity: 1; } }
@@ -357,36 +364,26 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .reward-cards { display: flex; gap: 14px; justify-content: center; margin: 18px 0; flex-wrap: wrap; }
 .reward-option { cursor: pointer; }
 .reward-option .owned { text-align: center; color: #8b8ba7; font-size: 0.7em; margin-top: 4px; }
-
 .deck-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 14px 0; max-height: 52vh; overflow-y: auto; }
-.deck-group { flex-direction: column; }
-
-/* Item card styles (item cards keep the full card frame and show their sprite art) */
-.card.item-card .card-name { font-size: 0.7em; }
-.item-slot { background: linear-gradient(135deg, #2a1a0a, #4a2a10) !important; border-color: #8B7355 !important; }
-.item-slot .card-cost { background: #8B7355; }
 
 .snackbar { position: fixed; left: max(12px, var(--safe-l)); right: max(12px, var(--safe-r)); bottom: calc(var(--tabs-h) + 14px + var(--safe-b));
   background: #2a2a3f; color: #eceaf4; border-radius: 12px; padding: 13px 16px; font-size: .84em;
   box-shadow: 0 8px 26px rgba(0,0,0,.55); z-index: 95; opacity: 0; transform: translateY(14px);
   transition: opacity .22s, transform .22s; pointer-events: none; text-align: left; }
 .snackbar.show { opacity: 1; transform: none; }
-.howto summary { cursor: pointer; color: #539cd5; font-weight: 600; padding: 6px 0; }
-.howto ul { margin: 8px 0 4px 20px; line-height: 1.7; }
 
-/* --- installed PWA / handsets: full-bleed, respect safe areas --- */
 /* Short / landscape viewports: compact battle chrome so it fits without clipping. */
 @media (max-height: 560px), (orientation: landscape) and (max-height: 720px) {
   :root { --hud-h: 44px; --tabs-h: 48px; }
   .hero { height: 96px; }
   .hero-logo { height: 52px; }
-  #battle { padding: 6px 6px 10px; }
+  #battle { padding: 6px 6px 8px; }
   .battle-header { padding: 6px 8px; }
   .hp-bar { height: 10px; margin: 3px 0 1px; }
   .field { margin-top: 4px; gap: 2px; }
   .field-row { min-height: 0; gap: 6px; }
-  .card { width: min(72px, 18vmin); height: min(96px, 28vmin); }
-  .battle-log { height: 48px; margin-top: 4px; }
+  .card { width: 64px; height: 86px; }
+  .battle-log { height: 44px; flex-basis: 44px; margin-top: 4px; }
   .battle-actions { margin-top: 4px; }
   .btn { padding: 8px 16px; }
 }
@@ -399,7 +396,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   .btn:hover { background: #c23152; }
   .btn.end-turn:hover { background: #1a5276; }
   .btn.secondary:hover { background: #45456a; }
-  .btn-ghost:hover { border-color: #e94560; color: #eee; }
   .menu-row:hover { background: rgba(255,255,255,.06); }
   .card.hand:hover { transform: translateY(-4px) scale(1.04); }
   .reward-option .card.hand:hover { transform: translateY(-6px) scale(1.06); border-color: #f39c12; }
@@ -418,22 +414,20 @@ h1, h2, h3 { letter-spacing: 0.02em; }
      and a compact tab strip. The real device draws the system bars.
      ============================================================ -->
 
-      <!-- ---------- in-game HUD ---------- -->
-      <header class="game-hud" id="game-hud">
-        <button class="hud-btn" id="hud-back" onclick="appBack()" aria-label="Back" hidden>
-          <span class="glyph-back"></span>
-        </button>
-        <div class="hud-titles">
-          <div class="hud-title" id="hud-title">The Shadow Road</div>
-          <div class="hud-sub" id="hud-sub">Monster Battle CCG</div>
-        </div>
-        <button class="hud-btn" id="hud-menu" onclick="openMenu()" aria-label="More options">
-          <span class="glyph-dots"></span>
-        </button>
-      </header>
+<header class="game-hud" id="game-hud">
+  <button class="hud-btn" id="hud-back" onclick="appBack()" aria-label="Back" hidden>
+    <span class="glyph-back"></span>
+  </button>
+  <div class="hud-titles">
+    <div class="hud-title" id="hud-title">The Shadow Road</div>
+    <div class="hud-sub" id="hud-sub">Monster Battle CCG</div>
+  </div>
+  <button class="hud-btn" id="hud-menu" onclick="openMenu()" aria-label="More options">
+    <span class="glyph-dots"></span>
+  </button>
+</header>
 
-      <!-- ---------- scrolling game content ---------- -->
-      <main class="app-body" id="app-body">
+<main class="app-body" id="app-body">
 
 <!-- ============ CAMPAIGN MAP ============ -->
 <div id="world" class="screen active">
@@ -469,7 +463,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   </div>
 
   <div id="region-list"></div>
-
 </div>
 
 <!-- ============ BATTLE ============ -->
@@ -502,7 +495,7 @@ h1, h2, h3 { letter-spacing: 0.02em; }
     <div class="field-label">Your Field</div>
   </div>
 
-  <div class="field-row" id="player-hand" style="margin:8px 0"></div>
+  <div class="field-row" id="player-hand"></div>
 
   <div class="battle-log" id="battle-log"></div>
 
@@ -514,21 +507,19 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 
 </main>
 
-      <!-- ---------- campaign tab strip ---------- -->
-      <nav class="game-tabs" id="game-tabs">
-        <button class="game-tab active" id="tab-campaign" onclick="navTo('campaign')">
-          <span class="nav-ico glyph-map"></span><span class="nav-label">Campaign</span>
-        </button>
-        <button class="game-tab" id="tab-deck" onclick="navTo('deck')">
-          <span class="nav-ico glyph-cards"></span><span class="nav-label">Deck</span>
-          <span class="game-tab-badge" id="deck-badge">21</span>
-        </button>
-        <button class="game-tab" id="tab-help" onclick="navTo('help')">
-          <span class="nav-ico glyph-help"></span><span class="nav-label">How to play</span>
-        </button>
-      </nav>
+<nav class="game-tabs" id="game-tabs">
+  <button class="game-tab active" id="tab-campaign" onclick="navTo('campaign')">
+    <span class="nav-ico glyph-map"></span><span class="nav-label">Campaign</span>
+  </button>
+  <button class="game-tab" id="tab-deck" onclick="navTo('deck')">
+    <span class="nav-ico glyph-cards"></span><span class="nav-label">Deck</span>
+    <span class="game-tab-badge" id="deck-badge">21</span>
+  </button>
+  <button class="game-tab" id="tab-help" onclick="navTo('help')">
+    <span class="nav-ico glyph-help"></span><span class="nav-label">How to play</span>
+  </button>
+</nav>
 
-      <!-- ============ ENCOUNTER INTRO ============ -->
 <div class="overlay" id="intro-overlay">
   <div class="panel">
     <div class="intro-portrait" id="intro-portrait">&#127794;</div>
@@ -545,7 +536,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   </div>
 </div>
 
-<!-- ============ RESULT ============ -->
 <div class="overlay" id="result-overlay">
   <div class="panel">
     <h1 id="result-text"></h1>
@@ -555,7 +545,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   </div>
 </div>
 
-<!-- ============ REWARD DRAFT ============ -->
 <div class="overlay" id="reward-overlay">
   <div class="panel">
     <h1 style="font-size:1.6em;color:#f39c12">Spoils of Victory</h1>
@@ -565,7 +554,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   </div>
 </div>
 
-<!-- ============ DECK VIEW ============ -->
 <div class="overlay" id="deck-overlay">
   <div class="panel">
     <h1 style="font-size:1.5em;color:#539cd5">Your Deck</h1>
@@ -574,7 +562,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   </div>
 </div>
 
-<!-- ============ RESET CONFIRM ============ -->
 <div class="overlay" id="reset-overlay">
   <div class="panel" style="max-width:430px">
     <h1 style="font-size:1.4em;color:#e94560">Reset the campaign?</h1>
@@ -584,7 +571,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   </div>
 </div>
 
-<!-- ============ HOW TO PLAY ============ -->
 <div class="overlay" id="help-overlay">
   <div class="panel">
     <h1 style="font-size:1.25em;color:#539cd5">How to play</h1>
@@ -596,12 +582,11 @@ h1, h2, h3 { letter-spacing: 0.02em; }
       <li>Elites and bosses have <b>powers</b> that fire on their turns &mdash; read them before you commit to a lane. Every boss also <b>Gathers Power</b>: every third turn it grows and strikes you directly, so turtling behind walls loses &mdash; win fast.</li>
       <li>Every first victory lets you recruit a new card. Every boss slain grants +2 max Vitality for the rest of the campaign.</li>
     </ul>
-      </div>
+    </div>
     <button class="btn secondary" onclick="closeOverlay('help-overlay')">Got it</button>
   </div>
 </div>
 
-<!-- ============ OVERFLOW MENU ============ -->
 <div class="overlay" id="menu-overlay">
   <div class="panel menu-panel">
     <button class="menu-row" onclick="closeOverlay('menu-overlay');navTo('deck')">
@@ -897,9 +882,10 @@ function openIntro(nodeId) {
     `Victory: +${node.exp} EXP` + (first ? (node.type === 'boss' ? ' · recruit a champion card · +2 max Vitality' : ' · recruit a new card') : ' (replay — no recruit)') +
     (node.final && first ? '<br><b style="color:#d4a5f5">This is the end of the road.</b>' : '');
 
+  document.querySelectorAll('#intro-overlay .power-card.gathering').forEach(n => n.remove());
   if (node.type === 'boss') {
     const gp = document.createElement('div');
-    gp.className = 'power-card';
+    gp.className = 'power-card gathering';
     gp.innerHTML = '<div class="pw-name">⚡ Gathering Power — every boss</div>' +
       '<div class="pw-desc">On every third enemy turn (3, 6, 9, ...), the boss gains +1 ATK and lashes you directly — walls will not save you. Only speed will.</div>';
     document.getElementById('intro-power').after(gp);
