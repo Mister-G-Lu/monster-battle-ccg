@@ -749,6 +749,7 @@ function offline_battle:HandleAttack(req)
 end
 
 function offline_battle:HandleStandby()
+    self:PushCommand("cmd_battle_standby", {})
     return nil
 end
 
