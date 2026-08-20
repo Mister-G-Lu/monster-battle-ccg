@@ -481,62 +481,36 @@ function meta:SetCompleteEvent(func)
 end
 
 function meta:LoadFromCSV()
-    print("[DATA] LoadFromCSV() called, is_load_complete=" .. tostring(self.is_load_complete))
     if self.is_load_complete then
         return
     end
-    if self.pre_idx == 1 then
-        self.tips_config = LoadTipsConfig()
-    elseif self.pre_idx == 2 then
-        self.pve_limit_config = LoadPveLimitPlay()
-    elseif self.pre_idx == 3 then
-        self.card_upgrade_config = LoadCardUpgradeConfig()
-    elseif self.pre_idx == 4 then
-        self.item_config = LoadItemConfig()
-    elseif self.pre_idx == 5 then
-        self.chest_config = LoadChestConfig()
-    elseif self.pre_idx == 6 then
-        self.power_config = LoadPowerConfig()
-    elseif self.pre_idx == 7 then
-        self.status_config = LoadStatusConfig()
-    elseif self.pre_idx == 8 then
-        self.card_resolve_config = LoadCardResolveConfig()
-    elseif self.pre_idx == 9 then
-        self.proficiency_config = LoadProficiencyConfig()
-    elseif self.pre_idx == 10 then
-        self.card_compose_config = LoadCardComposeConfig()
-    elseif self.pre_idx == 11 then
-        self.task_config = LoadTaskConfig()
-    elseif self.pre_idx == 12 then
-        self.achievement_config = LoadAchievementConfig()
-    elseif self.pre_idx == 13 then
-        self.statistic_config = LoadStatisticConfig()
-    elseif self.pre_idx == 14 then
-        self.pve_play_config = LoadPvePlay()
-    elseif self.pre_idx == 15 then
-        self.card_config = LoadCardConfig()
-    elseif self.pre_idx == 16 then
-        self.periphery_config = LoadPeripheryConfig()
-    elseif self.pre_idx == 17 then
-        self.battle_guide_event_config = LoadBattleGuideEventConfig()
-    elseif self.pre_idx == 18 then
-        self.guide_config = LoadGuideConfig()
-    elseif self.pre_idx == 19 then
-        self.guide_step_config = LoadGuideStepConfig()
-    elseif self.pre_idx == 20 then
-        self.adventure_config = LoadAdventureConfig()
-    elseif self.pre_idx == 21 then
-        self.card_state_config = LoadCardStateConfig()
-    else
-        self.is_load_complete = true
-        if self.complete_event then
-            self.complete_event()
-            self.complete_event = nil
-        end
-
+    -- Load all configs in one shot (was: 1 per frame over 21 frames)
+    self.tips_config = LoadTipsConfig()
+    self.pve_limit_config = LoadPveLimitPlay()
+    self.card_upgrade_config = LoadCardUpgradeConfig()
+    self.item_config = LoadItemConfig()
+    self.chest_config = LoadChestConfig()
+    self.power_config = LoadPowerConfig()
+    self.status_config = LoadStatusConfig()
+    self.card_resolve_config = LoadCardResolveConfig()
+    self.proficiency_config = LoadProficiencyConfig()
+    self.card_compose_config = LoadCardComposeConfig()
+    self.task_config = LoadTaskConfig()
+    self.achievement_config = LoadAchievementConfig()
+    self.statistic_config = LoadStatisticConfig()
+    self.pve_play_config = LoadPvePlay()
+    self.card_config = LoadCardConfig()
+    self.periphery_config = LoadPeripheryConfig()
+    self.battle_guide_event_config = LoadBattleGuideEventConfig()
+    self.guide_config = LoadGuideConfig()
+    self.guide_step_config = LoadGuideStepConfig()
+    self.adventure_config = LoadAdventureConfig()
+    self.card_state_config = LoadCardStateConfig()
+    self.is_load_complete = true
+    if self.complete_event then
+        self.complete_event()
+        self.complete_event = nil
     end
-
-    self.pre_idx = self.pre_idx + 1
 
 end
 
