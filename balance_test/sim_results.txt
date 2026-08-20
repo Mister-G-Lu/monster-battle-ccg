@@ -1,0 +1,43 @@
+Pools: baseline monsters=37 equips=60 | strongest monsters=601 equips=979
+================================================================================
+Deck 4+4 : atk avg=1.50 mhp=4.0 ecost=3.75 ehp=5.0 total_score=71
+Deck 6+6 : atk avg=1.83 mhp=4.0 ecost=4.00 ehp=6.3 total_score=120
+Deck 8+8 : atk avg=1.50 mhp=4.0 ecost=3.38 ehp=5.2 total_score=143
+================================================================================
+EXPERIMENT A — MIRROR (deck vs identical):  pacing & consistency  (n=1500)
+deck     win split (P/E/draw)   avg rounds   decisive len   survive     
+4+4      647/584/269  (43/39/18) 15.3 ± 16.3  7.7 ± 1.6      2.2 ± 0.8   
+6+6      959/516/25  (64/34/2)  11.3 ± 5.8   10.6 ± 2.9     3.1 ± 1.4   
+8+8      736/578/186  (49/39/12) 21.4 ± 11.7  17.3 ± 4.9     4.8 ± 2.1   
+
+EXPERIMENT B — CROSS-SIZE (same card quality, both orientations averaged):  n=1500 each way
+matchup          A win%       A win/draw%  avg rounds  
+4+4 vs 6+6       0.0%         6.6%         9.5         
+4+4 vs 8+8       0.0%         0.7%         6.9         
+6+6 vs 8+8       37.1%        37.3%        14.9        
+6+6 vs 4+4       93.3%        100.0%       9.6         
+8+8 vs 4+4       99.4%        100.0%       6.9         
+8+8 vs 6+6       61.1%        61.3%        15.0        
+
+EXPERIMENT C — POWER-EQUALIZED:  smaller deck draws the STRONGEST cards in the whole set
+(baseline 8+8 uses average pool; smaller deck uses top-tier cards)  n=1500 each way
+4+4 top-tier vs 8+8 avg :  small-win 83.1%  (draw 0.0%, rounds 6.5)
+6+6 top-tier vs 8+8 avg :  small-win 61.4%  (draw 0.0%, rounds 6.8)
+
+EXPERIMENT D — STRENGTH SWEEP:  break-even card strength for smaller decks vs 8+8
+(smaller deck samples only the top `pct`%% of cards by power; find where it hits ~50%%)
+--- 4+4 deck ---
+  top-100% : small-win 1.4%   (rounds 11.8)
+  top-50% : small-win 18.2%   (rounds 7.0)
+  top-30% : small-win 13.3%   (rounds 12.8)
+  top-20% : small-win 2.2%   (rounds 7.4)
+  top-10% : small-win 28.5%   (rounds 6.7)
+  top-5% : small-win 41.3%   (rounds 8.7)
+--- 6+6 deck ---
+  top-100% : small-win 33.9%   (rounds 22.3)
+  top-50% : small-win 80.6%   (rounds 8.2)
+  top-30% : small-win 58.3%   (rounds 9.0)
+  top-20% : small-win 49.7%   (rounds 12.7)
+  top-10% : small-win 49.8%   (rounds 11.7)
+  top-5% : small-win 99.7%   (rounds 6.8)
+
