@@ -1,0 +1,21 @@
+ID,name,res_path,desc
+number,string,string,string
+ID,name,res_path,desc
+100001,Monster Powder,m_monster,Material used to compose and upgrade Monster cards
+100002,Monster Powder(Nature),m_monster_nature,Material used to compose and upgrade Nature Monster cards
+100003,Monster Powder(Balance),m_monster_balance,Material used to compose and upgrade Balance Monster cards
+100004,Monster Powder(Chaos),m_monster_chaos,Material used to compose and upgrade Chaos Monster cards
+100005,Monster Powder(Fortune),m_monster_fortune,Material used to compose and upgrade Fortune Monster cards
+200001,Item Powder,m_item,Material used to compose and upgrade Item cards
+200002,Item Powder(Nature),m_item_nature,Material used to compose and upgrade Nature Item cards
+200003,Item Powder(Balance),m_item_balance,Material used to compose and upgrade Balance Item cards
+200004,Item Powder(Chaos),m_item_chaos,Material used to compose and upgrade Chaos Item cards
+200005,Item Powder(Fortune),m_item_fortune,Material used to compose and upgrade Fortune Item cards
+200006,Item Powder(All),m_item_all,Material used to compose and upgrade All Item cards
+300001,Common Glass Crystal,quality_piece1,Material used to upgrade Commonmonster cards
+300002,Rare Blue Crystal,quality_piece2,Material used to upgrade Rare monster cards
+300003,Epic Orange Crystal,quality_piece3,Material used to upgrade Epic monster cards
+300004,Legendary Blood Red Crystal,quality_piece4,Material used to upgrade Legendary monster cards
+400001,Scroll,fusion_scroll,Obtain materials to upgrade from Adventure System
+500001,Coin,gold,One of the most significant materials in the game
+500002,Diamond,diamond,One of the most significant materials in the game

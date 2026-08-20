@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  // Project GitHub Pages live at /monster-battle-ccg/. Local dev stays at /.
-  base: process.env.GITHUB_PAGES ? '/monster-battle-ccg/' : '/',
+  // A relative base lets this static build run from /web/dist/ on GitHub Pages
+  // as well as from the Vite dev server, without hard-coding a host path.
+  base: process.env.PAGES_BASE || './',
   server: {
     host: '0.0.0.0',
     port: 5173,

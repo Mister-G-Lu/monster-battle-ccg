@@ -1,0 +1,50 @@
+ID,name,name_desc,info_desc,type,target_type,casting_anim,hit_effect_type,hit_effect,cover_effect,anim_length
+number,string,string,string,string,string,string,string,string,string,number
+ID,name,name_desc,info_desc,type,target_type,casting_anim,hit_effect_type,hit_effect,cover_effect,anim_length
+1,melee,Melee,When in engagement slot: Attacks the enemy in engagement slot.,active,enemy,card_melee,moved,effects_melee,,1300
+2,ranged,Ranged,When in support slot: Prefers to attack the enemy in the diagonal support slot，but this attack has 25% chance to be blocked (deal no damage) if that enemy equips with Armor.,active,enemy,card_remote,moved,effects_remote,,2000
+3,magic,Magic,Prefers to attack the enemy in opposite slot and ignore its armor,active,enemy,card_magic,moved,effects_magic_aoe:effects_magic,,2300
+4,thrash,Doublestrike,When hitting any enemy with Melee Attack from engagement slot: Deals additional damage to one random enemy in support slot.,active,enemy,card_collateral_damage,fixed,effects_collateral_damage,,1050
+5,damage,Smite,Deals damage to target enemy.,active,enemy,,fixed,effects_hand_damage,,0
+6,damage_all,Group Smite,Deals damage to all enemies.,active,enemy,,fixed,effects_hand_damage,,0
+7,destroy,Smash,Destroy target's Armor of one enemy.,active,enemy,,fixed,effects_hand_de_defense,,0
+8,thorns,Thorns,When hit by a Melee Attack: Deals damage to the attacker.,passive,own,card_threaten,fixed,effects_counterattack,,2100
+9,reach,Reach,May make Melee Attack from a support slot.,passive,own,,,,effects_melee_long,1500
+10,cleave,Piercing,When destroying the armor of any enemy: Exceeding damage is dealt to that enemy.,passive,own,,,,,0
+11,flying,Flying,When attacked by monster without {Flying}: 50% chance to evade Melee Attack and Doublestrike. 25% chance to evade Ranged Attack.,passive,own,,,,,0
+12,shield,Shield,Reduces damage from Melee or Ranged Attack.,passive,own,,,,,0
+13,counter,Counter-attack,When receving Melee Damage: 50% chance to deal the same amount of damage to the attacker.,passive,own,card_melee,moved,effects_melee,,1300
+14,reflect,Magic Reflect,When attacked by Magic: 75% chance to receive no damage and deal the same amount of damage to the attacker.,passive,own,card_magic,moved,effects_magic_aoe:effects_magic,,2300
+15,disease,Disease,When dealing Melee，Ranged or Thorns Damage to any enemy: that enemy becomes Diseased (lose Encourage，Demoralize and Magic Reflect. Remove Blessed. This status can be removed by Heal).,passive,,,fixed,buff_disease,,1500
+16,boost,Enchanted Armor,When equipped with Armor: Gain additional Armor.,passive,,,,,,0
+17,breaker,Breaking Armor,When making Melee or Ranged Attack: Deal additional damage to the Armor，and Ranged Attack will not be be blocked by the Armor.,passive,,,,,,0
+18,silence,Silence,When coming into play: Each enemy becomes Silenced (loses Magic Attack and Heal).,passive,enemy,,fixed,buff_magic:buff_magic_under,,0
+19,mshield,Magic Shield,Reduces damage from Magic Attack.,passive,,,,,,0
+20,swap,Fear,When coming into play: the engagement slot enemy swaps position with one random enemy in support slot.,passive,enemy,,fixed,buff_fear,,1500
+21,draft,Reinforcement,When coming into play: You gain crystals.,passive,,,,,,0
+22,immunity,Immunity,May not be the target for a Consumable Card and is immune to Demoralize and Silence.,passive,,,,,,0
+23,crystal,Additional Crystal,When sacrificed: You gain additional crystals.,passive,enemy,,,,,0
+24,breaker_all,Armor break (all),,passive,enemy,,,,,0
+25,disease_all,Group Disease,When dealing Melee，Ranged or Thorns Damage to any enemy: Each enemy becomes Diseased (lose Encourage，Demoralize and Magic Reflect. Remove Blessed. This status can be removed by Heal).,passive,enemy,,fixed,buff_disease,,1500
+26,stealth,Stealth,When in support slot: May not be the target for Ranged and Magic Attack.,passive,own,,,,,0
+27,aggro,Taunt,Becomes the preferred target for Ranged Attack.,passive,own,,,,,0
+28,opportunity,Opportunity,When the opponent uses Reach or Backstab: Make one Ranged Attack to that enemy. This can trigger only once per turn.,passive,enemy,,,,,2000
+29,magic_aoe,Magic Blast,When hitting any enemy with Magic Attack: Deal additional damage to its adjacent enemies.,passive,enemy,card_threaten,fixed,effects_magic_aoe:effects_aoe_Meteorite,,2000
+30,disarm,Disarm,When hitting any enemy with Melee Attack or Ranged Attack: Destroys the enemy's weapon.,passive,enemy,,,,,1000
+31,trample,Trample,When in engagement slot and hitting any enemy with Melee Attack: Deals additional damage to all enemies in support slots.,passive,enemy,,,,,1050
+32,unsummon,Unsummon,Target monster returns to its owner's deck.,active,all,card_unsummon,,,,0
+33,drain_crystal,Drain crystal,When destorying any enemy: You gain crystals.,passive,enemy,,fixed,effects_absorb,,1400
+,,,,,,,,,,
+,Round-start powers,,,,,,,,,
+1001,demoralize,Demoralize,At the start of battle phase: Each enemy becomes Demoralized (Melee Attack decreases). Only the strongest Demoralized works if multiple same effects are in play.,passive,enemy,,fixed,buff_melee:buff_melee_down,,1000
+1002,rally,Encourage,At the start of battle phase: Each ally becomes Encouraged (Melee Attack increases). Only the strongest Encouraged works if multiple same effects are in play.,passive,own,,fixed,buff_melee:buff_melee_up,,1000
+1003,antimagic,Suppress Magic,At the start of battle phase: Each enemy becomes Magic-Supppressed (Magic Attack decreases). Only the strongest Magic-Supppressed works if multiple same effects are in play.,passive,enemy,,fixed,buff_magic:buff_magic_down,,1000
+1004,charge,Charge,At the start of battle phase: Becomes Charged (Melee Attack increases) until the end of the opponent's turn. This can trigger only once.,passive,own,,fixed,buff_charge_up,,1300
+1005,regenerate,Regenerate,Recovers half of the missing HP,passive,own,,,,,0
+1006,cautious,Vigilant,At the start of battle phase: Immune to Counter-Attack，Thorns，Entangle and Opportunity until the end of the opponent's turn.,passive,own,,,,,1200
+,,,,,,,,,,
+2001,heal_all,Group Heal,Recovers HP of all allies.,active,own,card_heal,fixed,effects_heal,,1300
+2002,heal,Heal,Recovers HP of one injured ally.,active,own,card_heal,fixed,effects_heal,,1300
+2003,repair,Repair,Repair the armor of one random ally.,passive,own,,,,,0
+2004,entangle,Entangle,50% chance to make the opposite enemy Entangled (loses Flying and skips next battle phase).,active,enemy,card_confusion,fixed,effects_confusion,,1500
+2005,chance,Chaos,Deals a random amount of damage to one random enemy.,active,enemy,card_random,fixed,effects_random,,2250

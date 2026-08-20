@@ -1,0 +1,6 @@
+ID,key,value,desc
+number,string,string,string
+ID,key,value,desc
+1,GOLD_REWARD_LIMIT,800,Daily gold cap
+2,INVITE_INTERVAL,180,Challenge invite interval（ seconds）
+3,test2,1,unused

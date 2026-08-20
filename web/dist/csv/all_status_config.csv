@@ -1,0 +1,13 @@
+ID,name,desc,icon,fix_symbol,fix_power,show_status,against_power_list,round_desc,info_desc
+number,string,string,string,number,string,string,string,string,string
+ID,name,desc,icon,fix_symbol,fix_power,show_status,against_power_list,round_desc,info_desc
+1,entangled,Entangled,debuff_entangle,,,debuff_entangle,,Entangled (%d turns left),Loses Flying and skips next battle phase
+2,diseased,Diseased,debuff_disease,,,debuff_disease,"demoralize,antimagic,rally,regenerate",Diseased (%d Heal needed),Lose Encourage，Demoralize and Magic Reflect. Remove Blessed. Can be removed by Heal
+3,silenced,Silenced,debuff_flying,,,,"heal_all,heal,magic",Silenced,Loses Magic Attack and Heal
+4,painted,Marked,debuff_flying,,,,,Marked (%d turns left),Become the most preferred target for Ranged Attack，ignoring Taunt and Stealth
+5,demoralized,Intimidated,debuff_melee,-1,melee,,,Demoralized,Melee Attack decreases by %d
+6,antimagicd,Antimagic,debuff_magic,-1,magic,,,Magic Suppressed,Magic Attack decreases by %d
+7,rallied,Rallied,buff_melee,1,melee,,,Encouraged,Melee Attack increases by %d
+8,charged,Charged,buff_melee,1,melee,,,Charge,Melee Attack increases by %d
+9,against_melee,DisabledMelee,debuff_melee,,,,,Melee Attack Unavailable,May not do Melee Attack from support slot
+10,against_ranged,DisabledRanged,debuff_ranged,,,,,Ranged Attack Unavailable,May not do Ranged Attack from engagement slot

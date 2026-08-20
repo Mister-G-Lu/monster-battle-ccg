@@ -1,0 +1,18 @@
+ID,stat_name,desc,init_score
+number,string,string,float
+ID,stat_name,desc,init_score
+1,cause_damage,cause damage,1
+2,bear_damage,bear damage,1
+3,heal,heal damage,1.5
+4,dodge,dodge damage,1.5
+5,kill,kill monster,5
+6,destroy_armor,destroy armor,4
+7,destroy_equip,destroy equip,4
+8,drain_crystal,drain crystal,5
+9,counter,counter damage,1.5
+10,boost,gain extra armor,1.5
+11,debuff_damage,decrease enemy's damage,1.5
+12,buff_damage,increase our's damage,1.5
+13,spurting,splash damage,2
+14,entangle,entangle times,5
+15,disease,disease enemy,1.5

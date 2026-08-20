@@ -1,0 +1,15 @@
+ID,level_desc,icon,ladder_desc,req_reward_cup,is_demote,reward_success_type1,reward_success_id1,reward_success_num1,reward_failed_type1,reward_failed_id1,reward_failed_num1,season_reward_type1,season_reward_id1,season_reward_num1,season_reward_type2,season_reward_id2,season_reward_num2
+number,string,string,string,number,number,string,number,number,string,number,number,string,number,number,string,number,number
+ID,level_desc,icon,ladder_desc,req_reward_cup,is_demote,reward_success_type1,reward_success_id1,reward_success_num1,reward_failed_type1,reward_failed_id1,reward_failed_num1,season_reward_type1,season_reward_id1,season_reward_num1,season_reward_type2,season_reward_id2,season_reward_num2
+1,Open circuit rank 12,level12,The first step to become masters is to fight between newbies,1100,1,,,,,,,chest,53,1,,,
+2,Open circuit rank 11,level11,The so-called Grant is only 2 meters high!,1300,1,,,,,,,chest,54,1,,,
+3,Open circuit rank 10,level10,The silk of furryspider is the ordinary strong but 20 times injection quantity.,1600,1,,,,,,,chest,55,1,,,
+4,Open circuit rank 9,level9,Let you know what is real kongfu! --Leezard,2000,1,,,,,,,chest,56,1,,,
+5,Open circuit rank 8,level8,Why so strong accent curse can be successful released? --Heavily injured maggie apprentice,2500,1,,,,,,,chest,57,1,,,
+6,Open circuit rank 7,level7,When it jump out of the sea， its huge body covers the sun which make you suddenly feel like night! That is sabershark!,3100,1,,,,,,,chest,58,1,,,
+7,Open circuit rank 6,level6,Crocodine is always taking guns with him， becaue he is a deadbeat bambler!,3800,1,,,,,,,chest,59,1,,,
+8,Open circuit rank 5,level5,Wind is its shadow and blade. There is no need to be heaten! --The Element Tutor,4600,1,,,,,,,chest,60,1,,,
+9,Open circuit rank 4,level4,The bird people are all good Archers. However，Boocan is the God among them.,5600,1,,,,,,,chest,61,1,,,
+10,Open circuit rank 3,level3,Is it a bird or a flying carpet?No，it's a cat knight! --Triglodite,6900,1,,,,,,,chest,62,1,,,
+11,Open circuit rank 2,level2,OMG! I'm gonna be rich! --The last word of lobster catchers.,8500,1,,,,,,,chest,63,1,,,
+12,Open circuit rank 1,level1,Me!The relative of power!   --Blue dragon,99999,1,,,,,,,chest,64,1,,,
