@@ -93,7 +93,8 @@ The game also writes startup breadcrumbs to `offline_debug.log` in its writable 
 
 ```bash
 python3 scripts/analyze_balance.py --markdown > docs/BALANCE_AUDIT.md
-python3 tests/static_checks.py
+python3 tests/static_checks.py   # includes refresh_campaign_data.py --verify
+make verify                      # static checks + Lua campaign tests when lua/luajit exists
 ```
 
 The balance audit is a heuristic design review for obvious CCG pitfalls: rarity-as-raw-power, strict same-cost upgrades, and tutorial/boss cards leaking into random pools.
