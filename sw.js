@@ -5,17 +5,22 @@
  * offline Android app is the network fetch for the shell and its art.
  *
  * Strategy:
- *   - navigations           -> network-first, falling back to the cached shell
- *                              (so a redeploy is picked up, but a plane ride
- *                              still boots the game)
- *   - everything else       -> cache-first (the art never changes per build)
+ *   - navigations / HTML / manifest
+ *                         -> network-first, falling back to the cached shell
+ *                            (so a redeploy is picked up, but a plane ride
+ *                            still boots the game). Treating HTML as
+ *                            cache-first is a classic PWA footgun: Chrome
+ *                            sometimes fetches the document without
+ *                            mode=navigate, and the player is stuck on a
+ *                            stale build forever.
+ *   - everything else     -> cache-first (the art never changes per build)
  *
  * Bump CACHE when the shell or the art pipeline changes; old caches are
  * dropped on activate.
  */
 'use strict';
 
-const CACHE = 'mbccg-shell-v1';
+const CACHE = 'mbccg-shell-v2';
 const SHELL = [
   './',
   './index.html',
@@ -48,6 +53,33 @@ self.addEventListener('activate', event => {
   );
 });
 
+function isShellRequest(req, url) {
+  if (req.mode === 'navigate' || req.destination === 'document') return true;
+  const path = url.pathname;
+  return path.endsWith('.html') || path.endsWith('.webmanifest') || path.endsWith('/');
+}
+
+function offlineShell(req) {
+  return caches.match(req).then(hit =>
+    hit ||
+    caches.match('./') ||
+    caches.match('./index.html') ||
+    caches.match('./game.html')
+  );
+}
+
+function networkFirst(req) {
+  return fetch(req)
+    .then(res => {
+      if (res && res.ok && res.type === 'basic') {
+        const copy = res.clone();
+        caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
+      }
+      return res;
+    })
+    .catch(() => offlineShell(req));
+}
+
 self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -55,16 +87,8 @@ self.addEventListener('fetch', event => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;   // never touch cross-origin
 
-  if (req.mode === 'navigate') {
-    event.respondWith(
-      fetch(req)
-        .then(res => {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
-          return res;
-        })
-        .catch(() => caches.match(req).then(hit => hit || caches.match('./')))
-    );
+  if (isShellRequest(req, url)) {
+    event.respondWith(networkFirst(req));
     return;
   }
 

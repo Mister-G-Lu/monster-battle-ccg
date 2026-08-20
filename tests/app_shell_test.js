@@ -148,6 +148,26 @@ console.log('== app_shell_test: ' + path.relative(ROOT, HTML) + ' ==');
   assert(markup.includes('100dvh'), 'page must use dynamic viewport height so mobile chrome does not clip');
   assert(markup.includes('orientation: landscape'), 'CSS must compact the battle chrome in landscape');
   assert(markup.includes('touch-action: pan-x pan-y'), 'page must allow pan/drag when content still overflows');
+  // Android Chrome / PWA pitfalls
+  assert(markup.includes('text-size-adjust: 100%') || markup.includes('-webkit-text-size-adjust: 100%'),
+         'Android font boosting (text-size-adjust) must be disabled so card chrome stays aligned');
+  assert(markup.includes('user-select: none'), 'long-press must not select card text');
+  assert(markup.includes('-webkit-touch-callout: none'), 'Android/iOS long-press callout must be disabled');
+  assert(markup.includes('.overlay { position: fixed'), 'overlays must be viewport-fixed, not document-absolute');
+  assert(markup.includes('.snackbar { position: fixed'), 'snackbar must be viewport-fixed');
+  assert(markup.includes('safe-area-inset-left'), 'HUD must respect left safe-area inset (landscape notch)');
+  assert(markup.includes('--app-h'), 'shell must expose a visual-viewport height variable');
+  assert(/html\s*\{[^}]*overscroll-behavior:\s*none/.test(markup) || markup.includes('overscroll-behavior: none'),
+         'html/body must disable pull-to-refresh in the browser, not only when installed');
+  assert(markup.includes('format-detection'), 'Android must not auto-link numbers as phone numbers');
+  assert(markup.includes('[hidden] { display: none !important; }') || markup.includes('[hidden]{display:none'),
+         'author display:flex must not override the hidden attribute (install row / back button)');
+  assert(html.includes('visualViewport'), 'shell must track visualViewport (Android URL bar)');
+  assert(html.includes("updateViaCache: 'none'") || html.includes('updateViaCache: "none"'),
+         'service worker registration must bypass HTTP cache of sw.js');
+  assert(html.includes('contextmenu'), 'long-press context menu must be suppressed');
+  assert(html.includes('pagehide'), 'save must flush when Android backgrounds the WebView');
+  assert(html.includes('isStandalone'), 'hardware back must only trap history in standalone display mode');
   // the campaign engine script must stay the FIRST bare <script> (campaign_sim.js slices on it)
   assert(html.indexOf('<script>') > markup.indexOf('<script data-shell-icons>'),
          'the head bootstrap must not be a bare <script> before the game script');
@@ -243,7 +263,13 @@ console.log('== app_shell_test: ' + path.relative(ROOT, HTML) + ' ==');
     assert(fs.existsSync(swPath), `${path.relative(ROOT, swPath)} must exist`);
     if (!fs.existsSync(mPath)) continue;
 
+    const sw = fs.readFileSync(swPath, 'utf8');
+    assert(sw.includes('isShellRequest') || sw.includes("path.endsWith('.html')"),
+           `${p.sw}: HTML/manifest must be network-first, not cache-first`);
+    assert(sw.includes('mbccg-shell-v2') || sw.includes('networkFirst'),
+           `${p.sw}: cache name must bump when the shell fetch policy changes`);
     const m = JSON.parse(fs.readFileSync(mPath, 'utf8'));
+    assert(m.start_url === './', `${p.manifest}: start_url must be ./ ('.' is unreliable on Android)`);
     assert(m.display === 'standalone', `${p.manifest}: display must be standalone for an app-like launch`);
     assert(!!m.name && !!m.short_name, `${p.manifest}: needs name + short_name`);
     assert(!!m.theme_color && !!m.background_color, `${p.manifest}: needs theme + background colors`);

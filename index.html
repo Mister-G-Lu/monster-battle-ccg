@@ -9,6 +9,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#161627">
 <meta name="color-scheme" content="dark">
+<meta name="format-detection" content="telephone=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -50,15 +51,31 @@
   --tabs-h: 52px;
   --safe-b: env(safe-area-inset-bottom, 0px);
   --safe-t: env(safe-area-inset-top, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --app-h: 100dvh;
 }
-html { height: 100%; height: 100dvh; }
-body { background: #07070f; color: var(--md-on-surface); overflow: hidden;
-  overscroll-behavior: none; -webkit-tap-highlight-color: transparent;
-  touch-action: pan-x pan-y; display: flex; flex-direction: column; }
+/* Full-viewport flex shell. A second `overflow-x: hidden` on body used to
+   reset overflow-y to auto (CSS overflow pairing), which made Android Chrome
+   scroll the document, fire pull-to-refresh, and unstick the tab strip. */
+html {
+  height: 100%; height: 100dvh; height: var(--app-h, 100dvh);
+  width: 100%; overflow: hidden; overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+}
+body { height: 100%; width: 100%; max-width: 100%; background: #07070f;
+  color: var(--md-on-surface); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  overflow: hidden; overscroll-behavior: none; -webkit-tap-highlight-color: transparent;
+  touch-action: pan-x pan-y; display: flex; flex-direction: column; position: relative;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+img, .card, .hero-logo { -webkit-user-drag: none; user-select: none; }
+button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.howto-body, .intro-meta, .power-card, #result-detail { -webkit-user-select: text; user-select: text; }
 
 /* --- in-game HUD (title + back + menu) --- */
 .game-hud { flex: 0 0 auto; height: calc(var(--hud-h) + var(--safe-t));
-  padding-top: var(--safe-t); display: flex; align-items: center; gap: 2px;
+  padding-top: var(--safe-t); padding-left: var(--safe-l); padding-right: var(--safe-r);
+  display: flex; align-items: center; gap: 2px;
   background: linear-gradient(180deg, rgba(10,10,20,.92), rgba(12,12,24,.86));
   border-bottom: 1px solid rgba(255,255,255,.06); z-index: 30; }
 .game-hud.battle-mode { background: linear-gradient(180deg, rgba(42,18,32,.96), rgba(22,22,39,.9)); }
@@ -70,9 +87,9 @@ body { background: #07070f; color: var(--md-on-surface); overflow: hidden;
 .hud-btn { width: 44px; height: 44px; border: none; background: transparent;
   border-radius: 50%; cursor: pointer; display: flex; align-items: center;
   justify-content: center; flex: 0 0 auto; transition: background .15s; padding: 0; }
-.hud-btn:hover { background: rgba(255,255,255,.07); }
 .hud-btn:active { background: rgba(255,255,255,.13); }
 .hud-btn[hidden] { display: none; }
+[hidden] { display: none !important; }
 .glyph-back { width: 16px; height: 16px; border-left: 2px solid #dcdcea;
   border-bottom: 2px solid #dcdcea; transform: rotate(45deg); margin-left: 4px; }
 .glyph-dots { width: 4px; height: 4px; border-radius: 50%; background: #dcdcea;
@@ -81,13 +98,15 @@ body { background: #07070f; color: var(--md-on-surface); overflow: hidden;
 /* --- scrolling game content --- */
 .app-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden;
   -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  padding-left: var(--safe-l); padding-right: var(--safe-r);
   scrollbar-width: thin; scrollbar-color: #2c2c46 transparent; }
 .app-body::-webkit-scrollbar { width: 5px; }
 .app-body::-webkit-scrollbar-thumb { background: #2c2c46; border-radius: 3px; }
 
 /* --- campaign tab strip (game navigation, not a fake OS nav bar) --- */
 .game-tabs { flex: 0 0 auto; height: calc(var(--tabs-h) + var(--safe-b));
-  padding-bottom: var(--safe-b); display: flex; background: var(--md-surface);
+  padding-bottom: var(--safe-b); padding-left: var(--safe-l); padding-right: var(--safe-r);
+  display: flex; background: var(--md-surface);
   border-top: 1px solid var(--md-outline); z-index: 30; }
 .game-tabs.hidden { display: none; }
 .game-tab { position: relative; flex: 1 1 0; display: flex; flex-direction: column;
@@ -152,7 +171,6 @@ body { background: #07070f; color: var(--md-on-surface); overflow: hidden;
   background: linear-gradient(90deg, #e94560, #f39c12); }
 .progress-next { font-size: .8em; color: #ffc46b; }
 
-body { background: #12121f; color: #eee; font-family: 'Segoe UI', system-ui, sans-serif; overflow-x: hidden; }
 .screen { display: none; width: 100%; min-height: 100%; padding: 0 0 22px; position: relative; }
 .screen.active { display: flex; flex-direction: column; align-items: center; animation: screenIn .22s ease-out; }
 @keyframes screenIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -175,7 +193,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .world-head .subtitle { color: #8b8ba7; font-size: 0.9em; }
 .world-actions { display: flex; gap: 8px; }
 .btn-ghost { background: #1c1c30; border: 1px solid #33334d; color: #bbb; padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85em; transition: all 0.15s; }
-.btn-ghost:hover { border-color: #e94560; color: #eee; }
 
 .statsbar { display: flex; gap: 7px; flex-wrap: wrap; margin: 0 12px 4px; width: calc(100% - 24px); max-width: 920px; }
 .statsbar span { background: var(--md-surface); border: 1px solid var(--md-outline); padding: 6px 11px; border-radius: 999px; font-size: 0.76em; color: #b0b0c6; display: inline-flex; align-items: center; }
@@ -251,7 +268,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 
 .card { width: min(88px, 28%, 22vmin); height: min(118px, 38vmin); border-radius: 6px; font-size: 0.72em; cursor: default; transition: transform 0.15s, box-shadow 0.15s; position: relative; border: none; overflow: hidden; background: #14142a; box-shadow: 0 2px 6px rgba(0,0,0,.55); flex: 0 0 auto; }
 .card.hand { cursor: pointer; }
-.card.hand:hover { transform: translateY(-4px) scale(1.04); }
 .card.token { filter: saturate(.85); }
 
 /* Android card chrome: frame sprite layered over art */
@@ -289,19 +305,17 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   font-size: 0.92em; font-weight: 600; font-family: inherit; cursor: pointer; margin: 4px 0;
   transition: background .15s, transform .1s, box-shadow .15s; box-shadow: 0 2px 8px rgba(233,69,96,.28); }
 .btn:active { transform: scale(.97); }
-.btn:hover { background: #c23152; }
 .btn:disabled { background: #333; cursor: default; }
 .btn.end-turn { background: #0f3460; }
-.btn.end-turn:hover { background: #1a5276; }
 .btn.secondary { background: #33334d; }
-.btn.secondary:hover { background: #45456a; }
 
 /* ============ OVERLAYS ============ */
 /* Game panels: centered modals over the board — the Android game's own
    result/reward screens, not OS-style bottom sheets. */
-.overlay { position: absolute; inset: 0; background: rgba(6,6,14,0.78); backdrop-filter: blur(3px);
+.overlay { position: fixed; inset: 0; background: rgba(6,6,14,0.78); backdrop-filter: blur(3px);
   display: none; flex-direction: column; align-items: center; justify-content: center;
-  z-index: 100; padding: 18px; overflow: hidden; }
+  z-index: 100; overflow: hidden;
+  padding: max(18px, var(--safe-t)) max(18px, var(--safe-r)) max(18px, var(--safe-b)) max(18px, var(--safe-l)); }
 .overlay.active { display: flex; animation: scrimIn .2s ease-out; }
 @keyframes scrimIn { from { opacity: 0; } to { opacity: 1; } }
 .overlay .panel { background: var(--md-surface); border: 1px solid var(--md-outline);
@@ -316,7 +330,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .menu-row { display: flex; align-items: center; gap: 14px; width: 100%; padding: 14px 8px;
   background: transparent; border: none; border-radius: 12px; color: var(--md-on-surface);
   font-size: .95em; font-family: inherit; cursor: pointer; text-align: left; }
-.menu-row:hover { background: rgba(255,255,255,.06); }
 .menu-row.danger { color: #ff8fa3; }
 .menu-row .nav-ico { width: 20px; height: 20px; }
 .menu-panel .btn { width: 100%; margin-top: 10px; }
@@ -343,7 +356,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 
 .reward-cards { display: flex; gap: 14px; justify-content: center; margin: 18px 0; flex-wrap: wrap; }
 .reward-option { cursor: pointer; }
-.reward-option .card.hand:hover { transform: translateY(-6px) scale(1.06); border-color: #f39c12; }
 .reward-option .owned { text-align: center; color: #8b8ba7; font-size: 0.7em; margin-top: 4px; }
 
 .deck-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 14px 0; max-height: 52vh; overflow-y: auto; }
@@ -354,7 +366,7 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .item-slot { background: linear-gradient(135deg, #2a1a0a, #4a2a10) !important; border-color: #8B7355 !important; }
 .item-slot .card-cost { background: #8B7355; }
 
-.snackbar { position: absolute; left: 12px; right: 12px; bottom: calc(var(--tabs-h) + 14px + var(--safe-b));
+.snackbar { position: fixed; left: max(12px, var(--safe-l)); right: max(12px, var(--safe-r)); bottom: calc(var(--tabs-h) + 14px + var(--safe-b));
   background: #2a2a3f; color: #eceaf4; border-radius: 12px; padding: 13px 16px; font-size: .84em;
   box-shadow: 0 8px 26px rgba(0,0,0,.55); z-index: 95; opacity: 0; transform: translateY(14px);
   transition: opacity .22s, transform .22s; pointer-events: none; text-align: left; }
@@ -380,6 +392,17 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 }
 @media (display-mode: standalone), (display-mode: fullscreen) {
   html, body { overscroll-behavior: none; }
+}
+/* Sticky :hover after a tap is a classic Android Chrome bug. Keep :active. */
+@media (hover: hover) and (pointer: fine) {
+  .hud-btn:hover { background: rgba(255,255,255,.07); }
+  .btn:hover { background: #c23152; }
+  .btn.end-turn:hover { background: #1a5276; }
+  .btn.secondary:hover { background: #45456a; }
+  .btn-ghost:hover { border-color: #e94560; color: #eee; }
+  .menu-row:hover { background: rgba(255,255,255,.06); }
+  .card.hand:hover { transform: translateY(-4px) scale(1.04); }
+  .reward-option .card.hand:hover { transform: translateY(-6px) scale(1.06); border-color: #f39c12; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
@@ -418,7 +441,7 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   <div class="hero">
     <div class="hero-art" id="hero-art"></div>
     <div class="hero-scrim"></div>
-    <img class="hero-logo" id="logo-img" src="" alt="Monster Battle CCG">
+    <img class="hero-logo" id="logo-img" src="" alt="Monster Battle CCG" draggable="false">
     <div class="hero-copy">
       <div class="hero-kicker">Offline single-player campaign</div>
       <div class="hero-title">The Shadow Road</div>
@@ -1888,16 +1911,65 @@ function toast(msg) {
 
 // ---- installability (Add to Home screen) --------------------------------
 let deferredInstall = null;
+function isStandalone() {
+  try {
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
+    if (window.matchMedia && window.matchMedia('(display-mode: fullscreen)').matches) return true;
+    if (window.navigator && window.navigator.standalone) return true; // iOS Safari Add to Home
+    return false;
+  } catch (e) { return false; }
+}
+
+function syncInstallRow() {
+  const row = el('menu-install');
+  if (row) row.hidden = isStandalone();
+}
+
+function armBackButton() {
+  // Only trap the hardware back key inside an installed app. Doing this in a
+  // regular Android Chrome tab hijacks history so the first Back does nothing.
+  if (!isStandalone()) return;
+  try { if (window.history && history.pushState) history.pushState({ mbccg: 1 }, ''); } catch (e) {}
+}
+
 if (typeof window !== 'undefined' && window.addEventListener) {
-  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstall = e; });
-  window.addEventListener('appinstalled', () => { deferredInstall = null; toast('Installed — launch it from your home screen.'); });
-  // Android hardware back button, when running as an installed app.
-  window.addEventListener('popstate', () => { if (appBack()) history.pushState(null, ''); });
-  if (window.history && history.pushState) history.pushState(null, '');
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredInstall = e;
+    const row = el('menu-install');
+    if (row) row.hidden = false;
+  });
+  window.addEventListener('appinstalled', () => {
+    deferredInstall = null;
+    const row = el('menu-install');
+    if (row) row.hidden = true;
+    toast('Installed — launch it from your home screen.');
+  });
+  window.addEventListener('popstate', () => {
+    if (appBack()) armBackButton();
+  });
+  armBackButton();
+
+  // Long-press on Android Chrome otherwise opens Save-image / text-select on cards.
+  window.addEventListener('contextmenu', e => { e.preventDefault(); });
+  window.addEventListener('dragstart', e => { e.preventDefault(); });
+
+  // Android may kill a background WebView; flush the save while we still can.
+  window.addEventListener('pagehide', () => { try { writeSave(); } catch (e) {} });
+  if (document && typeof document.addEventListener === 'function') {
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') { try { writeSave(); } catch (e) {} }
+    });
+  }
 }
 
 function promptInstall() {
-  if (deferredInstall) { deferredInstall.prompt(); deferredInstall = null; return; }
+  if (deferredInstall) {
+    deferredInstall.prompt();
+    deferredInstall = null;
+    return;
+  }
+  if (isStandalone()) { toast('Already installed.'); return; }
   toast('Use your browser menu → "Add to Home screen" to install.');
 }
 
@@ -1916,47 +1988,54 @@ function applyArt() {
   if (hero) hero.style.backgroundImage = "url('" + worldUrl + "')";
 }
 
-// Scale the desktop phone frame so it always fits the current viewport
-// (landscape phones/tablets used to clip past the screen). When it still
-// overflows, .stage is scrollable so the player can pan/drag around.
-function fitStage() {
-  const device = el('device');
-  if (!device || !device.style) return;
-  device.style.transform = '';
-  const stage = device.parentElement;
-  if (!stage) return;
-  const cs = (typeof getComputedStyle === 'function') ? getComputedStyle(stage) : null;
-  if (cs && parseFloat(cs.paddingTop) === 0) {
-    device.style.transform = '';
-    return; // edge-to-edge phone / PWA — CSS already fills the screen
-  }
-  const cap = stage.querySelector && stage.querySelector('.stage-caption');
-  const capH = (cap && cap.offsetHeight) ? (cap.offsetHeight + 14) : 0;
-  const padX = 32, padY = 44;
-  const availW = (typeof window !== 'undefined' ? window.innerWidth : 420) - padX;
-  const availH = (typeof window !== 'undefined' ? window.innerHeight : 896) - padY - capH;
-  const w = device.offsetWidth || 420;
-  const h = device.offsetHeight || 700;
-  if (!availW || !availH || !w || !h) return;
-  const s = Math.min(1, availW / w, availH / h);
-  device.style.transform = (s < 0.995) ? ('scale(' + s + ')') : '';
+// Android Chrome's URL bar makes 100vh / even 100dvh lie. Drive --app-h from
+// the visual viewport so the flex shell fills the pixels the user can see.
+function applyViewport() {
+  try {
+    const root = document.documentElement;
+    if (!root || !root.style || typeof root.style.setProperty !== 'function') return;
+    const vv = (typeof window !== 'undefined') ? window.visualViewport : null;
+    const h = (vv && vv.height) || (typeof window !== 'undefined' ? window.innerHeight : 0);
+    if (h) root.style.setProperty('--app-h', Math.round(h) + 'px');
+  } catch (e) { /* tests / restricted contexts */ }
 }
+function fitStage() { applyViewport(); } // alias kept for older callers
+
 
 applyArt();
 save = loadSave();
 renderCampaign();
 updateWorldStats();
 setChrome('world');
+if (typeof syncInstallRow === 'function') syncInstallRow();
 if (typeof window !== 'undefined') {
-  fitStage();
-  window.addEventListener('resize', fitStage);
-  window.addEventListener('orientationchange', () => setTimeout(fitStage, 80));
+  applyViewport();
+  window.addEventListener('resize', applyViewport);
+  window.addEventListener('orientationchange', () => setTimeout(applyViewport, 80));
+  if (window.visualViewport && window.visualViewport.addEventListener) {
+    window.visualViewport.addEventListener('resize', applyViewport);
+    window.visualViewport.addEventListener('scroll', applyViewport);
+  }
+  window.addEventListener('pageshow', e => { if (e && e.persisted) applyViewport(); });
 }
 
-if (typeof window !== 'undefined' && window.setInterval) {
+if (typeof window !== 'undefined') {
   // register the offline service worker (installable app, works with no network)
   if (navigator.serviceWorker && location.protocol.startsWith('http')) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+    const swReg = () => navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).catch(() => {});
+    if (document.readyState === 'complete') swReg();
+    else window.addEventListener('load', swReg);
+  }
+  // Tap the scrim to dismiss informational panels (not result/reward — those
+  // would drop a victory draft if a fat-finger hit the dimmed area).
+  if (document && typeof document.querySelectorAll === 'function') {
+    const dismissable = { 'intro-overlay': 1, 'help-overlay': 1, 'deck-overlay': 1,
+                          'menu-overlay': 1, 'reset-overlay': 1 };
+    document.querySelectorAll('.overlay').forEach(o => {
+      o.addEventListener('click', e => {
+        if (e.target === o && dismissable[o.id]) closeOverlay(o.id);
+      });
+    });
   }
 }
 </script>
