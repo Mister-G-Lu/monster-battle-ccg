@@ -2,6 +2,9 @@
 -- Comprehensive integration tests for the offline single-player build.
 -- Runs under real Lua 5.1 with the same mock layer as sim_test.lua.
 
+-- Ensure save directory exists for test
+os.execute("mkdir sim_save_int")  -- Windows/Linux compatible
+
 local failures = 0
 local passes = 0
 local function check(cond, msg)

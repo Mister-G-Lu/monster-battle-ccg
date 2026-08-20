@@ -14,6 +14,8 @@ local STATUS_TYPE = constants.STATUS_TYPE
 local BATTLE_SLOT_MAX = constants.BATTLE_SLOT_MAX
 local IMMOLATION = constants.CARD_IMMOLATION_CRYSTAL
 
+local MAX_ROUNDS = 50  -- force game over after this many rounds to prevent infinite battles
+
 local offline_battle = {}
 
 -- =====================================================================
@@ -537,6 +539,10 @@ function offline_battle:HandleMove(req)
     if actor.cur_crystal < card.cost then
         return "battle_crystal_not_enough"
     end
+    -- safety: clamp target_pos to valid range
+    if target_pos and (target_pos < 1 or target_pos > BATTLE_SLOT_MAX) then
+        return "battle_deploy_slot_full"
+    end
 
     if card.type == CARD_TYPE.monster then
         local allow_pos = actor:GetCurMonsterSlotPos()
@@ -625,6 +631,8 @@ function offline_battle:HandleMove(req)
         self:CheckGameOver()
         return nil
     end
+    -- crystal floor safety
+    if actor.cur_crystal < 0 then actor.cur_crystal = 0 end
     return "battle_deploy_hand_null"
 end
 
@@ -689,6 +697,27 @@ function offline_battle:HandleAttack(req)
     end
     -- early game-over guard (defense-in-depth)
     if self:CheckGameOver() then
+        return nil
+    end
+    -- safety: force game over if max rounds exceeded
+    if self.round >= MAX_ROUNDS then
+        local own_count = 0
+        for i = 1, BATTLE_SLOT_MAX do
+            if self.own.battle_slot[i] and self.own.battle_slot[i].monster then
+                own_count = own_count + 1
+            end
+        end
+        local enemy_count = 0
+        for i = 1, BATTLE_SLOT_MAX do
+            if self.enemy.battle_slot[i] and self.enemy.battle_slot[i].monster then
+                enemy_count = enemy_count + 1
+            end
+        end
+        if own_count >= enemy_count then
+            self:FinishBattle("player")
+        else
+            self:FinishBattle("enemy")
+        end
         return nil
     end
     -- enemy prep: +1 crystal this round was already granted at round start
@@ -979,25 +1008,41 @@ function offline_battle:RunCombat()
     -- round-start powers
     self:ApplyRoundStartPowers()
 
-    -- attackers in order: own slot 1..3, then enemy slot 1..3
-    local order = {}
-    for i = 1, BATTLE_SLOT_MAX do
-        if self.own.battle_slot[i] then table.insert(order, self.own.battle_slot[i]) end
-    end
-    for i = 1, BATTLE_SLOT_MAX do
-        if self.enemy.battle_slot[i] then table.insert(order, self.enemy.battle_slot[i]) end
+    -- Build attacker list: snapshot which slots are occupied NOW.
+    -- CompactSlots can shift slots mid-combat, so we take a snapshot
+    -- of slot objects before the loop and re-check liveness each pass.
+    local function collect_attackers(actor)
+        local list = {}
+        for i = 1, BATTLE_SLOT_MAX do
+            local s = actor.battle_slot[i]
+            if s and s.monster and not s:IsDead() then
+                list[#list + 1] = s
+            end
+        end
+        return list
     end
 
-    for _, attacker in ipairs(order) do
+    local own_list = collect_attackers(self.own)
+    local enemy_list = collect_attackers(self.enemy)
+
+    -- Player slots attack first, then enemy slots
+    for _, attacker in ipairs(own_list) do
+        -- re-check: slot may have died from earlier thorns/counter
         if attacker.monster and not attacker:IsDead() then
             self:SlotAttack(attacker, events)
         end
-        if self.is_over then
-            break
+        if self.is_over then break end
+    end
+    for _, attacker in ipairs(enemy_list) do
+        if attacker.monster and not attacker:IsDead() then
+            self:SlotAttack(attacker, events)
         end
-        if self:CheckGameOver() then
-            break
-        end
+        if self.is_over then break end
+    end
+
+    -- also check game-over during combat in case kill target reached
+    if not self.is_over then
+        self:CheckGameOver()
     end
 
     if #events > 0 and not self.is_over then
@@ -1303,7 +1348,7 @@ function offline_battle:AIDoPrep()
         local best_idx, best_cost = nil, nil
         for i = 1, 4 do
             local c = actor.hand_card[i]
-            if c and c.type == CARD_TYPE.monster and c.cost <= actor.cur_crystal then
+            if c and c.type == CARD_TYPE.monster and c.cost <= actor.cur_crystal and actor.cur_crystal > 0 then
                 if not best_cost or c.cost < best_cost then
                     best_idx, best_cost = i, c.cost
                 end
@@ -1315,6 +1360,7 @@ function offline_battle:AIDoPrep()
         local card = actor:GetHandCard(best_idx)
         local slot = self:DeployMonster(actor, card, slot_pos)
         actor.cur_crystal = actor.cur_crystal - card.cost
+        if actor.cur_crystal < 0 then actor.cur_crystal = 0 end
         local new_card = actor:DrawCard(CARD_TYPE.monster)
         actor:SetHandCard(best_idx, new_card)
         self:PushCommand("cmd_battle_move", {
@@ -1334,7 +1380,7 @@ function offline_battle:AIDoPrep()
         local best_idx, best_slot = nil, nil
         for i = 1, 4 do
             local c = actor.hand_card[i]
-            if c and (c.type == CARD_TYPE.equip or c.type == CARD_TYPE.armor) and c.cost <= actor.cur_crystal then
+            if c and (c.type == CARD_TYPE.equip or c.type == CARD_TYPE.armor) and c.cost <= actor.cur_crystal and actor.cur_crystal > 0 then
                 for j = 1, BATTLE_SLOT_MAX do
                     local s = actor.battle_slot[j]
                     if s and s.monster and not s.item then
@@ -1356,6 +1402,7 @@ function offline_battle:AIDoPrep()
         local card = actor:GetHandCard(best_idx)
         self:EquipItem(best_slot, card)
         actor.cur_crystal = actor.cur_crystal - card.cost
+        if actor.cur_crystal < 0 then actor.cur_crystal = 0 end
         local new_card = actor:DrawCard(CARD_TYPE.item)
         actor:SetHandCard(best_idx, new_card)
         self:PushCommand("cmd_battle_move", {
@@ -1375,7 +1422,7 @@ function offline_battle:AIDoPrep()
         local use_idx, use_slot = nil, nil
         for i = 1, 4 do
             local c = actor.hand_card[i]
-            if c and c.type == CARD_TYPE.consume and c.cost <= actor.cur_crystal then
+            if c and c.type == CARD_TYPE.consume and c.cost <= actor.cur_crystal and actor.cur_crystal > 0 then
                 local is_heal = false
                 for _, p in ipairs(c.power_list or {}) do
                     if p.name == POWER_NAME.heal or p.name == POWER_NAME.heal_all then
@@ -1401,6 +1448,7 @@ function offline_battle:AIDoPrep()
         local card = actor:GetHandCard(use_idx)
         local effects = self:ApplyCardPowers(card, use_slot, actor, actor.user_id)
         actor.cur_crystal = actor.cur_crystal - card.cost
+        if actor.cur_crystal < 0 then actor.cur_crystal = 0 end
         local new_card = actor:DrawCard(CARD_TYPE.item)
         actor:SetHandCard(use_idx, new_card)
         self:PushCommand("cmd_battle_move", {
