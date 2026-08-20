@@ -50,6 +50,15 @@ adb logcat -s AndroidRuntime  # Java crashes
 
 The game also writes startup breadcrumbs to `offline_debug.log` in its writable directory on device.
 
+### Run the balance/static checks
+
+```bash
+python3 scripts/analyze_balance.py --markdown > docs/BALANCE_AUDIT.md
+python3 tests/static_checks.py
+```
+
+The balance audit is a heuristic design review for obvious CCG pitfalls: rarity-as-raw-power, strict same-cost upgrades, and tutorial/boss cards leaking into random pools.
+
 ### Run the headless test suites
 
 The tests load the REAL game Lua modules under LuaJIT 2.1 (the same language

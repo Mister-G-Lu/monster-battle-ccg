@@ -1,29 +1,16 @@
 local meta = {}
 
+local ENGLISH_LANG = "en-US"
+
 local locale_list = {
-    [cc.LANGUAGE_ENGLISH] = "en-US",
-    [cc.LANGUAGE_CHINESE] = "zh-CN",
+    [cc.LANGUAGE_ENGLISH] = ENGLISH_LANG,
+    [cc.LANGUAGE_CHINESE] = ENGLISH_LANG,
 }
--- Load language file
+
+-- Load language file. The offline build is intentionally English-only:
+-- device locale must not switch the UI to bundled Simplified/Traditional CSVs.
 function meta:Init(lang)
-    local language = cc.Application:getInstance():getCurrentLanguage()
-
-    if not locale_list[language] then
-        locale_list[language] = locale_list[cc.LANGUAGE_ENGLISH]
-    end
-
-    -- If Chinese locale, check Traditional vs Simplified.
-    if language == cc.LANGUAGE_CHINESE and  self:IsTraditional() then
-        lang = "zh-TW"
-    end
-
-    lang = lang or locale_list[language]
-
-    -- desktop builds default to English
-    local TARGET_PLATFORM = cc.Application:getInstance():getTargetPlatform()
-    if TARGET_PLATFORM == cc.PLATFORM_OS_WINDOWS or TARGET_PLATFORM == cc.PLATFORM_OS_MAC or TARGET_PLATFORM == cc.PLATFORM_OS_LINUX then
-        lang = locale_list[cc.LANGUAGE_ENGLISH] --English
-    end
+    lang = ENGLISH_LANG
 
     local temp = self:Load(lang)
 
@@ -33,7 +20,8 @@ function meta:Init(lang)
     self.cur_lang = lang
 end
 
--- Detect Traditional Chinese early
+-- Kept for compatibility with legacy callers that check platform language.
+-- It no longer affects which CSV is loaded in the offline English build.
 function meta:IsTraditional()
     local cur_lang = cc.Application:getInstance():getCurrentLanguage()
     if cur_lang ~= cc.LANGUAGE_CHINESE then
@@ -43,8 +31,7 @@ function meta:IsTraditional()
     local language = nil
     if ThirdHelper and ThirdHelper["getCurrentLanguage"] then
         language = ThirdHelper["getCurrentLanguage"]()
-        -- iOS returns zh-Hans-CN / zh-Hans
-        -- Android returns zh-CN
+        -- iOS returns zh-Hans-CN / zh-Hans; Android returns zh-CN.
         if language == "zh-CN" or language == "zh-Hans-CN" or language == "zh-Hans" then
             return false
         else
@@ -80,6 +67,10 @@ function meta:Load(lang)
     local table_info = {}
     local str = nil
     pcall(function() str = cc.FileUtils:getInstance():getStringFromFile(string.format("res/data/client_lang_%s.csv", lang)) end)
+    if (not str or str == "") and lang ~= ENGLISH_LANG then
+        pcall(function() str = cc.FileUtils:getInstance():getStringFromFile(string.format("res/data/client_lang_%s.csv", ENGLISH_LANG)) end)
+        lang = ENGLISH_LANG
+    end
     if not str or str == "" then
         print("[TEXT_LOADER] WARNING: language CSV not found for lang=" .. tostring(lang))
         return table_info
@@ -133,7 +124,8 @@ end
 
 -- Get localized text
 function meta:GetText(str, ...)
-    local info = self.text[str] or str
+    local text_table = self.text or {}
+    local info = text_table[str] or str
     return string.format(info,...)
 end
 

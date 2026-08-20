@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+"""Fast repository checks that do not require LuaJIT or Android tooling."""
+from __future__ import annotations
+
+import json
+import os
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+CHINESE_RE = re.compile(r"[\u4e00-\u9fff]")
+ALLOWED_CHINESE_FILES = {
+    Path("csv_data/client_lang_zh-CN.csv"),
+    Path("csv_data/client_lang_zh-TW.csv"),
+}
+SKIP_SUFFIXES = {".apk", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".wav", ".mp3"}
+
+
+def check_no_chinese_artifacts() -> list[str]:
+    errors: list[str] = []
+    for path in ROOT.rglob("*"):
+        rel = path.relative_to(ROOT)
+        if ".git" in rel.parts or not path.is_file():
+            continue
+        if rel in ALLOWED_CHINESE_FILES or path.suffix.lower() in SKIP_SUFFIXES:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        if CHINESE_RE.search(text):
+            errors.append(f"unexpected Chinese characters in {rel}")
+    return errors
+
+
+def check_text_loader_forces_english() -> list[str]:
+    text = (ROOT / "src/manager/text_loader.lua").read_text(encoding="utf-8")
+    if 'local ENGLISH_LANG = "en-US"' not in text or "lang = ENGLISH_LANG" not in text:
+        return ["text_loader.lua must force the English CSV in this offline build"]
+    return []
+
+
+def check_web_data_marks_special_cards() -> list[str]:
+    data = json.loads((ROOT / "build/web/game_data.json").read_text(encoding="utf-8"))
+    errors: list[str] = []
+    for cid in ("119001", "149018", "21901"):
+        card = data["cards"].get(cid)
+        if not card:
+            errors.append(f"special card {cid} missing from web data")
+        elif card.get("flags") != 0:
+            errors.append(f"special card {cid} must remain flags=0")
+    html = (ROOT / "build/web/game.html").read_text(encoding="utf-8")
+    if "c.flags === 1" not in html:
+        errors.append("web prototype random/starter pools must filter to flags=1 collectible cards")
+    if "ATK:${card.attack || 1}" not in html:
+        errors.append("web prototype should use attack values, not current HP as damage")
+    return errors
+
+
+def check_balance_audit() -> list[str]:
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts/analyze_balance.py"), "--fail-on-critical"],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        return ["balance audit found collectible critical outliers", result.stdout, result.stderr]
+    return []
+
+
+def main() -> int:
+    errors: list[str] = []
+    for check in (
+        check_no_chinese_artifacts,
+        check_text_loader_forces_english,
+        check_web_data_marks_special_cards,
+        check_balance_audit,
+    ):
+        errors.extend(check())
+    if errors:
+        print("STATIC CHECKS FAILED")
+        for err in errors:
+            print(" -", err)
+        return 1
+    print("STATIC CHECKS PASSED")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
