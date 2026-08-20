@@ -19,6 +19,8 @@ local data_template = require "manager.data_template"
 local timer = require "manager.time"
 local configuration = require "manager.configuration"
 local offline_battle = require "manager.offline_battle"
+-- The Shadow Road campaign, served by this service (see campaign_service.lua).
+local campaign_service = require "manager.campaign_service"
 
 local offline_server = {}
 
@@ -254,6 +256,45 @@ function offline_server:SplitList(str)
         table.insert(list, tonumber(w))
     end
     return list
+end
+
+-- =====================================================================
+-- Campaign helpers (the Shadow Road runs on this service)
+-- =====================================================================
+
+-- The player's campaign save block, seeded on first access so existing
+-- saves pick up the campaign without a migration.
+function offline_server:GetCampaignSave()
+    if not self.save.campaign then
+        self.save.campaign = campaign_service.default_save()
+    end
+    campaign_service.ensure_starter(self.save.campaign)
+    return self.save.campaign
+end
+
+-- Normalized card index for campaign pool resolution / recruit drafts.
+-- data_template.card_config is the in-memory config on the device; the
+-- service normalizes it (kind string, attack from powers) for pools.
+function offline_server:CampaignCardIndex()
+    return campaign_service.normalize_index(data_template.card_config)
+end
+
+-- Build an offline_battle deck ({monster_list, item_list}) from model ids.
+function offline_server:DeckFromModelIds(ids, user_id)
+    local deck = { monster_list = {}, item_list = {} }
+    local uid = 1
+    for _, id in ipairs(ids) do
+        local c = self:CardInfoFromModel(id, uid, nil, user_id)
+        uid = uid + 1
+        if c then
+            if c.type == "monster" then
+                deck.monster_list[#deck.monster_list + 1] = c
+            else
+                deck.item_list[#deck.item_list + 1] = c
+            end
+        end
+    end
+    return deck
 end
 
 -- =====================================================================
@@ -1109,6 +1150,144 @@ function offline_server:OnPveOver(battle, cmd_over, play_id, difficulty, pcfg)
         cmd_over.pve_info = { difficulty = tonumber(difficulty) }
     end
     self:Save()
+end
+
+-- =====================================================================
+-- Handlers: Shadow Road campaign
+--
+-- The single-player campaign is served by this service (not by a
+-- parallel HTML app over the top): req_campaign_info returns the full
+-- canonical campaign + progress, req_campaign_battle_start runs a node
+-- on the native battle engine, and rewards/progression are applied in
+-- OnCampaignOver. The client (native campaign panel) speaks the same
+-- req_*/cmd_* protocol every other screen already uses.
+-- =====================================================================
+
+offline_server.handlers["req_campaign_info"] = function(self)
+    return campaign_service.info(self:GetCampaignSave())
+end
+
+offline_server.handlers["req_campaign_battle_start"] = function(self, req)
+    local node_id = req and req.node_id
+    local node = campaign_service.node_by_id(node_id)
+    if not node then
+        return "campaign_node_not_found"
+    end
+    local csave = self:GetCampaignSave()
+    if csave.pending_recruit then
+        return "campaign_recruit_pending"
+    end
+    if not campaign_service.is_playable(csave, node) then
+        return "campaign_node_locked"
+    end
+
+    local cards = self:CampaignCardIndex()
+    local own_deck = self:DeckFromModelIds(campaign_service.player_deck_ids(csave), self.save.user_id)
+    local enemy_deck = self:DeckFromModelIds(campaign_service.enemy_deck_ids(node, cards), "enemy")
+    if #enemy_deck.monster_list == 0 then
+        return "campaign_deck_empty"
+    end
+
+    self:StartBattle({
+        battle_type = "campaign",
+        battle_object_type = "pve",
+        -- The native engine decides the fight: a side loses when its
+        -- monster army is exhausted. node.hp travels as metadata for the
+        -- client's encounter header; no web-style commander HP here.
+        pve_info = {
+            play_id = 0,
+            difficulty = 1,
+            pve_win_cur_value = 0,
+            campaign_node_id = node.id,
+        },
+        pve_win_target = 0,
+        own_deck = own_deck,
+        enemy_deck = enemy_deck,
+        enemy_name = node.enemy_name or node.name,
+        on_battle_over = function(battle, cmd_over)
+            self:OnCampaignOver(battle, cmd_over, node)
+        end,
+    })
+    return nil
+end
+
+function offline_server:OnCampaignOver(battle, cmd_over, node)
+    local csave = self:GetCampaignSave()
+    if battle.win_user_id == "player" then
+        local result = campaign_service.apply_victory(csave, node)
+        -- campaign EXP also feeds the Android level/EXP progression
+        self:AddExp(result.exp_gain)
+        cmd_over.campaign_info = {
+            node_id = node.id,
+            victory = true,
+            exp_gain = result.exp_gain,
+            first_clear = result.first_clear,
+            vitality = csave.vitality,
+            vitality_gain = result.vitality_gain,
+            bosses_slain = csave.bosses_slain,
+            complete = csave.complete,
+        }
+        if result.first_clear then
+            cmd_over.campaign_info.recruit_offers =
+                campaign_service.recruit_offers(csave, node, self:CampaignCardIndex())
+        end
+    else
+        campaign_service.apply_defeat(csave)
+        cmd_over.campaign_info = {
+            node_id = node.id,
+            victory = false,
+        }
+    end
+    self:Save()
+end
+
+offline_server.handlers["req_campaign_recruit_offers"] = function(self, req)
+    local csave = self:GetCampaignSave()
+    local node_id = req and req.node_id
+    if csave.pending_recruit ~= node_id then
+        return "campaign_no_recruit"
+    end
+    if not csave.pending_offers then
+        local node = campaign_service.node_by_id(node_id)
+        if not node then return "campaign_node_not_found" end
+        csave.pending_offers = campaign_service.recruit_offers(csave, node, self:CampaignCardIndex())
+        self:Save()
+    end
+    return { offers = csave.pending_offers }
+end
+
+offline_server.handlers["req_campaign_recruit"] = function(self, req)
+    local csave = self:GetCampaignSave()
+    if not csave.pending_offers then
+        return "campaign_no_offers"
+    end
+    if not campaign_service.apply_recruit(csave, req and req.card_id) then
+        return "campaign_invalid_pick"
+    end
+    self:Save()
+    return {
+        collection = csave.collection,
+        exp = csave.exp,
+    }
+end
+
+offline_server.handlers["req_campaign_skip_recruit"] = function(self)
+    local csave = self:GetCampaignSave()
+    if not campaign_service.skip_recruit(csave) then
+        return "campaign_no_recruit"
+    end
+    self:AddExp(campaign_service.SKIP_RECRUIT_EXP)
+    self:Save()
+    return {
+        exp = csave.exp,
+    }
+end
+
+offline_server.handlers["req_campaign_reset"] = function(self)
+    local csave = self:GetCampaignSave()
+    campaign_service.reset(csave)
+    self:Save()
+    return campaign_service.info(csave)
 end
 
 -- =====================================================================

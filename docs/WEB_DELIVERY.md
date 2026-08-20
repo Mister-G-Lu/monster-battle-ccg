@@ -1,7 +1,7 @@
-# Serving the Android app on the web
+# Serving the campaign: web view + Android service
 
-Research + the decision behind the app shell in `index.html` /
-`build/web/game.html`.
+Research and decisions behind `index.html` / `build/web/game.html` and the
+campaign's home inside the Android app.
 
 ## The question
 
@@ -9,7 +9,8 @@ The Android build (`English_offline.apk`) looks far better than the old web
 prototype: it has a real app frame — status bar, app bar, bottom navigation,
 bottom sheets, a cold-start splash — while the web page was a flat, scrolling
 wall of text blocks. We want the campaign on the web to *look and behave like
-the Android app*, from a plain HTML file.
+the Android game*, from a plain HTML file, **without** faking the Android OS on
+top of the actual app.
 
 ## How the pros actually do it
 
@@ -52,78 +53,84 @@ not a stream, so it costs nothing per player and runs at native-ish speed.
 The catch for *this* repo: the Android title is Cocos2d-x 3.x + LuaJIT with
 `libcocos2dlua.so`, an ARM native binary. There is no supported path from that
 APK to a Cocos web build without porting the whole client. We already made the
-pragmatic version of this choice — the web prototype is an independent
+pragmatic version of this choice — the web campaign is an independent
 JavaScript reimplementation of the battle system driven by the *same* extracted
 game data and the *same* extracted art.
 
 Verdict: **this is the model we follow**, and it is already in place.
 
-### 4. Progressive Web App: an app shell that *is* the app
+### 4. Progressive Web App plumbing (installable, offline, no fake chrome)
 
-The remaining gap was never the engine — it was the chrome. The industry answer
-for "web content that must feel like a native mobile app" is the **app shell +
-PWA** pattern, and the guidance is consistent across MDN, web.dev and the
-practitioner writeups:
+The PWA layer is still valuable — but only the parts a real OS does *not*
+provide: `display: standalone` launches with no browser UI once installed,
+maskable icons keep the launcher icon on-brand, `theme_color` /
+`background_color` tint the OS bars and the install splash, a service worker
+makes the game work fully offline, `viewport-fit=cover` + safe-area insets
+clear the display cutout and gesture bar, and `@media (display-mode: standalone)`
+lets the page adapt when installed.
 
-* A **web app manifest** with `display: standalone` launches the app in its own
-  window with no browser UI, so it looks native once installed.
-* **Maskable icons** are required on Android, or the launcher shoves your icon
-  inside a white circle and instantly outs it as a web app.
-* `theme_color` / `background_color` tint the system bars and the splash.
-* A **service worker** caches the shell so the app boots with no network — the
-  natural fit for a build whose entire selling point is being offline.
-* `@media (display-mode: standalone)` lets the page adapt when it is launched
-  as an installed app versus in a browser tab (e.g. hide the "install me" hint,
-  disable overscroll/pull-to-refresh).
-* `viewport-fit=cover` plus `env(safe-area-inset-*)` keeps content clear of
-  display cutouts and the gesture bar.
-* The **app shell** itself — persistent app bar, bottom navigation, bottom
-  sheets, a cold-start splash — is what actually makes it read as an app.
-  Content scrolls; the chrome does not.
-
-Google's own `Play Instant` / "Try now" program is the native-side answer to
-the same problem (play a demo without installing), but it publishes a stripped
-APK through the Play Store — it does not put anything in a browser.
+What the web page must **not** do is reproduce the Android OS chrome (status
+bar, app bar, bottom navigation, bottom sheets, cold-start splash, gesture
+pill, phone frame) in HTML. The Android game owns the frame; on a handset the
+OS draws the real bars, and a fake set drawn *on top of the game* is what made
+the campaign read as a second, overlaid copy of the app. That chrome was
+removed: the page now renders only game content — a slim in-game HUD, the
+campaign screens, and a compact tab strip.
 
 ## What we built
 
-A **PWA app shell that reproduces the Android build's chrome in HTML/CSS**, with
-the existing campaign engine untouched underneath:
+### Web: a clean game view (no fake OS chrome)
 
-| Android affordance | Web implementation |
+| What | Web implementation |
 |---|---|
-| Status bar | `.sysbar` — live clock, signal/wifi/battery glyphs, cutout. Hidden on real phones (the OS draws the real one) |
-| App bar | `.appbar` — title + subtitle retitle per screen, back arrow appears only on sub-screens, overflow menu |
-| Bottom navigation | `.bottomnav` — Campaign / Deck / How to play, with a Material pill indicator and a count badge; hidden during battles for an immersive view |
-| Bottom sheets | every overlay (intro, result, rewards, deck, help, menu) slides up from the bottom with a grip handle |
+| In-game HUD | `#game-hud` — back button (sub-screens only), title/subtitle, overflow menu |
+| Tabs | `#tab-campaign` / `#tab-deck` / `#tab-help` — compact strip inside the game view, not a Material bottom nav |
+| Overlays | centered game panels (intro, result, rewards, deck, help, menu) |
 | Snackbar | `toast()` for recruit / EXP / install feedback |
-| Cold-start splash | `.splash` — logo + indeterminate progress bar, auto-dismissed on load |
-| Hardware back button | `appBack()`, wired to `popstate`, closes the top sheet then retreats from a battle |
-| Adaptive launcher icon | `assets/icons/maskable-*.png`, cropped from the game's own logo emblem |
-| Install to home screen | `beforeinstallprompt` captured, offered in the overflow menu |
-| Offline | `sw.js` — network-first for navigations, cache-first for art |
+| Back behavior | `appBack()`, wired to `popstate`, closes the top overlay then retreats from a battle |
+| Installable | `manifest.webmanifest` + `sw.js` (offline first, cache-first for art) |
+| Safe areas | `viewport-fit=cover` + `env(safe-area-inset-*)` — the OS bars are real, content stays clear of them |
 
-On a desktop browser the whole thing is presented inside a **phone frame** on a
-blurred backdrop of the game's own world art, so the page reads as "here is the
-Android app". Below 620px wide — or whenever the manifest's `standalone` display
-mode is active — the frame, the fake status bar and the gesture pill all drop
-away and the app goes edge-to-edge, because at that point it *is* the app.
+Removed: `.device` phone frame + stage caption, `.sysbar` fake status bar,
+`.appbar` fake app bar, `.bottomnav` fake bottom navigation, sheet grip
+handles, cold-start `.splash`, gesture pill. The Android game — or the device's
+own bars — now provides all of that. `tests/app_shell_test.js` asserts the game
+HUD/tabs/overlays are present and the fake chrome is gone.
 
-The text-heavy blocks that motivated the request are gone: the world header is
-now a hero banner over the game's key art, the stats line is a row of Material
-chips, campaign progress is a real progress card, and "How to play" moved out of
-the page body into a bottom sheet behind a nav tab.
+### Android: the campaign is a native service feature
+
+The same canonical campaign (`content/campaign_data.json` →
+`src/manager/campaign_data_generated.lua`) is now served by the Android app's
+own in-process game server, `src/manager/offline_server.lua`, through
+`src/manager/campaign_service.lua`:
+
+- `req_campaign_info` — regions, progress, collection, vitality.
+- `req_campaign_battle_start{node_id}` — builds the enemy deck from the
+  canonical node pool, the player deck from the campaign collection, and runs
+  the **real Android battle engine** (`offline_battle.lua`); rejects locked
+  nodes / pending recruits.
+- Victory/defeat (`OnCampaignOver`) — first-clear EXP + 3-card recruit draft,
+  replay EXP, +2 max vitality per boss, final-boss completion flag.
+- `req_campaign_recruit_offers` / `req_campaign_recruit` /
+  `req_campaign_skip_recruit` / `req_campaign_reset`.
+
+Campaign progress lives in the game's own save file. `tests/level_w1_test.lua`
+and `tests/campaign_service_test.lua` assert the w1 slice end-to-end (deck
+plumbing plus win/loss through the native engine).
 
 ### Files
 
 ```
-index.html                 the app shell + campaign (served from the repo root)
-manifest.webmanifest       PWA manifest, icons pointed at build/web/assets/
-sw.js                      offline service worker
-build/web/game.html        byte-identical mirror, served from build/web/
+index.html                      the game view (served from the repo root)
+manifest.webmanifest            PWA manifest, icons pointed at build/web/assets/
+sw.js                           offline service worker
+build/web/game.html             byte-identical mirror, served from build/web/
 build/web/manifest.webmanifest, build/web/sw.js   the mirror's copies
-build/web/assets/icons/    icon-{192,512}.png + maskable-{192,512}.png
-tests/app_shell_test.js    regression tests for the chrome + the PWA files
+build/web/assets/icons/         icon-{192,512}.png + maskable-{192,512}.png
+src/manager/campaign_service.lua      native campaign service (pure data/logic)
+src/manager/campaign_data.lua         native adapter onto campaign_data_generated
+tests/app_shell_test.js         regression tests for the game view + PWA files
+tests/campaign_service_test.lua regression tests for the native campaign service
 ```
 
 Both HTML copies must stay byte-identical (enforced by
@@ -133,9 +140,10 @@ from the page's own directory — the same trick `ART_BASE` already used.
 ### Verifying
 
 ```bash
-make verify            # static checks (now including the PWA/app-shell checks)
-node tests/app_shell_test.js   # app shell chrome + manifest/SW/icon consistency
-node tests/campaign_sim.js 40  # unchanged: the campaign engine itself
+make verify            # static checks (including refresh_campaign_data.py --verify)
+node tests/app_shell_test.js        # game view + manifest/SW/icon consistency
+node tests/campaign_sim.js 40       # the campaign engine itself
+luajit tests/campaign_service_test.lua   # native campaign service + w1 end-to-end
 make web               # serve at http://localhost:8000/ and try it
 ```
 

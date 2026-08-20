@@ -429,6 +429,9 @@ function offline_battle:Start()
             play_id = self.opts.pve_info and self.opts.pve_info.play_id or 0,
             difficulty = self.opts.pve_info and self.opts.pve_info.difficulty or 1,
             pve_win_cur_value = self.pve_win_cur_value,
+            -- campaign battles carry the canonical node id through the
+            -- start command so the client can render the encounter header
+            campaign_node_id = self.opts.pve_info and self.opts.pve_info.campaign_node_id or nil,
         },
     })
 

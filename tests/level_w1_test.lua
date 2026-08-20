@@ -35,29 +35,69 @@ end
 -- Engine path: only when data_template can load (setup_test_env.py fixtures).
 local data_template = nil
 if io.open("csv_plain/all_card_config.csv", "r") or io.open("decrypted/src/manager/data_template.lua", "r") then
-    -- bit stub for Lua 5.1 without LuaJIT
+    -- Full mock layer (same as integration_test.lua) so data_template can boot.
     if not package.loaded.bit then
         local bit_stub = {}
-        function bit_stub.band(a, b)
-            local r, p = 0, 1
-            while (a > 0 or b > 0) and p <= 2^31 do
-                if a % 2 == 1 and b % 2 == 1 then r = r + p end
-                a = math.floor(a / 2); b = math.floor(b / 2); p = p * 2
-            end
-            return r
-        end
-        function bit_stub.bor(a, b)
-            local r, p = 0, 1
-            while (a > 0 or b > 0) and p <= 2^31 do
-                if a % 2 == 1 or b % 2 == 1 then r = r + p end
-                a = math.floor(a / 2); b = math.floor(b / 2); p = p * 2
-            end
-            return r
-        end
-        function bit_stub.lshift(a, n) return bit_stub.band(a * 2^n, 0xFFFFFFFF) end
-        package.loaded.bit = bit_stub
+        function bit_stub.band(a,b) local r,p=0,1 while(a>0 or b>0)and p<=2^31 do if a%2==1 and b%2==1 then r=r+p end a=math.floor(a/2);b=math.floor(b/2);p=p*2 end return r end
+        function bit_stub.bor(a,b) local r,p=0,1 while(a>0 or b>0)and p<=2^31 do if a%2==1 or b%2==1 then r=r+p end a=math.floor(a/2);b=math.floor(b/2);p=p*2 end return r end
+        function bit_stub.bxor(a,b) local r,p=0,1 while(a>0 or b>0)and p<=2^31 do if(a%2)~=(b%2)then r=r+p end a=math.floor(a/2);b=math.floor(b/2);p=p*2 end return r end
+        function bit_stub.bnot(a) return 0xFFFFFFFF-bit_stub.band(a,0xFFFFFFFF) end
+        function bit_stub.lshift(a,n) return bit_stub.band(a*2^n,0xFFFFFFFF) end
+        function bit_stub.rshift(a,n) return math.floor(bit_stub.band(a,0xFFFFFFFF)/2^n) end
+        package.loaded["bit"] = bit_stub
     end
+    if not aandm then
+        aandm = {}
+        function aandm.loadConfig(name)
+            local base = string.match(name, "([^/\\]+)%.csv$") or name
+            local f = io.open("csv_plain/" .. base .. ".csv", "r")
+            if not f then return "" end
+            local c = f:read("*a"); f:close(); return c
+        end
+        function aandm.getDataFromFile() return nil end
+    end
+    if not socket then socket = {} end
+    if not crypt then crypt = {} end
+    package.loaded["socket"] = socket
+    package.loaded["crypt"] = crypt
+    if not protobuf then
+        protobuf = { register = function() end, encode = function() return "" end, decode2 = function() return {} end }
+    end
+    package.loaded["utils.protobuf"] = protobuf
+    path = path or "res/data/"
+    if not cc then
+        cc = {}
+        cc.LANGUAGE_ENGLISH = 0; cc.LANGUAGE_CHINESE = 1
+        cc.PLATFORM_OS_WINDOWS = 4; cc.PLATFORM_OS_ANDROID = 3
+        local app = { getCurrentLanguage = function() return cc.LANGUAGE_ENGLISH end,
+                      getTargetPlatform = function() return cc.PLATFORM_OS_ANDROID end }
+        cc.Application = { getInstance = function() return app end }
+        cc.FileUtils = { getInstance = function()
+            return { getWritablePath = function() return "sim_save_int/" end }
+        end }
+        cc.UserDefault = { getInstance = function()
+            return { getStringForKey = function() return "" end,
+                     getIntegerForKey = function(_,d) return d or 0 end,
+                     getBoolForKey = function(_,d) return d or false end,
+                     setStringForKey = function() end, setIntegerForKey = function() end,
+                     setBoolForKey = function() end, setDoubleForKey = function() end,
+                     flush = function() end }
+        end }
+        cc.Director = { getInstance = function() return { getTextureCache = function() return {} end,
+                     getScheduler = function() return { scheduleScriptFunc = function() return 1 end } end,
+                     getRunningScene = function() return nil end, replaceScene = function() end,
+                     endToLua = function() end } end }
+    end
+    pcall(require, "common.ext.init")
     data_template = try_require("manager.data_template")
+    if data_template then
+        data_template:Init()
+        local load_count = 0
+        while not data_template.is_load_complete and load_count < 200 do
+            data_template:LoadFromCSV()
+            load_count = load_count + 1
+        end
+    end
 end
 
 if not data_template then

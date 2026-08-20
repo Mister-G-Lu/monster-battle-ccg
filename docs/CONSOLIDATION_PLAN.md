@@ -107,10 +107,16 @@ In dependency order, each a small vertical slice:
 
 - **Slice 2** — **done**: `campaign_data.lua` requires generated tables and
   resolves pools from CSV / card config.
-- **Slice 3** — **in progress**: `w1` enemy/player decks come from canonical
-  JSON (`tests/level_w1_test.lua`, `tests/campaign_data_test.py`). Full native
-  play-through still needs `setup_test_env.py` fixtures.
-- **Slice 4** — keep `index.html` ↔ `build/web/game.html` byte-identical.
+- **Slice 3** — **done**: the w1 slice is playable end-to-end through the native
+  engine. `src/manager/campaign_service.lua` + `offline_server.lua` handlers
+  build w1's enemy deck from the canonical pool, run the battle on
+  `offline_battle.lua`, and apply rewards/recruit/vitality to the game save.
+  `tests/level_w1_test.lua` and `tests/campaign_service_test.lua` assert
+  plumbing + win/loss with `setup_test_env.py` fixtures.
+- **Slice 4** — keep `index.html` ↔ `build/web/game.html` byte-identical. The
+  web page no longer draws fake Android chrome (phone frame, status bar, app
+  bar, bottom navigation, sheets, splash) — it renders only game content, and
+  the Android app / device OS owns the frame (`tests/app_shell_test.js`).
 - **Slice 5** — **DECIDED** (see `docs/ENGINE_STRATEGY.md`): stay on the thin JS
   port + APK art for the HTML host; do not start WASM/Capacitor this phase.
 - **Slice 6** — presentation parity (card frames, skill icons, crystal/HP chrome,

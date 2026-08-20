@@ -32,9 +32,11 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* ============================================================
-   ANDROID APP SHELL
-   Phone frame on desktop, edge-to-edge on handsets / installed PWA.
-   Material-style status bar, app bar, bottom nav and bottom sheets.
+   GAME VIEW (Android elements only)
+   No fake OS chrome: no status bar, no phone frame, no bottom
+   navigation. The real device draws the system bars; this page
+   only renders the game — a slim in-game HUD up top and a compact
+   tab strip for the campaign's own screens.
    ============================================================ */
 :root {
   --md-bg: #0f0f1c;
@@ -44,103 +46,59 @@
   --md-primary: #e94560;
   --md-on-surface: #eceaf4;
   --md-on-surface-var: #9a9ab4;
-  --appbar-h: 56px;
-  --sysbar-h: 26px;
-  --bottomnav-h: 60px;
+  --hud-h: 50px;
+  --tabs-h: 52px;
   --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
 }
-html { height: 100%; }
-body { background: #07070f; overflow: hidden; overscroll-behavior: none;
-  -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; }
+body { background: #07070f; color: var(--md-on-surface); overflow: hidden;
+  overscroll-behavior: none; -webkit-tap-highlight-color: transparent;
+  display: flex; flex-direction: column; }
 
-/* --- stage: the desktop backdrop the phone sits on --- */
-.stage { position: fixed; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 14px; padding: 22px 16px; }
-.stage-bg { position: absolute; inset: 0; background-size: cover; background-position: center;
-  filter: blur(38px) saturate(.7) brightness(.4); transform: scale(1.15); z-index: 0; }
-.stage::after { content: ''; position: absolute; inset: 0; z-index: 0;
-  background: radial-gradient(ellipse at 50% 35%, rgba(233,69,96,.10), transparent 62%), rgba(7,7,15,.72); }
-.stage-caption { position: relative; z-index: 2; color: #6f6f8c; font-size: .8em;
-  text-align: center; max-width: 460px; line-height: 1.55; }
-.stage-caption b { color: #9a9ab4; }
-.stage-caption i { color: #c9a6ff; font-style: normal; }
-
-/* --- the phone --- */
-.device { position: relative; z-index: 2; width: min(420px, 100%);
-  height: min(896px, calc(100vh - 96px)); flex: 0 1 auto;
-  border-radius: 40px; padding: 10px; background: linear-gradient(160deg, #2b2b3d, #101018 55%, #24243a);
-  box-shadow: 0 34px 90px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.06) inset,
-              0 2px 0 rgba(255,255,255,.10) inset; }
-.device-screen { position: relative; width: 100%; height: 100%; border-radius: 31px;
-  overflow: hidden; background: var(--md-bg); display: flex; flex-direction: column;
-  color: var(--md-on-surface); }
-
-/* --- system status bar --- */
-.sysbar { flex: 0 0 auto; height: var(--sysbar-h); display: flex; align-items: center;
-  gap: 6px; padding: 0 16px; font-size: 11px; font-weight: 700; letter-spacing: .02em;
-  color: #cfcfe4; background: #0c0c18; }
-.sys-cutout { flex: 1 1 auto; position: relative; }
-.sys-cutout::after { content: ''; position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%); width: 9px; height: 9px; border-radius: 50%;
-  background: #05050b; box-shadow: 0 0 0 1px rgba(255,255,255,.07); }
-.sys-icons { display: flex; align-items: center; gap: 6px; }
-.ico-signal { display: inline-flex; align-items: flex-end; gap: 1px; height: 9px; }
-.ico-signal b { width: 2px; background: #cfcfe4; border-radius: 1px; }
-.ico-signal b:nth-child(1) { height: 3px; } .ico-signal b:nth-child(2) { height: 5px; }
-.ico-signal b:nth-child(3) { height: 7px; } .ico-signal b:nth-child(4) { height: 9px; }
-.ico-wifi { width: 11px; height: 9px; background: #cfcfe4;
-  clip-path: polygon(50% 100%, 0 26%, 14% 12%, 50% 44%, 86% 12%, 100% 26%); }
-.ico-batt { width: 18px; height: 9px; border: 1px solid #cfcfe4; border-radius: 2px;
-  position: relative; background: linear-gradient(90deg, #7ee692 72%, transparent 72%);
-  background-clip: content-box; padding: 1px; }
-.ico-batt::after { content: ''; position: absolute; right: -3px; top: 2px; width: 2px;
-  height: 3px; background: #cfcfe4; border-radius: 0 1px 1px 0; }
-
-/* --- app bar --- */
-.appbar { flex: 0 0 auto; height: var(--appbar-h); display: flex; align-items: center;
-  gap: 4px; padding: 0 4px; background: var(--md-surface);
-  box-shadow: 0 1px 0 rgba(255,255,255,.04), 0 3px 12px rgba(0,0,0,.45); z-index: 30; }
-.appbar.battle-mode { background: linear-gradient(90deg, #2a1220, #161627); }
-.appbar-titles { flex: 1 1 auto; min-width: 0; padding-left: 4px; }
-.appbar-title { font-size: 1.02em; font-weight: 700; line-height: 1.2;
+/* --- in-game HUD (title + back + menu) --- */
+.game-hud { flex: 0 0 auto; height: calc(var(--hud-h) + var(--safe-t));
+  padding-top: var(--safe-t); display: flex; align-items: center; gap: 2px;
+  background: linear-gradient(180deg, rgba(10,10,20,.92), rgba(12,12,24,.86));
+  border-bottom: 1px solid rgba(255,255,255,.06); z-index: 30; }
+.game-hud.battle-mode { background: linear-gradient(180deg, rgba(42,18,32,.96), rgba(22,22,39,.9)); }
+.hud-titles { flex: 1 1 auto; min-width: 0; padding-left: 6px; }
+.hud-title { font-size: 1em; font-weight: 700; line-height: 1.25;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.appbar-sub { font-size: .72em; color: var(--md-on-surface-var); line-height: 1.3;
+.hud-sub { font-size: .7em; color: var(--md-on-surface-var); line-height: 1.3;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.appbar-icon { width: 44px; height: 44px; border: none; background: transparent;
+.hud-btn { width: 44px; height: 44px; border: none; background: transparent;
   border-radius: 50%; cursor: pointer; display: flex; align-items: center;
   justify-content: center; flex: 0 0 auto; transition: background .15s; padding: 0; }
-.appbar-icon:hover { background: rgba(255,255,255,.07); }
-.appbar-icon:active { background: rgba(255,255,255,.13); }
-.appbar-icon[hidden] { display: none; }
+.hud-btn:hover { background: rgba(255,255,255,.07); }
+.hud-btn:active { background: rgba(255,255,255,.13); }
+.hud-btn[hidden] { display: none; }
 .glyph-back { width: 16px; height: 16px; border-left: 2px solid #dcdcea;
   border-bottom: 2px solid #dcdcea; transform: rotate(45deg); margin-left: 4px; }
 .glyph-dots { width: 4px; height: 4px; border-radius: 50%; background: #dcdcea;
   box-shadow: 0 -6px 0 #dcdcea, 0 6px 0 #dcdcea; }
 
-/* --- scrolling content region --- */
+/* --- scrolling game content --- */
 .app-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden;
   -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
   scrollbar-width: thin; scrollbar-color: #2c2c46 transparent; }
 .app-body::-webkit-scrollbar { width: 5px; }
 .app-body::-webkit-scrollbar-thumb { background: #2c2c46; border-radius: 3px; }
 
-/* --- bottom navigation --- */
-.bottomnav { flex: 0 0 auto; height: calc(var(--bottomnav-h) + var(--safe-b));
+/* --- campaign tab strip (game navigation, not a fake OS nav bar) --- */
+.game-tabs { flex: 0 0 auto; height: calc(var(--tabs-h) + var(--safe-b));
   padding-bottom: var(--safe-b); display: flex; background: var(--md-surface);
   border-top: 1px solid var(--md-outline); z-index: 30; }
-.bottomnav.hidden { display: none; }
-.navitem { position: relative; flex: 1 1 0; display: flex; flex-direction: column;
+.game-tabs.hidden { display: none; }
+.game-tab { position: relative; flex: 1 1 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 3px; border: none;
   background: transparent; color: var(--md-on-surface-var); cursor: pointer;
-  font-size: .68em; font-family: inherit; letter-spacing: .02em; padding: 6px 2px; }
-.navitem .nav-ico { transition: background .18s, transform .18s; }
-.navitem.active { color: #ffbcc7; }
-.navitem.active .nav-ico { transform: translateY(-1px); }
-.navitem.active::before { content: ''; position: absolute; top: 6px; width: 56px;
-  height: 30px; border-radius: 999px; background: rgba(233,69,96,.18); }
-.navitem > * { position: relative; }
-.nav-label { font-weight: 600; }
-.nav-badge { position: absolute; top: 4px; right: calc(50% - 26px); min-width: 17px;
+  font-size: .72em; font-family: inherit; letter-spacing: .02em; padding: 6px 2px; }
+.game-tab.active { color: #ffbcc7; }
+.game-tab.active::before { content: ''; position: absolute; top: 0; width: 64px;
+  height: 2px; border-radius: 0 0 4px 4px; background: var(--md-primary); }
+.game-tab .nav-label { font-weight: 600; }
+.game-tab-badge { position: absolute; top: 5px; right: calc(50% - 30px); min-width: 17px;
   padding: 0 4px; height: 16px; border-radius: 999px; background: var(--md-primary);
   color: #fff; font-size: 9px; font-weight: 800; line-height: 16px; text-align: center; }
 
@@ -167,24 +125,8 @@ body { background: #07070f; overflow: hidden; overscroll-behavior: none;
 .glyph-sword { -webkit-mask: var(--m) center/contain no-repeat; mask: var(--m) center/contain no-repeat;
   --m: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 3v5l-8.5 8.5 1.6 1.6-1.4 1.4-1.6-1.6-1.3 1.3 1.6 1.6L8.9 22l-1.6-1.6L5.8 22l-1.4-1.4 1.6-1.5-1.6-1.6 1.4-1.4 1.6 1.6L15 8.9V3h5z'/></svg>"); }
 
-/* --- gesture nav pill --- */
-.navpill { position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%);
-  width: 110px; height: 4px; border-radius: 999px; background: rgba(255,255,255,.30);
-  z-index: 40; pointer-events: none; }
-
-/* --- cold-start splash --- */
-.splash { position: absolute; inset: 0; z-index: 90; background:
-  radial-gradient(ellipse at 50% 35%, #241634, #0d0d18 70%); display: flex;
-  flex-direction: column; align-items: center; justify-content: center; gap: 16px;
-  transition: opacity .45s ease, visibility .45s; }
-.splash.gone { opacity: 0; visibility: hidden; }
-.splash-logo { width: 62%; max-width: 250px; filter: drop-shadow(0 6px 18px rgba(0,0,0,.6)); }
-.splash-title { font-size: 1.15em; font-weight: 800; letter-spacing: .06em; color: #fff; }
-.splash-bar { width: 128px; height: 3px; border-radius: 999px; background: #2a2a44; overflow: hidden; }
-.splash-bar span { display: block; height: 100%; width: 40%; border-radius: 999px;
-  background: linear-gradient(90deg, #e94560, #c9a6ff); animation: splashSlide 1.1s ease-in-out infinite; }
-@keyframes splashSlide { 0% { transform: translateX(-105%); } 100% { transform: translateX(330%); } }
-.splash-foot { position: absolute; bottom: 34px; color: #6b6b8a; font-size: .74em; letter-spacing: .05em; }
+/* --- cold-start splash is gone: the game appears as soon as it renders.
+   The browser/launcher draws the real cold-start screen. --- */
 
 /* --- hero header on the campaign screen --- */
 .hero { position: relative; width: 100%; height: 168px; display: flex;
@@ -355,17 +297,18 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .btn.secondary:hover { background: #45456a; }
 
 /* ============ OVERLAYS ============ */
-.overlay { position: absolute; inset: 0; background: rgba(6,6,14,0.72); backdrop-filter: blur(2px);
-  display: none; flex-direction: column; align-items: center; justify-content: flex-end;
-  z-index: 100; padding: 0; overflow: hidden; }
+/* Game panels: centered modals over the board — the Android game's own
+   result/reward screens, not OS-style bottom sheets. */
+.overlay { position: absolute; inset: 0; background: rgba(6,6,14,0.78); backdrop-filter: blur(3px);
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 100; padding: 18px; overflow: hidden; }
 .overlay.active { display: flex; animation: scrimIn .2s ease-out; }
 @keyframes scrimIn { from { opacity: 0; } to { opacity: 1; } }
 .overlay .panel { background: var(--md-surface); border: 1px solid var(--md-outline);
-  border-radius: 26px 26px 0 0; border-bottom: none; padding: 10px 20px calc(22px + var(--safe-b));
+  border-radius: 18px; padding: 18px 20px calc(20px + var(--safe-b));
   max-width: 640px; width: 100%; text-align: center; max-height: 92%; overflow-y: auto;
-  box-shadow: 0 -14px 50px rgba(0,0,0,.65); animation: sheetUp .26s cubic-bezier(.2,.8,.3,1); }
-@keyframes sheetUp { from { transform: translateY(18%); opacity: .4; } to { transform: none; opacity: 1; } }
-.sheet-grip { width: 34px; height: 4px; border-radius: 999px; background: #3a3a58; margin: 4px auto 14px; }
+  box-shadow: 0 18px 60px rgba(0,0,0,.7); animation: panelIn .22s ease-out; }
+@keyframes panelIn { from { transform: scale(.96); opacity: .4; } to { transform: none; opacity: 1; } }
 .howto-body { text-align: left; color: var(--md-on-surface-var); font-size: .84em; margin-bottom: 14px; }
 .howto-body ul { margin: 8px 0 4px 18px; line-height: 1.7; }
 .howto-body li { margin-bottom: 6px; }
@@ -411,7 +354,7 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .item-slot { background: linear-gradient(135deg, #2a1a0a, #4a2a10) !important; border-color: #8B7355 !important; }
 .item-slot .card-cost { background: #8B7355; }
 
-.snackbar { position: absolute; left: 12px; right: 12px; bottom: calc(var(--bottomnav-h) + 14px + var(--safe-b));
+.snackbar { position: absolute; left: 12px; right: 12px; bottom: calc(var(--tabs-h) + 14px + var(--safe-b));
   background: #2a2a3f; color: #eceaf4; border-radius: 12px; padding: 13px 16px; font-size: .84em;
   box-shadow: 0 8px 26px rgba(0,0,0,.55); z-index: 95; opacity: 0; transform: translateY(14px);
   transition: opacity .22s, transform .22s; pointer-events: none; text-align: left; }
@@ -419,17 +362,7 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .howto summary { cursor: pointer; color: #539cd5; font-weight: 600; padding: 6px 0; }
 .howto ul { margin: 8px 0 4px 20px; line-height: 1.7; }
 
-/* --- real phones + installed PWA: drop the desktop frame, go edge-to-edge --- */
-@media (max-width: 620px), (display-mode: standalone), (display-mode: fullscreen) {
-  .stage { padding: 0; gap: 0; }
-  .stage-bg, .stage-caption { display: none; }
-  .stage::after { display: none; }
-  .device { width: 100%; height: 100%; max-width: none; padding: 0; border-radius: 0; box-shadow: none; }
-  .device-screen { border-radius: 0; }
-  .sysbar { display: none; }
-  .navpill { display: none; }
-  :root { --sysbar-h: 0px; }
-}
+/* --- installed PWA / handsets: full-bleed, respect safe areas --- */
 @media (display-mode: standalone), (display-mode: fullscreen) {
   html, body { overscroll-behavior: none; }
 }
@@ -441,44 +374,27 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 <body>
 
 <!-- ============================================================
-     ANDROID APP SHELL
-     The campaign is delivered as an installable Android-style app
-     served straight from HTML: system status bar, app bar, bottom
-     navigation and bottom sheets, inside a phone frame on desktop
-     and edge-to-edge on a real handset / installed PWA.
+     GAME VIEW
+     No fake OS chrome. The Android game owns the frame; this page
+     renders only the game: a slim in-game HUD, the campaign screens,
+     and a compact tab strip. The real device draws the system bars.
      ============================================================ -->
-<div class="stage">
-  <div class="stage-bg" id="stage-bg"></div>
 
-  <div class="device" id="device">
-    <div class="device-screen" id="device-screen">
-
-      <!-- ---------- system status bar ---------- -->
-      <div class="sysbar" id="sysbar">
-        <span class="sys-time" id="sys-time">9:41</span>
-        <span class="sys-cutout"></span>
-        <span class="sys-icons">
-          <i class="ico-signal"><b></b><b></b><b></b><b></b></i>
-          <i class="ico-wifi"></i>
-          <i class="ico-batt"></i>
-        </span>
-      </div>
-
-      <!-- ---------- app bar ---------- -->
-      <header class="appbar" id="appbar">
-        <button class="appbar-icon" id="appbar-nav" onclick="appBack()" aria-label="Back">
+      <!-- ---------- in-game HUD ---------- -->
+      <header class="game-hud" id="game-hud">
+        <button class="hud-btn" id="hud-back" onclick="appBack()" aria-label="Back" hidden>
           <span class="glyph-back"></span>
         </button>
-        <div class="appbar-titles">
-          <div class="appbar-title" id="appbar-title">The Shadow Road</div>
-          <div class="appbar-sub" id="appbar-sub">Monster Battle CCG</div>
+        <div class="hud-titles">
+          <div class="hud-title" id="hud-title">The Shadow Road</div>
+          <div class="hud-sub" id="hud-sub">Monster Battle CCG</div>
         </div>
-        <button class="appbar-icon" id="appbar-overflow" onclick="openMenu()" aria-label="More options">
+        <button class="hud-btn" id="hud-menu" onclick="openMenu()" aria-label="More options">
           <span class="glyph-dots"></span>
         </button>
       </header>
 
-      <!-- ---------- scrolling app content ---------- -->
+      <!-- ---------- scrolling game content ---------- -->
       <main class="app-body" id="app-body">
 
 <!-- ============ CAMPAIGN MAP ============ -->
@@ -560,16 +476,16 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 
 </main>
 
-      <!-- ---------- bottom navigation ---------- -->
-      <nav class="bottomnav" id="bottomnav">
-        <button class="navitem active" id="nav-campaign" onclick="navTo('campaign')">
+      <!-- ---------- campaign tab strip ---------- -->
+      <nav class="game-tabs" id="game-tabs">
+        <button class="game-tab active" id="tab-campaign" onclick="navTo('campaign')">
           <span class="nav-ico glyph-map"></span><span class="nav-label">Campaign</span>
         </button>
-        <button class="navitem" id="nav-deck" onclick="navTo('deck')">
+        <button class="game-tab" id="tab-deck" onclick="navTo('deck')">
           <span class="nav-ico glyph-cards"></span><span class="nav-label">Deck</span>
-          <span class="nav-badge" id="nav-deck-badge">21</span>
+          <span class="game-tab-badge" id="deck-badge">21</span>
         </button>
-        <button class="navitem" id="nav-help" onclick="navTo('help')">
+        <button class="game-tab" id="tab-help" onclick="navTo('help')">
           <span class="nav-ico glyph-help"></span><span class="nav-label">How to play</span>
         </button>
       </nav>
@@ -630,10 +546,9 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   </div>
 </div>
 
-<!-- ============ HOW TO PLAY (sheet) ============ -->
-<div class="overlay sheet" id="help-overlay">
+<!-- ============ HOW TO PLAY ============ -->
+<div class="overlay" id="help-overlay">
   <div class="panel">
-    <div class="sheet-grip"></div>
     <h1 style="font-size:1.25em;color:#539cd5">How to play</h1>
     <div class="howto-body">
     <ul>
@@ -648,10 +563,9 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   </div>
 </div>
 
-<!-- ============ OVERFLOW MENU (sheet) ============ -->
-<div class="overlay sheet" id="menu-overlay">
+<!-- ============ OVERFLOW MENU ============ -->
+<div class="overlay" id="menu-overlay">
   <div class="panel menu-panel">
-    <div class="sheet-grip"></div>
     <button class="menu-row" onclick="closeOverlay('menu-overlay');navTo('deck')">
       <span class="nav-ico glyph-cards"></span> View deck
     </button>
@@ -667,25 +581,6 @@ h1, h2, h3 { letter-spacing: 0.02em; }
     <button class="btn secondary" onclick="closeOverlay('menu-overlay')">Close</button>
   </div>
 </div>
-
-      <!-- ---------- launch splash (Android cold-start) ---------- -->
-      <div class="splash" id="splash">
-        <img class="splash-logo" id="splash-logo" src="" alt="">
-        <div class="splash-title">The Shadow Road</div>
-        <div class="splash-bar"><span></span></div>
-        <div class="splash-foot">Monster Battle CCG &middot; offline single-player</div>
-      </div>
-
-      <!-- ---------- gesture navigation pill ---------- -->
-      <div class="navpill"></div>
-    </div><!-- /device-screen -->
-  </div><!-- /device -->
-
-  <div class="stage-caption">
-    <b>Monster Battle CCG</b> &mdash; the Android build, served as HTML.
-    Runs fully offline; use <i>Add to Home screen</i> to install it as an app.
-  </div>
-</div><!-- /stage -->
 
 <script>
 // Card/PvE data (embedded from CSV extraction; regenerated by scripts/redesign_cards.py)
@@ -889,7 +784,7 @@ function updateWorldStats() {
     const n = nid ? NODE_BY_ID[nid] : null;
     next.textContent = n ? ('Next: ' + n.name + ' — ' + n.enemyName) : 'The road is cleared.';
   }
-  const badge = document.getElementById('nav-deck-badge');
+  const badge = document.getElementById('deck-badge');
   if (badge) badge.textContent = save.collection.length;
   document.getElementById('stat-level').textContent = 'Lv ' + playerLevel();
   document.getElementById('stat-exp').textContent = save.exp;
@@ -1890,22 +1785,21 @@ function addLogIfBattle(msg) { if (battle) addLog(msg, 'heal'); }
 
 
 // ============================================================
-// Android app shell: navigation, app bar, sheets, install, toast
-// The campaign screens below are unchanged; this layer only drives
-// the chrome (app bar title, back affordance, bottom nav, sheets)
-// so the page behaves like the Android build it was extracted from.
+// In-game HUD: title, back affordance, tab strip, install, toast.
+// This layer drives only the game's own chrome (HUD title, back
+// button, tab strip) — no fake OS bars, no phone frame.
 // ============================================================
 
 const SCREEN_CHROME = {
-  world:  { title: 'The Shadow Road', sub: 'Monster Battle CCG', nav: true,  back: false, tab: 'campaign' },
-  battle: { title: 'Battle',          sub: '',                   nav: false, back: true,  tab: null },
+  world:  { title: 'The Shadow Road', sub: 'Monster Battle CCG', tabs: true,  back: false, tab: 'campaign' },
+  battle: { title: 'Battle',          sub: '',                   tabs: false, back: true,  tab: null },
 };
 
 function el(id) { return document.getElementById(id); }
 
 function setChrome(screenId) {
   const c = SCREEN_CHROME[screenId] || SCREEN_CHROME.world;
-  const title = el('appbar-title'), sub = el('appbar-sub');
+  const title = el('hud-title'), sub = el('hud-sub');
   if (title) title.textContent = (screenId === 'battle' && typeof battle !== 'undefined' && battle && battle.node)
     ? battle.node.name : c.title;
   if (sub) {
@@ -1913,12 +1807,12 @@ function setChrome(screenId) {
       ? ('vs ' + battle.node.enemyName) : c.sub;
     sub.style.display = sub.textContent ? '' : 'none';
   }
-  const bar = el('appbar');
-  if (bar) bar.classList.toggle('battle-mode', screenId === 'battle');
-  const navBtn = el('appbar-nav');
-  if (navBtn) navBtn.hidden = !c.back;
-  const nav = el('bottomnav');
-  if (nav) nav.classList.toggle('hidden', !c.nav);
+  const hud = el('game-hud');
+  if (hud) hud.classList.toggle('battle-mode', screenId === 'battle');
+  const backBtn = el('hud-back');
+  if (backBtn) backBtn.hidden = !c.back;
+  const tabs = el('game-tabs');
+  if (tabs) tabs.classList.toggle('hidden', !c.tabs);
   if (c.tab) setActiveTab(c.tab);
   const body = el('app-body');
   if (body) body.scrollTop = 0;
@@ -1926,12 +1820,12 @@ function setChrome(screenId) {
 
 function setActiveTab(tab) {
   ['campaign', 'deck', 'help'].forEach(t => {
-    const b = el('nav-' + t);
+    const b = el('tab-' + t);
     if (b) b.classList.toggle('active', t === tab);
   });
 }
 
-/** Bottom-nav destinations. Deck and Help are sheets over the campaign map. */
+/** Tab-strip destinations. Deck and Help are panels over the campaign map. */
 function navTo(tab) {
   if (tab === 'campaign') {
     ['deck-overlay', 'help-overlay', 'menu-overlay'].forEach(closeOverlay);
@@ -1961,7 +1855,7 @@ function appBack() {
   return false;
 }
 
-// Material-style transient message.
+// Transient in-game message (snackbar).
 let toastTimer = null;
 function toast(msg) {
   let bar = el('snackbar');
@@ -1969,8 +1863,7 @@ function toast(msg) {
     bar = document.createElement('div');
     bar.id = 'snackbar';
     bar.className = 'snackbar';
-    const screen = el('device-screen');
-    if (screen && screen.appendChild) screen.appendChild(bar);
+    if (document.body && document.body.appendChild) document.body.appendChild(bar);
   }
   bar.textContent = msg;
   bar.classList.add('show');
@@ -1993,20 +1886,6 @@ function promptInstall() {
   toast('Use your browser menu → "Add to Home screen" to install.');
 }
 
-// ---- status-bar clock ---------------------------------------------------
-function tickClock() {
-  const t = el('sys-time');
-  if (!t) return;
-  const d = new Date();
-  t.textContent = d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
-}
-
-// ---- cold-start splash --------------------------------------------------
-function dismissSplash() {
-  const s = el('splash');
-  if (s && s.classList) s.classList.add('gone');
-}
-
 // ============================================================
 // Boot
 // ============================================================
@@ -2018,12 +1897,8 @@ function applyArt() {
   if (battle) battle.style.backgroundImage = "url('" + ART_BASE + "bg/battle_empty.png')";
   const logo = document.getElementById('logo-img');
   if (logo) logo.src = ART_BASE + 'logo.png';
-  const splashLogo = document.getElementById('splash-logo');
-  if (splashLogo) splashLogo.src = ART_BASE + 'logo.png';
   const hero = document.getElementById('hero-art');
   if (hero) hero.style.backgroundImage = "url('" + worldUrl + "')";
-  const stage = document.getElementById('stage-bg');
-  if (stage) stage.style.backgroundImage = "url('" + worldUrl + "')";
 }
 
 applyArt();
@@ -2033,16 +1908,10 @@ updateWorldStats();
 setChrome('world');
 
 if (typeof window !== 'undefined' && window.setInterval) {
-  tickClock();
-  setInterval(tickClock, 20000);
-  window.addEventListener('load', () => setTimeout(dismissSplash, 620));
-  setTimeout(dismissSplash, 2200); // never let the splash trap the app
   // register the offline service worker (installable app, works with no network)
   if (navigator.serviceWorker && location.protocol.startsWith('http')) {
     window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
   }
-} else {
-  dismissSplash();
 }
 </script>
 </body>
