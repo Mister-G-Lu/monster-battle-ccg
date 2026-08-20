@@ -49,13 +49,15 @@
   --bottomnav-h: 60px;
   --safe-b: env(safe-area-inset-bottom, 0px);
 }
-html { height: 100%; }
-body { background: #07070f; overflow: hidden; overscroll-behavior: none;
-  -webkit-tap-highlight-color: transparent; }
+html { height: 100%; height: 100dvh; }
+body { background: #07070f; overflow: auto; overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent; touch-action: pan-x pan-y; }
 
 /* --- stage: the desktop backdrop the phone sits on --- */
 .stage { position: fixed; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 14px; padding: 22px 16px; }
+  align-items: center; justify-content: center; gap: 14px; padding: 22px 16px;
+  overflow: auto; overscroll-behavior: contain; touch-action: pan-x pan-y;
+  -webkit-overflow-scrolling: touch; }
 .stage-bg { position: absolute; inset: 0; background-size: cover; background-position: center;
   filter: blur(38px) saturate(.7) brightness(.4); transform: scale(1.15); z-index: 0; }
 .stage::after { content: ''; position: absolute; inset: 0; z-index: 0;
@@ -67,7 +69,9 @@ body { background: #07070f; overflow: hidden; overscroll-behavior: none;
 
 /* --- the phone --- */
 .device { position: relative; z-index: 2; width: min(420px, 100%);
-  height: min(896px, calc(100vh - 96px)); flex: 0 1 auto;
+  height: min(896px, calc(100dvh - 96px), calc(100vh - 96px));
+  max-width: 100%; max-height: 100%; flex: 0 1 auto;
+  transform-origin: center center;
   border-radius: 40px; padding: 10px; background: linear-gradient(160deg, #2b2b3d, #101018 55%, #24243a);
   box-shadow: 0 34px 90px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.06) inset,
               0 2px 0 rgba(255,255,255,.10) inset; }
@@ -299,7 +303,7 @@ h1, h2, h3 { letter-spacing: 0.02em; }
   padding: 1px 8px; border-radius: 999px; cursor: help; font-weight: 600; }
 
 .field { display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 720px; margin-top: 10px; }
-.field-row { display: flex; justify-content: center; gap: 8px; min-height: 92px; }
+.field-row { display: flex; justify-content: center; gap: 8px; min-height: 72px; flex-wrap: nowrap; overflow-x: auto; max-width: 100%; }
 .field-label { text-align: center; color: #666; font-size: 0.72em; text-transform: uppercase; letter-spacing: 0.12em; margin: 2px 0; }
 
 .crystal-bar { display: flex; align-items: center; gap: 4px; justify-content: center; margin: 2px 0; }
@@ -307,7 +311,7 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .crystal.has-art { background-color: transparent; filter: drop-shadow(0 1px 1px rgba(0,0,0,.6)); }
 .crystal.empty { background: #2a2a3a; opacity: .35; filter: grayscale(1); }
 
-.card { width: min(88px, 26vw); height: min(118px, 35vw); border-radius: 6px; font-size: 0.72em; cursor: default; transition: transform 0.15s, box-shadow 0.15s; position: relative; border: none; overflow: hidden; background: #14142a; box-shadow: 0 2px 6px rgba(0,0,0,.55); }
+.card { width: min(88px, 28%, 22vmin); height: min(118px, 38vmin); border-radius: 6px; font-size: 0.72em; cursor: default; transition: transform 0.15s, box-shadow 0.15s; position: relative; border: none; overflow: hidden; background: #14142a; box-shadow: 0 2px 6px rgba(0,0,0,.55); flex: 0 0 auto; }
 .card.hand { cursor: pointer; }
 .card.hand:hover { transform: translateY(-4px) scale(1.04); }
 .card.token { filter: saturate(.85); }
@@ -420,15 +424,33 @@ h1, h2, h3 { letter-spacing: 0.02em; }
 .howto ul { margin: 8px 0 4px 20px; line-height: 1.7; }
 
 /* --- real phones + installed PWA: drop the desktop frame, go edge-to-edge --- */
-@media (max-width: 620px), (display-mode: standalone), (display-mode: fullscreen) {
-  .stage { padding: 0; gap: 0; }
+@media (max-width: 620px), (max-height: 560px), (orientation: landscape) and (max-height: 720px),
+       (display-mode: standalone), (display-mode: fullscreen) {
+  .stage { padding: 0; gap: 0; overflow: auto; }
   .stage-bg, .stage-caption { display: none; }
   .stage::after { display: none; }
-  .device { width: 100%; height: 100%; max-width: none; padding: 0; border-radius: 0; box-shadow: none; }
+  .device { width: 100%; height: 100%; max-width: none; max-height: none;
+    padding: 0; border-radius: 0; box-shadow: none; transform: none; }
   .device-screen { border-radius: 0; }
   .sysbar { display: none; }
   .navpill { display: none; }
   :root { --sysbar-h: 0px; }
+}
+
+/* Short / landscape viewports: compact battle chrome so it fits without clipping. */
+@media (max-height: 560px), (orientation: landscape) and (max-height: 720px) {
+  :root { --appbar-h: 44px; --bottomnav-h: 48px; }
+  .hero { height: 96px; }
+  .hero-logo { height: 52px; }
+  #battle { padding: 6px 6px 10px; }
+  .battle-header { padding: 6px 8px; }
+  .hp-bar { height: 10px; margin: 3px 0 1px; }
+  .field { margin-top: 4px; gap: 2px; }
+  .field-row { min-height: 0; gap: 6px; }
+  .card { width: min(72px, 18vmin); height: min(96px, 28vmin); }
+  .battle-log { height: 48px; margin-top: 4px; }
+  .battle-actions { margin-top: 4px; }
+  .btn { padding: 8px 16px; }
 }
 @media (display-mode: standalone), (display-mode: fullscreen) {
   html, body { overscroll-behavior: none; }
@@ -2026,11 +2048,42 @@ function applyArt() {
   if (stage) stage.style.backgroundImage = "url('" + worldUrl + "')";
 }
 
+// Scale the desktop phone frame so it always fits the current viewport
+// (landscape phones/tablets used to clip past the screen). When it still
+// overflows, .stage is scrollable so the player can pan/drag around.
+function fitStage() {
+  const device = el('device');
+  if (!device || !device.style) return;
+  device.style.transform = '';
+  const stage = device.parentElement;
+  if (!stage) return;
+  const cs = (typeof getComputedStyle === 'function') ? getComputedStyle(stage) : null;
+  if (cs && parseFloat(cs.paddingTop) === 0) {
+    device.style.transform = '';
+    return; // edge-to-edge phone / PWA — CSS already fills the screen
+  }
+  const cap = stage.querySelector && stage.querySelector('.stage-caption');
+  const capH = (cap && cap.offsetHeight) ? (cap.offsetHeight + 14) : 0;
+  const padX = 32, padY = 44;
+  const availW = (typeof window !== 'undefined' ? window.innerWidth : 420) - padX;
+  const availH = (typeof window !== 'undefined' ? window.innerHeight : 896) - padY - capH;
+  const w = device.offsetWidth || 420;
+  const h = device.offsetHeight || 700;
+  if (!availW || !availH || !w || !h) return;
+  const s = Math.min(1, availW / w, availH / h);
+  device.style.transform = (s < 0.995) ? ('scale(' + s + ')') : '';
+}
+
 applyArt();
 save = loadSave();
 renderCampaign();
 updateWorldStats();
 setChrome('world');
+if (typeof window !== 'undefined') {
+  fitStage();
+  window.addEventListener('resize', fitStage);
+  window.addEventListener('orientationchange', () => setTimeout(fitStage, 80));
+}
 
 if (typeof window !== 'undefined' && window.setInterval) {
   tickClock();
