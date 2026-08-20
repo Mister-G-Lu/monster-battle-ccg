@@ -26,9 +26,27 @@ A fully offline, single-player version of the English Card Battle game — origi
 > of them. Rebuild with `scripts/build_and_verify.py` (requires Java 17) and
 > install the `English_offline.apk` it writes to the repo root.
 
-### Play the Web Prototype
+### Play the Web App
 
-Open `build/web/game.html` in any browser to try the card battle system with real game data (1,580 cards from the original CSVs). No server required.
+The campaign ships as an **installable, Android-style web app** — the same
+chrome the APK has (status bar, app bar, bottom navigation, bottom sheets,
+cold-start splash), rendered in HTML/CSS around the existing battle engine.
+
+```bash
+make web     # http://localhost:8000/
+```
+
+Serve it over HTTP rather than opening the file directly, so the service worker
+and the *Add to Home screen* install prompt work (`file://` is not a secure
+context). On desktop the app is presented inside a phone frame; on a handset —
+or once installed — it goes edge-to-edge and launches standalone with no browser
+UI. Everything runs client-side with real game data (1,580 cards from the
+original CSVs) and works fully offline after the first load.
+
+`build/web/game.html` is a byte-identical mirror of `index.html` and can be
+opened the same way. See `docs/WEB_DELIVERY.md` for the delivery options
+evaluated (cloud APK streaming, dead Chrome runtimes, engine web exports) and
+why the PWA app-shell approach won.
 
 The prototype is a **handcrafted single-player campaign — "The Shadow Road"**:
 
@@ -58,6 +76,8 @@ The prototype now renders the original game's own artwork (extracted from
 so cards, the battlefield and the campaign map look like the Android game
 instead of plain text. See `docs/ART_INTEGRATION.md` for how it works and the
 alternatives evaluated (generated art, free asset sites).
+
+The art now sits inside an Android app shell — see `docs/WEB_DELIVERY.md`.
 
 ### Consolidation (Android engine + Web campaign)
 
@@ -93,8 +113,8 @@ The game also writes startup breadcrumbs to `offline_debug.log` in its writable 
 
 ```bash
 python3 scripts/analyze_balance.py --markdown > docs/BALANCE_AUDIT.md
-python3 tests/static_checks.py   # includes refresh_campaign_data.py --verify
-make verify                      # static checks + Lua campaign tests when lua/luajit exists
+python3 tests/static_checks.py   # includes refresh_campaign_data.py --verify + the PWA checks
+make verify                      # static checks + app shell test + Lua campaign tests
 ```
 
 The balance audit is a heuristic design review for obvious CCG pitfalls: rarity-as-raw-power, strict same-cost upgrades, and tutorial/boss cards leaking into random pools.
@@ -127,6 +147,7 @@ luajit tests/sim_test.lua             # 29-check game logic simulation
 luajit tests/integration_test.lua     # 106-check integration tests
 luajit tests/guide_battle_test.lua    # tutorial battle end-to-end regression (client side)
 node tests/campaign_sim.js 80         # web campaign: engine regression + difficulty curve report
+node tests/app_shell_test.js          # Android app shell chrome + PWA manifest/SW/icons
 ```
 
 `tests/campaign_sim.js` loads the real page script with a stubbed DOM, plays
@@ -171,10 +192,16 @@ monster-battle-ccg/
 │   └── guide_battle_test.lua     # Tutorial battle client-side end-to-end regression
 ├── csv_data/                     # Game configuration (plain CSV)
 ├── English_offline.apk           # Final installable APK (~55 MB) — install THIS one
+├── index.html                    # The Android-style web app (app shell + campaign)
+├── manifest.webmanifest          # PWA manifest (installable, standalone display)
+├── sw.js                         # Offline service worker
 ├── build/
 │   ├── English_offline.apk       # Earlier build — see Quick Start (rebuild first)
 │   └── web/
-│       ├── game.html             # Browser-playable card battle prototype
+│       ├── game.html             # Byte-identical mirror of index.html
+│       ├── manifest.webmanifest  # The mirror's manifest + service worker
+│       ├── sw.js
+│       ├── assets/icons/         # Launcher icons, incl. Android maskable/adaptive
 │       └── game_data.json        # Card and PvE data for the prototype
 └── .gitignore
 ```

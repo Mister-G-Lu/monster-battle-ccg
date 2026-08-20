@@ -1,9 +1,17 @@
-.PHONY: verify campaign-data static lua-campaign
+.PHONY: verify campaign-data static lua-campaign app-shell web
 
-verify: static lua-campaign
+verify: static app-shell lua-campaign
 
 static:
 	python3 tests/static_checks.py
+
+app-shell:
+	@if command -v node >/dev/null 2>&1; then node tests/app_shell_test.js; \
+	else echo "SKIP app shell test (no node)"; fi
+
+web:
+	@echo "Serving the app at http://localhost:8000/ (Ctrl-C to stop)"
+	python3 -m http.server 8000
 
 campaign-data:
 	python3 scripts/refresh_campaign_data.py --verify

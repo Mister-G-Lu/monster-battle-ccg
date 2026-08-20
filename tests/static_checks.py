@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -80,6 +81,63 @@ def check_campaign_generators() -> list[str]:
     return errors
 
 
+def check_pwa_shell() -> list[str]:
+    """The page ships as an installable Android-style app: both copies of the
+    shell need their own manifest + service worker + icons, and the two HTML
+    copies must stay byte-identical (asserted in check_campaign_generators)."""
+    errors: list[str] = []
+    copies = [
+        (ROOT, "build/web/assets/"),                 # repo root: index.html
+        (ROOT / "build" / "web", "assets/"),         # mirror: game.html
+    ]
+    for base, prefix in copies:
+        rel_base = base.relative_to(ROOT) if base != ROOT else Path(".")
+        manifest = base / "manifest.webmanifest"
+        sw = base / "sw.js"
+        if not manifest.is_file():
+            errors.append(f"missing {rel_base / 'manifest.webmanifest'}")
+            continue
+        if not sw.is_file():
+            errors.append(f"missing {rel_base / 'sw.js'}")
+        data = json.loads(manifest.read_text(encoding="utf-8"))
+        if data.get("display") != "standalone":
+            errors.append(f"{rel_base}/manifest.webmanifest must use display=standalone")
+        if not any(i.get("purpose") == "maskable" for i in data.get("icons", [])):
+            errors.append(f"{rel_base}/manifest.webmanifest needs a maskable (adaptive) icon")
+        for icon in data.get("icons", []):
+            src = icon.get("src", "")
+            if not src.startswith(prefix):
+                errors.append(f"{rel_base}/manifest.webmanifest icon {src} must start with {prefix}")
+            elif not (base / src).is_file():
+                errors.append(f"{rel_base}/manifest.webmanifest references missing icon {src}")
+
+    html = (ROOT / "index.html").read_text(encoding="utf-8")
+    for needle, why in (
+        ('rel="manifest"', "the page must link its web app manifest"),
+        ('name="theme-color"', "the page must theme the Android system bars"),
+        ("viewport-fit=cover", "the viewport must opt into display cutouts / safe areas"),
+        ("display-mode: standalone", "the shell must adapt when launched as an installed app"),
+        ("serviceWorker", "the page must register its offline service worker"),
+    ):
+        if needle not in html:
+            errors.append(f"index.html: {why} ({needle!r} not found)")
+    return errors
+
+
+def check_app_shell_test() -> list[str]:
+    """Run the Node app-shell regression test when node is available."""
+    node = shutil.which("node")
+    if not node:
+        return []
+    result = subprocess.run(
+        [node, str(ROOT / "tests/app_shell_test.js")],
+        cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        return ["app_shell_test.js failed", result.stdout, result.stderr]
+    return []
+
+
 def check_balance_audit() -> list[str]:
     result = subprocess.run(
         [sys.executable, str(ROOT / "scripts/analyze_balance.py"), "--fail-on-critical"],
@@ -113,6 +171,8 @@ def main() -> int:
         check_text_loader_forces_english,
         check_web_data_marks_special_cards,
         check_campaign_generators,
+        check_pwa_shell,
+        check_app_shell_test,
         check_balance_audit,
     ):
         errors.extend(check())

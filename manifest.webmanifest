@@ -1,0 +1,63 @@
+{
+  "name": "Monster Battle CCG — The Shadow Road",
+  "short_name": "Shadow Road",
+  "description": "The offline single-player campaign from the Monster Battle CCG Android build, delivered as an installable web app.",
+  "id": "monster-battle-ccg-shadow-road",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ],
+  "orientation": "portrait",
+  "background_color": "#0d0d18",
+  "theme_color": "#161627",
+  "categories": [
+    "games",
+    "entertainment"
+  ],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "build/web/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "build/web/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "build/web/assets/icons/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "build/web/assets/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Continue the campaign",
+      "short_name": "Continue",
+      "url": ".",
+      "icons": [
+        {
+          "src": "build/web/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
