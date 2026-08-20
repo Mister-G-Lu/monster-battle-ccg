@@ -16,9 +16,21 @@ Status of the consolidation at the time of writing:
   (items/equip/armor/consume, full keywords, strategic AI).
 - **Web shells are identical again** (`index.html` == `build/web/game.html`),
   both running the full engine + real art + the canonical campaign.
-- **PR #9 is still OPEN** — the native "Shadow Road" campaign, which currently
-  **hand-copies** the campaign in `src/manager/campaign_data.lua`. That copy is
-  now the main consolidation debt: it duplicates the canonical JSON.
+- **Web de-chrome landed** — the fake Android chrome (phone frame, status bar,
+  app bar, bottom navigation, bottom sheets, splash) was removed from the page;
+  it now renders only game content (HUD + tabs + screens), and the Android app
+  / device OS owns the frame.
+- **The campaign is now a native Android service feature** — the in-process
+  server (`offline_server.lua`) serves the Shadow Road through
+  `src/manager/campaign_service.lua` (info / battle start / rewards / recruit /
+  reset), running battles on the real `offline_battle` engine, with progress in
+  the game save. `tests/campaign_service_test.lua` + `tests/level_w1_test.lua`
+  cover the w1 slice end-to-end (PR B, below, is substantially landed).
+- **PR #9 is still OPEN** — the native campaign **client scene** (`campaign_panel.lua`):
+  the service handlers it should call are in place, but the Cocos scene that
+  drives them is not yet merged. That scene now consumes the canonical data via
+  `src/manager/campaign_data.lua` (adapter over `campaign_data_generated.lua`) —
+  no hand-copied campaign remains.
 
 The order below is deliberately small, vertical slices (VP §10). Each PR must
 land independently, with its own green tests, before the next starts.

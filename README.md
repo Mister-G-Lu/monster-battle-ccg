@@ -28,9 +28,10 @@ A fully offline, single-player version of the English Card Battle game — origi
 
 ### Play the Web App
 
-The campaign ships as an **installable, Android-style web app** — the same
-chrome the APK has (status bar, app bar, bottom navigation, bottom sheets,
-cold-start splash), rendered in HTML/CSS around the existing battle engine.
+The campaign also ships as an **installable web game** — a clean, full-bleed
+game view with no fake Android chrome. The Android app owns the frame (the OS
+draws the real status/navigation bars); the page renders only the game: a slim
+in-game HUD, the campaign screens, and a compact tab strip.
 
 ```bash
 make web     # http://localhost:8000/
@@ -38,10 +39,10 @@ make web     # http://localhost:8000/
 
 Serve it over HTTP rather than opening the file directly, so the service worker
 and the *Add to Home screen* install prompt work (`file://` is not a secure
-context). On desktop the app is presented inside a phone frame; on a handset —
-or once installed — it goes edge-to-edge and launches standalone with no browser
-UI. Everything runs client-side with real game data (1,580 cards from the
-original CSVs) and works fully offline after the first load.
+context). Once installed it launches standalone (`display: standalone`) with no
+browser UI, edge-to-edge. Everything runs client-side with real game data
+(1,580 cards from the original CSVs) and works fully offline after the first
+load.
 
 `build/web/game.html` is a byte-identical mirror of `index.html` and can be
 opened the same way. See `docs/WEB_DELIVERY.md` for the delivery options
@@ -77,7 +78,8 @@ so cards, the battlefield and the campaign map look like the Android game
 instead of plain text. See `docs/ART_INTEGRATION.md` for how it works and the
 alternatives evaluated (generated art, free asset sites).
 
-The art now sits inside an Android app shell — see `docs/WEB_DELIVERY.md`.
+The web page frames it as a clean game view — no fake Android chrome; the real
+app (or the device's own bars) owns the frame. See `docs/WEB_DELIVERY.md`.
 
 ### Consolidation (Android engine + Web campaign)
 
@@ -88,6 +90,14 @@ every platform's copy from it: the `CAMPAIGN_DATA` blob in `index.html` /
 `src/manager/campaign_data_generated.lua`. Edit the JSON, re-run the generator —
 never hand-edit the copies. See `docs/CONSOLIDATION_PLAN.md` for the
 decision and the architecture map.
+
+The campaign is also integrated into the **Android app's own service**: the
+in-process game server (`offline_server.lua`) serves the Shadow Road through
+`src/manager/campaign_service.lua` — campaign info, battle start (enemy deck
+from the canonical node pool, run on the real `offline_battle` engine),
+first-clear rewards/recruit, boss vitality, reset — with progress persisted in
+the game save. `tests/campaign_service_test.lua` and `tests/level_w1_test.lua`
+cover the w1 slice end-to-end. See `docs/WEB_DELIVERY.md`.
 
 ### Rebuild from Source
 
@@ -145,9 +155,11 @@ tutorial battle's match-panel standby handshake that historically hung on
 python3 scripts/setup_test_env.py     # decrypt game Lua from the APK into decrypted/ + csv_plain/
 luajit tests/sim_test.lua             # 29-check game logic simulation
 luajit tests/integration_test.lua     # 106-check integration tests
+luajit tests/level_w1_test.lua        # native w1 slice: canonical pool → decks, win/loss
+luajit tests/campaign_service_test.lua # native campaign service + w1 end-to-end through the server
 luajit tests/guide_battle_test.lua    # tutorial battle end-to-end regression (client side)
 node tests/campaign_sim.js 80         # web campaign: engine regression + difficulty curve report
-node tests/app_shell_test.js          # Android app shell chrome + PWA manifest/SW/icons
+node tests/app_shell_test.js          # game-view HUD/tabs + PWA manifest/SW/icons
 ```
 
 `tests/campaign_sim.js` loads the real page script with a stubbed DOM, plays
@@ -173,6 +185,8 @@ monster-battle-ccg/
 │   │   ├── network.lua           # TCP → offline intercept layer
 │   │   ├── offline_server.lua    # In-process game server (~1,700 lines)
 │   │   ├── offline_battle.lua    # AI battle engine (~1,500 lines)
+│   │   ├── campaign_service.lua  # Native Shadow Road service (info/battle/rewards/recruit)
+│   │   ├── campaign_data.lua     # Native adapter onto campaign_data_generated.lua
 │   │   ├── global.lua            # Scene manager (patched)
 │   │   └── data_template.lua     # CSV data loader (patched)
 │   ├── logic/
@@ -189,10 +203,12 @@ monster-battle-ccg/
 ├── tests/                        # Headless test suites
 │   ├── sim_test.lua              # 29-check game logic simulation
 │   ├── integration_test.lua      # 106-check integration tests
+│   ├── level_w1_test.lua         # Native w1 slice (canonical pool → decks, win/loss)
+│   ├── campaign_service_test.lua # Native campaign service + w1 end-to-end
 │   └── guide_battle_test.lua     # Tutorial battle client-side end-to-end regression
 ├── csv_data/                     # Game configuration (plain CSV)
 ├── English_offline.apk           # Final installable APK (~55 MB) — install THIS one
-├── index.html                    # The Android-style web app (app shell + campaign)
+├── index.html                    # The web game view (no fake OS chrome; HUD + campaign)
 ├── manifest.webmanifest          # PWA manifest (installable, standalone display)
 ├── sw.js                         # Offline service worker
 ├── build/

@@ -1,14 +1,18 @@
 #!/usr/bin/env node
 /**
- * Regression tests for the Android app shell around the campaign
+ * Regression tests for the game view around the campaign
  * (index.html / build/web/game.html).
  *
- * The shell is the chrome that makes the page behave like the Android build:
- * status bar, app bar (title + back affordance), bottom navigation, bottom
- * sheets, snackbar, splash and the PWA plumbing. The campaign engine itself is
- * covered by tests/campaign_sim.js — this file only asserts the chrome reacts
- * to navigation the way the native app does, and that the installable-app
- * files (manifest + service worker + icons) are present and consistent.
+ * The page renders ONLY the game — no fake OS chrome. The fake Android
+ * shell (phone frame, status bar, app bar, bottom nav, splash, gesture
+ * pill) is gone; the campaign runs inside the real Android build's
+ * service. What remains on the web is a slim in-game HUD (title + back
+ * + menu) and a compact tab strip (Campaign / Deck / How to play).
+ *
+ * This file asserts that the fake chrome is gone, that the game HUD
+ * reacts to navigation the way the game does, and that the installable
+ * files (manifest + service worker + icons) are still present and
+ * consistent. The campaign engine itself is covered by tests/campaign_sim.js.
  *
  * Usage: node tests/app_shell_test.js
  */
@@ -76,6 +80,7 @@ function $(id) { if (!elCache.has(id)) elCache.set(id, makeEl('div')); return el
 const screenIds = ['world', 'battle'];
 global.document = {
   head: makeEl('head'),
+  body: makeEl('body'),
   getElementById: $,
   createElement: makeEl,
   querySelectorAll(sel) { return sel === '.screen' ? screenIds.map($) : []; },
@@ -113,7 +118,7 @@ vm.runInThisContext(
   'globalThis.__shell = { get battle(){return battle;}, set battle(v){battle=v;},' +
   ' get save(){return save;}, set save(v){save=v;}, ALL_NODES, NODE_BY_ID,' +
   ' showScreen, navTo, setChrome, appBack, openMenu, toast, promptInstall,' +
-  ' dismissSplash, openOverlay, closeOverlay, startBattle, defaultSave, updateWorldStats };',
+  ' openOverlay, closeOverlay, startBattle, defaultSave, updateWorldStats };',
   { filename: 'shell-bridge.js' }
 );
 const S = globalThis.__shell;
@@ -123,59 +128,65 @@ console.log('== app_shell_test: ' + path.relative(ROOT, HTML) + ' ==');
 // ---------------------------------------------------------------- markup
 {
   const markup = html.slice(0, html.indexOf('<script>'));
-  for (const id of ['device', 'device-screen', 'sysbar', 'appbar', 'appbar-title', 'appbar-sub',
-                    'appbar-nav', 'app-body', 'bottomnav', 'nav-campaign', 'nav-deck', 'nav-help',
-                    'splash', 'hero-art', 'progress-fill', 'help-overlay', 'menu-overlay']) {
-    assert(markup.includes(`id="${id}"`), `shell markup is missing #${id}`);
+  // the game's own chrome is present...
+  for (const id of ['game-hud', 'hud-title', 'hud-sub', 'hud-back', 'hud-menu',
+                    'app-body', 'game-tabs', 'tab-campaign', 'tab-deck', 'tab-help',
+                    'deck-badge', 'hero-art', 'progress-fill', 'help-overlay', 'menu-overlay']) {
+    assert(markup.includes(`id="${id}"`), `game HUD markup is missing #${id}`);
   }
+  // ...and the fake Android OS chrome is gone
+  for (const id of ['device', 'device-screen', 'sysbar', 'appbar', 'bottomnav',
+                    'nav-campaign', 'nav-deck', 'nav-help', 'splash', 'navpill', 'stage']) {
+    assert(!markup.includes(`id="${id}"`), `fake OS chrome #${id} must be removed`);
+  }
+  assert(!markup.includes('class="stage"'), 'the phone-frame stage must be gone');
   assert(markup.includes('rel="manifest"'), 'page must link a web app manifest');
   assert(markup.includes('name="theme-color"'), 'page must set a theme-color for the system bars');
   assert(markup.includes('viewport-fit=cover'), 'viewport must opt into the display cutout / safe areas');
   assert(/display-mode:\s*standalone/.test(markup), 'CSS must adapt to the installed standalone display mode');
-  assert(markup.includes('safe-area-inset-bottom'), 'shell must respect the bottom safe-area inset');
-  assert(markup.includes('100dvh'), 'shell must use dynamic viewport height so mobile chrome does not clip');
-  assert(markup.includes('orientation: landscape'), 'CSS must compact the layout in landscape');
-  assert(markup.includes('touch-action: pan-x pan-y'), 'stage must allow pan/drag when content still overflows');
-  assert(html.includes('function fitStage'), 'page must scale the phone frame to fit the viewport');
+  assert(markup.includes('safe-area-inset-bottom'), 'HUD must respect the bottom safe-area inset');
+  assert(markup.includes('100dvh'), 'page must use dynamic viewport height so mobile chrome does not clip');
+  assert(markup.includes('orientation: landscape'), 'CSS must compact the battle chrome in landscape');
+  assert(markup.includes('touch-action: pan-x pan-y'), 'page must allow pan/drag when content still overflows');
   // the campaign engine script must stay the FIRST bare <script> (campaign_sim.js slices on it)
   assert(html.indexOf('<script>') > markup.indexOf('<script data-shell-icons>'),
          'the head bootstrap must not be a bare <script> before the game script');
 }
 
-// ---------------------------------------------------------------- chrome
+// ---------------------------------------------------------------- HUD
 {
   S.save = S.defaultSave();
   S.battle = null;
   S.showScreen('world');
-  assert($('appbar-title').textContent === 'The Shadow Road', 'app bar shows the campaign title on the map');
-  assert($('appbar-nav').hidden === true, 'no back arrow on the top-level campaign screen');
-  assert($('bottomnav').classList.contains('hidden') === false, 'bottom nav is visible on the campaign screen');
-  assert($('nav-campaign').classList.contains('active'), 'Campaign tab is selected on the map');
+  assert($('hud-title').textContent === 'The Shadow Road', 'HUD shows the campaign title on the map');
+  assert($('hud-back').hidden === true, 'no back button on the top-level campaign screen');
+  assert($('game-tabs').classList.contains('hidden') === false, 'tab strip is visible on the campaign screen');
+  assert($('tab-campaign').classList.contains('active'), 'Campaign tab is selected on the map');
 
   S.startBattle(S.NODE_BY_ID['w1']);
-  assert($('appbar-title').textContent === 'Forest Trail', 'app bar retitles to the encounter during battle');
-  assert($('appbar-sub').textContent.startsWith('vs '), 'app bar subtitle names the opponent');
-  assert($('appbar-nav').hidden === false, 'battle screen exposes the back affordance');
-  assert($('bottomnav').classList.contains('hidden'), 'bottom nav is hidden during a battle (immersive)');
-  assert($('appbar').classList.contains('battle-mode'), 'app bar switches to its battle treatment');
+  assert($('hud-title').textContent === 'Forest Trail', 'HUD retitles to the encounter during battle');
+  assert($('hud-sub').textContent.startsWith('vs '), 'HUD subtitle names the opponent');
+  assert($('hud-back').hidden === false, 'battle screen exposes the back affordance');
+  assert($('game-tabs').classList.contains('hidden'), 'tab strip is hidden during a battle (immersive)');
+  assert($('game-hud').classList.contains('battle-mode'), 'HUD switches to its battle treatment');
 
   S.battle = null;
   S.showScreen('world');
-  assert($('bottomnav').classList.contains('hidden') === false, 'bottom nav returns after the battle');
+  assert($('game-tabs').classList.contains('hidden') === false, 'tab strip returns after the battle');
 }
 
 // ---------------------------------------------------------------- navigation
 {
   S.navTo('deck');
-  assert($('deck-overlay').classList.contains('active'), 'Deck tab opens the deck sheet');
-  assert($('nav-deck').classList.contains('active'), 'Deck tab is selected while its sheet is open');
+  assert($('deck-overlay').classList.contains('active'), 'Deck tab opens the deck panel');
+  assert($('tab-deck').classList.contains('active'), 'Deck tab is selected while its panel is open');
 
-  assert(S.appBack() === true, 'back closes the open sheet');
-  assert($('deck-overlay').classList.contains('active') === false, 'deck sheet closed by back');
-  assert($('nav-campaign').classList.contains('active'), 'closing a sheet reselects Campaign');
+  assert(S.appBack() === true, 'back closes the open panel');
+  assert($('deck-overlay').classList.contains('active') === false, 'deck panel closed by back');
+  assert($('tab-campaign').classList.contains('active'), 'closing a panel reselects Campaign');
 
   S.navTo('help');
-  assert($('help-overlay').classList.contains('active'), 'How to play tab opens the help sheet');
+  assert($('help-overlay').classList.contains('active'), 'How to play tab opens the help panel');
   S.closeOverlay('help-overlay');
 
   S.openMenu();
@@ -185,7 +196,7 @@ console.log('== app_shell_test: ' + path.relative(ROOT, HTML) + ' ==');
 
   // back with nothing open and no battle: the shell reports "not handled"
   S.battle = null;
-  assert(S.appBack() === false, 'back is a no-op on the root screen with no sheets open');
+  assert(S.appBack() === false, 'back is a no-op on the root screen with no panels open');
 
   // back during a battle retreats rather than stranding the player
   S.startBattle(S.NODE_BY_ID['w1']);
@@ -205,8 +216,8 @@ console.log('== app_shell_test: ' + path.relative(ROOT, HTML) + ' ==');
          'progress total is derived from the campaign data, not hard-coded');
   assert($('progress-fill').style.width === '0%', 'progress bar starts empty');
   assert($('progress-next').textContent.startsWith('Next: '), 'progress card names the next encounter');
-  assert(String($('nav-deck-badge').textContent) === String(S.save.collection.length),
-         'deck tab badge counts the collection');
+  assert(String($('deck-badge').textContent) === String(S.save.collection.length),
+         'Deck tab badge counts the collection');
 
   S.save.cleared[S.ALL_NODES[0].id] = true;
   S.showScreen('world');
@@ -215,9 +226,6 @@ console.log('== app_shell_test: ' + path.relative(ROOT, HTML) + ' ==');
   S.toast('hello');
   const bar = $('snackbar');
   assert(bar.textContent === 'hello' || elCache.get('snackbar').textContent === 'hello', 'snackbar shows a message');
-
-  S.dismissSplash();
-  assert($('splash').classList.contains('gone'), 'splash is dismissed at boot');
 
   S.promptInstall();  // no deferred event in this environment: must not throw
 }
