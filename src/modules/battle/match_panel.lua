@@ -84,6 +84,9 @@ function meta:Show()
     self._exit_requested = false
     self._standby_advanced = false
     self._standby_complete = false
+    -- Don't wait on enter_battle (often never completes on the APK). Handshake
+    -- immediately so the opponent is not stuck on "…".
+    self:_RequestStandby("show_immediate")
     self:PlayAnimation("enter_battle", false, function ()
         self:_RequestStandby("enter_animation_complete")
     end)

@@ -13,7 +13,7 @@ editer,interface/battle/battle_ui_handcard_panel.csb,sacri_node.titlebg.title,Sa
 editer,interface/battle/battle_ui_panel.csb,end_node.close_desc,Tap to Exit
 editer,interface/battle/battle_ui_panel.csb,end_node.trophies.template.desc,Booty
 editer,interface/battle/battle_ui_panel.csb,enemy_info.card_monster_detail,Monsters remaining
-editer,interface/battle/battle_ui_panel.csb,enemy_status.desc,Let me see...
+editer,interface/battle/battle_ui_panel.csb,enemy_status.desc,Planning
 editer,interface/battle/battle_ui_panel.csb,match_info.enemy_info.level_desc,Rank
 editer,interface/battle/battle_ui_panel.csb,match_info.ourside_info.level_desc,Rank
 editer,interface/battle/battle_ui_panel.csb,match_info.vs.desc,VS
@@ -99,8 +99,8 @@ editer,interface/mail/mailbox_panel.csb,node.mail_detailbg.confirm_btn.desc,Rece
 editer,interface/mail/mailbox_panel.csb,node.mail_detailbg.read_icon.desc,Read
 editer,interface/mail/mailbox_panel.csb,node.mail_template.read_icon.desc,Read
 editer,interface/mail/mailbox_panel.csb,node.title,Parrot Mail
-editer,interface/pve/main_pve_list.csb,pve_list.template1.name,Gerbip Tide
-editer,interface/pve/main_pve_list.csb,pvelist.template1.name,Gerbip Tide
+editer,interface/pve/main_pve_list.csb,pve_list.template1.name,Whispering Woods
+editer,interface/pve/main_pve_list.csb,pvelist.template1.name,Whispering Woods
 editer,interface/pve/main_pve_list.csb,pvelist.template2.name,Monsters' Range
 editer,interface/pve/pve_cardgroup_panel.csb,node.cardgroup_list.cardgroup_btn2,My deck
 editer,interface/pve/pve_cardgroup_panel.csb,node.times.desc,Remaining times today
@@ -383,9 +383,9 @@ text,desc_delete_friend_normal,,Comfirm deletion?
 text,friend_setting_desc,,Edit
 text,friend_chatting_title,,Chat with %s
 text,friend_chatting_emptytext,,Your message cannot be empty
-text,pve_misson1_title,,— Gerbip Tide —
-text,pve_misson1_confition,,Victory：defeat 10 gerbips \n Failure：lose all your monsters
-text,pve_misson1_tip,,＊Go go defeat gerbips!
+text,pve_misson1_title,,— Whispering Woods —
+text,pve_misson1_confition,,Victory: clear the thicket prowlers\nFailure: lose all your monsters
+text,pve_misson1_tip,,＊Cut a path through the woods.
 text,pve_misson1_tip2,,＊Super challenge difficulty(Temporary)! Suitable for players who like to challenge impossible missions!
 text,pve_misson2_title,,— Monsters' Range —
 text,pve_misson2_confition,,Victory：defeat 7 targets \n Failure：lose all your monsters or enemy own 50 crystals
@@ -398,7 +398,7 @@ text,pve_startbtn_limit,,need %d more %s monster card
 text,pve_startbtn_normal,,Adventure
 text,pve_startbtn_times,,Closed
 text,mission_difficulty_desc,,Difficulty%d★
-text,pve_battle_mission1_desc,,Defeat all gerbips
+text,pve_battle_mission1_desc,,Defeat the thicket prowlers
 text,pve_battle_mission2_desc,,Destroy %d targets before your enemy get 50 crystals
 text,input_friend_num,,Enter user ID
 text,input_chat_word,,Enter message
@@ -516,7 +516,7 @@ text,adv_skilled_exam,,Player rank %d upgrade exam
 text,exam_college,,Player college
 text,exam_college_skilled,,Unlock when your exp is full in player rank 1
 text,progress_text,,Progress
-text,gerbil_tide_title,,— Gerbip Tide —
+text,gerbil_tide_title,,— Whispering Woods —
 text,adv_main_title,,Adventure
 text,battle_result_lost_desc,,Please continue
 text,battle_result_win_desc,,Congratulations

@@ -63,6 +63,8 @@ function meta:Clean()
     self.is_own = false
     self.pve_win_cur_value = 0
     self._standby_block_time = 0
+    self._auto_standby_wait = 0
+    self._enemy_think_time = 0
 end
 
 function meta:PushBattleQueue(name, data)
@@ -98,15 +100,40 @@ function meta:Update(elapsed_time)
     local now_time = timer:Now()
     self.elapsed_time = elapsed_time
 
-    if self.cur_stage == self.STAGE.own and not self.own_player.is_sacrifice then
+    -- Offline single-player: never auto-end the player's turn on a timer.
+    -- The original PvP countdown HUD is a debug leftover; only honor it
+    -- when DEV_MODE is on.
+    if _G["DEV_MODE"] and self.cur_stage == self.STAGE.own and self.own_player and not self.own_player.is_sacrifice then
         local last_oper_time = self.own_player.last_oper_time
         if last_oper_time then
             local last_time = timer:GetDiffSecond(last_oper_time)
             if last_time <= 0 then
-                -- auto-battle
                 self:ReqBattleAttack("auto")
             end
         end
+    end
+
+    -- If the match-panel enter animation never fires, request standby ourselves.
+    if self.standby_status == 0 and self.own_player then
+        self._auto_standby_wait = (self._auto_standby_wait or 0) + elapsed_time
+        if self._auto_standby_wait > 0.8 then
+            print("[BATTLE] auto-requesting standby (match panel silent)")
+            self:ReqBattleStandby()
+        end
+    end
+
+    -- Enemy think bubble: if the queue is frozen on a missing animation
+    -- during their turn, drop the deploy lock so AI commands can run.
+    if self.cur_stage == self.STAGE.enemy and self.is_play_animation then
+        self._enemy_think_time = (self._enemy_think_time or 0) + elapsed_time
+        if self._enemy_think_time > 3.0 then
+            print("[BATTLE] enemy think stall; clearing animation lock")
+            self.is_play_animation = false
+            self._anim_block_time = 0
+            self._enemy_think_time = 0
+        end
+    else
+        self._enemy_think_time = 0
     end
 
     if self.is_play_animation then

@@ -13,6 +13,9 @@ end
 
 require "config"
 require "cocos.init"
+
+-- Release APK: no FPS overlay / GL stats. Desktop/dev can set this true.
+_G["DEV_MODE"] = false
 local json = require "utils.json"
 
 local error_tracer = require "manager.error_tracer"
@@ -105,9 +108,10 @@ function main()
                 file_util:setPopupNotify(false)
                 file_util:addSearchPath("src/")
                 file_util:addSearchPath("res/")
-                cc.Director:getInstance():setDisplayStats(true)
-            else
-                cc.Director:getInstance():setDisplayStats(false)
+            end
+            -- FPS / GL "time" overlay is a debug HUD. Never show it on a
+            -- player APK; only when DEV_MODE is explicitly on.
+            cc.Director:getInstance():setDisplayStats(_G["DEV_MODE"] == true)
                 local writable_path = file_util:getWritablePath()
 
                 local do_decompress = false

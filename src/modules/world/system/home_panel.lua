@@ -1,21 +1,10 @@
-local resource = require "manager.resource"
-local text_loader = require "manager.text_loader"
 local ui_helper = require "manager.ui_helper"
 local graphic = require "manager.graphic"
 local configuration = require "manager.configuration"
 
-local chest_logic = require "logic.chest"
 local mail_logic = require "logic.mail"
-local daily_logic = require "logic.daily"
-local challenge_logic =require "logic.challenge"
-local rank_logic = require "logic.rank"
-local friend_logic = require "logic.friend"
-local pve_logic = require"logic.pve"
+local pve_logic = require "logic.pve"
 local user_logic = require "logic.user"
-local constants = require "common.constants"
-local data_template = require "manager.data_template"
-local arena_logic = require "logic.arena"
-local CHEST_STAGE = constants.CHEST_STAGE
 
 local meta = class("home_panel",function ()
     return ui_helper:LoadCocosUI("interface/world/main_panel.csb")
@@ -34,16 +23,23 @@ function meta:ctor()
     ui_helper:BindTimeLine(self.mail_btn_newtip, "interface/world/newtip.csb")
     self.mail_btn_newtip:PlayAnimation("loop", true)
 
-    -- PVP
+    -- Battle: original PVP + PVE both opened the same campaign in offline
+    -- mode. Keep one Play button (the PVE node) and hide the duplicate PVP
+    -- entry so the home bar isn't two doors to the same room.
     self.pvp_btn = self:getChildByName("pvpbtn")
-    -- Events
+    if self.pvp_btn then self.pvp_btn:setVisible(false) end
+
+    -- Events / challenge rooms need a second player. Hide in single-player.
     self.event_btn = self:getChildByName("event")
+    if self.event_btn then self.event_btn:setVisible(false) end
+
     -- Booster packs
     self.card_chest_btn = self:getChildByName("cardbag")
     -- Card album
     self.card_book_btn = self:getChildByName("cardbook")
-    -- Shop
+    -- Shop has no catalogue offline (IAP / server store). Hide the dead button.
     self.shop_btn = self:getChildByName("shop")
+    if self.shop_btn then self.shop_btn:setVisible(false) end
     -- Help
     self.help_btn = self:getChildByName("helpbtn")
     local path = "interface/world/help_btn.csb"
@@ -58,37 +54,23 @@ function meta:ctor()
     -- Account binding
     self.setting_btn = self:getChildByName("setting")
 
-    -- Friends
+    -- Friends / social — empty list offline. Hide the entry.
     self.friend_btn = self:getChildByName("friend")
-
-    self.friend_btn_newtip = self.friend_btn:getChildByName("newtip")
-    ui_helper:BindTimeLine(self.friend_btn_newtip, "interface/world/newtip.csb")
-    self.friend_btn_newtip:PlayAnimation("loop", true)
-    self.friend_btn_newtip:setVisible(false)
-
-    if friend_logic.notice ~= nil then
-        self.friend_btn_newtip:setVisible(true)
+    if self.friend_btn then
+        self.friend_btn:setVisible(false)
+        self.friend_btn_newtip = self.friend_btn:getChildByName("newtip")
+        if self.friend_btn_newtip then
+            self.friend_btn_newtip:setVisible(false)
+        end
     end
 
-    -- Community
-    -- self.community_btn = self:getChildByName("community")
-    -- PVE
+    -- PVE / campaign — the single Play destination
     self.pve_btn = self:getChildByName("pvebtn")
-    -- self.pve_touch_panel = self.pve_list:getChildByName("touch_panel")
+    if self.pve_btn then self.pve_btn:setVisible(true) end
 
-    -- if ThirdHelper and ThirdHelper["isCommunity"] and ThirdHelper["isCommunity"]() then
-    --     self.community_btn:setVisible(true)
-    -- else
-    --     self.community_btn:setVisible(false)
-    -- end
-
-    -- local text_loader = require "manager.text_loader"
-    -- if text_loader:IsTraditional() then
-        -- self.community_btn:setVisible(false)
-    -- end
-
-    -- Rankings
+    -- Rankings — a one-row dummy ladder. Hide; record lives in PVE / arena.
     self.rank_btn = self:getChildByName("ladder")
+    if self.rank_btn then self.rank_btn:setVisible(false) end
 
     -- -- Daily reward
     -- self.reward_tip_node = self:getChildByName("reward_tip")
@@ -112,8 +94,9 @@ function meta:ctor()
 
     self:RegisterEvent()
     graphic:DispatchEvent("refresh_new_mail", mail_logic.new_mail_num)
-    graphic:DispatchEvent("refresh_new_friendtip", friend_logic.friendtip_show)
-    graphic:DispatchEvent("check_pve_is_turned",arena_logic.arena_stage,arena_logic.level)
+    -- PVE is always the campaign entry in this build — never hide it behind
+    -- the old "unlock after first arena match" gate.
+    if self.pve_btn then self.pve_btn:setVisible(true) end
     self:RegisterWidgetEvent()
 end
 
@@ -149,22 +132,7 @@ function meta:RegisterEvent()
             self.mail_btn_newtip:setVisible(false)
         end
     end)
-    -- Friend message indicator
-    graphic:RegisterEvent("refresh_new_friendtip", function(show)
-        if show then
-            self.friend_btn_newtip:setVisible(true)
-        else
-            self.friend_btn_newtip:setVisible(false)
-        end
-    end)
-    -- Check whether PVE is unlocked
-    graphic:RegisterEvent("check_pve_is_turned", function (stage,level)
-        if stage == constants.ARENA_STAGE.casual and level == 1 then
-            self.pve_btn:setVisible(false)
-        else
-            self.pve_btn:setVisible(true)
-        end
-    end)
+    -- Friend / PVE-unlock events ignored: those buttons are gone or always on.
 
 end
 
@@ -184,20 +152,12 @@ function meta:RegisterWidgetEvent()
     ui_helper:AddClick(self.mail_btn, function ()
         mail_logic:Query()
     end)
-    -- PVP
-    ui_helper:AddClick(self.pvp_btn, function ()
-        -- PVP disabled: redirect to PVE
-        pve_logic:ShowPve()
-    end)
-    -- PVE
-    ui_helper:AddClick(self.pve_btn, function ()
-        pve_logic:ShowPve()
-    end)
-
-    -- Events / challenge
-    ui_helper:AddClick(self.event_btn, function ()
-        challenge_logic:Query()
-    end)
+    -- PVE / Play
+    if self.pve_btn then
+        ui_helper:AddClick(self.pve_btn, function ()
+            pve_logic:ShowPve()
+        end)
+    end
 
     -- Tasks
     ui_helper:AddClick(self.task_btn, function ()
@@ -215,9 +175,7 @@ function meta:RegisterWidgetEvent()
         graphic:DispatchEvent("switch_system_module", "deck")
     end)
 
-    -- Shop
-    ui_helper:AddClick(self.shop_btn, function ()
-    end)
+    -- Shop hidden (no catalogue)
 
     -- Help
     local button = self.help_btn:getChildByName("helpbtn")
@@ -232,18 +190,6 @@ function meta:RegisterWidgetEvent()
     -- Account binding
     ui_helper:AddClick(self.setting_btn, function ()
         graphic:DispatchEvent("push_world_panel", "setting", "global_setting_panel")
-    end)
-
-    -- Friends
-    ui_helper:AddClick(self.friend_btn, function ()
-        friend_logic:Query()
-    end)
-
-    -- community_btn removed (ThirdHelper unavailable offline)
-
-    -- Rankings
-    ui_helper:AddClick(self.rank_btn, function ()
-        rank_logic:QueryRank()
     end)
 
     -- Achievements
