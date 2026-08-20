@@ -1,0 +1,18 @@
+ID,battle_guide_id,trigger_command,trigger_func,trigger_condition,trigger_monster_id,trigger_item_id,dialogue_text,dialogue_pos,dialogue_icon,dialogue_name
+number,number,string,string,string,number,number,string,string,string,string
+ID,battle_guide_id,trigger_command,trigger_func,trigger_condition,trigger_monster_id,trigger_item_id,dialogue_text,dialogue_pos,dialogue_icon,dialogue_name
+1,1,cmd_battle_move,cmd_battle_move_func,,110011,,Come on，defeat all my monsters!,up,monster3,Will
+2,1,cmd_battle_attack,battle_slot_emtpy,,,,If there is no monster on your field，your deck will be punished,up,monster3,Will
+3,1,cmd_battle_move,deploy_melee_error_func,melee,,,My attck type is Melee ，I can only attack in slot 1,down,monster2,Sharp flake
+4,1,cmd_battle_move,deploy_ranged_error_func,ranged,,,Unnnn…I can't use Ranged attack in slot 1…,down,monster1,Dust maiden
+5,1,cmd_battle_attack,cmd_battle_attack_func,melee,110011,,My monster is better than yours!,up,monster3,Will
+6,1,cmd_battle_over,cmd_battle_over_func,random,,,Hahahahaaaaaa~,up,monster3,Will
+7,2,cmd_battle_move,cmd_battle_move_func,,110011,21002,Take your equip and have a nice fight!,up,monster4,Challenger
+8,2,cmd_battle_prepa,cmd_battle_prepa_func,,110011,21002,We shall also be equiped!,down,monster2,Sharp flake
+9,2,cmd_battle_move,cmd_battle_move_func,,119001,21901,"Seems it time to show my ""bomb""!",up,monster4,Challenger
+10,2,cmd_battle_attack,physics_attack,1,119001,,Hahaha，it doesn't works!,up,monster4,Challenger
+11,2,cmd_battle_attack,physics_attack,2,119001,,Armor can take all damages except Magic!,up,monster4,Challenger
+12,2,cmd_battle_attack,magic_attack,magic,119001,,Magic attack???Noooooooo~,up,monster4,Challenger
+13,2,cmd_battle_attack,battle_slot_emtpy,,,,If there is no monster on your field，your deck will be punished,up,monster4,Challenger
+14,2,cmd_battle_move,deploy_melee_error_func,melee,,,My attck type is Melee ，I can only attack in slot 1,down,monster2,Sharp flake
+15,2,cmd_battle_move,deploy_ranged_error_func,ranged,,,Unnnn…I can't use Ranged attack in slot 1…,down,monster1,Dust maiden
