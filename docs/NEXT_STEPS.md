@@ -1,5 +1,12 @@
 # Next Steps — PR Roadmap for the Android + Web Consolidation
 
+Status of the consolidation at the time of writing (updated):
+
+- **PR A done** — `src/manager/campaign_data.lua` is adapters only (`require` generated tables + pool resolution).
+- **PR C done** — `docs/ENGINE_STRATEGY.md` records route (3).
+- **PR B (this slice)** — `w1` decks are built from canonical JSON + CSV; `tests/level_w1_test.lua` covers plumbing and, with fixtures, win/loss.
+- **PR F (partial)** — `make verify` / `static_checks` run `refresh_campaign_data.py --verify` and require identical HTML shells.
+
 Status of the consolidation at the time of writing:
 
 - **PR #10 merged** — the art integration **and** the first consolidation slice

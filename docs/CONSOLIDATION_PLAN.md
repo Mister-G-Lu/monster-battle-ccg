@@ -105,11 +105,11 @@ This directly satisfies VP §3 (data layer), §16 (one campaign), and §10
 
 In dependency order, each a small vertical slice:
 
-- **Slice 2** — adopt `campaign_data_generated.lua` in the native module:
-  `src/manager/campaign_data.lua` `require`s the generated tables (no hand-copied nodes).
-- **Slice 3** — one playable level, end-to-end: drive the *native* engine from
-  canonical JSON for `w1` (Forest Trail), verify identical combat semantics
-  (VP §14) against `offline_battle.lua`.
+- **Slice 2** — **done**: `campaign_data.lua` requires generated tables and
+  resolves pools from CSV / card config.
+- **Slice 3** — **in progress**: `w1` enemy/player decks come from canonical
+  JSON (`tests/level_w1_test.lua`, `tests/campaign_data_test.py`). Full native
+  play-through still needs `setup_test_env.py` fixtures.
 - **Slice 4** — keep `index.html` ↔ `build/web/game.html` byte-identical.
 - **Slice 5** — **DECIDED** (see `docs/ENGINE_STRATEGY.md`): stay on the thin JS
   port + APK art for the HTML host; do not start WASM/Capacitor this phase.

@@ -54,8 +54,29 @@ def check_web_data_marks_special_cards() -> list[str]:
     html = (ROOT / "build/web/game.html").read_text(encoding="utf-8")
     if "c.flags === 1" not in html:
         errors.append("web prototype random/starter pools must filter to flags=1 collectible cards")
-    if "ATK:${card.attack || 1}" not in html:
+    if "card.attack || 1" not in html and "attacker.attack || 1" not in html:
         errors.append("web prototype should use attack values, not current HP as damage")
+    return errors
+
+
+def check_campaign_generators() -> list[str]:
+    """PR F: checked-in campaign/web blobs must match the generators."""
+    errors: list[str] = []
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts/refresh_campaign_data.py"), "--verify"],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        errors.append("refresh_campaign_data.py --verify failed")
+        errors.append(result.stdout)
+        errors.append(result.stderr)
+    html_a = (ROOT / "index.html").read_bytes()
+    html_b = (ROOT / "build/web/game.html").read_bytes()
+    if html_a != html_b:
+        errors.append("index.html and build/web/game.html must stay byte-identical")
     return errors
 
 
@@ -74,13 +95,28 @@ def check_balance_audit() -> list[str]:
 
 def main() -> int:
     errors: list[str] = []
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "tests/campaign_data_test.py")],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    extra = []
+    if result.returncode != 0:
+        extra.append("campaign_data_test.py failed")
+        extra.append(result.stdout)
+        extra.append(result.stderr)
+
     for check in (
         check_no_chinese_artifacts,
         check_text_loader_forces_english,
         check_web_data_marks_special_cards,
+        check_campaign_generators,
         check_balance_audit,
     ):
         errors.extend(check())
+    errors.extend(extra)
     if errors:
         print("STATIC CHECKS FAILED")
         for err in errors:
