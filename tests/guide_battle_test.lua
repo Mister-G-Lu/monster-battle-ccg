@@ -472,9 +472,10 @@ check(battle_logic.own_player.is_sacrifice == true, "player sacrifice phase acti
 -- ---------------------------------------------------------------------------
 section("4. Turn window")
 
-local turn_seconds_left = time:GetDiffSecond(battle_logic.own_player.last_oper_time or 0)
-check(turn_seconds_left > 3000, "server grants an effectively unlimited turn window (last_oper_time in the future, " .. turn_seconds_left .. "s left)")
+-- Offline builds ignore last_oper_time unless DEV_MODE; the player must
+-- tap Fight. Confirm the stage did not auto-flip off own.
 check(battle_logic.cur_stage == battle_logic.STAGE.own, "no instant auto-attack (stage still own after prepa)")
+check(battle_logic.is_battle_over ~= true, "turn window did not auto-end the battle")
 
 -- ---------------------------------------------------------------------------
 -- SECTION 5: play the tutorial battle to completion via the client API

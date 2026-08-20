@@ -467,12 +467,13 @@ end
 function offline_battle:BeginPrep(user_id)
     local actor = user_id == self.own.user_id and self.own or self.enemy
     actor.is_sacrifice = true
-    -- Far-future timestamp: prevents auto-attack during sacrifice phase.
-    -- Player must manually sacrifice/deploy/end turn.
+    -- No turn countdown in the player APK (battle.lua ignores last_oper_time
+    -- unless DEV_MODE). Keep a modest deadline so debug HUDs don't show 59:59.
+    local deadline = os.time() + (_G["DEV_MODE"] and 90 or 0)
     self:PushCommand("cmd_battle_prepa", {
         user_id = actor.user_id,
         sync_crystal = actor.cur_crystal,
-        last_oper_time = os.time() + 3600,
+        last_oper_time = deadline,
         is_sacrifice = true,
     })
 end
@@ -724,10 +725,12 @@ function offline_battle:HandleAttack(req)
     end
     -- enemy prep: +1 crystal this round was already granted at round start
     self.enemy.is_sacrifice = true
+    -- Deadline = now so the "Let me see..." think bubble is not waiting on
+    -- a PvP clock that never ticks in offline mode.
     self:PushCommand("cmd_battle_prepa", {
         user_id = self.enemy.user_id,
         sync_crystal = self.enemy.cur_crystal,
-        last_oper_time = 0,
+        last_oper_time = os.time(),
         is_sacrifice = true,
     })
 
