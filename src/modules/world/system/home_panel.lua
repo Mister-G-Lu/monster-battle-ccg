@@ -16,6 +16,20 @@ function meta:ctor()
     arena_node:setVisible(false)
     self:addChild(arena_node)
     self.arena_node = arena_node
+
+    -- Campaign map (The Shadow Road) — the Play/Battle destination. The
+    -- campaign is served by the app's own offline service and fought on the
+    -- native battle engine; the stock PvE mission list is no longer the
+    -- entry point (kept only as a pcall fallback).
+    self.campaign_node = nil
+    local ok, campaign_node = pcall(function ()
+        return require("modules.world.system.campaign_panel").new()
+    end)
+    if ok and campaign_node then
+        campaign_node:setVisible(false)
+        self:addChild(campaign_node)
+        self.campaign_node = campaign_node
+    end
     -- Mail entry
     self.mail_btn = self:getChildByName("mailbox")
     -- new mail tips animation
@@ -103,6 +117,9 @@ end
 function meta:Update(elapsed_time)
     -- self.reward_tip_node:setVisible(daily_logic.login_reward > 0)
     self.arena_node:Update(elapsed_time)
+    if self.campaign_node then
+        self.campaign_node:Update(elapsed_time)
+    end
 end
 
 
@@ -152,10 +169,14 @@ function meta:RegisterWidgetEvent()
     ui_helper:AddClick(self.mail_btn, function ()
         mail_logic:Query()
     end)
-    -- PVE / Play
+    -- PVE / Play -> The Shadow Road campaign map
     if self.pve_btn then
         ui_helper:AddClick(self.pve_btn, function ()
-            pve_logic:ShowPve()
+            if self.campaign_node then
+                self.campaign_node:Show()
+            else
+                pve_logic:ShowPve()
+            end
         end)
     end
 

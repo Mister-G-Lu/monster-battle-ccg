@@ -48,7 +48,7 @@ No strict same-cost rarity upgrades found among level-1 collectible monsters.
 
 ## Special/tutorial cards
 
-Cards with `flags=0` are intentionally excluded from random reward pools and the web prototype's generated decks. They can remain extreme because they teach mechanics or act as scripted bosses.
+Cards with `flags=0` are intentionally excluded from random reward pools and the campaign.s generated decks. They can remain extreme because they teach mechanics or act as scripted bosses.
 
 | Card | Type | Rarity | Cost | HP | Attack | Abilities |
 |---|---|---|---:|---:|---:|---|
@@ -60,7 +60,7 @@ Cards with `flags=0` are intentionally excluded from random reward pools and the
 
 - The collectible level-1 monster set is not wildly pay-to-win on raw HP: Common/Rare averages sit close together at costs 1-4.
 - Legendary averages do jump at cost 3, so Legendary designs should be reviewed card-by-card and pushed toward conditional/choice-heavy effects instead of more HP plus more attack.
-- The worst apparent power-creep example is actually the `flags=0` tutorial card Vibranium Armor; Gerbip king has been moved out of the 1-cost slot and remains non-collectible. The bug was exposure: the web prototype treated special cards as normal random cards.
+- The worst apparent power-creep example is actually the `flags=0` tutorial card Vibranium Armor; Gerbip king has been moved out of the 1-cost slot and remains non-collectible. The bug was exposure: the old HTML prototype treated special cards as normal random cards.
 - The production offline reward pool is already curated; keep it that way and do not switch rewards to sample from all cards without applying `flags=1` and budget checks.
 
 ## Recommended next design pass

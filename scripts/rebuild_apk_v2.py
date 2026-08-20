@@ -27,6 +27,7 @@ JDK = "C:/Program Files/Java/jdk-17/bin"
 CHANGED = {
     "src/manager/network.lua": os.path.join(DECRYPTED, "manager", "network.lua"),
     "src/manager/offline_battle.lua": os.path.join(DECRYPTED, "manager", "offline_battle.lua"),
+    "src/manager/offline_battle_model.lua": os.path.join(DECRYPTED, "manager", "offline_battle_model.lua"),
     "src/manager/offline_server.lua": os.path.join(DECRYPTED, "manager", "offline_server.lua"),
     "src/logic/account/mu77_account.lua": os.path.join(DECRYPTED, "logic", "account", "mu77_account.lua"),
     "src/scenes/login_scene.lua": os.path.join(DECRYPTED, "scenes", "login_scene.lua"),
@@ -34,6 +35,16 @@ CHANGED = {
     "src/manager/global.lua": os.path.join(DECRYPTED, "manager", "global.lua"),
     "src/logic/login.lua": os.path.join(DECRYPTED, "logic", "login.lua"),
     "src/manager/data_template.lua": os.path.join(DECRYPTED, "manager", "data_template.lua"),
+    "src/logic/guide.lua": os.path.join(DECRYPTED, "logic", "guide.lua"),
+    "src/logic/battle.lua": os.path.join(DECRYPTED, "logic", "battle.lua"),
+    "src/modules/battle/match_panel.lua": os.path.join(DECRYPTED, "modules", "battle", "match_panel.lua"),
+    "src/modules/battle/battle_ui_panel.lua": os.path.join(DECRYPTED, "modules", "battle", "battle_ui_panel.lua"),
+    "src/manager/text_loader.lua": os.path.join(DECRYPTED, "manager", "text_loader.lua"),
+    "src/utils/csv.lua": os.path.join(DECRYPTED, "utils", "csv.lua"),
+    "src/manager/campaign_data.lua": os.path.join(DECRYPTED, "manager", "campaign_data.lua"),
+    "src/manager/campaign_data_generated.lua": os.path.join(DECRYPTED, "manager", "campaign_data_generated.lua"),
+    "src/manager/campaign_service.lua": os.path.join(DECRYPTED, "manager", "campaign_service.lua"),
+    "src/modules/world/system/campaign_panel.lua": os.path.join(DECRYPTED, "modules", "world", "system", "campaign_panel.lua"),
 }
 
 # ---------------------------------------------------------------------------

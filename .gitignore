@@ -1,5 +1,7 @@
 # Build artifacts
 build/decoded_apk/
+# Removed web shell (was the HTML campaign prototype — scrapped)
+build/web/
 build/English_offline_unsigned.apk
 build/English_offline_signed.apk
 build/English_offline_aligned.apk
@@ -31,7 +33,6 @@ English.apk
 
 # Encrypted Lua files (we track decrypted versions)
 *.mu
-!build/web/game.html
 
 # APK workspace temp files
 patch_server.py

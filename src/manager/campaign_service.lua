@@ -415,6 +415,9 @@ function M.info(save)
         vitality = save.vitality,
         bosses_slain = save.bosses_slain,
         complete = save.complete,
+        -- a pending first-clear recruit blocks the next battle until picked
+        -- or skipped (the campaign panel surfaces the draft chooser)
+        pending_recruit = save.pending_recruit,
     }
 end
 

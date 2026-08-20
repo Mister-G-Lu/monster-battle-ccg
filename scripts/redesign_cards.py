@@ -18,7 +18,7 @@ changes is the keyword/ability list, plus the "attack" value implied by the
 primary melee/ranged/magic value.
 
 Usage:
-    python3 scripts/redesign_cards.py            # rewrite CSV + web data + docs
+    python3 scripts/redesign_cards.py            # rewrite CSV + docs
     python3 scripts/redesign_cards.py --dry-run  # print a summary, change nothing
 """
 
@@ -36,8 +36,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CARD_CSV = ROOT / "csv_data" / "all_card_config.csv"
-WEB_JSON = ROOT / "build" / "web" / "game_data.json"
-WEB_HTML = ROOT / "build" / "web" / "game.html"
 AUDIT_DOC = ROOT / "docs" / "BALANCE_AUDIT.md"
 IDENTITY_DOC = ROOT / "docs" / "FACTION_IDENTITY.md"
 
@@ -378,42 +376,6 @@ def fix_dominance(monsters: list[dict]) -> int:
 
 
 # ---------------------------------------------------------------------------
-# Web prototype data
-# ---------------------------------------------------------------------------
-def build_web_data(rows: list[dict], pve: dict) -> dict:
-    cards = {}
-    for r in rows:
-        if not r.get("ID", "").strip().isdigit():
-            continue
-        powers = []
-        attack = 0
-        for i in (1, 2, 3):
-            name = (r.get(f"p{i}n") or "").strip().lower()
-            if name:
-                v = to_int(r.get(f"p{i}v"))
-                powers.append({"name": name, "value": v})
-                if name in ATTACK_KEYWORDS:
-                    attack = max(attack, v)
-        cards[str(r["ID"])] = {
-            "id": to_int(r["ID"]),
-            "name": r["name"],
-            "hp": to_int(r["hp"]),
-            "cost": to_int(r["cost"]),
-            "type": r["type"],
-            "kind": r["kind"],
-            "quality": r["quality"],
-            "level": to_int(r["level"]),
-            "flags": to_int(r["flags"]),
-            "score": to_int(r["score"]),
-            "attack": attack,
-            "res_path": r.get("res_path", ""),
-            "group_id": r.get("group_id", ""),
-            "powers": powers,
-        }
-    return {"cards": cards, "pve": pve}
-
-
-# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 def main() -> int:
@@ -469,28 +431,6 @@ def main() -> int:
 
     write_cards(rows, header)
     print(f"Wrote {CARD_CSV.relative_to(ROOT)}")
-
-    # --- web prototype data ---
-    existing_web = json.loads(WEB_JSON.read_text(encoding="utf-8"))
-    web = build_web_data(rows, existing_web.get("pve", {}))
-    WEB_JSON.write_text(json.dumps(web, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"Wrote {WEB_JSON.relative_to(ROOT)}")
-
-    # splice the embedded GAME_DATA blob inside game.html
-    html = WEB_HTML.read_text(encoding="utf-8")
-    blob = json.dumps(web, ensure_ascii=False, separators=(",", ":"))
-    new_html, n = re.subn(
-        r"const GAME_DATA = .*?;\n",
-        f"const GAME_DATA = {blob};\n",
-        html,
-        count=1,
-        flags=re.DOTALL,
-    )
-    if n != 1:
-        print("ERROR: could not locate `const GAME_DATA` in game.html", file=sys.stderr)
-        return 1
-    WEB_HTML.write_text(new_html, encoding="utf-8")
-    print(f"Wrote {WEB_HTML.relative_to(ROOT)}")
 
     # --- balance audit ---
     result = subprocess.run(

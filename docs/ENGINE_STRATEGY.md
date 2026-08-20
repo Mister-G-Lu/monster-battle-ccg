@@ -1,29 +1,43 @@
-# Engine strategy — one engine, two shells (decision)
+# Engine strategy — Android-only (decision, supersedes the web shell)
 
-Status: **decided for this phase.** This is PR C from `docs/NEXT_STEPS.md`
-(VP §8: decision first, no rewrite).
+Status: **decided.** The HTML/web shell has been **removed**; the game ships
+as the Android app alone.
 
-## Options
+## History
 
-| Route | What it is | Cost | Risk | Closeness to Android graphics |
-|---|---|---|---|---|
-| **(1) LuaJIT → WASM** | Compile `offline_battle.lua` / `offline_server.lua` with a WASI Lua and host it from the HTML page | High (tooling, FFI, Cocos bindings) | High — Cocos2d-x is not WASI | Mechanics 1:1; **rendering still HTML** unless we also port Cocos |
-| **(2) WebView / Capacitor wrapping the APK** | Ship the native binary inside a web wrapper | High for a *browser* page (no ARM libcocos in Chrome) | High — does not run as a static HTML file | Pixel-perfect **only on device**, not on the HTML host |
-| **(3) Thin JS port + canonical data + real APK art** *(current)* | Keep the already-ported battle JS; feed it `content/campaign_data.json` + extracted sprites | Low | Low — already shipping | Visual language of Android (frames, skill icons, maps); not the Cocos scene graph |
+| Phase | Route | Outcome |
+|---|---|---|
+| Prototype | HTML campaign ("The Shadow Road") + JS battle engine | Proved the campaign content, but the HTML battle was a parallel implementation of the native mechanics |
+| Interim | Route (3): thin JS port + canonical data + APK art | Kept one canonical campaign (`content/campaign_data.json`) across both hosts |
+| **Now** | **Android only** | The campaign (map, duel engine, powers, rewards) is fully native; the web shell and its JS battle engine are scrapped |
 
-## Recommendation
+## Why Android-only
 
-**Stay on route (3) for the HTML host.** Reasons:
+1. The user-facing client is the **Android app** (Cocos2d-x / LuaJIT). Its
+   battle scene is the polished interface; the HTML battle was "terrible"
+   and duplicated the Lua mechanics.
+2. The Shadow Road campaign is now served by the app's own offline service
+   (`campaign_service.lua`) and fought on the native battle engine
+   (`offline_battle.lua` hero-HP duel + scripted powers) — no web port to
+   keep in sync.
+3. Routes (1) LuaJIT→WASM and (2) WebView/Capacitor are **no-go**: there is
+   no HTML host left to justify them.
 
-1. The user-facing deliverable is an **HTML page**. Routes (1) and (2) do not put `libcocos2dlua.so` in a browser without a multi-month spike.
-2. The JS battle engine is already a port of `offline_battle.lua` (items, keywords, AI). Mechanics bugs still have a canonical Lua fix; the web port tracks it.
-3. Presentation parity (PR D) closes the visual gap using the **same art the APK already ships** (`build/web/assets/`), which is the highest-leverage way to “feel like Android” in HTML.
-4. Route (1) remains the long-term *mechanics* unification if/when a WASI Lua spike is funded. First spike would be: run `offline_battle.lua` under `wasmer` with a fake `cmd_battle` sink, no UI.
+## Current architecture
 
-## Go / no-go
+```
+content/campaign_data.json            ← canonical campaign (data only)
+        │  scripts/refresh_campaign_data.py
+        └─► src/manager/campaign_data_generated.lua   (native Lua tables)
 
-- **GO** presentation parity + canonical campaign on the HTML shell (this work).
-- **NO-GO** speculative WASM or Capacitor this slice (NEXT_STEPS “out of scope”).
-- **Revisit** WASM only after a documented spike that runs one `w1` battle headlessly under Lua-in-WASM.
+csv_data/all_card_config.csv          ← canonical cards/items
+        │  scripts/redesign_cards.py / data_template.lua
+        └─► src/manager/data_template.lua             (native card config)
 
-Recorded in `docs/CONSOLIDATION_PLAN.md` §5 as the chosen interim.
+English_offline.apk                   ← the client (Android)
+src/manager/offline_battle.lua        ← canonical battle mechanics (+ campaign duel)
+src/manager/campaign_service.lua      ← canonical campaign service
+src/modules/world/system/campaign_panel.lua  ← native campaign map UI
+```
+
+One campaign, one engine, one client.
