@@ -28,6 +28,8 @@ local M = {}
 M.BASE_VITALITY = 30
 M.VITALITY_CAP = 38      -- 30 + 4 bosses * 2, same ceiling as the web shell
 M.DRAFT_SIZE = 3
+M.DECK_MONSTERS = 6      -- battle deck: at most 6 creatures
+M.DECK_EQUIPS = 6        -- battle deck: at most 6 equipment/armor/consume
 M.REPLAY_EXP = 5         -- replaying a cleared node
 M.SKIP_RECRUIT_EXP = 15  -- taking EXP instead of a recruit
 
@@ -209,10 +211,40 @@ function M.enemy_deck_ids(node, cards)
     return campaign.enemy_model_ids(node, cards)
 end
 
--- The player's campaign deck: every collected card.
-function M.player_deck_ids(save)
+local function last_n(list, n)
+    if #list <= n then return list end
     local out = {}
+    for i = #list - n + 1, #list do
+        out[#out + 1] = list[i]
+    end
+    return out
+end
+
+-- The player's campaign battle deck: up to DECK_MONSTERS creatures and
+-- DECK_EQUIPS equipment. Recruits are appended to the collection, so the
+-- newest cards win the 6+6 slots (collection still grows for later picks).
+function M.player_deck_ids(save, cards)
+    if not cards then
+        local out = {}
+        for _, id in ipairs(save.collection) do
+            out[#out + 1] = id
+        end
+        return out
+    end
+    local monsters, items = {}, {}
     for _, id in ipairs(save.collection) do
+        local c = M.card(cards, id)
+        if c and c.type == "monster" then
+            monsters[#monsters + 1] = id
+        else
+            items[#items + 1] = id
+        end
+    end
+    local out = {}
+    for _, id in ipairs(last_n(monsters, M.DECK_MONSTERS)) do
+        out[#out + 1] = id
+    end
+    for _, id in ipairs(last_n(items, M.DECK_EQUIPS)) do
         out[#out + 1] = id
     end
     return out

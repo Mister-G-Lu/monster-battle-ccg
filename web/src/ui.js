@@ -1,5 +1,7 @@
-// ui.js — DOM rendering for the campaign map and battle screens.
+// ui.js — DOM rendering for the campaign map, battle, and recruit-draft screens.
 // Reads snapshots from the engine bridge; sends player actions back.
+
+import { luaList } from './lua_list.js';
 
 const KIND_COLORS = {
   war: '#c0392b', fortune: '#f1c40f', balance: '#8e44ad',
@@ -18,6 +20,7 @@ export class UI {
     this.engine = engine;
     this.screen = 'campaign';
     this.activeNode = null;
+    this.recruitNodeId = null;
   }
 
   render() {
@@ -29,6 +32,12 @@ export class UI {
   // ---- Campaign map ------------------------------------------------------
   renderCampaign() {
     const info = this.engine.campaignInfo();
+    // A first-clear recruit blocks the next fight — same rule as the native map.
+    if (info.pending_recruit) {
+      this.recruitNodeId = info.pending_recruit;
+      this.renderRecruit();
+      return;
+    }
     const wrap = el('div', 'campaign');
 
     const header = el('div', 'topbar');
@@ -38,6 +47,7 @@ export class UI {
     stats.appendChild(el('span', 'stat', `⚔ Wins ${info.wins}`));
     stats.appendChild(el('span', 'stat', `☠ Losses ${info.losses}`));
     stats.appendChild(el('span', 'stat', `👑 Bosses ${info.bosses_slain}`));
+    stats.appendChild(el('span', 'stat', `🂠 Deck ${info.collection_size}`));
     header.appendChild(stats);
     wrap.appendChild(header);
 
@@ -75,6 +85,10 @@ export class UI {
             this.activeNode = node;
             this.screen = 'battle';
             this.render();
+          } else {
+            // startBattle refuses a pending recruit (and other errors).
+            // Re-render so a pending draft surfaces instead of a silent no-op.
+            this.render();
           }
         };
         track.appendChild(nc);
@@ -89,6 +103,14 @@ export class UI {
   // ---- Battle ------------------------------------------------------------
   renderBattle() {
     const s = this.engine.battleState();
+    if (s.is_over && s.winner === 'player') {
+      const info = this.engine.campaignInfo();
+      if (info.pending_recruit) {
+        this.recruitNodeId = info.pending_recruit;
+        this.renderRecruit();
+        return;
+      }
+    }
     const wrap = el('div', 'battle');
 
     // Enemy commander
@@ -135,8 +157,6 @@ export class UI {
       controls.appendChild(banner);
       const back = el('button', 'btn primary', 'Return to the Road');
       back.onclick = () => {
-        // resolve any pending recruit by skipping for now (draft UI is a next step)
-        try { this.engine.skipRecruit(); } catch (e) {}
         this.screen = 'campaign';
         this.render();
       };
@@ -155,6 +175,68 @@ export class UI {
       controls.appendChild(flee);
     }
     wrap.appendChild(controls);
+
+    this.root.appendChild(wrap);
+  }
+
+  // First-clear 3-card draft. Collection IS the deck — picking here is what
+  // keeps later acts winnable. Skip takes +15 EXP instead.
+  renderRecruit() {
+    const nodeId = this.recruitNodeId;
+    const offers = luaList(this.engine.recruitOffers(nodeId));
+    const wrap = el('div', 'recruit');
+
+    wrap.appendChild(el('div', 'title', 'New recruit — pick a card'));
+    wrap.appendChild(el('div', 'hint',
+      'Collection IS your deck. This card joins every later battle.'));
+
+    if (offers.length === 0) {
+      wrap.appendChild(el('div', 'hint', 'No recruits available.'));
+      const cont = el('button', 'btn primary', 'Continue');
+      cont.onclick = () => {
+        this.engine.skipRecruit();
+        this.screen = 'campaign';
+        this.recruitNodeId = null;
+        this.render();
+      };
+      wrap.appendChild(cont);
+      this.root.appendChild(wrap);
+      return;
+    }
+
+    const row = el('div', 'recruit-offers');
+    offers.forEach((card) => {
+      const btn = el('button', 'card recruit-card');
+      btn.classList.add(`k-${card.kind || 'none'}`);
+      btn.dataset.cardId = String(card.id);
+      btn.appendChild(el('div', 'card-cost', `💎${card.cost ?? 0}`));
+      btn.appendChild(el('div', 'card-name', card.name || `#${card.id}`));
+      btn.appendChild(el('div', 'card-type', card.type || 'card'));
+      if (card.type === 'monster') {
+        const line = el('div', 'monster-stats');
+        if (card.attack != null) line.appendChild(el('span', 'atk', `⚔${card.attack}`));
+        line.appendChild(el('span', 'hp', `❤${card.hp ?? 0}`));
+        btn.appendChild(line);
+      }
+      if (card.kind) btn.appendChild(el('div', 'card-kind', card.kind));
+      btn.onclick = () => {
+        this.engine.recruit(nodeId, card.id);
+        this.screen = 'campaign';
+        this.recruitNodeId = null;
+        this.render();
+      };
+      row.appendChild(btn);
+    });
+    wrap.appendChild(row);
+
+    const skip = el('button', 'btn ghost skip-recruit', 'Skip (+15 EXP)');
+    skip.onclick = () => {
+      this.engine.skipRecruit();
+      this.screen = 'campaign';
+      this.recruitNodeId = null;
+      this.render();
+    };
+    wrap.appendChild(skip);
 
     this.root.appendChild(wrap);
   }

@@ -1182,7 +1182,7 @@ offline_server.handlers["req_campaign_battle_start"] = function(self, req)
     end
 
     local cards = self:CampaignCardIndex()
-    local own_deck = self:DeckFromModelIds(campaign_service.player_deck_ids(csave), self.save.user_id)
+    local own_deck = self:DeckFromModelIds(campaign_service.player_deck_ids(csave, cards), self.save.user_id)
     local enemy_deck = self:DeckFromModelIds(campaign_service.enemy_deck_ids(node, cards), "enemy")
     if #enemy_deck.monster_list == 0 then
         return "campaign_deck_empty"

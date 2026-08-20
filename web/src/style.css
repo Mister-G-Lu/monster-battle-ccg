@@ -118,3 +118,12 @@ body {
   font-weight: 700; cursor: pointer; }
 .btn.primary { background: linear-gradient(90deg, var(--accent), #6fd0ff); color: #05203a; }
 .btn.ghost { background: transparent; color: var(--muted); border: 1px solid #333c4a; }
+
+/* Recruit draft (first-clear 3-card chooser) */
+.recruit { display: flex; flex-direction: column; gap: 14px; padding: 8px 4px 16px; }
+.recruit .title { text-align: center; font-size: 22px; font-weight: 700; color: var(--gold); }
+.recruit-offers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.recruit-card { min-height: 148px; }
+.recruit-card .card-kind { font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--muted); }
+.skip-recruit { margin-top: 4px; }

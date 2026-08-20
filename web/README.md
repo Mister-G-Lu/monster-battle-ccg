@@ -54,12 +54,22 @@ npm run preview
   native engine. Deploy monsters / equip / consume from hand, sacrifice for
   crystals, end turn to resolve combat (enemy AI + combat all run in the Lua
   engine). Win/lose is decided by the engine.
+- **Recruit draft** — after a node's first clear, pick one of three cards
+  (or skip for +15 EXP). The picked card joins the collection, which IS the
+  deck for every later battle.
+
+## Tests
+
+```bash
+npm test                 # UI chooser + luaList (node --test, no WASM)
+npm run test:bridge      # real engine in WASM (needs setup_test_env.py fixtures)
+```
+
+From the repo root, `make verify` runs the static checks, the UI tests, and the
+WASM recruit-draft harness (Lua campaign suites run when `luajit` is installed).
 
 ## Next steps
 
-- Recruit-draft chooser UI after a first clear (bridge methods
-  `recruit_offers` / `recruit` / `skip_recruit` already exist; the battle-over
-  screen currently auto-skips).
 - Sprite/atlas art extracted from the APK instead of text cards.
 - Scripted boss-power callouts (the engine already emits them on `cmd_battle`).
 - PWA manifest + service worker for offline/installable parity with the app.

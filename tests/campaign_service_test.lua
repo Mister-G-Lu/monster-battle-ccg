@@ -47,10 +47,26 @@ section("1. Starter + defaults")
 local save = campaign_service.default_save()
 campaign_service.ensure_starter(save)
 check(save.vitality == 30, "base vitality 30")
-check(#save.collection == 21, "starter collection has 21 cards (" .. #save.collection .. ")")
+check(#save.collection == 12, "starter collection has 12 cards (" .. #save.collection .. ")")
+local starter_m, starter_i = campaign.split_collection(save.collection, csv_cards)
+check(#starter_m == campaign_service.DECK_MONSTERS, "starter has 6 monsters (got " .. #starter_m .. ")")
+check(#starter_i == campaign_service.DECK_EQUIPS, "starter has 6 equipment (got " .. #starter_i .. ")")
+local starter_deck = campaign_service.player_deck_ids(save, cards)
+check(#starter_deck == 12, "battle deck is 6+6 on a fresh save")
+do
+    local overflow = campaign_service.default_save()
+    campaign_service.ensure_starter(overflow)
+    for _ = 1, 8 do
+        overflow.collection[#overflow.collection + 1] = 110011
+    end
+    local d = campaign_service.player_deck_ids(overflow, cards)
+    local dm, di = campaign.split_collection(d, csv_cards)
+    check(#dm == campaign_service.DECK_MONSTERS, "battle deck caps at 6 monsters after extra recruits")
+    check(#di == campaign_service.DECK_EQUIPS, "battle deck caps at 6 equipment after extra recruits")
+end
 check(save.starter_granted == true, "starter granted once")
 campaign_service.ensure_starter(save)
-check(#save.collection == 21, "ensure_starter is idempotent")
+check(#save.collection == 12, "ensure_starter is idempotent")
 local w1 = campaign_service.node_by_id("w1")
 local w5 = campaign_service.node_by_id("w5")
 check(w1 ~= nil and w1.name == "Forest Trail", "w1 resolved from canonical data")
@@ -84,6 +100,10 @@ local before = #save.collection
 check(campaign_service.apply_recruit(save, offers[1]) == true, "valid recruit accepted")
 check(#save.collection == before + 1, "collection grew by one")
 check(save.pending_recruit == nil, "pending recruit cleared after pick")
+local deck_after = campaign_service.player_deck_ids(save, cards)
+local mons_after, items_after = campaign.split_collection(deck_after, csv_cards)
+check(#mons_after <= campaign_service.DECK_MONSTERS, "battle deck stays at most 6 monsters")
+check(#items_after <= campaign_service.DECK_EQUIPS, "battle deck stays at most 6 equipment")
 
 -- replay: no recruit, small EXP
 local res2 = campaign_service.apply_victory(save, w1)
@@ -269,7 +289,7 @@ if fixtures_ready then
     -- campaign info
     local info = server.handlers["req_campaign_info"](server)
     check(info ~= nil and info.current_node == "w1", "req_campaign_info: starts at w1")
-    check(#info.collection == 21, "req_campaign_info: starter collection present")
+    check(#info.collection == 12, "req_campaign_info: starter collection present")
     check(info.vitality == 30, "req_campaign_info: vitality 30")
 
     -- a locked node refuses to start
@@ -335,7 +355,7 @@ if fixtures_ready then
     local offers = server.handlers["req_campaign_recruit_offers"](server, { node_id = "w1" })
     check(offers ~= nil and #offers.offers == 3, "recruit offers served (" .. tostring(offers and #offers.offers) .. ")")
     local rec = server.handlers["req_campaign_recruit"](server, { card_id = offers.offers[1] })
-    check(rec ~= nil and #rec.collection == 22, "recruit applied server-side (collection " .. tostring(rec and #rec.collection) .. ")")
+    check(rec ~= nil and #rec.collection == 13, "recruit applied server-side (collection " .. tostring(rec and #rec.collection) .. ")")
 
     -- cmd_battle_start carried the canonical node id
     local found_node = false

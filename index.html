@@ -3,45 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monster Battle CCG — Offline Android Build</title>
-<meta name="description" content="Monster Battle CCG: the fully offline single-player Android build with the Shadow Road campaign. The game runs in the Android app — no browser version.">
+<title>Monster Battle — The Shadow Road</title>
+<meta name="description" content="Play The Shadow Road in your browser — the real Lua engine in WebAssembly — or download the offline Android APK.">
+<meta name="theme-color" content="#0e1116">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    background: #0f0f1c; color: #eceaf4;
+    background: radial-gradient(1200px 800px at 50% -10%, #1b2330, #0e1116);
+    color: #e6ebf2;
     font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
   main { max-width: 560px; padding: 40px 24px; text-align: center; }
-  h1 { font-size: 1.6em; color: #e94560; margin-bottom: 12px; }
-  p { color: #9a9ab4; line-height: 1.6; margin-bottom: 10px; }
+  h1 { font-size: 1.7em; color: #e8c15a; margin-bottom: 8px; letter-spacing: 1px; }
+  .sub { color: #8a94a6; margin-bottom: 22px; font-size: 0.95em; }
+  p { color: #9a9ab4; line-height: 1.6; margin-bottom: 12px; }
+  .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 22px 0 10px; }
   a.btn {
-    display: inline-block; margin-top: 18px; padding: 14px 28px;
-    background: #e94560; color: #fff; text-decoration: none;
-    border-radius: 10px; font-weight: 700;
+    display: inline-block; padding: 14px 26px;
+    border-radius: 10px; font-weight: 700; text-decoration: none;
   }
+  a.btn.primary { background: linear-gradient(90deg, #4aa3ff, #6fd0ff); color: #05203a; }
+  a.btn.ghost { background: transparent; color: #e6ebf2; border: 1px solid #333c4a; }
   a.btn:active { opacity: .85; }
+  .note { font-size: 0.85em; color: #8a94a6; }
   code { color: #53d769; font-size: .9em; }
 </style>
 </head>
 <body>
 <main>
-  <h1>Monster Battle CCG — Offline Android Build</h1>
+  <h1>The Shadow Road</h1>
+  <div class="sub">Monster Battle CCG — play in the browser or on Android</div>
   <p>
-    This project is an <strong>Android-only</strong> offline build of the English Card
-    Battle game. The Shadow Road campaign, all battles, and the card game itself
-    run inside the Android app — there is no web/browser version.
+    A 4-act campaign of commander-HP duels on the <strong>real Lua engine</strong>
+    (the same rules as the APK). Win a node, pick a recruit — collection is your
+    6-monster / 6-equipment deck.
   </p>
-  <p>
-    Install <code>English_offline.apk</code> from the repository root on an Android
-    device (allow unknown sources), then launch the app. It works fully offline,
-    no account or Internet connection required.
+  <div class="actions">
+    <a class="btn primary" id="play" href="./web/">Play in browser</a>
+    <a class="btn ghost" href="English_offline.apk" download>Download APK</a>
+  </div>
+  <p class="note">
+    Browser: campaign map, battles, and the 3-card recruit draft.
+    Android: install <code>English_offline.apk</code> (allow unknown sources) — fully offline, no account.
   </p>
-  <p>
-    Source and build instructions live in the
-    <a href="https://github.com/Mister-G-Lu/monster-battle-ccg" style="color:#3498db">GitHub repository</a>.
-  </p>
-  <a class="btn" href="English_offline.apk" download>Download English_offline.apk</a>
 </main>
 </body>
 </html>
