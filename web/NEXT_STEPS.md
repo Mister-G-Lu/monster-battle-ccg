@@ -21,32 +21,19 @@ console `localStorage.removeItem('mb_save')`.
 
 ---
 
-## 1. Recruit-draft chooser UI  (highest value, low effort)
+## 1. Recruit-draft chooser UI  ✅ done
 
-**Why:** after a node's *first* clear the campaign opens a 3-card recruit draft
-("collection IS your deck" — it's what keeps later acts winnable). Today the
-victory screen **auto-skips** it, so the web player can't grow their deck.
-
-**Already wired in the bridge** (`web/lua/web_bridge.lua`):
-- `recruit_offers(node_id)` → `[{id, name}, …]`
-- `recruit(node_id, card_id)` → bool
-- `skip_recruit()`
-
-**Do:**
-1. In `src/ui.js` `renderBattle()`, when `s.is_over && s.winner === 'player'`,
-   check `campaignInfo().pending_recruit === node.id`.
-2. If pending, render a draft screen: call `engine.recruitOffers(node.id)`,
-   show the 3 cards as buttons → `engine.recruit(node.id, card.id)`, plus a
-   "Skip" → `engine.skipRecruit()`. Then return to the map.
-3. Verify the picked card shows up in later battles' hands.
-
-**Note:** `recruit_offers` in the bridge currently returns names via
-`campaign_service.card(nil, id)`; confirm that resolves real card names (it may
-need `data_template.card_config[id].name` as a fallback).
+After a node's *first* clear the campaign opens a 3-card recruit draft
+("collection IS your deck" — it's what keeps later acts winnable). The victory
+screen (and the map, if a draft is still pending) renders the chooser:
+`engine.recruitOffers(node.id)` → pick `engine.recruit(node.id, card.id)` or
+`Skip (+15 EXP)` → `engine.skipRecruit()`. Card names resolve from
+`data_template.card_config`. Covered by `web/tests/ui.test.mjs`,
+`tests/web_bridge_test.lua`, and `web/tests/bridge_recruit.mjs`.
 
 ---
 
-## 2. Card art from the APK  (visual parity)
+## 2. Card art from the APK  (visual parity, now highest value)
 
 **Why:** cards/monsters are text tiles right now. The APK ships the real sprites.
 
@@ -97,12 +84,16 @@ doesn't surface them, and combat currently "snaps" between states.
 
 **Why:** guarantee the web build's mechanics never drift from the APK.
 
-**Do:**
+**Done so far:** `web/tests/bridge_recruit.mjs` boots the real engine in WASM and
+asserts the recruit-draft API (real card names, pick grows the collection, skip
+via the server handler, invalid picks rejected). `tests/web_bridge_test.lua`
+covers the same path under LuaJIT. `make verify` runs the WASM harness.
+
+**Still to do:**
 1. Reuse the existing Lua tests (`tests/campaign_*_test.lua`) as the oracle.
-2. Add a Node script (like the verification used during the spike) that boots the
-   engine in WASM and asserts the same invariants: 19 nodes, 30/14 hero HP on w1,
+2. Assert the same battle invariants in WASM: 19 nodes, 30/14 hero HP on w1,
    deterministic battle outcome for a fixed RNG seed + scripted moves.
-3. Wire it into CI so a broken bridge/shim fails the build.
+3. Wire a full CI job so a broken bridge/shim fails the build.
 
 ---
 

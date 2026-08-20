@@ -41,7 +41,7 @@ for _, id in ipairs(ids) do
 end
 
 local mons, items = campaign.split_collection(campaign.STARTER_COLLECTION, cards)
-check(#mons > 0 and #items > 0, "starter splits into monsters and items")
+check(#mons == 6 and #items == 6, "starter is 6 monsters + 6 equipment (got " .. #mons .. "+" .. #items .. ")")
 
 local enemy = campaign.enemy_model_ids(w1, cards)
 check(#enemy == 9, "w1 enemy deck ids")

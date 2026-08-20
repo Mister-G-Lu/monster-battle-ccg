@@ -13,16 +13,11 @@ A fully offline, single-player version of the English Card Battle game — origi
 - **Patches** Java-level SDK calls in smali to prevent crashes on Android 7+
 - **Adds** a splash/loading screen for immediate visual feedback
 
-> The earlier HTML prototype (web campaign + JS battle engine + PWA shell) has been **scrapped** — the HTML battle was a poor parallel of the native mechanics. There is no browser version; the Android app is the client. `index.html` is now a simple landing page that points at the APK.
->
-> **A real browser version is feasible, though** — not by reimplementing the rules
-> in JS (the mistake above), but by running the *actual Lua engine* in WebAssembly
-> so the mechanics are byte-for-byte identical to the APK. This was proven with a
-> spike (`web-poc/prove_engine.mjs`): the unmodified engine boots in WASM and loads
-> all 1,595 cards + the 19-node campaign. See
-> [`docs/BROWSER_VERSION_RESEARCH.md`](docs/BROWSER_VERSION_RESEARCH.md) for the
-> full landscape (APK-in-browser options, dead ends, and the recommended
-> Wasmoon-based architecture).
+> The earlier HTML prototype (web campaign + JS battle engine) was **scrapped**
+> because it reimplemented the rules. The current browser build in `web/` runs
+> the **actual Lua engine in WebAssembly**, so campaign battles and the 3-card
+> recruit draft are the same source of truth as the APK. The repo-root
+> `index.html` (GitHub Pages) offers **Play in browser** plus the APK download.
 
 ## Quick Start
 
@@ -121,6 +116,8 @@ luajit tests/level_w1_test.lua        # native w1 slice: canonical pool → deck
 luajit tests/campaign_service_test.lua # native campaign service + w1 end-to-end through the server
 luajit tests/campaign_battle_test.lua # hero-HP duel end-to-end (w1 skirmish + w5 boss powers)
 luajit tests/guide_battle_test.lua    # tutorial battle end-to-end regression (client side)
+luajit tests/web_bridge_test.lua      # browser bridge: recruit-draft names, pick, skip
+cd web && npm test                    # UI chooser + luaList unit tests (node --test)
 ```
 
 `tests/campaign_battle_test.lua` boots the real offline server and plays
@@ -176,11 +173,13 @@ monster-battle-ccg/
 │   ├── level_w1_test.lua         # Native w1 slice (canonical pool → decks, win/loss)
 │   ├── campaign_service_test.lua # Native campaign service + w1 end-to-end
 │   ├── campaign_battle_test.lua  # Hero-HP campaign duels end-to-end (w1 + w5)
+│   ├── web_bridge_test.lua       # Browser web_bridge recruit-draft (names/pick/skip)
 │   ├── campaign_test.lua         # Canonical campaign data checks
 │   ├── campaign_balance_diag.lua # Node HP / deck-size sanity
 │   ├── guide_battle_test.lua     # Tutorial battle client-side end-to-end regression
 │   ├── campaign_data_test.py     # Canonical JSON vs generated module (python)
 │   └── static_checks.py          # Fast repo-wide checks (no LuaJIT needed)
+├── web/                          # Browser build (real Lua engine in WASM)
 ├── csv_data/                     # Game configuration (plain CSV)
 ├── content/campaign_data.json    # Canonical Shadow Road campaign (single source)
 ├── English_offline.apk           # Final installable APK (~55 MB) — install THIS one

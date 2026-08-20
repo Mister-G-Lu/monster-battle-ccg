@@ -8,7 +8,9 @@
     "prepare-assets": "python3 scripts/prepare_web.py",
     "dev": "npm run prepare-assets && vite",
     "build": "npm run prepare-assets && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test tests/lua_list.test.mjs tests/ui.test.mjs",
+    "test:bridge": "node tests/bridge_recruit.mjs"
   },
   "dependencies": {
     "wasmoon": "1.16.0"

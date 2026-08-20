@@ -6,10 +6,17 @@ import { LuaFactory } from 'wasmoon';
 // Let Vite resolve/serve the wasm binary and hand wasmoon an explicit URL,
 // instead of relying on wasmoon's default path resolution in the browser.
 import wasmUrl from 'wasmoon/dist/glue.wasm?url';
+import { luaList } from './lua_list.js';
 
 // The decrypted Lua tree + plain CSVs are copied into /public by
 // scripts/prepare_web.py and served statically. We fetch a manifest of the
 // files, mount them into the WASM VFS, then boot.
+
+const BASE = import.meta.env.BASE_URL || '/';
+function assetUrl(path) {
+  const prefix = BASE.endsWith('/') ? BASE : `${BASE}/`;
+  return prefix + String(path).replace(/^\//, '');
+}
 
 async function fetchText(url) {
   const r = await fetch(url);
@@ -90,19 +97,19 @@ export class Engine {
     this.lua = await factory.createEngine();
 
     onProgress('Fetching game files…');
-    const manifest = await (await fetch('/game-manifest.json')).json();
+    const manifest = await (await fetch(assetUrl('game-manifest.json'))).json();
 
     onProgress(`Mounting ${manifest.lua.length} Lua files…`);
     for (const rel of manifest.lua) {
-      const content = await fetchText(`/game/${rel}`);
+      const content = await fetchText(assetUrl(`game/${rel}`));
       await factory.mountFile(`/game/${rel}`, content);
     }
     // the bridge itself
-    await factory.mountFile('/game/web_bridge.lua', await fetchText('/web_bridge.lua'));
+    await factory.mountFile('/game/web_bridge.lua', await fetchText(assetUrl('web_bridge.lua')));
 
     onProgress(`Mounting ${manifest.csv.length} data tables…`);
     for (const rel of manifest.csv) {
-      const content = await fetchText(`/csv/${rel}`);
+      const content = await fetchText(assetUrl(`csv/${rel}`));
       await factory.mountFile(`/csv/${rel}`, content);
     }
 
@@ -136,7 +143,7 @@ export class Engine {
   sacrifice(pos) { this.bridge.sacrifice(pos); }
   playCard(pos) { return this.bridge.play_card(pos); }
   endTurn() { this.bridge.end_turn(); this._persist(); }
-  recruitOffers(id) { return this.bridge.recruit_offers(id); }
+  recruitOffers(id) { return luaList(this.bridge.recruit_offers(id)); }
   recruit(id, card) { const r = this.bridge.recruit(id, card); this._persist(); return r; }
-  skipRecruit() { this.bridge.skip_recruit(); this._persist(); }
+  skipRecruit() { const r = this.bridge.skip_recruit(); this._persist(); return r; }
 }

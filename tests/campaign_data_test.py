@@ -67,7 +67,14 @@ def main() -> int:
     w1 = next(n for n in nodes if n["id"] == "w1")
     if w1["name"] != "Forest Trail" or w1["hp"] != 14:
         errors.append("w1 identity mismatch")
+    starter = CANON["starterCollection"]
+    if len(starter) != 12:
+        errors.append(f"starter collection should be 12 cards (6+6), got {len(starter)}")
     cards = load_cards()
+    mons = [i for i in starter if cards.get(i, {}).get("type") == "monster"]
+    equips = [i for i in starter if cards.get(i, {}).get("type") != "monster"]
+    if len(mons) != 6 or len(equips) != 6:
+        errors.append(f"starter should be 6 monsters + 6 equipment (got {len(mons)}+{len(equips)})")
     ids = resolve_pool(w1["pool"], cards)
     if len(ids) != 9:
         errors.append(f"w1 pool size {len(ids)}")

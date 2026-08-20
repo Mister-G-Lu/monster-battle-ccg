@@ -8,7 +8,7 @@
 -- of hand-maintaining its own copies.
 local M = {}
 
-M.STARTER_COLLECTION = { 110011, 110011, 110051, 110041, 120021, 120021, 120031, 130031, 130031, 130041, 140021, 140021, 140031, 150011, 150011, 150061, 31001, 21001, 40001, 40003, 40012 }
+M.STARTER_COLLECTION = { 110011, 120021, 130031, 140021, 150011, 140031, 31001, 34001, 21001, 24001, 40003, 40012 }
 
 M.TOKENS = {
     sapling = { uid = "tok_sapling", name = "Sapling", kind = "nature", cost = 1, hp = 1, type = "monster", quality = "normal", level = 1, res_path = "", power_list = { { name = "melee", value = 1, target_type = "enemy", type = "passive" } } },

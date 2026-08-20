@@ -8,6 +8,7 @@
 local network         = require "manager.network"
 local campaign_data   = require "manager.campaign_data"
 local campaign_service = require "manager.campaign_service"
+local data_template   = require "manager.data_template"
 
 local B = {}
 
@@ -187,15 +188,38 @@ function B.end_turn()
     if b and not b.is_over then b:HandleAttack({}) end
 end
 
--- Recruit draft (after a first clear)
+-- Recruit draft (after a first clear). Names come from data_template.card_config
+-- (the same index the native campaign_panel uses) — never a nil card table.
+local function card_snapshot(id)
+    local key = tostring(id)
+    local cfg = data_template.card_config and (data_template.card_config[key] or data_template.card_config[id])
+    local n = campaign_service.normalize_card(cfg)
+    if not n then
+        return { id = tonumber(id) or id, name = "Card " .. key }
+    end
+    local name = n.name
+    if not name or name == "" or name == key then
+        name = "Card " .. key
+    end
+    return {
+        id      = n.id,
+        name    = name,
+        type    = n.type,
+        cost    = n.cost or 0,
+        hp      = n.hp or 0,
+        kind    = n.kind or "",
+        quality = n.quality or "normal",
+        attack  = n.attack or 0,
+        level   = n.level or 1,
+    }
+end
+
 function B.recruit_offers(node_id)
     local out = {}
     network:Send("req_campaign_recruit_offers", { node_id = node_id }, function(result, recv)
         if result == "success" and recv and recv.offers then
-            local cards = offline_server:GetCampaignSave().collection
             for _, id in ipairs(recv.offers) do
-                local info = campaign_service.card(nil, id) or {}
-                out[#out + 1] = { id = id, name = info.name or ("Card " .. tostring(id)) }
+                out[#out + 1] = card_snapshot(id)
             end
         end
     end)
@@ -210,9 +234,11 @@ function B.recruit(node_id, card_id)
 end
 
 function B.skip_recruit()
-    local save = offline_server:GetCampaignSave()
-    campaign_service.skip_recruit(save)
-    offline_server:Save()
+    local ok = false
+    network:Send("req_campaign_skip_recruit", {}, function(result)
+        ok = (result == "success")
+    end)
+    return ok
 end
 
 return B
