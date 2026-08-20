@@ -17,7 +17,7 @@ local BATTLE_GUIDE_FUNC = {
             local is_own = user_logic.user_id == event_info.src_user_id
             local card = battle_logic.enemy_player:GetHandCard(event_info.src_hand_pos)
 
-            if not is_own then
+            if not is_own and card then
                 if tonumber(card.uid) == trigger_event.trigger_monster_id then
                     battle_logic:DispatchEvent("update_dialogue", is_own, trigger_event)
                     trigger_event.trigger_command = nil
@@ -38,8 +38,8 @@ local BATTLE_GUIDE_FUNC = {
             local is_own = user_logic.user_id == event_info.src_user_id
             local card = battle_logic.own_player:GetHandCard(event_info.src_hand_pos)
 
-            if is_own then
-                for _, power in pairs(card.power_list) do
+            if is_own and card then
+                for _, power in pairs(card.power_list or {}) do
                     if power.name == trigger_event.trigger_condition and event_info.desc_slot_pos ~= 1 then
                         battle_logic:DispatchEvent("update_dialogue", is_own, trigger_event)
                         trigger_event.trigger_command = nil
@@ -53,8 +53,8 @@ local BATTLE_GUIDE_FUNC = {
             local is_own = user_logic.user_id == event_info.src_user_id
             local card = battle_logic.own_player:GetHandCard(event_info.src_hand_pos)
 
-            if is_own then
-                for _, power in pairs(card.power_list) do
+            if is_own and card then
+                for _, power in pairs(card.power_list or {}) do
                     if power.name == trigger_event.trigger_condition and event_info.desc_slot_pos == 1 then
                         battle_logic:DispatchEvent("update_dialogue", is_own, trigger_event)
                         trigger_event.trigger_command = nil
@@ -68,6 +68,9 @@ local BATTLE_GUIDE_FUNC = {
 
                 if not battle_logic.is_own then
                     local battle_slot = battle_logic.enemy_player:GetBattleCard(event.src_pos)
+                    if not battle_slot or not battle_slot.monster then
+                        return
+                    end
                     local card = battle_slot.monster
 
                     if tonumber(card.uid) == trigger_event.trigger_monster_id then
@@ -89,12 +92,12 @@ local BATTLE_GUIDE_FUNC = {
         ["cmd_battle_move_func"] = function(trigger_event, event_info)
             if not battle_logic.is_own then
                 local battle_slot = battle_logic.enemy_player:GetBattleCard(event_info.desc_slot_pos)
-                if battle_slot then
+                if battle_slot and battle_slot.monster then
                     local monster_card = battle_slot.monster
                     local hand_card = battle_logic.enemy_player:GetHandCard(event_info.src_hand_pos)
 
                     local monster_condition = trigger_event.trigger_monster_id == tonumber(monster_card.uid)
-                    local item_condition = trigger_event.trigger_item_id == tonumber(hand_card.uid)
+                    local item_condition = hand_card and trigger_event.trigger_item_id == tonumber(hand_card.uid)
 
                     if monster_condition and item_condition then
                         battle_logic:DispatchEvent("update_dialogue", battle_logic.is_own, trigger_event)
@@ -107,7 +110,7 @@ local BATTLE_GUIDE_FUNC = {
             local is_own = user_logic.user_id == event_info.user_id
             if is_own then
                 for _, battle_slot in pairs(battle_logic.enemy_player.battle_slot) do
-                    if battle_slot then
+                    if battle_slot and battle_slot.monster then
                         local monster_condition = trigger_event.trigger_monster_id == tonumber(battle_slot.monster.uid)
                         if monster_condition and battle_slot.item then
                             local item_condition = trigger_event.trigger_item_id == tonumber(battle_slot.item.uid)
@@ -126,7 +129,7 @@ local BATTLE_GUIDE_FUNC = {
 
                 if battle_logic.is_own then
                     local battle_slot = battle_logic.enemy_player:GetBattleCard(event.tar_pos)
-                    if battle_slot then
+                    if battle_slot and battle_slot.monster then
                         local card = battle_slot.monster
                         if attack_target_count ~= tonumber(trigger_event.trigger_condition) then
                             return false
@@ -145,6 +148,9 @@ local BATTLE_GUIDE_FUNC = {
             if event.power_name == trigger_event.trigger_condition then
                 if battle_logic.is_own then
                     local battle_slot = battle_logic.enemy_player:GetBattleCard(event.tar_pos)
+                    if not battle_slot or not battle_slot.monster then
+                        return
+                    end
                     local card = battle_slot.monster
 
                     if tonumber(card.uid) == trigger_event.trigger_monster_id then

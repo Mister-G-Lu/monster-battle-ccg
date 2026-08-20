@@ -41,33 +41,27 @@ function meta:ctor()
 end
 
 function meta:Update(elapsed_time)
+    -- NOTE: battle_scene calls this every frame, so the method must exist.
+    -- The old "3s auto-advance" watchdog lived here and was removed on
+    -- purpose: it force-cleared battle_logic.is_play_animation even when the
+    -- standby handshake was healthy, which replayed battle_panel_standby
+    -- mid-animation and made the ready animation run twice (or never).
+    -- The real fix for the "stuck on loading" bug is server-side:
+    -- offline_battle:HandleStandby must answer req_battle_standby with
+    -- cmd_battle_standby (it now does).  battle_logic's own 5s
+    -- is_play_animation safety remains as last-resort recovery for broken
+    -- animations.
 end
 
 function meta:Show()
     self:setVisible(true)
-    self._standby_timer = 0
-    self._standby_advanced = false
-    self:PlayAnimation("enter_battle",false, function ()
+    self:PlayAnimation("enter_battle", false, function ()
         battle_logic:ReqBattleStandby()
         self:PlayAnimation("loop_battle", true)
     end)
 end
 
-function meta:Update(elapsed_time)
-    -- safety: if standby response never arrives within 3 seconds, auto-advance
-    if not self._standby_advanced then
-        self._standby_timer = (self._standby_timer or 0) + elapsed_time
-        if self._standby_timer > 3.0 then
-            self._standby_advanced = true
-            print("[MATCH] WARNING: No standby response in 3s, auto-advancing battle")
-            battle_logic.is_play_animation = false
-        end
-    end
-end
-
-
 function meta:RegisterWidgetEvent()
-
     self:SetFrameEventCallFunc(function (frame)
         local event_name = frame:getEvent()
         if event_name == "battlefield_enter" then
