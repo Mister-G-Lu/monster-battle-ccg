@@ -21,68 +21,30 @@ Research note: the healthiest CCG pattern I found is to separate rarity from raw
 
 | Cost | Rarity | Count | Avg HP | Avg Attack | Avg Abilities | Avg Budget |
 |---:|---|---:|---:|---:|---:|---:|
-| 1 | Common | 1 | 4.00 | 1.00 | 1.00 | 5.60 |
-| 1 | Rare | 1 | 4.00 | 1.00 | 1.00 | 5.60 |
-| 2 | Common | 12 | 3.50 | 1.42 | 1.25 | 6.08 |
-| 2 | Rare | 10 | 4.00 | 1.50 | 1.50 | 7.07 |
-| 2 | Epic | 9 | 3.44 | 2.22 | 1.56 | 7.58 |
-| 2 | Legendary | 6 | 4.00 | 1.67 | 1.33 | 7.72 |
-| 3 | Common | 11 | 4.55 | 1.45 | 1.73 | 8.08 |
-| 3 | Rare | 13 | 4.31 | 1.38 | 1.77 | 7.54 |
-| 3 | Epic | 12 | 4.83 | 1.75 | 1.67 | 9.28 |
-| 3 | Legendary | 4 | 6.75 | 2.00 | 2.25 | 11.50 |
-| 4 | Common | 1 | 5.00 | 1.00 | 2.00 | 7.60 |
-| 4 | Rare | 6 | 5.33 | 2.17 | 1.67 | 10.03 |
-| 4 | Epic | 3 | 5.67 | 2.33 | 2.00 | 10.30 |
-| 4 | Legendary | 3 | 6.33 | 2.33 | 2.67 | 12.37 |
-| 5 | Legendary | 2 | 7.00 | 3.50 | 2.00 | 13.80 |
-| 6 | Epic | 1 | 7.00 | 6.00 | 2.00 | 17.60 |
+| 1 | Common | 1 | 4.00 | 1.00 | 2.00 | 6.60 |
+| 1 | Rare | 1 | 4.00 | 1.00 | 2.00 | 6.70 |
+| 2 | Common | 12 | 4.00 | 2.00 | 2.00 | 8.38 |
+| 2 | Rare | 10 | 4.00 | 2.00 | 2.00 | 8.32 |
+| 2 | Epic | 9 | 4.00 | 1.00 | 2.00 | 6.76 |
+| 2 | Legendary | 6 | 4.00 | 1.00 | 2.00 | 6.68 |
+| 3 | Common | 11 | 5.00 | 2.00 | 2.00 | 9.35 |
+| 3 | Rare | 13 | 5.00 | 2.00 | 2.00 | 9.33 |
+| 3 | Epic | 12 | 5.00 | 1.00 | 2.00 | 7.80 |
+| 3 | Legendary | 4 | 5.00 | 1.00 | 2.00 | 7.85 |
+| 4 | Common | 1 | 6.00 | 3.00 | 2.00 | 12.80 |
+| 4 | Rare | 6 | 6.00 | 3.00 | 2.00 | 13.07 |
+| 4 | Epic | 3 | 6.00 | 2.00 | 2.00 | 11.93 |
+| 4 | Legendary | 3 | 6.00 | 1.00 | 2.00 | 10.20 |
+| 5 | Legendary | 2 | 7.00 | 2.00 | 2.00 | 13.10 |
+| 6 | Epic | 1 | 9.00 | 5.00 | 2.00 | 20.30 |
 
 ## Outliers to review
 
-| Severity | Card | Rarity | Cost | Level | HP | Attack | Abilities | Reason |
-|---|---|---|---:|---:|---:|---:|---|---|
-| Review | Whiterabbit `110114` | Legendary | 2 | 4 | 7 | 5 | melee | Legendary budget 15.0 above same cost/level threshold 14.8 |
-| Review | Whiterabbit `110115` | Legendary | 2 | 5 | 7 | 5 | melee, mshield | Legendary budget 16.0 above same cost/level threshold 15.8 |
-| Review | Whiterabbit `110116` | Legendary | 2 | 6 | 7 | 6 | melee, mshield | Legendary budget 17.6 above same cost/level threshold 16.8 |
-| Review | Kingmushrhum `140156` | Legendary | 2 | 6 | 16 | 0 | aggro | Legendary budget 17.0 above same cost/level threshold 16.8 |
+No critical rate outliers found by the heuristic.
 
 ## Strict power-creep candidates
 
-These are same-cost level-1 monster pairs where a higher-rarity card is at least as good on HP, primary attack, and ability count, with one or more strictly higher. These need design review; some may be justified by ability drawbacks that the heuristic cannot understand.
-
-| Lower-rarity card | Higher-rarity card | Cost | Why flagged |
-|---|---|---:|---|
-| Triglodite `110011` (Common) | Wolf Rider `110051` (Rare) | 2 | HP 4 -> 5 |
-| Triglodite `110011` (Common) | Barrier Knight `110181` (Rare) | 2 | abilities 1 -> 2 |
-| Gloat `110021` (Common) | Barrier Knight `110181` (Rare) | 2 | attack 1 -> 2 |
-| Dust Maiden `120021` (Common) | Tux Shooter `120041` (Rare) | 2 | HP 2 -> 3 |
-| Dust Maiden `120021` (Common) | Flying Carpet `120101` (Rare) | 2 | HP 2 -> 4 |
-| Turkey `140031` (Common) | Eelectric `140101` (Rare) | 2 | abilities 1 -> 2 |
-| Staglamite `150011` (Common) | Lava Ooze `150041` (Rare) | 2 | HP 4 -> 5 |
-| Bloglodyte `150021` (Common) | Lava Ooze `150041` (Rare) | 2 | HP 4 -> 5, attack 1 -> 2 |
-| Bloglodyte `150021` (Common) | Naughty Imp `150181` (Rare) | 2 | abilities 1 -> 2 |
-| Bloglodyte `150021` (Common) | Mad Dwarf `150191` (Rare) | 2 | abilities 1 -> 2 |
-| Arcane Garbage `150161` (Common) | Naughty Imp `150181` (Rare) | 2 | HP 2 -> 4 |
-| Arcane Garbage `150161` (Common) | Mad Dwarf `150191` (Rare) | 2 | HP 2 -> 4 |
-| Triglodite `110011` (Common) | Captain Cacti `110081` (Epic) | 2 | HP 4 -> 5, abilities 1 -> 2 |
-| Gloat `110021` (Common) | Captain Cacti `110081` (Epic) | 2 | HP 4 -> 5, attack 1 -> 2 |
-| Dust Maiden `120021` (Common) | Ninjafox `120071` (Epic) | 2 | HP 2 -> 5, abilities 1 -> 2 |
-| Dust Maiden `120021` (Common) | Crocodime `120111` (Epic) | 2 | HP 2 -> 5, attack 2 -> 3 |
-| Notarat `120031` (Common) | Ninjafox `120071` (Epic) | 2 | HP 4 -> 5, abilities 1 -> 2 |
-| Notarat `120031` (Common) | Crocodime `120111` (Epic) | 2 | HP 4 -> 5, attack 2 -> 3 |
-| Sharp Flake `130011` (Common) | Moonkey `130121` (Epic) | 2 | abilities 1 -> 2 |
-| Bookworm `130031` (Common) | Summitwitch `130081` (Epic) | 2 | attack 1 -> 2 |
-| Bookworm `130031` (Common) | Moonkey `130121` (Epic) | 2 | HP 3 -> 4, abilities 1 -> 2 |
-| Spiked Flake `130161` (Common) | Moonkey `130121` (Epic) | 2 | HP 3 -> 4 |
-| Mushrhum `140021` (Common) | Tiker `140121` (Epic) | 2 | attack 2 -> 3 |
-| Turkey `140031` (Common) | Tiker `140121` (Epic) | 2 | attack 1 -> 3 |
-| Triglodite `110011` (Common) | Whiterabbit `110111` (Legendary) | 2 | HP 4 -> 5, attack 2 -> 3 |
-| Dust Maiden `120021` (Common) | Boocan `120151` (Legendary) | 2 | HP 2 -> 3, attack 2 -> 3 |
-| Arcane Garbage `150161` (Common) | Dungeonmaster `150111` (Legendary) | 2 | HP 2 -> 3, attack 1 -> 2 |
-| Wolf Rider `110051` (Rare) | Captain Cacti `110081` (Epic) | 2 | abilities 1 -> 2 |
-| Barrier Knight `110181` (Rare) | Captain Cacti `110081` (Epic) | 2 | HP 4 -> 5 |
-| Tux Shooter `120041` (Rare) | Ninjafox `120071` (Epic) | 2 | HP 3 -> 5, abilities 1 -> 2 |
+No strict same-cost rarity upgrades found among level-1 collectible monsters.
 
 ## Special/tutorial cards
 

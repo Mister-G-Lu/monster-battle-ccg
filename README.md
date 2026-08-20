@@ -59,6 +59,21 @@ python3 tests/static_checks.py
 
 The balance audit is a heuristic design review for obvious CCG pitfalls: rarity-as-raw-power, strict same-cost upgrades, and tutorial/boss cards leaking into random pools.
 
+### Card identity redesign
+
+`scripts/redesign_cards.py` rebuilds the card powers in `csv_data/all_card_config.csv`
+around five faction identities (see `docs/FACTION_IDENTITY.md`): War = aggro/tempo,
+Fortune = fast/rush, Balance = control/defense, Nature = defense/growth,
+Chaos = disruption. It gives every creature a distinct keyword identity, makes
+level-ups add keywords instead of just HP, de-duplicates the equipment/armor
+faction variants, and keeps rarity as "specialization, not raw stats". It also
+regenerates `build/web/game_data.json`, the `GAME_DATA` blob in
+`build/web/game.html`, and `docs/BALANCE_AUDIT.md`.
+
+```bash
+python3 scripts/redesign_cards.py
+```
+
 ### Run the headless test suites
 
 The tests load the REAL game Lua modules under LuaJIT 2.1 (the same language
