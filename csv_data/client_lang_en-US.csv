@@ -1,0 +1,3140 @@
+类型,索引,替换目标,文本值(英语）
+type,key,object,value
+editer,interface/achievement/achievement_panel.csb,msgbox.page_btn1.desc,Achievement
+editer,interface/achievement/achievement_panel.csb,msgbox.page_btn1.desc,Achievement
+editer,interface/achievement/achievement_panel.csb,msgbox.page_btn2.desc,My footprints
+editer,interface/achievement/achievement_panel.csb,msgbox.player_info.desc,My achievement point
+editer,interface/achievement/achievement_panel.csb,msgbox.titlebg.title,Statistics
+editer,interface/battle/battle_end/battle_ui_end_panel_lose.csb,end_node.end_desc,Lose
+editer,interface/battle/battle_end/battle_ui_end_panel_victory.csb,end_node.end_desc,Victory
+editer,interface/battle/battle_ui_end_panel.csb,end_node.close_desc,Tap to quit
+editer,interface/battle/battle_ui_end_panel.csb,end_node.trophies.template.desc,Loop
+editer,interface/battle/battle_ui_handcard_panel.csb,sacri_node.titlebg.title,Sacrifice
+editer,interface/battle/battle_ui_panel.csb,end_node.close_desc,Tap to Exit
+editer,interface/battle/battle_ui_panel.csb,end_node.trophies.template.desc,Booty
+editer,interface/battle/battle_ui_panel.csb,enemy_info.card_monster_detail,Monsters remaining
+editer,interface/battle/battle_ui_panel.csb,enemy_status.desc,Let me see...
+editer,interface/battle/battle_ui_panel.csb,match_info.enemy_info.level_desc,Rank
+editer,interface/battle/battle_ui_panel.csb,match_info.ourside_info.level_desc,Rank
+editer,interface/battle/battle_ui_panel.csb,match_info.vs.desc,VS
+editer,interface/battle/battle_ui_panel.csb,ourside_info.card_monster_detail,Monsters remaining
+editer,interface/battle/card_detail_panel.csb,back_btn.desc,Back
+editer,interface/battle/sacrifice_panel.csb,sacrifice_panel.cards_panel.battlefield_title,Cards on battlefield
+editer,interface/battle/sacrifice_panel.csb,sacrifice_panel.cards_panel.handcard_title,Hand
+editer,interface/battle/sacrifice_panel.csb,sacrifice_panel.desc1,Only one sacrifice can be done per turn
+editer,interface/battle/sacrifice_panel.csb,sacrifice_panel.desc1.desc2,You will receive 2 crystals by sacrificing a monster in your hand and 1 crystal by sacrificing one already in play
+editer,interface/battle/sacrifice_panel.csb,sacrifice_panel.desc1.exit_btn.desc,Cancel
+editer,interface/battle/setting_panel.csb,msgbox_panel.consume_btn.desc,Continue
+editer,interface/battle/setting_panel.csb,msgbox_panel.surrender_btn.desc,Surrender
+editer,interface/battle/setting_panel.csb,msgbox_panel.title,Config
+editer,interface/battle/battle_end/battle_ui_end_panel_lose.csb,confirm_btn.desc,OK
+editer,interface/battle/battle_end/battle_ui_end_panel_victory.csb,confirm_btn.desc,OK
+editer,interface/battle/battle_end/template_reward.csb,template_reward.title,Reward
+editer,interface/chest/cardbag_panel.csb,node.desc,Each victory within refresh time will reward you with a pack from the tavern owner!
+editer,interface/chest/cardbag_panel.csb,node.title,Boost pack
+editer,interface/chest/open_cardbag_panel.csb,back_btn.txt,Back
+editer,interface/chest/resolve_tip.csb,resolve_tip.desc,Disenchant
+editer,interface/chest/resolve_tip2.csb,resolve_tip2.desc,Cards you have owned two or more will be disenchantped automatically
+editer,interface/common/reward_panel.csb,node.detailbg.confirm_btn.desc,OK
+editer,interface/common/reward_panel.csb,node.detailbg.desc,You received these materials today
+editer,interface/common/reward_panel.csb,node.title,Get reward
+editer,interface/deck/battlecard_group.csb,battle_cardgroup.title,Battle Deck
+editer,interface/deck/battlecard_group.csb,change_tab.tab_item_txt,Item
+editer,interface/deck/battlecard_group.csb,change_tab.tab_monster_txt,Monster
+editer,interface/deck/card_detail_panel.csb,node.add_btn.desc,Use
+editer,interface/deck/card_detail_panel.csb,node.create_node.create_btn.desc,Compose
+editer,interface/deck/card_detail_panel.csb,node.deck_tips_btn.desc,In use
+editer,interface/deck/card_detail_panel.csb,node.delete_btn.desc,Disenchant
+editer,interface/deck/card_detail_panel.csb,node.levelup_btn.desc,Upgrade
+editer,interface/deck/filter_panel.csb,filter_btn.desc,Filter
+editer,interface/deck/filter_panel.csb,filter_panel.filter1.all_chk.desc,All
+editer,interface/deck/filter_panel.csb,filter_panel.filter1.consume_chk.desc,Consumable
+editer,interface/deck/filter_panel.csb,filter_panel.filter1.equip_chk.desc,Equipment
+editer,interface/deck/filter_panel.csb,filter_panel.filter1.monster_chk.desc,Monster
+editer,interface/deck/filter_panel.csb,filter_panel.filter1.title,Card type
+editer,interface/deck/filter_panel.csb,filter_panel.filter2.entire_chk.desc,All
+editer,interface/deck/filter_panel.csb,filter_panel.filter2.title,Card color
+editer,interface/deck/filter_panel.csb,filter_panel.filter3.checkbox1.desc,All
+editer,interface/deck/filter_panel.csb,filter_panel.filter3.title,Crystal cost
+editer,interface/deck/filter_panel.csb,filter_panel.filter4.checkbox1.desc,All
+editer,interface/deck/filter_panel.csb,filter_panel.filter4.checkbox2.desc,Common
+editer,interface/deck/filter_panel.csb,filter_panel.filter4.checkbox3.desc,Rare
+editer,interface/deck/filter_panel.csb,filter_panel.filter4.checkbox4.desc,Epic
+editer,interface/deck/filter_panel.csb,filter_panel.filter4.checkbox5.desc,Legendary
+editer,interface/deck/filter_panel.csb,filter_panel.filter4.title,Rarity
+editer,interface/deck/levellist_panel.csb,bg.head.cost.cost_desc,cost
+editer,interface/deck/levelup_panel.csb,node.detailbg.title.name,Material needed
+editer,interface/deck/levelup_panel.csb,node.title,Card level up
+editer,interface/deck/resolve_panel.csb,node.detailbg.confirm_btn.desc,Confirm
+editer,interface/deck/resolve_panel.csb,node.detailbg.desc,You will get following materials by disenchanting this card，confirm?
+editer,interface/deck/resolve_panel.csb,node.title,Disenchant
+editer,interface/deck/resolve_panel.csb,node.detailbg.title.name,Get from disenchant
+editer,interface/download_panel.csb,loading_bg.desc,Update Version
+editer,interface/friend/friend_add_panel.csb,msgbox.page_btn1.desc,Search friend
+editer,interface/friend/friend_add_panel.csb,msgbox.page_btn2.desc,Coming soon
+editer,interface/friend/friend_add_panel.csb,msgbox.page_btn3.desc,Coming soon
+editer,interface/friend/friend_add_panel.csb,msgbox.the_bg.find_node.result.result1,No result
+editer,interface/friend/friend_add_panel.csb,msgbox.the_bg.find_node.result.result2.confirm_btn.desc,Send friend request
+editer,interface/friend/friend_add_panel.csb,msgbox.titlebg.title,Add friend
+editer,interface/friend/friend_chat_panel.csb,msgbox.chat_node.enter_btn.desc,Send
+editer,interface/friend/friend_chat_panel.csb,msgbox.titlebg.title,Friend
+editer,interface/friend/friend_list_panel.csb,msgbox.list_node.add_btn.desc,Add friend
+editer,interface/friend/friend_list_panel.csb,msgbox.list_node.message_btn.desc,Notice
+editer,interface/friend/friend_list_panel.csb,msgbox.list_node.page_btn2.desc,Coming soon
+editer,interface/friend/friend_list_panel.csb,msgbox.list_node.template.the_normal_node.fight_btn.desc,Practice
+editer,interface/friend/friend_list_panel.csb,msgbox.titlebg.title,Friend
+editer,interface/friend/friend_message_panel.csb,node.desc,No longer accept friend requests
+editer,interface/friend/friend_message_panel.csb,node.template.cancel_btn.desc,Refuse
+editer,interface/friend/friend_message_panel.csb,node.template.confirm_btn.desc,Agree
+editer,interface/friend/friend_message_panel.csb,node.titlebg.title,Notice
+editer,interface/friend/friend_panel.csb,msgbox.chat_node.textfield,Click and enter
+editer,interface/ladder/intro_list_panel.csb,template.reward_desc,Season award
+editer,interface/ladder/intro_list_panel.csb,title,Ladder Ranks
+editer,interface/ladder/ladder_panel.csb,info_desc,Ladder Rules
+editer,interface/login_panel.csb,login_btn.other.desc,Game Center login
+editer,interface/login_panel.csb,logo.start_txt,Tap to Start
+editer,interface/login_panel.csb,npc.bubblebg.desc,Let's play Card Monsters!
+editer,interface/login_panel.csb,tip,Search "Card Monsters" on Facebook and like us!
+editer,interface/mail/mailbox_panel.csb,node.mail_detailbg.confirm_btn.desc,Receive reward
+editer,interface/mail/mailbox_panel.csb,node.mail_detailbg.read_icon.desc,Read
+editer,interface/mail/mailbox_panel.csb,node.mail_template.read_icon.desc,Read
+editer,interface/mail/mailbox_panel.csb,node.title,Parrot Mail
+editer,interface/pve/main_pve_list.csb,pve_list.template1.name,Gerbip Tide
+editer,interface/pve/main_pve_list.csb,pvelist.template1.name,Gerbip Tide
+editer,interface/pve/main_pve_list.csb,pvelist.template2.name,Monsters' Range
+editer,interface/pve/pve_cardgroup_panel.csb,node.cardgroup_list.cardgroup_btn2,My deck
+editer,interface/pve/pve_cardgroup_panel.csb,node.times.desc,Remaining times today
+editer,interface/pve/pve_panel.csb,level_info.level_list.level_template.lock_node.desc,Please complete previous stage
+editer,interface/pve/pve_panel.csb,level_info.level_list.level_template.unfinished_node.reward_desc,Complete bonus
+editer,interface/setting/account_panel.csb,msgbox.desc,Please bind your account so you can play Card Monsters in any devices
+editer,interface/setting/account_panel.csb,msgbox.titlebg.title,Bind account
+editer,interface/setting/account_panel.csb,msgbox.transform_btn.desc,Change account
+editer,interface/setting/cdkey_panel.csb,msgbox.confirm_btn.desc,Comfirm
+editer,interface/setting/cdkey_panel.csb,msgbox.titlebg.title,Redemption Gift Code
+editer,interface/setting/global_setting_panel.csb,msgbox.login_btn.btn2.desc,Gift Code
+editer,interface/setting/global_setting_panel.csb,msgbox.login_btn.btn3.desc,Bind account
+editer,interface/setting/global_setting_panel.csb,msgbox.titlebg.title,Settings
+editer,interface/task/task_normal_node.csb,normal_node.title1,Quest target
+editer,interface/task/task_normal_node.csb,normal_node.title2,Quest reward
+editer,interface/task/task_normal_node.csb,normal_node.transform_btn.desc,Refresh
+editer,interface/task/task_panel.csb,msgbox.page_btn2.desc,Quest
+editer,interface/task/task_panel.csb,node.titlebg.title,Quest
+editer,interface/task/task_waiting_node.csb,waitting_node.title,Next quest coming in
+editer,interface/world/deck_panel.csb,cardbook.book.page.title,My collection
+editer,interface/world/deck_panel.csb,cardbook_btn.desc,My collection
+editer,interface/world/deck_panel.csb,create_btn.desc,Compose card
+editer,interface/world/deck_panel.csb,create_node.node.bg.desc1,Monster powder
+editer,interface/world/deck_panel.csb,create_node.node.bg2.desc1,Item powder
+editer,interface/world/deck_panel.csb,create_node.node.topbg.title,Compose card
+editer,interface/world/friendfight_panel.csb,msgbox.step1.champion_desc,Champion Record History
+editer,interface/world/friendfight_panel.csb,msgbox.step1.create_btn.desc,Create a room
+editer,interface/world/friendfight_panel.csb,msgbox.step1.desc,Every four players could start a match in one room;  2v2 match randomly for semifinals.The victory party will continue to the final
+editer,interface/world/friendfight_panel.csb,msgbox.step1.enter_btn.desc,Join
+editer,interface/world/friendfight_panel.csb,msgbox.step1.textfield,Enter room number
+editer,interface/world/friendfight_panel.csb,msgbox.step2.copy_btn.desc,Quit room
+editer,interface/world/friendfight_panel.csb,msgbox.step2.slot1.enter_node.fight_desc,in battle
+editer,interface/world/friendfight_panel.csb,msgbox.step2.slot2.enter_node.fight_desc,in battle
+editer,interface/world/friendfight_panel.csb,msgbox.step2.slot3.enter_node.fight_desc,in battle
+editer,interface/world/friendfight_panel.csb,msgbox.step2.slot4.enter_node.fight_desc,in battle
+editer,interface/world/help_btn.csb,setting.desc,Help
+editer,interface/world/help_btn.csb,helpbtn.desc,Help
+editer,interface/world/help_panel.csb,back_btn.desc,Back
+editer,interface/world/help_panel.csb,pageview.page0.desc1,FAQ 1
+editer,interface/world/help_panel.csb,pageview.page0.desc2,Q&A for mobile card monsters:\n\nQ:Why players can not create their own character name while applied a random ID?\nA:Because of lacking account system，we set players’ ID randomly when they first launch the game. ID Customization will be considered later on.\n\nQ: Why there is no Tutorial in the game?\nA: Since Card Monsters is still under Beta test，some primary features have not launched yet. Based on the basic process，every main gameplay should has its relative tutorial，so the whole game tutorial will be ready after these features launched.\n\nQ:Why there are some parts are locked in the game? Such as castles，shops，etc..\nA:Because those parts are still under developing. Hopefully to unlock them 
+editer,interface/world/help_panel.csb,pageview.page1.desc1,Equipment Cards are on the left
+editer,interface/world/help_panel.csb,pageview.page1.desc2,Monster Cards are on the right
+editer,interface/world/help_panel.csb,pageview.page1.desc3,Remaining Number
+editer,interface/world/help_panel.csb,pageview.page1.desc4,You
+editer,interface/world/help_panel.csb,pageview.page1.desc5,There are two types of cards: Monster Card and Item Card(including Equipment Card and Consumable Card).Equipment Cards must be attached to monsters with the same color
+editer,interface/world/help_panel.csb,pageview.page2.desc1,You
+editer,interface/world/help_panel.csb,pageview.page2.desc2,You can press the Sacrifice button at the bottom，to sacrifice your cards and get extra crystals
+editer,interface/world/help_panel.csb,pageview.page3.desc1,Opponent
+editer,interface/world/help_panel.csb,pageview.page3.desc2,Start Battle button
+editer,interface/world/help_panel.csb,pageview.page3.desc3,After all monsters are deployed，you can press Start Battle button to attack. However If you start battle without any monsters on your field，you will get penalty
+editer,interface/world/help_panel.csb,pageview.page4.desc1,Opponent
+editer,interface/world/help_panel.csb,pageview.page4.desc2,Remaining Monsters
+editer,interface/world/help_panel.csb,pageview.page4.desc3,Opponent's remaining monsters
+editer,interface/world/help_panel.csb,pageview.page4.desc4,The game is turn-based，the game continues until all monsters of one player are defeated
+editer,interface/world/help_panel.csb,pageview.page5.desc1,Opponent
+editer,interface/world/help_panel.csb,pageview.page5.desc2,Engagement slot
+editer,interface/world/help_panel.csb,pageview.page5.desc3,Support slot
+editer,interface/world/help_panel.csb,pageview.page5.desc4,Support slot
+editer,interface/world/help_panel.csb,pageview.page5.desc5,Engagement slot
+editer,interface/world/help_panel.csb,pageview.page5.desc6,Support slot
+editer,interface/world/help_panel.csb,pageview.page5.desc7,Support slot
+editer,interface/world/help_panel.csb,pageview.page5.desc8,You
+editer,interface/world/help_panel.csb,pageview.page5.desc9,Melee skill only works when the monster is on Engagement Slot，attacking the target in the opposite Engagement Slot
+editer,interface/world/help_panel.csb,pageview.page6.desc1,Opponent
+editer,interface/world/help_panel.csb,pageview.page6.desc2,Engagement slot
+editer,interface/world/help_panel.csb,pageview.page6.desc3,Support slot
+editer,interface/world/help_panel.csb,pageview.page6.desc4,Support slot
+editer,interface/world/help_panel.csb,pageview.page6.desc5,Engagement slot
+editer,interface/world/help_panel.csb,pageview.page6.desc6,Support slot
+editer,interface/world/help_panel.csb,pageview.page6.desc7,Support slot
+editer,interface/world/help_panel.csb,pageview.page6.desc8,You
+editer,interface/world/help_panel.csb,pageview.page6.desc9,Ranged skill works when the monster is in any support slot，attacking the target according to a static preferred order (as shown in above diagram)
+editer,interface/world/help_panel.csb,pageview.page7.desc1,Opponent
+editer,interface/world/help_panel.csb,pageview.page7.desc2,Engagement slot
+editer,interface/world/help_panel.csb,pageview.page7.desc3,Support slot
+editer,interface/world/help_panel.csb,pageview.page7.desc4,Support slot
+editer,interface/world/help_panel.csb,pageview.page7.desc5,Engagement slot
+editer,interface/world/help_panel.csb,pageview.page7.desc6,Support slot
+editer,interface/world/help_panel.csb,pageview.page7.desc7,Support slot
+editer,interface/world/help_panel.csb,pageview.page7.desc8,You
+editer,interface/world/help_panel.csb,pageview.page7.desc9,Magic skill works when the monster is in any slot，attacking the opposite target as the first preference. In case there is no opposite target，then it attacks the target in Engagement Slot instead
+editer,interface/world/help_panel.csb,pageview.page8.desc1,Opponent
+editer,interface/world/help_panel.csb,pageview.page8.desc2,Melee or Ranged skills causes damage to Armor first，while Magic skill ignores Armor
+editer,interface/world/help_panel.csb,pageview.page9.desc1,FAQ 2
+editer,interface/world/help_panel.csb,pageview.page9.desc2,Q:Why we can’t get extra booster card packs except 5 packs per 12 hours?\nA:We are developing other functions for players to get more packs. There will variety ways for players to get packs then.\n\nQ:Why we can’t get EXP/coins/materials by winning battles now?\nA:We truly know that players want to level up themselves and win stronger opponents. We are not sure what kind of systems will be online，such as role players level systems or EXP systems. Coins and other materials you can get them from other unlocked functions in the game. We will try to unlock them online ASAP
+editer,interface/world/help_panel.csb,title,Help
+editer,interface/world/ladder_panel.csb,node.info_desc,Refresh per hour
+editer,interface/world/ladder_panel.csb,node.page_btn1.desc,Global Ranking
+editer,interface/world/ladder_panel.csb,node.page_btn2.desc,Friend Ranking
+editer,interface/world/ladder_panel.csb,node.titlebg.title,Ranking
+editer,interface/world/ladder_panel.csb,node.top_btn.desc,Back
+editer,interface/world/main_panel.csb,achievement.desc,Achievement
+editer,interface/world/main_panel.csb,cardbag.desc,Booster packs
+editer,interface/world/main_panel.csb,cardbook.desc,My collection
+editer,interface/world/main_panel.csb,community.desc,Community
+editer,interface/world/main_panel.csb,event.tip,Challenge Room
+editer,interface/world/main_panel.csb,friend.desc,friend
+editer,interface/world/main_panel.csb,ladder.desc,Ranking
+editer,interface/world/main_panel.csb,mailbox.desc,Parrot Mail
+editer,interface/world/main_panel.csb,pvebtn.desc,Adventure
+editer,interface/world/main_panel.csb,pvpbtn.desc,Battle
+editer,interface/world/main_panel.csb,reward_tip.desc,Daily reward
+editer,interface/world/main_panel.csb,setting.desc,Settings
+editer,interface/world/main_panel.csb,setting2.desc,Settings
+editer,interface/world/main_panel.csb,task.desc,Quest
+editer,interface/world/main_panel.csb,task.desc,Quest
+editer,interface/world/main_panel.csb,tip,Search "Card Monsters" on Facebook and like us!
+editer,interface/world/match_panel.csb,msgbox.bubble_bg.desc,Opponent found!
+editer,interface/world/match_panel.csb,msgbox.desc,Waiting for opponent...
+editer,interface/battle/battle_end2/mvp_node.csb,panel.title,Best overall
+editer,interface/battle/battle_end2/reward_template.csb,panel.title,Reward
+text,lost_connection,,Connection lost
+text,unconnected,,Server not connected
+text,send_time_out,,Request timeout
+text,battle_pvp_text,,Turn %d
+text,own_monster_num,,Monster %d
+text,own_item_num,,Equipment %d
+text,battle_started,,Ready to start
+text,card_type_monster,,Monster Card
+text,card_type_armor,,Armor Card
+text,card_type_equip,,Weapon Card
+text,card_type_consume,,Consumable Card
+text,operation_card_level_up,,%d cards can be upgraded
+text,operation_card_detail,,Card Details
+text,fight_deck_name,,Battle Deck %d
+text,arena_stage_wait_desc,,Battle
+text,arena_stage_match_desc,,Cancel
+text,sacrifice_error,,Only one sacrifice can be done per turn
+text,deck_is_null,,Deck is empty
+text,card_is_null,,This card does not exist
+text,card_config_is_null,,Card data does not exist
+text,deck_monster_full,,The card was not added to Monster Deck successfully
+text,deck_item_full,,The card was not added to Item Deck successfully
+text,deck_same_card_limit,,Only three copies of each card can be included in one deck
+text,battle_is_null,,You are not in a battle
+text,battle_hand_card_is_null,,Hand does not exist
+text,battle_crystal_not_enough,,Insufficient Crystals
+text,battle_target_card_is_null,,No valid target
+text,battle_monster_kind_not_match,,Monster type mismatch
+text,battle_consume_own_deploy_fail,,This card may not be used to your cards in play
+text,battle_consume_enemy_deploy_fail,,This card may not be used to your opponent's cards in play
+text,common_confirm,,Confirm
+text,common_cancel,,Cancel
+text,common_close,,Close
+text,unknown_error,,Unknown Error
+text,package_decompress_err_title,,Decompression Failure
+text,package_decompress_err,,Decompression Failure
+text,package_decompress_err_confirm1,,Exit Game
+text,package_decompress_err_confirm2,,Download again
+text,package_version_too_low_title,,Version expired
+text,package_version_too_low,,Your game version is too old. Game has to be closed.
+text,package_update_title,,Version Update
+text,package_update,,The update package: %.2f Mb. Update now?
+text,network_unable_connect_title,,Connection Failure
+text,network_unable_connect,,Unable to connect to server，please check your internet settings.
+text,network_unable_connect_confirm,,Reconnect
+text,network_unable_connect_close,,Close
+text,network_unable_connect_cancel,,Cancel
+text,network_unable_connect_login,,Quit
+text,game_exit_title,,Exit Game
+text,game_exit_desc,,Are you sure you want to exit Card Monsters?
+text,game_exit_confirm,,Exit
+text,game_exit_cancel,,Cancel
+text,online_player_desc,,%d players online
+text,world_home_btn,,Home
+text,world_deck_btn,,Deck
+text,card_level_desc,,Lv %d
+text,tips_random_desc,,Tips: %s
+text,deck_chest_time_over,,Open
+text,chest_money_desc,,%d-%d coins
+text,chest_card_desc,,%d cards
+text,chest_is_empty,,The pack is empty.
+text,chest_is_time_out,,The time to open this pack has not come yet.
+text,chest_chest_opening,,Another pack is opening.
+text,chest_stage_open,,Open Timer
+text,chest_stage_use,,Open the pack
+text,chest_time_desc,,Open after %s
+text,chest_nofiy_desc,,%s can be opened now
+text,card_quality_narmal,,Common
+text,card_quality_rare,,Rare
+text,card_quality_rarity,,Epic
+text,card_quality_epic,,Legendary
+text,battle_result_win,,VICTORY
+text,battle_result_lose,,DEFEAT
+text,battle_round_own,,Your Turn
+text,battle_round_first,,First
+text,battle_round_after,,Second
+text,battle_power_desc,,Deck Strength %d
+text,battle_exit_title,,Battle Message
+text,battle_exit_desc,,The battle is over，please click OK to exit
+text,battle_exit_confirm,,OK
+text,arena_level_desc,,Player Rank %d
+text,slot_detail_title_status,,Status
+text,slot_detail_title_power,,Description
+text,slot_detail_title_buff,,Buff
+text,slot_detail_title_debuff,,Debuff
+text,own_deck_penalty,,Negative penalty for yourself
+text,enemy_deck_penalty,,Negative penalty for your opponent
+text,un_sacrifice_target,,You did not select any card
+text,mail_send_user_name,,Sender:%s
+text,mail_system_offline,,Mail system is offline
+text,mail_is_null,,Mail not found
+text,chest_have_card_num,,Has x%d cards
+text,chest_quality_at_least,,At least has %s cardx%d
+text,refresh_time_desc,,Refresh time: %s
+text,extra_crystal_use_desc,,【Additional Crystal】can only be triggered by sacrifice
+text,user_is_ban,,Account being banned，please contact customer service
+text,service_is_close,,Server is down，please try again later
+text,nofiy_refresh_time_desc,,Tavern owner's booster pack have been refreshed
+text,deck_limit_desc,,%d can only use  %s in one deck
+text,card_num_not_enough,,There are not enough cards
+text,card_is_max_level,,Level Max!
+text,resource_money_not_enough,,Not enough money
+text,resource_coin_not_enough,,Not enough coin
+text,card_not_resolve,,This card can not be resolved
+text,card_upgrade_success,,Success
+text,card_resolve_success,,Success
+text,cardgroup_info_num,,No. %d  battle deck
+text,monster_property_card,,Monster Card
+text,the_property_card,,Item Card
+text,the_battle_card,,Deployed Card
+text,input_room_num,,enter room number
+text,room_not_exist,,invalid room number
+text,room_is_full,,match already started，please wait
+text,challenge_3,,比赛已经开始，无法加入
+text,challenge_4,,Attend sucessfully
+text,challenge_5,,等待对手加入…
+text,challenge_6,,（我）
+text,the_countdown_began,,Ready to start!
+text,challenge_prompt_txt,,Confirm quit?
+text,fail_the_battle,,Sorry but you are out
+text,you_are_win,,Victory!
+text,you_are_lose,,Defeat!
+text,win_the_semifinals,,Semifinal!
+text,challenge_room_number,,No. %d Room
+text,challenge_room_name,,4-seats Challenge Room
+text,wait_for_people,,Searching for opponent
+text,in_the_battle,,In Battle
+text,ail_the_battle,,Knocked out
+text,add_QQ,,Search "Card Monsters" and like our Facebook page!
+text,add_facebook,,Search "Card Monsters" and like our Facebook page!
+text,challenge_prompt,,Quit
+text,the_countdown_numer1,,1
+text,the_countdown_numer2,,2
+text,the_countdown_numer3,,3
+text,this_is_me,,（me）
+text,item_num_not_enough,,There are not enough items
+text,please_input_room,,Please enter room number
+text,create_room_failed,,failed to create room!
+text,the_card_handbook,,Card Info
+text,my_card_handbook,,My Collection
+text,prop_powder_num,,%d monster powder
+text,monster_powder_num,,%d item powder
+text,powder_not_enough,,Not enough monster powder
+text,item_powder_not_enough,,Not enough item powder
+text,card_compose_success,,Compose success
+text,card_only_two,,Reach the maximum quantity of card creating
+text,rank_win_lose_value,,%sWin/%sLose
+text,user_rank_info,,Your Rank(next refresh time：%s)
+text,rank_info_name,,Cup
+text,rank_info_desc,,You can increase your Cup by winning in the battles，and if you lost，your Cup will be reduced
+text,user_not_in_rank,,Sorry，you are not in the ranking
+text,user_in_rank,,Your Rank (refresh per hour)
+text,battle_immunity_consume_card,,Monsters which have [Immunity] skill can not be targeted by consume card
+text,compose_limit_desc,,Reach the maximum
+text,card_not_compose,,Unable to compose
+text,enemy_match_ready_desc,,Waiting
+text,ourside_match_ready_desc,,Ready
+text,rank_elo_name,,ELO:
+text,user_in_world_rank,,Your global rank
+text,user_in_friend_rank,,Your friend rank
+text,user_country_empty,,Unknown region
+text,user_world_rank_number,,/global rank%d
+text,user_friend_rank_number,,friend rank:%d
+text,normal_friend_online,,Normal(online%d)
+text,friend_fight,,Practice
+text,friend_fight_countdown,,%dS
+text,title_delete_friend_normal,,Delete
+text,desc_delete_friend_normal,,Comfirm deletion?
+text,friend_setting_desc,,Edit
+text,friend_chatting_title,,Chat with %s
+text,friend_chatting_emptytext,,Your message cannot be empty
+text,pve_misson1_title,,— Gerbip Tide —
+text,pve_misson1_confition,,Victory：defeat 10 gerbips \n Failure：lose all your monsters
+text,pve_misson1_tip,,＊Go go defeat gerbips!
+text,pve_misson1_tip2,,＊Super challenge difficulty(Temporary)! Suitable for players who like to challenge impossible missions!
+text,pve_misson2_title,,— Monsters' Range —
+text,pve_misson2_confition,,Victory：defeat 7 targets \n Failure：lose all your monsters or enemy own 50 crystals
+text,pve_misson2_tip,,＊Use various attack type to shoot the targets! Be careful about bomb targets.
+text,pve_day_limit_desc,,Choose deck
+text,pve_cardgroup_mission,,Leasehold deck
+text,pve_cardgroup_ourside,,My deck
+text,pve_cardgroup_limit,,%s limit：Your deck must include at least %d %s monster cards
+text,pve_startbtn_limit,,need %d more %s monster card
+text,pve_startbtn_normal,,Adventure
+text,pve_startbtn_times,,Closed
+text,mission_difficulty_desc,,Difficulty%d★
+text,pve_battle_mission1_desc,,Defeat all gerbips
+text,pve_battle_mission2_desc,,Destroy %d targets before your enemy get 50 crystals
+text,input_friend_num,,Enter user ID
+text,input_chat_word,,Enter message
+text,the_hp_desc,,HP
+text,the_armor_desc,,Armor
+text,please_input_id,,ID not exist
+text,invite_battle_prompt,,Practice
+text,battle_with_friend,,Waiting for your friend
+text,friend_online_state,,Online
+text,friend_outline_state_day,,Last login %d days ago
+text,friend_outline_state_hour,,Last login %d hours ago
+text,friend_fight_state,,In battle
+text,friend_fightbtn_cancel,,Cancel practice
+text,invited_battle_prompt,,Practice
+text,invited_battle_with_friend,,%s ask you for practice，agree?
+text,invited_fight_msgbox_confirm,,Agree
+text,invited_fight_msgbox_cancel,,Decline
+text,tip_friend_fight_state,,Your friend is in battle
+text,tip_friend_outline_state,,Your friend already offline
+text,pve_finished_desc,,Complete stage %d★！
+text,user_not_exist,,The player doesn't exist
+text,user_already_friend,,The player has already been your friend
+text,user_not_be_added,,The player refuses any friend's request
+text,user_not_online,,The player is not online
+text,user_is_fighting,,The player is in a battle
+text,user_is_matching,,The player is searching an opponent
+text,friend_invite_not_time,,Not invite tiem
+text,user_is_myself,,You can't add yourself as a friend
+text,friend_is_inviting,,The player is under inviting
+text,user_not_add_list,,The player is not in the list
+text,not_friend_ship,,You are not friends yet
+text,user_already_request_add,,You already invited
+text,refuse_friend_success,,Refuse friend success
+text,send_add_friend_success,,Send success
+text,add_friend_success,,Add friend success
+text,delete_friend_success,,Delete friend success
+text,people_is_online,,online
+text,people_is_offline,,offline
+text,people_is_fighting,,Your friend is in battle
+text,people_is_matching,,Matching
+text,people_is_inviting,,Inviting
+text,task_free_refresh_desc,,Free refresh times today %d/%d
+text,task_progress_desc,,Progress %d/%d
+text,task_daily_last_num,,%d quests left today
+text,join_room_failed,,Join room failed
+text,filter_close_desc,,Filter
+text,filter_open_desc,,Comfirm
+text,account_bind_success_t,,Platform %s bind success
+text,account_bind_state1,,Bind %s
+text,account_bind_state2,,%s binding
+text,account_bind_state3,,%s binded
+text,account_login_state1,,%s Login
+text,account_login_state2,,%s Logging in
+text,account_bind_name_wc,,Wchat
+text,account_bind_name_yk,,Guest
+text,account_bind_name_bd,,%s bind
+text,account_bind_alert,,This %s account has been binded to the game account. Would you change another account?(Unbound account could lost the local data)
+text,account_bind_log_tips,,Make sure you have login in [Setting]->[GameCenter]
+text,account_bind_log_tips1,,If you are guest account，please bind first
+text,login_auth_error,,Account validation failed，please try again later
+text,achievement_name_1,,Make Friends
+text,achievement_name_2,,Ladder victory
+text,achievement_name_4,,Legendary
+text,achievement_name_5,,Epic
+text,achievement_name_6,,Work hard
+text,achievement_name_7,,Friendlies
+text,achievement_name_8,,Good battle
+text,achievement_name_9,,Challenge champion
+text,achievement_name_11,,Trifecta
+text,achievement_desc_1,,Have %d friends ： get %d achievement points
+text,achievement_desc_2,,Win %d matches in Battle/Practice Mode： get %d achievement points
+text,achievement_desc_4,,Get %d legendary cards： get %d achievement points
+text,achievement_desc_5,,Get %d epic cards： get %d achievement points
+text,achievement_desc_6,,Login %d days： get %d achievement points
+text,achievement_desc_7,,Play %d friendlies： get %d achievement points
+text,achievement_desc_8,,Finish %d challenge matches： get %d achievement points
+text,achievement_desc_9,,Be challenge champion %d times： get %d achievement points
+text,achievement_desc_11,,Trifecta %d times： get %d achievement points
+text,pve_play_not_open,,Haven't open yet
+text,pve_difficulty_error,,You choosed a wrong difficulty
+text,pve_attack_type_error,,Wrong deck
+text,pve_fight_data_error,,Wrong fight data
+text,pve_count_not_enough,,All PVE counts used
+text,task_reward_failed,,Receive task reward failed
+text,achievement_reward_failed,,Receive ahcievement reward failed
+text,task_reset_failed,,Reset failed
+text,pve_no_limit,,Deck format no limit
+text,task_daily_clean,,You have finished all tasks today， please come back tomorrow
+text,task_reward_desc,,Here is your task reward
+text,achievement_reward_desc,,Here is your achievement reward
+text,task_complete,,Get reward
+text,friend_title,,Rank in friends：%d
+text,friend_name,,Player name#%s
+text,invited_fight_msgbox_response,,%s rejected your invitation
+text,invited_fight_msgbox_title,,Friendly match
+text,arena_info_name,,Rules of Ladder Mode
+text,arena_info_desc,,At the end of each match season，you will get a reward according to your highest ranking during the season.
+text,arena_fight_msgbox_cancel,,%s has cancelled his request
+text,pvp_confirm_btn_value,,Battle
+text,battle_result_tips_info,,Reached today's ceiling
+text,arena_bar_text,,Next rank:%s
+text,pve_first_reward_desc,,Clear reward
+text,pve_reward_desc,,Clear reward
+text,loading_desc,,Update Version
+text,guide_name_1,,Will
+text,guide_name_2,,Challenger
+text,enter_cdkey_code,,Enter gift code
+text,redeem_failed,,Exchange failed
+text,redeem_code_invalid,,Invalid gift code
+text,redeem_code_used,,Gift code have already be used
+text,gift_already_got,,Gift have already be received
+text,redeem_code_error,,Incorrect gift code
+text,equip_target_card_is_null,,Equip card must equiped on monster cards
+text,adv_skilled_exam,,Player rank %d upgrade exam
+text,exam_college,,Player college
+text,exam_college_skilled,,Unlock when your exp is full in player rank 1
+text,progress_text,,Progress
+text,gerbil_tide_title,,— Gerbip Tide —
+text,adv_main_title,,Adventure
+text,battle_result_lost_desc,,Please continue
+text,battle_result_win_desc,,Congratulations
+text,battle_result_enemy,,Enemy
+text,battle_result_self,,Self
+text,battle_result_synthesis_desc,,You haven't got the card, you're going to compose it?
+text,battle_result_upgrade_desc,,You have got the card, you're going to upgrade it?
+text,upgrade_level,,Player level
+text,upgrade_award,,Reward
+card_config,110011,name,Triglodite
+card_config,110012,name,Triglodite
+card_config,110013,name,Triglodite
+card_config,110014,name,Triglodite
+card_config,110015,name,Triglodite
+card_config,110021,name,Gloat
+card_config,110022,name,Gloat
+card_config,110023,name,Gloat
+card_config,110024,name,Gloat
+card_config,110025,name,Gloat
+card_config,110031,name,Triclops
+card_config,110032,name,Triclops
+card_config,110033,name,Triclops
+card_config,110034,name,Triclops
+card_config,110035,name,Triclops
+card_config,110036,name,Triclops
+card_config,110041,name,Lost Explorer
+card_config,110042,name,Lost Explorer
+card_config,110043,name,Lost Explorer
+card_config,110044,name,Lost Explorer
+card_config,110045,name,Lost Explorer
+card_config,110051,name,Wolf Rider
+card_config,110052,name,Wolf Rider
+card_config,110053,name,Wolf Rider
+card_config,110054,name,Wolf Rider
+card_config,110055,name,Wolf Rider
+card_config,110056,name,Wolf Rider
+card_config,110061,name,Headless
+card_config,110062,name,Headless
+card_config,110063,name,Headless
+card_config,110064,name,Headless
+card_config,110065,name,Headless
+card_config,110066,name,Headless
+card_config,110071,name,Admiral Eagle
+card_config,110072,name,Admiral Eagle
+card_config,110073,name,Admiral Eagle
+card_config,110074,name,Admiral Eagle
+card_config,110075,name,Admiral Eagle
+card_config,110076,name,Admiral Eagle
+card_config,110077,name,Admiral Eagle
+card_config,110081,name,Captain Cacti
+card_config,110082,name,Captain Cacti
+card_config,110083,name,Captain Cacti
+card_config,110084,name,Captain Cacti
+card_config,110085,name,Captain Cacti
+card_config,110086,name,Captain Cacti
+card_config,110091,name,Red Dragon
+card_config,110092,name,Red Dragon
+card_config,110093,name,Red Dragon
+card_config,110094,name,Red Dragon
+card_config,110095,name,Red Dragon
+card_config,110096,name,Red Dragon
+card_config,110097,name,Red Dragon
+card_config,110098,name,Red Dragon
+card_config,110101,name,Twinaxe
+card_config,110102,name,Twinaxe
+card_config,110103,name,Twinaxe
+card_config,110104,name,Twinaxe
+card_config,110105,name,Twinaxe
+card_config,110106,name,Twinaxe
+card_config,110111,name,Whiterabbit
+card_config,110112,name,Whiterabbit
+card_config,110113,name,Whiterabbit
+card_config,110114,name,Whiterabbit
+card_config,110115,name,Whiterabbit
+card_config,110116,name,Whiterabbit
+card_config,110117,name,Whiterabbit
+card_config,110118,name,Whiterabbit
+card_config,110121,name,Kamicron
+card_config,110122,name,Kamicron
+card_config,110123,name,Kamicron
+card_config,110124,name,Kamicron
+card_config,110125,name,Kamicron
+card_config,110126,name,Kamicron
+card_config,110127,name,Kamicron
+card_config,110131,name,Fisher Monger
+card_config,110132,name,Fisher Monger
+card_config,110133,name,Fisher Monger
+card_config,110134,name,Fisher Monger
+card_config,110135,name,Fisher Monger
+card_config,110136,name,Fisher Monger
+card_config,110137,name,Fisher Monger
+card_config,110141,name,Cat Knight
+card_config,110142,name,Cat Knight
+card_config,110143,name,Cat Knight
+card_config,110144,name,Cat Knight
+card_config,110145,name,Cat Knight
+card_config,110146,name,Cat Knight
+card_config,110147,name,Cat Knight
+card_config,110148,name,Cat Knight
+card_config,110151,name,Snoozemon
+card_config,110152,name,Snoozemon
+card_config,110153,name,Snoozemon
+card_config,110154,name,Snoozemon
+card_config,110155,name,Snoozemon
+card_config,110156,name,Snoozemon
+card_config,110157,name,Snoozemon
+card_config,110161,name,Fr.Silence
+card_config,110162,name,Fr.Silence
+card_config,110163,name,Fr.Silence
+card_config,110164,name,Fr.Silence
+card_config,110165,name,Fr.Silence
+card_config,110171,name,Triglodite Marauders
+card_config,110172,name,Triglodite Marauders
+card_config,110173,name,Triglodite Marauders
+card_config,110174,name,Triglodite Marauders
+card_config,110175,name,Triglodite Marauders
+card_config,110181,name,Barrier Knight
+card_config,110182,name,Barrier Knight
+card_config,110183,name,Barrier Knight
+card_config,110184,name,Barrier Knight
+card_config,110185,name,Barrier Knight
+card_config,110186,name,Barrier Knight
+card_config,110191,name,Eagle Archer
+card_config,110192,name,Eagle Archer
+card_config,110193,name,Eagle Archer
+card_config,110194,name,Eagle Archer
+card_config,110195,name,Eagle Archer
+card_config,110196,name,Eagle Archer
+card_config,120011,name,Lost Drums
+card_config,120012,name,Lost Drums
+card_config,120013,name,Lost Drums
+card_config,120014,name,Lost Drums
+card_config,120015,name,Lost Drums
+card_config,120021,name,Dust Maiden
+card_config,120022,name,Dust Maiden
+card_config,120023,name,Dust Maiden
+card_config,120024,name,Dust Maiden
+card_config,120025,name,Dust Maiden
+card_config,120031,name,Notarat
+card_config,120032,name,Notarat
+card_config,120033,name,Notarat
+card_config,120034,name,Notarat
+card_config,120035,name,Notarat
+card_config,120041,name,Tux Shooter
+card_config,120042,name,Tux Shooter
+card_config,120043,name,Tux Shooter
+card_config,120044,name,Tux Shooter
+card_config,120045,name,Tux Shooter
+card_config,120046,name,Tux Shooter
+card_config,120051,name,Leezard
+card_config,120052,name,Leezard
+card_config,120053,name,Leezard
+card_config,120054,name,Leezard
+card_config,120055,name,Leezard
+card_config,120056,name,Leezard
+card_config,120061,name,Abobinable
+card_config,120062,name,Abobinable
+card_config,120063,name,Abobinable
+card_config,120064,name,Abobinable
+card_config,120065,name,Abobinable
+card_config,120066,name,Abobinable
+card_config,120071,name,Ninjafox
+card_config,120072,name,Ninjafox
+card_config,120073,name,Ninjafox
+card_config,120074,name,Ninjafox
+card_config,120075,name,Ninjafox
+card_config,120076,name,Ninjafox
+card_config,120077,name,Ninjafox
+card_config,120081,name,Ninjutsurtle
+card_config,120082,name,Ninjutsurtle
+card_config,120083,name,Ninjutsurtle
+card_config,120084,name,Ninjutsurtle
+card_config,120085,name,Ninjutsurtle
+card_config,120086,name,Ninjutsurtle
+card_config,120087,name,Ninjutsurtle
+card_config,120091,name,Lazydragon
+card_config,120092,name,Lazydragon
+card_config,120093,name,Lazydragon
+card_config,120094,name,Lazydragon
+card_config,120095,name,Lazydragon
+card_config,120096,name,Lazydragon
+card_config,120097,name,Lazydragon
+card_config,120098,name,Lazydragon
+card_config,120101,name,Flying Carpet
+card_config,120102,name,Flying Carpet
+card_config,120103,name,Flying Carpet
+card_config,120104,name,Flying Carpet
+card_config,120105,name,Flying Carpet
+card_config,120106,name,Flying Carpet
+card_config,120111,name,Crocodime
+card_config,120112,name,Crocodime
+card_config,120113,name,Crocodime
+card_config,120114,name,Crocodime
+card_config,120115,name,Crocodime
+card_config,120116,name,Crocodime
+card_config,120117,name,Crocodime
+card_config,120121,name,Chimpbow
+card_config,120122,name,Chimpbow
+card_config,120123,name,Chimpbow
+card_config,120124,name,Chimpbow
+card_config,120125,name,Chimpbow
+card_config,120126,name,Chimpbow
+card_config,120127,name,Chimpbow
+card_config,120131,name,Griffin
+card_config,120132,name,Griffin
+card_config,120133,name,Griffin
+card_config,120134,name,Griffin
+card_config,120135,name,Griffin
+card_config,120136,name,Griffin
+card_config,120137,name,Griffin
+card_config,120141,name,Pirate Lobster
+card_config,120142,name,Pirate Lobster
+card_config,120143,name,Pirate Lobster
+card_config,120144,name,Pirate Lobster
+card_config,120145,name,Pirate Lobster
+card_config,120146,name,Pirate Lobster
+card_config,120147,name,Pirate Lobster
+card_config,120148,name,Pirate Lobster
+card_config,120151,name,Boocan
+card_config,120152,name,Boocan
+card_config,120153,name,Boocan
+card_config,120154,name,Boocan
+card_config,120155,name,Boocan
+card_config,120156,name,Boocan
+card_config,120157,name,Boocan
+card_config,120158,name,Boocan
+card_config,120161,name,Magic Carpet
+card_config,120162,name,Magic Carpet
+card_config,120163,name,Magic Carpet
+card_config,120164,name,Magic Carpet
+card_config,120165,name,Magic Carpet
+card_config,120171,name,Qigong Leezard
+card_config,120172,name,Qigong Leezard
+card_config,120173,name,Qigong Leezard
+card_config,120174,name,Qigong Leezard
+card_config,120175,name,Qigong Leezard
+card_config,120181,name,Mad Crocodime
+card_config,120182,name,Mad Crocodime
+card_config,120183,name,Mad Crocodime
+card_config,120184,name,Mad Crocodime
+card_config,120185,name,Mad Crocodime
+card_config,120186,name,Mad Crocodime
+card_config,120191,name,Breaker
+card_config,120192,name,Breaker
+card_config,120193,name,Breaker
+card_config,120194,name,Breaker
+card_config,120195,name,Breaker
+card_config,120196,name,Breaker
+card_config,130011,name,Sharp Flake
+card_config,130012,name,Sharp Flake
+card_config,130013,name,Sharp Flake
+card_config,130014,name,Sharp Flake
+card_config,130015,name,Sharp Flake
+card_config,130021,name,Ghostshield
+card_config,130022,name,Ghostshield
+card_config,130023,name,Ghostshield
+card_config,130024,name,Ghostshield
+card_config,130025,name,Ghostshield
+card_config,130031,name,Bookworm
+card_config,130032,name,Bookworm
+card_config,130033,name,Bookworm
+card_config,130034,name,Bookworm
+card_config,130035,name,Bookworm
+card_config,130041,name,Snakecharmer
+card_config,130042,name,Snakecharmer
+card_config,130043,name,Snakecharmer
+card_config,130044,name,Snakecharmer
+card_config,130045,name,Snakecharmer
+card_config,130046,name,Snakecharmer
+card_config,130051,name,Fishcat
+card_config,130052,name,Fishcat
+card_config,130053,name,Fishcat
+card_config,130054,name,Fishcat
+card_config,130055,name,Fishcat
+card_config,130056,name,Fishcat
+card_config,130061,name,Frosty
+card_config,130062,name,Frosty
+card_config,130063,name,Frosty
+card_config,130064,name,Frosty
+card_config,130065,name,Frosty
+card_config,130066,name,Frosty
+card_config,130071,name,Snailmail
+card_config,130072,name,Snailmail
+card_config,130073,name,Snailmail
+card_config,130074,name,Snailmail
+card_config,130075,name,Snailmail
+card_config,130076,name,Snailmail
+card_config,130077,name,Snailmail
+card_config,130081,name,Summitwitch
+card_config,130082,name,Summitwitch
+card_config,130083,name,Summitwitch
+card_config,130084,name,Summitwitch
+card_config,130085,name,Summitwitch
+card_config,130086,name,Summitwitch
+card_config,130087,name,Summitwitch
+card_config,130091,name,Rock Monster
+card_config,130092,name,Rock Monster
+card_config,130093,name,Rock Monster
+card_config,130094,name,Rock Monster
+card_config,130095,name,Rock Monster
+card_config,130096,name,Rock Monster
+card_config,130097,name,Rock Monster
+card_config,130098,name,Rock Monster
+card_config,130101,name,Plaster
+card_config,130102,name,Plaster
+card_config,130103,name,Plaster
+card_config,130104,name,Plaster
+card_config,130105,name,Plaster
+card_config,130106,name,Plaster
+card_config,130111,name,Murble
+card_config,130112,name,Murble
+card_config,130113,name,Murble
+card_config,130114,name,Murble
+card_config,130115,name,Murble
+card_config,130116,name,Murble
+card_config,130117,name,Murble
+card_config,130121,name,Moonkey
+card_config,130122,name,Moonkey
+card_config,130123,name,Moonkey
+card_config,130124,name,Moonkey
+card_config,130125,name,Moonkey
+card_config,130126,name,Moonkey
+card_config,130127,name,Moonkey
+card_config,130131,name,Cloudy
+card_config,130132,name,Cloudy
+card_config,130133,name,Cloudy
+card_config,130134,name,Cloudy
+card_config,130135,name,Cloudy
+card_config,130136,name,Cloudy
+card_config,130137,name,Cloudy
+card_config,130141,name,Calamity
+card_config,130142,name,Calamity
+card_config,130143,name,Calamity
+card_config,130144,name,Calamity
+card_config,130145,name,Calamity
+card_config,130146,name,Calamity
+card_config,130147,name,Calamity
+card_config,130148,name,Calamity
+card_config,130151,name,Archmage
+card_config,130152,name,Archmage
+card_config,130153,name,Archmage
+card_config,130154,name,Archmage
+card_config,130155,name,Archmage
+card_config,130156,name,Archmage
+card_config,130157,name,Archmage
+card_config,130158,name,Archmage
+card_config,130161,name,Spiked Flake
+card_config,130162,name,Spiked Flake
+card_config,130163,name,Spiked Flake
+card_config,130164,name,Spiked Flake
+card_config,130165,name,Spiked Flake
+card_config,130171,name,Magic Worm
+card_config,130172,name,Magic Worm
+card_config,130173,name,Magic Worm
+card_config,130174,name,Magic Worm
+card_config,130175,name,Magic Worm
+card_config,130181,name,Snail Garder
+card_config,130182,name,Snail Garder
+card_config,130183,name,Snail Garder
+card_config,130184,name,Snail Garder
+card_config,130185,name,Snail Garder
+card_config,130186,name,Snail Garder
+card_config,130191,name,Fishmon
+card_config,130192,name,Fishmon
+card_config,130193,name,Fishmon
+card_config,130194,name,Fishmon
+card_config,130195,name,Fishmon
+card_config,130196,name,Fishmon
+card_config,140011,name,Gerbip
+card_config,140012,name,Gerbip
+card_config,140013,name,Gerbip
+card_config,140014,name,Gerbip
+card_config,140015,name,Gerbip
+card_config,140021,name,Mushrhum
+card_config,140022,name,Mushrhum
+card_config,140023,name,Mushrhum
+card_config,140024,name,Mushrhum
+card_config,140025,name,Mushrhum
+card_config,140031,name,Turkey
+card_config,140032,name,Turkey
+card_config,140033,name,Turkey
+card_config,140034,name,Turkey
+card_config,140035,name,Turkey
+card_config,140041,name,Butterbat
+card_config,140042,name,Butterbat
+card_config,140043,name,Butterbat
+card_config,140044,name,Butterbat
+card_config,140045,name,Butterbat
+card_config,140046,name,Butterbat
+card_config,140051,name,Lapia
+card_config,140052,name,Lapia
+card_config,140053,name,Lapia
+card_config,140054,name,Lapia
+card_config,140055,name,Lapia
+card_config,140056,name,Lapia
+card_config,140061,name,Furryspider
+card_config,140062,name,Furryspider
+card_config,140063,name,Furryspider
+card_config,140064,name,Furryspider
+card_config,140065,name,Furryspider
+card_config,140066,name,Furryspider
+card_config,140071,name,Polar Lizard
+card_config,140072,name,Polar Lizard
+card_config,140073,name,Polar Lizard
+card_config,140074,name,Polar Lizard
+card_config,140075,name,Polar Lizard
+card_config,140076,name,Polar Lizard
+card_config,140077,name,Polar Lizard
+card_config,140081,name,Frock
+card_config,140082,name,Frock
+card_config,140083,name,Frock
+card_config,140084,name,Frock
+card_config,140085,name,Frock
+card_config,140086,name,Frock
+card_config,140087,name,Frock
+card_config,140091,name,Flying Snake
+card_config,140092,name,Flying Snake
+card_config,140093,name,Flying Snake
+card_config,140094,name,Flying Snake
+card_config,140095,name,Flying Snake
+card_config,140096,name,Flying Snake
+card_config,140097,name,Flying Snake
+card_config,140098,name,Flying Snake
+card_config,140101,name,Eelectric
+card_config,140102,name,Eelectric
+card_config,140103,name,Eelectric
+card_config,140104,name,Eelectric
+card_config,140105,name,Eelectric
+card_config,140106,name,Eelectric
+card_config,140111,name,Belican
+card_config,140112,name,Belican
+card_config,140113,name,Belican
+card_config,140114,name,Belican
+card_config,140115,name,Belican
+card_config,140116,name,Belican
+card_config,140117,name,Belican
+card_config,140121,name,Tiker
+card_config,140122,name,Tiker
+card_config,140123,name,Tiker
+card_config,140124,name,Tiker
+card_config,140125,name,Tiker
+card_config,140126,name,Tiker
+card_config,140127,name,Tiker
+card_config,140131,name,Sabershark
+card_config,140132,name,Sabershark
+card_config,140133,name,Sabershark
+card_config,140134,name,Sabershark
+card_config,140135,name,Sabershark
+card_config,140136,name,Sabershark
+card_config,140137,name,Sabershark
+card_config,140141,name,Squidiver
+card_config,140142,name,Squidiver
+card_config,140143,name,Squidiver
+card_config,140144,name,Squidiver
+card_config,140145,name,Squidiver
+card_config,140146,name,Squidiver
+card_config,140147,name,Squidiver
+card_config,140148,name,Squidiver
+card_config,140151,name,Kingmushrhum
+card_config,140152,name,Kingmushrhum
+card_config,140153,name,Kingmushrhum
+card_config,140154,name,Kingmushrhum
+card_config,140155,name,Kingmushrhum
+card_config,140156,name,Kingmushrhum
+card_config,140157,name,Kingmushrhum
+card_config,140158,name,Kingmushrhum
+card_config,140161,name,Armor Spider
+card_config,140162,name,Armor Spider
+card_config,140163,name,Armor Spider
+card_config,140164,name,Armor Spider
+card_config,140165,name,Armor Spider
+card_config,140171,name,Healmushrhum
+card_config,140172,name,Healmushrhum
+card_config,140173,name,Healmushrhum
+card_config,140174,name,Healmushrhum
+card_config,140175,name,Healmushrhum
+card_config,140181,name,Vigilant Turkey
+card_config,140182,name,Vigilant Turkey
+card_config,140183,name,Vigilant Turkey
+card_config,140184,name,Vigilant Turkey
+card_config,140185,name,Vigilant Turkey
+card_config,140186,name,Vigilant Turkey
+card_config,140191,name,Cryeel
+card_config,140192,name,Cryeel
+card_config,140193,name,Cryeel
+card_config,140194,name,Cryeel
+card_config,140195,name,Cryeel
+card_config,140196,name,Cryeel
+card_config,149018,name,Gerbip king
+card_config,150011,name,Staglamite
+card_config,150012,name,Staglamite
+card_config,150013,name,Staglamite
+card_config,150014,name,Staglamite
+card_config,150015,name,Staglamite
+card_config,150021,name,Bloglodyte
+card_config,150022,name,Bloglodyte
+card_config,150023,name,Bloglodyte
+card_config,150024,name,Bloglodyte
+card_config,150025,name,Bloglodyte
+card_config,150031,name,Pileogoo
+card_config,150032,name,Pileogoo
+card_config,150033,name,Pileogoo
+card_config,150034,name,Pileogoo
+card_config,150035,name,Pileogoo
+card_config,150041,name,Lava Ooze
+card_config,150042,name,Lava Ooze
+card_config,150043,name,Lava Ooze
+card_config,150044,name,Lava Ooze
+card_config,150045,name,Lava Ooze
+card_config,150046,name,Lava Ooze
+card_config,150051,name,Zombull
+card_config,150052,name,Zombull
+card_config,150053,name,Zombull
+card_config,150054,name,Zombull
+card_config,150055,name,Zombull
+card_config,150056,name,Zombull
+card_config,150061,name,Skeleton
+card_config,150062,name,Skeleton
+card_config,150063,name,Skeleton
+card_config,150064,name,Skeleton
+card_config,150065,name,Skeleton
+card_config,150066,name,Skeleton
+card_config,150071,name,Acolyte
+card_config,150072,name,Acolyte
+card_config,150073,name,Acolyte
+card_config,150074,name,Acolyte
+card_config,150075,name,Acolyte
+card_config,150076,name,Acolyte
+card_config,150077,name,Acolyte
+card_config,150081,name,Demon Dwarf
+card_config,150082,name,Demon Dwarf
+card_config,150083,name,Demon Dwarf
+card_config,150084,name,Demon Dwarf
+card_config,150085,name,Demon Dwarf
+card_config,150086,name,Demon Dwarf
+card_config,150087,name,Demon Dwarf
+card_config,150091,name,Musculard
+card_config,150092,name,Musculard
+card_config,150093,name,Musculard
+card_config,150094,name,Musculard
+card_config,150095,name,Musculard
+card_config,150096,name,Musculard
+card_config,150097,name,Musculard
+card_config,150098,name,Musculard
+card_config,150101,name,Sky Drake
+card_config,150102,name,Sky Drake
+card_config,150103,name,Sky Drake
+card_config,150104,name,Sky Drake
+card_config,150105,name,Sky Drake
+card_config,150106,name,Sky Drake
+card_config,150111,name,Dungeonmaster
+card_config,150112,name,Dungeonmaster
+card_config,150113,name,Dungeonmaster
+card_config,150114,name,Dungeonmaster
+card_config,150115,name,Dungeonmaster
+card_config,150116,name,Dungeonmaster
+card_config,150117,name,Dungeonmaster
+card_config,150118,name,Dungeonmaster
+card_config,150121,name,Giantrat
+card_config,150122,name,Giantrat
+card_config,150123,name,Giantrat
+card_config,150124,name,Giantrat
+card_config,150125,name,Giantrat
+card_config,150126,name,Giantrat
+card_config,150127,name,Giantrat
+card_config,150131,name,Whisp
+card_config,150132,name,Whisp
+card_config,150133,name,Whisp
+card_config,150134,name,Whisp
+card_config,150135,name,Whisp
+card_config,150136,name,Whisp
+card_config,150137,name,Whisp
+card_config,150141,name,Blue Dragon
+card_config,150142,name,Blue Dragon
+card_config,150143,name,Blue Dragon
+card_config,150144,name,Blue Dragon
+card_config,150145,name,Blue Dragon
+card_config,150146,name,Blue Dragon
+card_config,150147,name,Blue Dragon
+card_config,150148,name,Blue Dragon
+card_config,150151,name,Aeon
+card_config,150152,name,Aeon
+card_config,150153,name,Aeon
+card_config,150154,name,Aeon
+card_config,150155,name,Aeon
+card_config,150156,name,Aeon
+card_config,150157,name,Aeon
+card_config,150161,name,Arcane Garbage
+card_config,150162,name,Arcane Garbage
+card_config,150163,name,Arcane Garbage
+card_config,150164,name,Arcane Garbage
+card_config,150165,name,Arcane Garbage
+card_config,150171,name,Big Pliers
+card_config,150172,name,Big Pliers
+card_config,150173,name,Big Pliers
+card_config,150174,name,Big Pliers
+card_config,150175,name,Big Pliers
+card_config,150181,name,Naughty Imp
+card_config,150182,name,Naughty Imp
+card_config,150183,name,Naughty Imp
+card_config,150184,name,Naughty Imp
+card_config,150185,name,Naughty Imp
+card_config,150186,name,Naughty Imp
+card_config,150191,name,Mad Dwarf
+card_config,150192,name,Mad Dwarf
+card_config,150193,name,Mad Dwarf
+card_config,150194,name,Mad Dwarf
+card_config,150195,name,Mad Dwarf
+card_config,150196,name,Mad Dwarf
+card_config,21001,name,Plain Clothes
+card_config,210011,name,Plain Clothes
+card_config,210012,name,Plain Clothes
+card_config,22001,name,Plain Clothes
+card_config,220011,name,Plain Clothes
+card_config,220012,name,Plain Clothes
+card_config,23001,name,Plain Clothes
+card_config,230011,name,Plain Clothes
+card_config,230012,name,Plain Clothes
+card_config,24001,name,Plain Clothes
+card_config,240011,name,Plain Clothes
+card_config,240012,name,Plain Clothes
+card_config,25001,name,Plain Clothes
+card_config,250011,name,Plain Clothes
+card_config,250012,name,Plain Clothes
+card_config,26001,name,Plain Clothes
+card_config,260011,name,Plain Clothes
+card_config,260012,name,Plain Clothes
+card_config,21002,name,Metal Cap
+card_config,210021,name,Metal Cap
+card_config,210022,name,Metal Cap
+card_config,22002,name,Metal Cap
+card_config,220021,name,Metal Cap
+card_config,220022,name,Metal Cap
+card_config,23002,name,Metal Cap
+card_config,230021,name,Metal Cap
+card_config,230022,name,Metal Cap
+card_config,24002,name,Metal Cap
+card_config,240021,name,Metal Cap
+card_config,240022,name,Metal Cap
+card_config,25002,name,Metal Cap
+card_config,250021,name,Metal Cap
+card_config,250022,name,Metal Cap
+card_config,26002,name,Metal Cap
+card_config,260021,name,Metal Cap
+card_config,260022,name,Metal Cap
+card_config,21003,name,Spiked Leggings
+card_config,210031,name,Spiked Leggings
+card_config,210032,name,Spiked Leggings
+card_config,22003,name,Spiked Leggings
+card_config,220031,name,Spiked Leggings
+card_config,220032,name,Spiked Leggings
+card_config,23003,name,Spiked Leggings
+card_config,230031,name,Spiked Leggings
+card_config,230032,name,Spiked Leggings
+card_config,24003,name,Spiked Leggings
+card_config,240031,name,Spiked Leggings
+card_config,240032,name,Spiked Leggings
+card_config,25003,name,Spiked Leggings
+card_config,250031,name,Spiked Leggings
+card_config,250032,name,Spiked Leggings
+card_config,26003,name,Spiked Leggings
+card_config,260031,name,Spiked Leggings
+card_config,260032,name,Spiked Leggings
+card_config,21004,name,Heavy Gloves
+card_config,210041,name,Heavy Gloves
+card_config,210042,name,Heavy Gloves
+card_config,22004,name,Heavy Gloves
+card_config,220041,name,Heavy Gloves
+card_config,220042,name,Heavy Gloves
+card_config,23004,name,Heavy Gloves
+card_config,230041,name,Heavy Gloves
+card_config,230042,name,Heavy Gloves
+card_config,24004,name,Heavy Gloves
+card_config,240041,name,Heavy Gloves
+card_config,240042,name,Heavy Gloves
+card_config,25004,name,Heavy Gloves
+card_config,250041,name,Heavy Gloves
+card_config,250042,name,Heavy Gloves
+card_config,26004,name,Heavy Gloves
+card_config,260041,name,Heavy Gloves
+card_config,260042,name,Heavy Gloves
+card_config,21005,name,Fur Armor
+card_config,210051,name,Fur Armor
+card_config,210052,name,Fur Armor
+card_config,22005,name,Fur Armor
+card_config,220051,name,Fur Armor
+card_config,220052,name,Fur Armor
+card_config,23005,name,Fur Armor
+card_config,230051,name,Fur Armor
+card_config,230052,name,Fur Armor
+card_config,24005,name,Fur Armor
+card_config,240051,name,Fur Armor
+card_config,240052,name,Fur Armor
+card_config,25005,name,Fur Armor
+card_config,250051,name,Fur Armor
+card_config,250052,name,Fur Armor
+card_config,26005,name,Fur Armor
+card_config,260051,name,Fur Armor
+card_config,260052,name,Fur Armor
+card_config,22006,name,Thief Cloak
+card_config,220061,name,Thief Cloak
+card_config,220062,name,Thief Cloak
+card_config,23006,name,Thief Cloak
+card_config,230061,name,Thief Cloak
+card_config,230062,name,Thief Cloak
+card_config,24006,name,Thief Cloak
+card_config,240061,name,Thief Cloak
+card_config,240062,name,Thief Cloak
+card_config,25006,name,Thief Cloak
+card_config,250061,name,Thief Cloak
+card_config,250062,name,Thief Cloak
+card_config,26006,name,Thief Cloak
+card_config,260061,name,Thief Cloak
+card_config,260062,name,Thief Cloak
+card_config,21007,name,Unused Gloves
+card_config,210071,name,Unused Gloves
+card_config,210072,name,Unused Gloves
+card_config,22007,name,Unused Gloves
+card_config,220071,name,Unused Gloves
+card_config,220072,name,Unused Gloves
+card_config,23007,name,Unused Gloves
+card_config,230071,name,Unused Gloves
+card_config,230072,name,Unused Gloves
+card_config,24007,name,Unused Gloves
+card_config,240071,name,Unused Gloves
+card_config,240072,name,Unused Gloves
+card_config,25007,name,Unused Gloves
+card_config,250071,name,Unused Gloves
+card_config,250072,name,Unused Gloves
+card_config,26007,name,Unused Gloves
+card_config,260071,name,Unused Gloves
+card_config,260072,name,Unused Gloves
+card_config,22008,name,Sight Bracers
+card_config,220081,name,Sight Bracers
+card_config,220082,name,Sight Bracers
+card_config,23008,name,Sight Bracers
+card_config,230081,name,Sight Bracers
+card_config,230082,name,Sight Bracers
+card_config,24008,name,Sight Bracers
+card_config,240081,name,Sight Bracers
+card_config,240082,name,Sight Bracers
+card_config,26008,name,Sight Bracers
+card_config,260081,name,Sight Bracers
+card_config,260082,name,Sight Bracers
+card_config,21009,name,Chain Mail
+card_config,210091,name,Chain Mail
+card_config,210092,name,Chain Mail
+card_config,22009,name,Chain Mail
+card_config,220091,name,Chain Mail
+card_config,220092,name,Chain Mail
+card_config,23009,name,Chain Mail
+card_config,230091,name,Chain Mail
+card_config,230092,name,Chain Mail
+card_config,24009,name,Chain Mail
+card_config,240091,name,Chain Mail
+card_config,240092,name,Chain Mail
+card_config,25009,name,Chain Mail
+card_config,250091,name,Chain Mail
+card_config,250092,name,Chain Mail
+card_config,26009,name,Chain Mail
+card_config,260091,name,Chain Mail
+card_config,260092,name,Chain Mail
+card_config,21010,name,Leather Armor
+card_config,210101,name,Leather Armor
+card_config,210102,name,Leather Armor
+card_config,22010,name,Leather Armor
+card_config,220101,name,Leather Armor
+card_config,220102,name,Leather Armor
+card_config,23010,name,Leather Armor
+card_config,230101,name,Leather Armor
+card_config,230102,name,Leather Armor
+card_config,24010,name,Leather Armor
+card_config,240101,name,Leather Armor
+card_config,240102,name,Leather Armor
+card_config,25010,name,Leather Armor
+card_config,250101,name,Leather Armor
+card_config,250102,name,Leather Armor
+card_config,26010,name,Leather Armor
+card_config,260101,name,Leather Armor
+card_config,260102,name,Leather Armor
+card_config,21011,name,Monk Armor
+card_config,210111,name,Monk Armor
+card_config,210112,name,Monk Armor
+card_config,22011,name,Monk Armor
+card_config,220111,name,Monk Armor
+card_config,220112,name,Monk Armor
+card_config,23011,name,Monk Armor
+card_config,230111,name,Monk Armor
+card_config,230112,name,Monk Armor
+card_config,24011,name,Monk Armor
+card_config,240111,name,Monk Armor
+card_config,240112,name,Monk Armor
+card_config,25011,name,Monk Armor
+card_config,250111,name,Monk Armor
+card_config,250112,name,Monk Armor
+card_config,26011,name,Monk Armor
+card_config,260111,name,Monk Armor
+card_config,260112,name,Monk Armor
+card_config,21012,name,Ferocious Mask
+card_config,210121,name,Ferocious Mask
+card_config,210122,name,Ferocious Mask
+card_config,22012,name,Ferocious Mask
+card_config,220121,name,Ferocious Mask
+card_config,220122,name,Ferocious Mask
+card_config,23012,name,Ferocious Mask
+card_config,230121,name,Ferocious Mask
+card_config,230122,name,Ferocious Mask
+card_config,24012,name,Ferocious Mask
+card_config,240121,name,Ferocious Mask
+card_config,240122,name,Ferocious Mask
+card_config,25012,name,Ferocious Mask
+card_config,250121,name,Ferocious Mask
+card_config,250122,name,Ferocious Mask
+card_config,26012,name,Ferocious Mask
+card_config,260121,name,Ferocious Mask
+card_config,260122,name,Ferocious Mask
+card_config,21013,name,Feather Cap
+card_config,210131,name,Feather Cap
+card_config,210132,name,Feather Cap
+card_config,22013,name,Feather Cap
+card_config,220131,name,Feather Cap
+card_config,220132,name,Feather Cap
+card_config,23013,name,Feather Cap
+card_config,230131,name,Feather Cap
+card_config,230132,name,Feather Cap
+card_config,24013,name,Feather Cap
+card_config,240131,name,Feather Cap
+card_config,240132,name,Feather Cap
+card_config,25013,name,Feather Cap
+card_config,250131,name,Feather Cap
+card_config,250132,name,Feather Cap
+card_config,26013,name,Feather Cap
+card_config,260131,name,Feather Cap
+card_config,260132,name,Feather Cap
+card_config,21014,name,Ranged Barcers
+card_config,210141,name,Ranged Barcers
+card_config,210142,name,Ranged Barcers
+card_config,22014,name,Ranged Barcers
+card_config,220141,name,Ranged Barcers
+card_config,220142,name,Ranged Barcers
+card_config,23014,name,Ranged Barcers
+card_config,230141,name,Ranged Barcers
+card_config,230142,name,Ranged Barcers
+card_config,24014,name,Ranged Barcers
+card_config,240141,name,Ranged Barcers
+card_config,240142,name,Ranged Barcers
+card_config,25014,name,Ranged Barcers
+card_config,250141,name,Ranged Barcers
+card_config,250142,name,Ranged Barcers
+card_config,26014,name,Ranged Barcers
+card_config,260141,name,Ranged Barcers
+card_config,260142,name,Ranged Barcers
+card_config,21015,name,Spiked Helmet
+card_config,210151,name,Spiked Helmet
+card_config,210152,name,Spiked Helmet
+card_config,22015,name,Spiked Helmet
+card_config,220151,name,Spiked Helmet
+card_config,220152,name,Spiked Helmet
+card_config,23015,name,Spiked Helmet
+card_config,230151,name,Spiked Helmet
+card_config,230152,name,Spiked Helmet
+card_config,24015,name,Spiked Helmet
+card_config,240151,name,Spiked Helmet
+card_config,240152,name,Spiked Helmet
+card_config,25015,name,Spiked Helmet
+card_config,250151,name,Spiked Helmet
+card_config,250152,name,Spiked Helmet
+card_config,26015,name,Spiked Helmet
+card_config,260151,name,Spiked Helmet
+card_config,260152,name,Spiked Helmet
+card_config,21016,name,Fighting Gloves
+card_config,210161,name,Fighting Gloves
+card_config,210162,name,Fighting Gloves
+card_config,22016,name,Fighting Gloves
+card_config,220161,name,Fighting Gloves
+card_config,220162,name,Fighting Gloves
+card_config,24016,name,Fighting Gloves
+card_config,240161,name,Fighting Gloves
+card_config,240162,name,Fighting Gloves
+card_config,25016,name,Fighting Gloves
+card_config,250161,name,Fighting Gloves
+card_config,250162,name,Fighting Gloves
+card_config,26016,name,Fighting Gloves
+card_config,260161,name,Fighting Gloves
+card_config,260162,name,Fighting Gloves
+card_config,21017,name,Shield
+card_config,210171,name,Shield
+card_config,210172,name,Shield
+card_config,22017,name,Shield
+card_config,220171,name,Shield
+card_config,220172,name,Shield
+card_config,23017,name,Shield
+card_config,230171,name,Shield
+card_config,230172,name,Shield
+card_config,24017,name,Shield
+card_config,240171,name,Shield
+card_config,240172,name,Shield
+card_config,26017,name,Shield
+card_config,260171,name,Shield
+card_config,260172,name,Shield
+card_config,22018,name,Light Tiara
+card_config,220181,name,Light Tiara
+card_config,220182,name,Light Tiara
+card_config,23018,name,Light Tiara
+card_config,230181,name,Light Tiara
+card_config,230182,name,Light Tiara
+card_config,24018,name,Light Tiara
+card_config,240181,name,Light Tiara
+card_config,240182,name,Light Tiara
+card_config,25018,name,Light Tiara
+card_config,250181,name,Light Tiara
+card_config,250182,name,Light Tiara
+card_config,26018,name,Light Tiara
+card_config,260181,name,Light Tiara
+card_config,260182,name,Light Tiara
+card_config,21019,name,Spiked Armor
+card_config,210191,name,Spiked Armor
+card_config,210192,name,Spiked Armor
+card_config,23019,name,Spiked Armor
+card_config,230191,name,Spiked Armor
+card_config,230192,name,Spiked Armor
+card_config,24019,name,Spiked Armor
+card_config,240191,name,Spiked Armor
+card_config,240192,name,Spiked Armor
+card_config,25019,name,Spiked Armor
+card_config,250191,name,Spiked Armor
+card_config,250192,name,Spiked Armor
+card_config,26019,name,Spiked Armor
+card_config,260191,name,Spiked Armor
+card_config,260192,name,Spiked Armor
+card_config,21020,name,Mirror Shield
+card_config,210201,name,Mirror Shield
+card_config,210202,name,Mirror Shield
+card_config,22020,name,Mirror Shield
+card_config,220201,name,Mirror Shield
+card_config,220202,name,Mirror Shield
+card_config,23020,name,Mirror Shield
+card_config,230201,name,Mirror Shield
+card_config,230202,name,Mirror Shield
+card_config,25020,name,Mirror Shield
+card_config,250201,name,Mirror Shield
+card_config,250202,name,Mirror Shield
+card_config,26020,name,Mirror Shield
+card_config,260201,name,Mirror Shield
+card_config,260202,name,Mirror Shield
+card_config,21021,name,Captains Shield
+card_config,210211,name,Captains Shield
+card_config,210212,name,Captains Shield
+card_config,22021,name,Captains Shield
+card_config,220211,name,Captains Shield
+card_config,220212,name,Captains Shield
+card_config,23021,name,Captains Shield
+card_config,230211,name,Captains Shield
+card_config,230212,name,Captains Shield
+card_config,24021,name,Captains Shield
+card_config,240211,name,Captains Shield
+card_config,240212,name,Captains Shield
+card_config,25021,name,Captains Shield
+card_config,250211,name,Captains Shield
+card_config,250212,name,Captains Shield
+card_config,26021,name,Captains Shield
+card_config,260211,name,Captains Shield
+card_config,260212,name,Captains Shield
+card_config,22022,name,Medusa Shield
+card_config,220221,name,Medusa Shield
+card_config,220222,name,Medusa Shield
+card_config,23022,name,Medusa Shield
+card_config,230221,name,Medusa Shield
+card_config,230222,name,Medusa Shield
+card_config,24022,name,Medusa Shield
+card_config,240221,name,Medusa Shield
+card_config,240222,name,Medusa Shield
+card_config,26022,name,Medusa Shield
+card_config,260221,name,Medusa Shield
+card_config,260222,name,Medusa Shield
+card_config,22023,name,Repair Plate
+card_config,220231,name,Repair Plate
+card_config,220232,name,Repair Plate
+card_config,23023,name,Repair Plate
+card_config,230231,name,Repair Plate
+card_config,230232,name,Repair Plate
+card_config,24023,name,Repair Plate
+card_config,240231,name,Repair Plate
+card_config,240232,name,Repair Plate
+card_config,26023,name,Repair Plate
+card_config,260231,name,Repair Plate
+card_config,260232,name,Repair Plate
+card_config,22024,name,Battle Tiara
+card_config,220241,name,Battle Tiara
+card_config,220242,name,Battle Tiara
+card_config,23024,name,Battle Tiara
+card_config,230241,name,Battle Tiara
+card_config,230242,name,Battle Tiara
+card_config,24024,name,Battle Tiara
+card_config,240241,name,Battle Tiara
+card_config,240242,name,Battle Tiara
+card_config,25024,name,Battle Tiara
+card_config,250241,name,Battle Tiara
+card_config,250242,name,Battle Tiara
+card_config,26024,name,Battle Tiara
+card_config,260241,name,Battle Tiara
+card_config,260242,name,Battle Tiara
+card_config,21025,name,Rock Armor
+card_config,210251,name,Rock Armor
+card_config,210252,name,Rock Armor
+card_config,22025,name,Rock Armor
+card_config,220251,name,Rock Armor
+card_config,220252,name,Rock Armor
+card_config,23025,name,Rock Armor
+card_config,230251,name,Rock Armor
+card_config,230252,name,Rock Armor
+card_config,24025,name,Rock Armor
+card_config,240251,name,Rock Armor
+card_config,240252,name,Rock Armor
+card_config,26025,name,Rock Armor
+card_config,260251,name,Rock Armor
+card_config,260252,name,Rock Armor
+card_config,21026,name,Armor Of Darkness
+card_config,210261,name,Armor Of Darkness
+card_config,210262,name,Armor Of Darkness
+card_config,22026,name,Armor Of Darkness
+card_config,220261,name,Armor Of Darkness
+card_config,220262,name,Armor Of Darkness
+card_config,23026,name,Armor Of Darkness
+card_config,230261,name,Armor Of Darkness
+card_config,230262,name,Armor Of Darkness
+card_config,24026,name,Armor Of Darkness
+card_config,240261,name,Armor Of Darkness
+card_config,240262,name,Armor Of Darkness
+card_config,25026,name,Armor Of Darkness
+card_config,250261,name,Armor Of Darkness
+card_config,250262,name,Armor Of Darkness
+card_config,26026,name,Armor Of Darkness
+card_config,260261,name,Armor Of Darkness
+card_config,260262,name,Armor Of Darkness
+card_config,21027,name,Protector
+card_config,210271,name,Protector
+card_config,210272,name,Protector
+card_config,22027,name,Protector
+card_config,220271,name,Protector
+card_config,220272,name,Protector
+card_config,23027,name,Protector
+card_config,230271,name,Protector
+card_config,230272,name,Protector
+card_config,24027,name,Protector
+card_config,240271,name,Protector
+card_config,240272,name,Protector
+card_config,26027,name,Protector
+card_config,260271,name,Protector
+card_config,260272,name,Protector
+card_config,21028,name,Infectious Armor
+card_config,210281,name,Infectious Armor
+card_config,210282,name,Infectious Armor
+card_config,23028,name,Infectious Armor
+card_config,230281,name,Infectious Armor
+card_config,230282,name,Infectious Armor
+card_config,24028,name,Infectious Armor
+card_config,240281,name,Infectious Armor
+card_config,240282,name,Infectious Armor
+card_config,26028,name,Infectious Armor
+card_config,260281,name,Infectious Armor
+card_config,260282,name,Infectious Armor
+card_config,21029,name,Wooden Bracers
+card_config,210291,name,Wooden Bracers
+card_config,210292,name,Wooden Bracers
+card_config,22029,name,Wooden Bracers
+card_config,220291,name,Wooden Bracers
+card_config,220292,name,Wooden Bracers
+card_config,23029,name,Wooden Bracers
+card_config,230291,name,Wooden Bracers
+card_config,230292,name,Wooden Bracers
+card_config,24029,name,Wooden Bracers
+card_config,240291,name,Wooden Bracers
+card_config,240292,name,Wooden Bracers
+card_config,25029,name,Wooden Bracers
+card_config,250291,name,Wooden Bracers
+card_config,250292,name,Wooden Bracers
+card_config,26029,name,Wooden Bracers
+card_config,260291,name,Wooden Bracers
+card_config,260292,name,Wooden Bracers
+card_config,31001,name,Short Sword
+card_config,310011,name,Short Sword
+card_config,310012,name,Short Sword
+card_config,32001,name,Short Sword
+card_config,320011,name,Short Sword
+card_config,320012,name,Short Sword
+card_config,34001,name,Short Sword
+card_config,340011,name,Short Sword
+card_config,340012,name,Short Sword
+card_config,35001,name,Short Sword
+card_config,350011,name,Short Sword
+card_config,350012,name,Short Sword
+card_config,36001,name,Short Sword
+card_config,360011,name,Short Sword
+card_config,360012,name,Short Sword
+card_config,31002,name,Short Bow
+card_config,310021,name,Short Bow
+card_config,310022,name,Short Bow
+card_config,32002,name,Short Bow
+card_config,320021,name,Short Bow
+card_config,320022,name,Short Bow
+card_config,33002,name,Short Bow
+card_config,330021,name,Short Bow
+card_config,330022,name,Short Bow
+card_config,34002,name,Short Bow
+card_config,340021,name,Short Bow
+card_config,340022,name,Short Bow
+card_config,35002,name,Short Bow
+card_config,350021,name,Short Bow
+card_config,350022,name,Short Bow
+card_config,36002,name,Short Bow
+card_config,360021,name,Short Bow
+card_config,360022,name,Short Bow
+card_config,31003,name,Oak Staff
+card_config,310031,name,Oak Staff
+card_config,310032,name,Oak Staff
+card_config,32003,name,Oak Staff
+card_config,320031,name,Oak Staff
+card_config,320032,name,Oak Staff
+card_config,33003,name,Oak Staff
+card_config,330031,name,Oak Staff
+card_config,330032,name,Oak Staff
+card_config,34003,name,Oak Staff
+card_config,340031,name,Oak Staff
+card_config,340032,name,Oak Staff
+card_config,35003,name,Oak Staff
+card_config,350031,name,Oak Staff
+card_config,350032,name,Oak Staff
+card_config,36003,name,Oak Staff
+card_config,360031,name,Oak Staff
+card_config,360032,name,Oak Staff
+card_config,31004,name,Violent Boots
+card_config,310041,name,Violent Boots
+card_config,310042,name,Violent Boots
+card_config,32004,name,Violent Boots
+card_config,320041,name,Violent Boots
+card_config,320042,name,Violent Boots
+card_config,33004,name,Violent Boots
+card_config,330041,name,Violent Boots
+card_config,330042,name,Violent Boots
+card_config,34004,name,Violent Boots
+card_config,340041,name,Violent Boots
+card_config,340042,name,Violent Boots
+card_config,35004,name,Violent Boots
+card_config,350041,name,Violent Boots
+card_config,350042,name,Violent Boots
+card_config,36004,name,Violent Boots
+card_config,360041,name,Violent Boots
+card_config,360042,name,Violent Boots
+card_config,32005,name,Light Shoes
+card_config,320051,name,Light Shoes
+card_config,320052,name,Light Shoes
+card_config,33005,name,Light Shoes
+card_config,330051,name,Light Shoes
+card_config,330052,name,Light Shoes
+card_config,34005,name,Light Shoes
+card_config,340051,name,Light Shoes
+card_config,340052,name,Light Shoes
+card_config,35005,name,Light Shoes
+card_config,350051,name,Light Shoes
+card_config,350052,name,Light Shoes
+card_config,36005,name,Light Shoes
+card_config,360051,name,Light Shoes
+card_config,360052,name,Light Shoes
+card_config,31006,name,Ring Of Poison
+card_config,310061,name,Ring Of Poison
+card_config,310062,name,Ring Of Poison
+card_config,32006,name,Ring Of Poison
+card_config,320061,name,Ring Of Poison
+card_config,320062,name,Ring Of Poison
+card_config,33006,name,Ring Of Poison
+card_config,330061,name,Ring Of Poison
+card_config,330062,name,Ring Of Poison
+card_config,34006,name,Ring Of Poison
+card_config,340061,name,Ring Of Poison
+card_config,340062,name,Ring Of Poison
+card_config,35006,name,Ring Of Poison
+card_config,350061,name,Ring Of Poison
+card_config,350062,name,Ring Of Poison
+card_config,36006,name,Ring Of Poison
+card_config,360061,name,Ring Of Poison
+card_config,360062,name,Ring Of Poison
+card_config,31007,name,Long Sword
+card_config,310071,name,Long Sword
+card_config,310072,name,Long Sword
+card_config,32007,name,Long Sword
+card_config,320071,name,Long Sword
+card_config,320072,name,Long Sword
+card_config,34007,name,Long Sword
+card_config,340071,name,Long Sword
+card_config,340072,name,Long Sword
+card_config,35007,name,Long Sword
+card_config,350071,name,Long Sword
+card_config,350072,name,Long Sword
+card_config,36007,name,Long Sword
+card_config,360071,name,Long Sword
+card_config,360072,name,Long Sword
+card_config,32008,name,Lucky Shoes
+card_config,320081,name,Lucky Shoes
+card_config,320082,name,Lucky Shoes
+card_config,33008,name,Lucky Shoes
+card_config,330081,name,Lucky Shoes
+card_config,330082,name,Lucky Shoes
+card_config,34008,name,Lucky Shoes
+card_config,340081,name,Lucky Shoes
+card_config,340082,name,Lucky Shoes
+card_config,35008,name,Lucky Shoes
+card_config,350081,name,Lucky Shoes
+card_config,350082,name,Lucky Shoes
+card_config,36008,name,Lucky Shoes
+card_config,360081,name,Lucky Shoes
+card_config,360082,name,Lucky Shoes
+card_config,31009,name,Hunters Bow
+card_config,310091,name,Hunters Bow
+card_config,310092,name,Hunters Bow
+card_config,32009,name,Hunters Bow
+card_config,320091,name,Hunters Bow
+card_config,320092,name,Hunters Bow
+card_config,33009,name,Hunters Bow
+card_config,330091,name,Hunters Bow
+card_config,330092,name,Hunters Bow
+card_config,34009,name,Hunters Bow
+card_config,340091,name,Hunters Bow
+card_config,340092,name,Hunters Bow
+card_config,36009,name,Hunters Bow
+card_config,360091,name,Hunters Bow
+card_config,360092,name,Hunters Bow
+card_config,31010,name,Balance Ring
+card_config,310101,name,Balance Ring
+card_config,310102,name,Balance Ring
+card_config,32010,name,Balance Ring
+card_config,320101,name,Balance Ring
+card_config,320102,name,Balance Ring
+card_config,33010,name,Balance Ring
+card_config,330101,name,Balance Ring
+card_config,330102,name,Balance Ring
+card_config,34010,name,Balance Ring
+card_config,340101,name,Balance Ring
+card_config,340102,name,Balance Ring
+card_config,35010,name,Balance Ring
+card_config,350101,name,Balance Ring
+card_config,350102,name,Balance Ring
+card_config,36010,name,Balance Ring
+card_config,360101,name,Balance Ring
+card_config,360102,name,Balance Ring
+card_config,31011,name,Pendant Of Courage
+card_config,310111,name,Pendant Of Courage
+card_config,310112,name,Pendant Of Courage
+card_config,32011,name,Pendant Of Courage
+card_config,320111,name,Pendant Of Courage
+card_config,320112,name,Pendant Of Courage
+card_config,33011,name,Pendant Of Courage
+card_config,330111,name,Pendant Of Courage
+card_config,330112,name,Pendant Of Courage
+card_config,34011,name,Pendant Of Courage
+card_config,340111,name,Pendant Of Courage
+card_config,340112,name,Pendant Of Courage
+card_config,35011,name,Pendant Of Courage
+card_config,350111,name,Pendant Of Courage
+card_config,350112,name,Pendant Of Courage
+card_config,36011,name,Pendant Of Courage
+card_config,360111,name,Pendant Of Courage
+card_config,360112,name,Pendant Of Courage
+card_config,31012,name,Ebony Staff
+card_config,310121,name,Ebony Staff
+card_config,310122,name,Ebony Staff
+card_config,32012,name,Ebony Staff
+card_config,320121,name,Ebony Staff
+card_config,320122,name,Ebony Staff
+card_config,33012,name,Ebony Staff
+card_config,330121,name,Ebony Staff
+card_config,330122,name,Ebony Staff
+card_config,34012,name,Ebony Staff
+card_config,340121,name,Ebony Staff
+card_config,340122,name,Ebony Staff
+card_config,35012,name,Ebony Staff
+card_config,350121,name,Ebony Staff
+card_config,350122,name,Ebony Staff
+card_config,36012,name,Ebony Staff
+card_config,360121,name,Ebony Staff
+card_config,360122,name,Ebony Staff
+card_config,31013,name,Combat Staff
+card_config,310131,name,Combat Staff
+card_config,310132,name,Combat Staff
+card_config,32013,name,Combat Staff
+card_config,320131,name,Combat Staff
+card_config,320132,name,Combat Staff
+card_config,33013,name,Combat Staff
+card_config,330131,name,Combat Staff
+card_config,330132,name,Combat Staff
+card_config,34013,name,Combat Staff
+card_config,340131,name,Combat Staff
+card_config,340132,name,Combat Staff
+card_config,35013,name,Combat Staff
+card_config,350131,name,Combat Staff
+card_config,350132,name,Combat Staff
+card_config,36013,name,Combat Staff
+card_config,360131,name,Combat Staff
+card_config,360132,name,Combat Staff
+card_config,32014,name,Heal Staff
+card_config,320141,name,Heal Staff
+card_config,320142,name,Heal Staff
+card_config,33014,name,Heal Staff
+card_config,330141,name,Heal Staff
+card_config,330142,name,Heal Staff
+card_config,34014,name,Heal Staff
+card_config,340141,name,Heal Staff
+card_config,340142,name,Heal Staff
+card_config,36014,name,Heal Staff
+card_config,360141,name,Heal Staff
+card_config,360142,name,Heal Staff
+card_config,32015,name,Healing Flute
+card_config,320151,name,Healing Flute
+card_config,320152,name,Healing Flute
+card_config,33015,name,Healing Flute
+card_config,330151,name,Healing Flute
+card_config,330152,name,Healing Flute
+card_config,34015,name,Healing Flute
+card_config,340151,name,Healing Flute
+card_config,340152,name,Healing Flute
+card_config,36015,name,Healing Flute
+card_config,360151,name,Healing Flute
+card_config,360152,name,Healing Flute
+card_config,31016,name,Pendant Of Disease
+card_config,310161,name,Pendant Of Disease
+card_config,310162,name,Pendant Of Disease
+card_config,32016,name,Pendant Of Disease
+card_config,320161,name,Pendant Of Disease
+card_config,320162,name,Pendant Of Disease
+card_config,33016,name,Pendant Of Disease
+card_config,330161,name,Pendant Of Disease
+card_config,330162,name,Pendant Of Disease
+card_config,34016,name,Pendant Of Disease
+card_config,340161,name,Pendant Of Disease
+card_config,340162,name,Pendant Of Disease
+card_config,35016,name,Pendant Of Disease
+card_config,350161,name,Pendant Of Disease
+card_config,350162,name,Pendant Of Disease
+card_config,36016,name,Pendant Of Disease
+card_config,360161,name,Pendant Of Disease
+card_config,360162,name,Pendant Of Disease
+card_config,31017,name,Toxic Blade
+card_config,310171,name,Toxic Blade
+card_config,310172,name,Toxic Blade
+card_config,32017,name,Toxic Blade
+card_config,320171,name,Toxic Blade
+card_config,320172,name,Toxic Blade
+card_config,33017,name,Toxic Blade
+card_config,330171,name,Toxic Blade
+card_config,330172,name,Toxic Blade
+card_config,34017,name,Toxic Blade
+card_config,340171,name,Toxic Blade
+card_config,340172,name,Toxic Blade
+card_config,35017,name,Toxic Blade
+card_config,350171,name,Toxic Blade
+card_config,350172,name,Toxic Blade
+card_config,36017,name,Toxic Blade
+card_config,360171,name,Toxic Blade
+card_config,360172,name,Toxic Blade
+card_config,32018,name,Poison Shot
+card_config,320181,name,Poison Shot
+card_config,320182,name,Poison Shot
+card_config,33018,name,Poison Shot
+card_config,330181,name,Poison Shot
+card_config,330182,name,Poison Shot
+card_config,34018,name,Poison Shot
+card_config,340181,name,Poison Shot
+card_config,340182,name,Poison Shot
+card_config,35018,name,Poison Shot
+card_config,350181,name,Poison Shot
+card_config,350182,name,Poison Shot
+card_config,36018,name,Poison Shot
+card_config,360181,name,Poison Shot
+card_config,360182,name,Poison Shot
+card_config,31019,name,Long Spear
+card_config,310191,name,Long Spear
+card_config,310192,name,Long Spear
+card_config,32019,name,Long Spear
+card_config,320191,name,Long Spear
+card_config,320192,name,Long Spear
+card_config,34019,name,Long Spear
+card_config,340191,name,Long Spear
+card_config,340192,name,Long Spear
+card_config,35019,name,Long Spear
+card_config,350191,name,Long Spear
+card_config,350192,name,Long Spear
+card_config,36019,name,Long Spear
+card_config,360191,name,Long Spear
+card_config,360192,name,Long Spear
+card_config,31020,name,Hammer
+card_config,310201,name,Hammer
+card_config,310202,name,Hammer
+card_config,32020,name,Hammer
+card_config,320201,name,Hammer
+card_config,320202,name,Hammer
+card_config,33020,name,Hammer
+card_config,330201,name,Hammer
+card_config,330202,name,Hammer
+card_config,34020,name,Hammer
+card_config,340201,name,Hammer
+card_config,340202,name,Hammer
+card_config,35020,name,Hammer
+card_config,350201,name,Hammer
+card_config,350202,name,Hammer
+card_config,36020,name,Hammer
+card_config,360201,name,Hammer
+card_config,360202,name,Hammer
+card_config,31021,name,Ring Of Mages
+card_config,310211,name,Ring Of Mages
+card_config,310212,name,Ring Of Mages
+card_config,32021,name,Ring Of Mages
+card_config,320211,name,Ring Of Mages
+card_config,320212,name,Ring Of Mages
+card_config,33021,name,Ring Of Mages
+card_config,330211,name,Ring Of Mages
+card_config,330212,name,Ring Of Mages
+card_config,34021,name,Ring Of Mages
+card_config,340211,name,Ring Of Mages
+card_config,340212,name,Ring Of Mages
+card_config,35021,name,Ring Of Mages
+card_config,350211,name,Ring Of Mages
+card_config,350212,name,Ring Of Mages
+card_config,36021,name,Ring Of Mages
+card_config,360211,name,Ring Of Mages
+card_config,360212,name,Ring Of Mages
+card_config,31022,name,Battle Axe
+card_config,310221,name,Battle Axe
+card_config,310222,name,Battle Axe
+card_config,32022,name,Battle Axe
+card_config,320221,name,Battle Axe
+card_config,320222,name,Battle Axe
+card_config,33022,name,Battle Axe
+card_config,330221,name,Battle Axe
+card_config,330222,name,Battle Axe
+card_config,34022,name,Battle Axe
+card_config,340221,name,Battle Axe
+card_config,340222,name,Battle Axe
+card_config,35022,name,Battle Axe
+card_config,350221,name,Battle Axe
+card_config,350222,name,Battle Axe
+card_config,36022,name,Battle Axe
+card_config,360221,name,Battle Axe
+card_config,360222,name,Battle Axe
+card_config,31023,name,Heralds Bow
+card_config,310231,name,Heralds Bow
+card_config,310232,name,Heralds Bow
+card_config,32023,name,Heralds Bow
+card_config,320231,name,Heralds Bow
+card_config,320232,name,Heralds Bow
+card_config,33023,name,Heralds Bow
+card_config,330231,name,Heralds Bow
+card_config,330232,name,Heralds Bow
+card_config,34023,name,Heralds Bow
+card_config,340231,name,Heralds Bow
+card_config,340232,name,Heralds Bow
+card_config,35023,name,Heralds Bow
+card_config,350231,name,Heralds Bow
+card_config,350232,name,Heralds Bow
+card_config,36023,name,Heralds Bow
+card_config,360231,name,Heralds Bow
+card_config,360232,name,Heralds Bow
+card_config,31024,name,Crossbow
+card_config,310241,name,Crossbow
+card_config,310242,name,Crossbow
+card_config,32024,name,Crossbow
+card_config,320241,name,Crossbow
+card_config,320242,name,Crossbow
+card_config,33024,name,Crossbow
+card_config,330241,name,Crossbow
+card_config,330242,name,Crossbow
+card_config,34024,name,Crossbow
+card_config,340241,name,Crossbow
+card_config,340242,name,Crossbow
+card_config,35024,name,Crossbow
+card_config,350241,name,Crossbow
+card_config,350242,name,Crossbow
+card_config,36024,name,Crossbow
+card_config,360241,name,Crossbow
+card_config,360242,name,Crossbow
+card_config,33025,name,Staff Of Flight
+card_config,330251,name,Staff Of Flight
+card_config,330252,name,Staff Of Flight
+card_config,35025,name,Staff Of Flight
+card_config,350251,name,Staff Of Flight
+card_config,350252,name,Staff Of Flight
+card_config,36025,name,Staff Of Flight
+card_config,360251,name,Staff Of Flight
+card_config,360252,name,Staff Of Flight
+card_config,32026,name,Horn Of Ages
+card_config,320261,name,Horn Of Ages
+card_config,320262,name,Horn Of Ages
+card_config,33026,name,Horn Of Ages
+card_config,330261,name,Horn Of Ages
+card_config,330262,name,Horn Of Ages
+card_config,34026,name,Horn Of Ages
+card_config,340261,name,Horn Of Ages
+card_config,340262,name,Horn Of Ages
+card_config,36026,name,Horn Of Ages
+card_config,360261,name,Horn Of Ages
+card_config,360262,name,Horn Of Ages
+card_config,31027,name,Twilight
+card_config,310271,name,Twilight
+card_config,310272,name,Twilight
+card_config,32027,name,Twilight
+card_config,320271,name,Twilight
+card_config,320272,name,Twilight
+card_config,34027,name,Twilight
+card_config,340271,name,Twilight
+card_config,340272,name,Twilight
+card_config,35027,name,Twilight
+card_config,350271,name,Twilight
+card_config,350272,name,Twilight
+card_config,36027,name,Twilight
+card_config,360271,name,Twilight
+card_config,360272,name,Twilight
+card_config,31028,name,Stalagmite Gloves
+card_config,310281,name,Stalagmite Gloves
+card_config,310282,name,Stalagmite Gloves
+card_config,32028,name,Stalagmite Gloves
+card_config,320281,name,Stalagmite Gloves
+card_config,320282,name,Stalagmite Gloves
+card_config,33028,name,Stalagmite Gloves
+card_config,330281,name,Stalagmite Gloves
+card_config,330282,name,Stalagmite Gloves
+card_config,34028,name,Stalagmite Gloves
+card_config,340281,name,Stalagmite Gloves
+card_config,340282,name,Stalagmite Gloves
+card_config,35028,name,Stalagmite Gloves
+card_config,350281,name,Stalagmite Gloves
+card_config,350282,name,Stalagmite Gloves
+card_config,36028,name,Stalagmite Gloves
+card_config,360281,name,Stalagmite Gloves
+card_config,360282,name,Stalagmite Gloves
+card_config,31029,name,Excalibur
+card_config,310291,name,Excalibur
+card_config,310292,name,Excalibur
+card_config,32029,name,Excalibur
+card_config,320291,name,Excalibur
+card_config,320292,name,Excalibur
+card_config,33029,name,Excalibur
+card_config,330291,name,Excalibur
+card_config,330292,name,Excalibur
+card_config,34029,name,Excalibur
+card_config,340291,name,Excalibur
+card_config,340292,name,Excalibur
+card_config,35029,name,Excalibur
+card_config,350291,name,Excalibur
+card_config,350292,name,Excalibur
+card_config,36029,name,Excalibur
+card_config,360291,name,Excalibur
+card_config,360292,name,Excalibur
+card_config,31030,name,Molten Crossbow
+card_config,310301,name,Molten Crossbow
+card_config,310302,name,Molten Crossbow
+card_config,32030,name,Molten Crossbow
+card_config,320301,name,Molten Crossbow
+card_config,320302,name,Molten Crossbow
+card_config,33030,name,Molten Crossbow
+card_config,330301,name,Molten Crossbow
+card_config,330302,name,Molten Crossbow
+card_config,34030,name,Molten Crossbow
+card_config,340301,name,Molten Crossbow
+card_config,340302,name,Molten Crossbow
+card_config,35030,name,Molten Crossbow
+card_config,350301,name,Molten Crossbow
+card_config,350302,name,Molten Crossbow
+card_config,36030,name,Molten Crossbow
+card_config,360301,name,Molten Crossbow
+card_config,360302,name,Molten Crossbow
+card_config,31031,name,Obsidian Spear
+card_config,310311,name,Obsidian Spear
+card_config,310312,name,Obsidian Spear
+card_config,32031,name,Obsidian Spear
+card_config,320311,name,Obsidian Spear
+card_config,320312,name,Obsidian Spear
+card_config,33031,name,Obsidian Spear
+card_config,330311,name,Obsidian Spear
+card_config,330312,name,Obsidian Spear
+card_config,34031,name,Obsidian Spear
+card_config,340311,name,Obsidian Spear
+card_config,340312,name,Obsidian Spear
+card_config,35031,name,Obsidian Spear
+card_config,350311,name,Obsidian Spear
+card_config,350312,name,Obsidian Spear
+card_config,36031,name,Obsidian Spear
+card_config,360311,name,Obsidian Spear
+card_config,360312,name,Obsidian Spear
+card_config,40001,name,Thareaing Knife
+card_config,40002,name,Healing Vial
+card_config,40003,name,Potion
+card_config,40004,name,Bomb
+card_config,40005,name,Boomerang
+card_config,40006,name,Dragons Blood
+card_config,40007,name,Soothing Music
+card_config,40008,name,Ceremonial Knife
+card_config,40009,name,Poison Dagger
+card_config,40010,name,Brittle Ointment
+card_config,40011,name,Rejuvenating Sound
+card_config,40012,name,Dragon'S Tear
+card_config,40013,name,Wolf Bombs
+card_config,40014,name,Shuriken
+card_config,40015,name,Elixir
+chest_config,1,name,Super Amazing Pack
+chest_config,2,name,Amazing Pack
+chest_config,3,name,Tremendous Pack
+chest_config,4,name,Carean Pack
+chest_config,5,name,Magic Pack
+chest_config,6,name,Gold Pack
+chest_config,7,name,Silver Pack
+chest_config,8,name,Wood Pack
+chest_config,9,name,Rusty Squire Pack
+chest_config,10,name,Glory Knight Pack
+chest_config,11,name,Deluxe Lord Pack
+chest_config,12,name,Freaking Awesome Demon Pack
+chest_config,13,name,Rusty Plebeian Pack
+chest_config,14,name,Rusty Newbee Pack
+chest_config,15,name,Rusty Novitiate Pack
+chest_config,16,name,Rusty Novitiate Pack
+chest_config,17,name,Rusty Apprentice Pack
+chest_config,18,name,Love and Peace from Staff
+chest_config,19,name,Tavern owner's daily booster pack Level 1
+chest_config,20,name,Tavern owner's daily booster pack Level 2
+chest_config,21,name,Tavern owner's daily booster pack Level 3
+chest_config,22,name,Tavern owner's daily booster pack Level 4
+chest_config,23,name,Tavern owner's daily booster pack Level 5
+chest_config,24,name,Tavern owner's daily booster pack Level 6
+chest_config,25,name,Tavern owner's daily booster pack Level 7
+chest_config,26,name,Tavern owner's daily booster pack Level 8
+chest_config,27,name,Tavern owner's daily booster pack Level 9
+chest_config,28,name,Tavern owner's daily booster pack Level 10
+chest_config,29,name,Tavern owner's daily booster pack Level 11
+chest_config,30,name,Tavern owner's daily booster pack Level 1(Old)
+chest_config,31,name,Tavern owner's daily booster pack Level 2(Old)
+chest_config,32,name,Tavern owner's daily booster pack Level 3(Old)
+chest_config,33,name,Tavern owner's daily booster pack Level 4(Old)
+chest_config,34,name,Tavern owner's daily booster pack Level 5(Old)
+chest_config,35,name,Tavern owner's daily booster pack Level 6(Old)
+chest_config,36,name,Tavern owner's daily booster pack Level Max
+chest_config,37,name,Tavern owner's daily booster pack Level Max
+chest_config,38,name,Tavern owner's daily booster pack Level 1
+chest_config,39,name,Tavern owner's daily booster pack Level 2
+chest_config,40,name,Tavern owner's daily booster pack Level 3
+chest_config,41,name,Tavern owner's daily booster pack Level 4
+chest_config,42,name,Tavern owner's daily booster pack Level 5
+chest_config,43,name,Tavern owner's daily booster pack Level 6
+chest_config,44,name,Tavern owner's daily booster pack Level 7
+chest_config,45,name,Tavern owner's daily booster pack Level 8
+chest_config,46,name,Tavern owner's daily booster pack Level 9
+chest_config,47,name,Tavern owner's daily booster pack Level 10
+chest_config,48,name,Tavern owner's daily booster pack Level 11
+chest_config,49,name,Tavern owner's daily booster pack Level 12
+chest_config,50,name,Tavern owner's daily booster pack Level 13
+chest_config,51,name,Tavern owner's daily booster pack Level Max
+chest_config,52,name,Tavern owner's newbie booster pack
+chest_config,53,name,Season booster pack Rank 12
+chest_config,54,name,Season booster pack Rank 11
+chest_config,55,name,Season booster pack Rank 10
+chest_config,56,name,Season booster pack Rank 9
+chest_config,57,name,Season booster pack Rank 8
+chest_config,58,name,Season booster pack Rank 7
+chest_config,59,name,Season booster pack Rank 6
+chest_config,60,name,Season booster pack Rank 5
+chest_config,61,name,Season booster pack Rank 4
+chest_config,62,name,Season booster pack Rank 3
+chest_config,63,name,Season booster pack Rank 2
+chest_config,64,name,Season booster pack Rank 1
+power_config,melee,name_desc,Melee
+power_config,melee,info_desc,When in engagement slot: Attacks the enemy in engagement slot.
+power_config,ranged,name_desc,Ranged
+power_config,ranged,info_desc,When in support slot: Prefers to attack the enemy in the diagonal support slot，but this attack has 25% chance to be blocked (deal no damage) if that enemy equips with Armor.
+power_config,magic,name_desc,Magic
+power_config,magic,info_desc,Prefers to attack the enemy in opposite slot and ignore its armor
+power_config,magic_aoe,name_desc,Magic Blast
+power_config,magic_aoe,info_desc,When hitting any enemy with Magic Attack: Deal additional damage to its adjacent enemies.
+power_config,shield,name_desc,Shield
+power_config,shield,info_desc,Reduces damage from Melee or Ranged Attack.
+power_config,mshield,name_desc,Magic Shield
+power_config,mshield,info_desc,Reduces damage from Magic Attack.
+power_config,rally,name_desc,Encourage
+power_config,rally,info_desc,At the start of battle phase: Each ally becomes Encouraged (Melee Attack increases). Only the strongest Encouraged works if multiple same effects are in play.
+power_config,demoralize,name_desc,Demoralize
+power_config,demoralize,info_desc,At the start of battle phase: Each enemy becomes Demoralized (Melee Attack decreases). Only the strongest Demoralized works if multiple same effects are in play.
+power_config,antimagic,name_desc,Suppress Magic
+power_config,antimagic,info_desc,At the start of battle phase: Each enemy becomes Magic-Supppressed (Magic Attack decreases). Only the strongest Magic-Supppressed works if multiple same effects are in play.
+power_config,heal,name_desc,Heal
+power_config,heal,info_desc,Recovers HP of one injured ally.
+power_config,heal_all,name_desc,Group Heal
+power_config,heal_all,info_desc,Recovers HP of all allies.
+power_config,thrash,name_desc,Doublestrike
+power_config,thrash,info_desc,When hitting any enemy with Melee Attack from engagement slot: Deals additional damage to one random enemy in support slot.
+power_config,thorns,name_desc,Thorns
+power_config,thorns,info_desc,When hit by a Melee Attack: Deals damage to the attacker.
+power_config,resonate,name_desc,Resonate
+power_config,resonate,info_desc,When the opponent spends crystals: You gain crystals.
+power_config,explode,name_desc,Explosion
+power_config,explode,info_desc,When destroyed in engagement slot: Deals damage to the opposite enemy.
+power_config,damage,name_desc,Smite
+power_config,damage,info_desc,Deals damage to target enemy.
+power_config,damage_all,name_desc,Group Smite
+power_config,damage_all,info_desc,Deals damage to all enemies.
+power_config,chance,name_desc,Chaos
+power_config,chance,info_desc,Deals a random amount of damage to one random enemy.
+power_config,crystal,name_desc,Additional Crystal
+power_config,crystal,info_desc,When sacrificed: You gain additional crystals.
+power_config,reach,name_desc,Reach
+power_config,reach,info_desc,May make Melee Attack from a support slot.
+power_config,cleave,name_desc,Piercing
+power_config,cleave,info_desc,When destroying the armor of any enemy: Exceeding damage is dealt to that enemy.
+power_config,disease,name_desc,Disease
+power_config,disease,info_desc,When dealing Melee，Ranged or Thorns Damage to any enemy: that enemy becomes Diseased (lose Encourage，Demoralize and Magic Reflect. Remove Blessed. This status can be removed by Heal).
+power_config,disease_all,name_desc,Group Disease
+power_config,disease_all,info_desc,When dealing Melee，Ranged or Thorns Damage to any enemy: Each enemy becomes Diseased (lose Encourage，Demoralize and Magic Reflect. Remove Blessed. This status can be removed by Heal).
+power_config,flying,name_desc,Flying
+power_config,flying,info_desc,When attacked by monster without {Flying}: 50% chance to evade Melee Attack and Doublestrike. 25% chance to evade Ranged Attack.
+power_config,counter,name_desc,Counter-attack
+power_config,counter,info_desc,When receving Melee Damage: 50% chance to deal the same amount of damage to the attacker.
+power_config,stoneskin,name_desc,Stoneskin
+power_config,stoneskin,info_desc,When attacked: If no armor is equiped，then 25% chance to avoid Ranged Damage.
+power_config,antidote,name_desc,Lightning
+power_config,antidote,info_desc,Deals Magic Damage to target enemy.
+power_config,disarm,name_desc,Disarm
+power_config,disarm,info_desc,When hitting any enemy with Melee Attack or Ranged Attack: Destroys the enemy's weapon.
+power_config,doom,name_desc,Doom
+power_config,doom,info_desc,Destroys target enemy.
+power_config,deathstrike,name_desc,Deathstrike
+power_config,deathstrike,info_desc,When dealing damage to any enemy: Destroys that enemy.
+power_config,revive,name_desc,Revive
+power_config,revive,info_desc,When destroyed: Immediately come back into play in the same slot. This can trigger only once.
+power_config,breaker,name_desc,Breaking Armor
+power_config,breaker,info_desc,When making Melee or Ranged Attack: Deal additional damage to the Armor，and Ranged Attack will not be be blocked by the Armor.
+power_config,entangle,name_desc,Entangle
+power_config,entangle,info_desc,50% chance to make the opposite enemy Entangled (loses Flying and skips next battle phase).
+power_config,reflect,name_desc,Magic Reflect
+power_config,reflect,info_desc,When attacked by Magic: 75% chance to receive no damage and deal the same amount of damage to the attacker.
+power_config,boost,name_desc,Enchanted Armor
+power_config,boost,info_desc,When equipped with Armor: Gain additional Armor.
+power_config,aggro,name_desc,Taunt
+power_config,aggro,info_desc,Becomes the preferred target for Ranged Attack.
+power_config,stealth,name_desc,Stealth
+power_config,stealth,info_desc,When in support slot: May not be the target for Ranged and Magic Attack.
+power_config,swap,name_desc,Fear
+power_config,swap,info_desc,When coming into play: the engagement slot enemy swaps position with one random enemy in support slot.
+power_config,paint,name_desc,Mark
+power_config,paint,info_desc,The target becomes Marked (become the most preferred target for Ranged Attack，ignoring Taunt and Stealth).
+power_config,trample,name_desc,Trample
+power_config,trample,info_desc,When in engagement slot and hitting any enemy with Melee Attack: Deals additional damage to all enemies in support slots.
+power_config,charge,name_desc,Charge
+power_config,charge,info_desc,At the start of battle phase: Becomes Charged (Melee Attack increases) until the end of the opponent's turn. This can trigger only once.
+power_config,critical,name_desc,Critical
+power_config,critical,info_desc,50% chance to deal 1.5 times Melee or Ranged Damage，rounded up.
+power_config,berserk,name_desc,Berserk
+power_config,berserk,info_desc,Melee Damage increases by the amount equal to the lost HP.
+power_config,backstab,name_desc,Backstab
+power_config,backstab,info_desc,When in support slot: May attack the opposite enemy and this attack ignores Stealth.
+power_config,regenerate,name_desc,Regenerate
+power_config,regenerate,info_desc,Recovers half of the missing HP
+power_config,stun,name_desc,Stun
+power_config,stun,info_desc,When hitting one enemy without armor with Melee or Ranged Attack: 75% chance the target becomes Stunned (loses Flying and skips next battle phase).
+power_config,silence,name_desc,Silence
+power_config,silence,info_desc,When coming into play: Each enemy becomes Silenced (loses Magic Attack and Heal).
+power_config,unsummon,name_desc,Unsummon
+power_config,unsummon,info_desc,Target monster returns to its owner's deck.
+power_config,decoy,name_desc,Invincibility
+power_config,decoy,info_desc,Target Monster becomes Invincible (immune to any damage) until the end of the opponent's turn. An Invincible Monster cannot become Invincible again.
+power_config,antiair,name_desc,Flak
+power_config,antiair,info_desc,When attacking but evaded by Flying: 75% chance to make one additional Ranged Attack which ignores Armor. This can trigger only once per turn.
+power_config,immunity,name_desc,Immunity
+power_config,immunity,info_desc,May not be the target for a Consumable Card and is immune to Demoralize and Silence.
+power_config,draft,name_desc,Reinforcement
+power_config,draft,info_desc,When coming into play: You gain crystals.
+power_config,destroy,name_desc,Smash
+power_config,destroy,info_desc,Destroy target's Armor of one enemy.
+power_config,opportunity,name_desc,Opportunity
+power_config,opportunity,info_desc,When the opponent uses Reach or Backstab: Make one Ranged Attack to that enemy. This can trigger only once per turn.
+power_config,cautious,name_desc,Vigilant
+power_config,cautious,info_desc,At the start of battle phase: Immune to Counter-Attack，Thorns，Entangle and Opportunity until the end of the opponent's turn.
+power_config,repair,name_desc,Repair
+power_config,repair,info_desc,Repair the armor of one random ally.
+power_config,bless,name_desc,Bless
+power_config,bless,info_desc,At the start of battle phase: Each ally becomes Blessed (becomes Vigilant，gains 2 Shield，gains 1 Magic Sheld and is immune to Consumable Damage until the end of the opponent's turn.
+power_config,curse,name_desc,Curse
+power_config,curse,info_desc,When hitting any enemy with Magic Attack: That enemy becomes Cursed (crystals recover 1 less at the start of your turn). An Cursed Monster cannot become Cursed again.
+power_config,drain_crystal,name_desc,Drain crystal
+power_config,drain_crystal,info_desc,When destorying any enemy: You gain crystals.
+power_config,swipe,name_desc,Sweep
+power_config,swipe,info_desc,When in engagement slot: Deal 0 or 1 damage to each enemy.
+power_config,invincible,name_desc,Invincibility
+power_config,invincible,info_desc,Target Monster becomes Invincible (immune to any damage) until the end of the opponent's turn. An Invincible Monster cannot become Invincible again.
+status_config,entangled,round_desc,Entangled (%d turns left)
+status_config,entangled,info_desc,Loses Flying and skips next battle phase
+status_config,diseased,round_desc,Diseased (%d Heal needed)
+status_config,diseased,info_desc,Lose Encourage，Demoralize and Magic Reflect. Remove Blessed. Can be removed by Heal
+status_config,silenced,round_desc,Silenced
+status_config,silenced,info_desc,Loses Magic Attack and Heal
+status_config,painted,round_desc,Marked (%d turns left)
+status_config,painted,info_desc,Become the most preferred target for Ranged Attack，ignoring Taunt and Stealth
+status_config,demoralized,round_desc,Demoralized
+status_config,demoralized,info_desc,Melee Attack decreases by %d
+status_config,antimagicd,round_desc,Magic Suppressed
+status_config,antimagicd,info_desc,Magic Attack decreases by %d
+status_config,rallied,round_desc,Encouraged
+status_config,rallied,info_desc,Melee Attack increases by %d
+status_config,charged,round_desc,Charge
+status_config,charged,info_desc,Melee Attack increases by %d
+status_config,against_melee,round_desc,Melee Attack Unavailable
+status_config,against_melee,info_desc,May not do Melee Attack from support slot
+status_config,against_ranged,round_desc,Ranged Attack Unavailable
+status_config,against_ranged,info_desc,May not do Ranged Attack from engagement slot
+item_config,100001,name,Monster Powder
+item_config,100002,name,Monster Powder(Nature)
+item_config,100003,name,Monster Powder(Balance)
+item_config,100004,name,Monster Powder(Chaos)
+item_config,100005,name,Monster Powder(Fortune)
+item_config,200001,name,Item Powder
+item_config,200002,name,Item Powder(Nature)
+item_config,200003,name,Item Powder(Balance)
+item_config,200004,name,Item Powder(Chaos)
+item_config,200005,name,Item Powder(Fortune)
+item_config,200006,name,Item Powder(All)
+item_config,300001,name,Common Glass Crystal
+item_config,300002,name,Rare Blue Crystal
+item_config,300003,name,Epic Orange Crystal
+item_config,300004,name,Legendary Blood Red Crystal
+item_config,400001,name,Scroll
+item_config,500001,name,Coin
+item_config,500002,name,Diamond
+item_config,100001,desc,Material used to compose and upgrade Monster cards
+item_config,100002,desc,Material used to compose and upgrade Nature Monster cards
+item_config,100003,desc,Material used to compose and upgrade Balance Monster cards
+item_config,100004,desc,Material used to compose and upgrade Chaos Monster cards
+item_config,100005,desc,Material used to compose and upgrade Fortune Monster cards
+item_config,200001,desc,Material used to compose and upgrade Item cards
+item_config,200002,desc,Material used to compose and upgrade Nature Item cards
+item_config,200003,desc,Material used to compose and upgrade Balance Item cards
+item_config,200004,desc,Material used to compose and upgrade Chaos Item cards
+item_config,200005,desc,Material used to compose and upgrade Fortune Item cards
+item_config,200006,desc,Material used to compose and upgrade All Item cards
+item_config,300001,desc,Material used to upgrade Commonmonster cards
+item_config,300002,desc,Material used to upgrade Rare monster cards
+item_config,300003,desc,Material used to upgrade Epic monster cards
+item_config,300004,desc,Material used to upgrade Legendary monster cards
+item_config,400001,desc,Obtain materials to upgrade from Adventure System
+item_config,500001,desc,One of the most significant materials in the game
+item_config,500002,desc,One of the most significant materials in the game
+tips_config,1,desc,Getting some drink from bartender...
+tips_config,2,desc,Creating my deck...
+tips_config,3,desc,Hold on，I got a phone call...
+tips_config,4,desc,Just a moment. I need to go to the washroom...
+tips_config,5,desc,Today is a good day...
+statistic_config,100001,desc,Gold spend
+statistic_config,200001,desc,Three-game winning streak
+statistic_config,300001,desc,Defeat blue dragons
+statistic_config,400001,desc,Be defeated by blue dragon
+statistic_config,500001,desc,Legendary cards
+task_config,1,desc,Win 1 match in Battle/Practice Mode
+task_config,2,desc,Summon 5 monsters in Battle/Practice Mode
+task_config,3,desc,Use 1 item in Battle/Practice Mode
+task_config,4,desc,Summon 1 Fortune clan monster(yellow) in Battle/Practice Mode and win
+task_config,5,desc,Summon 2 monsters cost 2 or less in Battle/Practice Mode
+task_config,6,desc,Summon 1 monster cost 3 or more in Battle
+task_config,7,desc,Win 1 match in Battle/Practice Mode
+task_config,100001,desc,Win 1 match in Battle/Practice Mode
+task_config,100002,desc,Defeat 4 monsters in Battle/Practice Mode
+task_config,100003,desc,Use 4 items in Battle/Practice Mode
+task_config,100004,desc,Win 1 match in Battle/Practice Mode
+task_config,200001,desc,Win 1 match in Battle/Practice Mode
+task_config,200002,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,200003,desc,Use 6 items in Battle/Practice Mode
+task_config,200004,desc,Summon 2 monsters cost 2 or less in Battle/Practice Mode
+task_config,200005,desc,Win 1 match in Battle/Practice Mode
+task_config,300001,desc,Win 1 match in Battle/Practice Mode
+task_config,300002,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,300003,desc,Use 6 items in Battle/Practice Mode
+task_config,300004,desc,Use 2 items cost 2 or less in Battle/Practice Mode
+task_config,300005,desc,Win 1 match in Battle/Practice Mode
+task_config,400001,desc,Win 1 match in Battle/Practice Mode
+task_config,400002,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,400003,desc,Use 6 items in Battle/Practice Mode
+task_config,400004,desc,Use 4 cards cost 2 or less in Battle/Practice Mode
+task_config,400005,desc,Win 1 match in Battle/Practice Mode
+task_config,500001,desc,Win 1 match in Battle/Practice Mode
+task_config,500002,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,500003,desc,Use 6 items in Battle/Practice Mode
+task_config,500004,desc,Use 4 cards cost 2 or less in Battle/Practice Mode
+task_config,500005,desc,Win 1 match in Battle/Practice Mode
+task_config,600001,desc,Use 2 War clan cards(red) in Battle/Practice Mode and win
+task_config,600002,desc,Use 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,600003,desc,Use 2 Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,600004,desc,Use 2 Nature clan cards(green) in Battle/Practice Mode and win
+task_config,600005,desc,Use 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,600006,desc,Use 2 Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,600007,desc,Use 3 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,600008,desc,Use 3 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,600009,desc,Use 3 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,600010,desc,Use 3 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,600011,desc,Use 3 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,600012,desc,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,600013,desc,Use 3 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,600014,desc,Use 3 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,600015,desc,Use 3 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,600016,desc,Use 3 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,600017,desc,Use 3 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,600018,desc,Use 3 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,600019,desc,Use 3 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,600020,desc,Use 3 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,600021,desc,Use 3 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,600022,desc,Win 1 match in Battle/Practice Mode
+task_config,600023,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,600024,desc,Use 6 items in Battle/Practice Mode
+task_config,600025,desc,Summon 2 monsters cost 2 or less in Battle/Practice Mode
+task_config,600026,desc,Summon 3 monsters cost 3 or less in Battle/Practice Mode
+task_config,600027,desc,Summon 4 monsters cost 4 or less in Battle/Practice Mode
+task_config,600028,desc,Summon 3 monsters cost 2 or more in Battle/Practice Mode
+task_config,600029,desc,Summon 2 monsters cost 3 or more in Battle/Practice Mode
+task_config,600030,desc,Use 2 items cost 2 or less in Battle/Practice Mode
+task_config,600031,desc,Use 3 items cost 3 or less in Battle/Practice Mode
+task_config,600032,desc,Use 4 items cost 4 or less in Battle/Practice Mode
+task_config,600033,desc,Use 3 items cost 2 or more in Battle/Practice Mode
+task_config,600034,desc,Use 2 items cost 3 or more in Battle/Practice Mode
+task_config,600035,desc,Use 2 cards cost 2 or less in Battle/Practice Mode
+task_config,600036,desc,Use 3 cards cost 3 or less in Battle/Practice Mode
+task_config,600037,desc,Use 4 cards cost 4 or less in Battle/Practice Mode
+task_config,600038,desc,Use 3 cards cost 2 or more in Battle/Practice Mode
+task_config,600039,desc,Use 2 cards cost 3 or more in Battle/Practice Mode
+task_config,600040,desc,Win 2 matches in Advance Mode
+task_config,700001,desc,Use 2 War clan cards(red) in Battle/Practice Mode and win
+task_config,700002,desc,Use 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,700003,desc,Use 2 Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,700004,desc,Use 2 Nature clan cards(green) in Battle/Practice Mode and win
+task_config,700005,desc,Use 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,700006,desc,Use 2 Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,700007,desc,Use 3 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,700008,desc,Use 3 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,700009,desc,Use 3 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,700010,desc,Use 3 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,700011,desc,Use 3 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,700012,desc,Use 3 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,700013,desc,Use 3 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,700014,desc,Use 3 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,700015,desc,Use 3 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,700016,desc,Use 3 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,700017,desc,Use 3 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,700018,desc,Use 3 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,700019,desc,Use 3 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,700020,desc,Use 3 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,700021,desc,Use 3 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,700022,desc,Win 1 match in Battle/Practice Mode
+task_config,700023,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,700024,desc,Use 6 items in Battle/Practice Mode
+task_config,700025,desc,Summon 2 monsters cost 2 or less in Battle/Practice Mode
+task_config,700026,desc,Summon 3 monsters cost 3 or less in Battle/Practice Mode
+task_config,700027,desc,Summon 4 monsters cost 4 or less in Battle/Practice Mode
+task_config,700028,desc,Summon 3 monsters cost 2 or more in Battle/Practice Mode
+task_config,700029,desc,Summon 2 monsters cost 3 or more in Battle/Practice Mode
+task_config,700030,desc,Use 2 items cost 2 or less in Battle/Practice Mode
+task_config,700031,desc,Use 3 items cost 3 or less in Battle/Practice Mode
+task_config,700032,desc,Use 4 items cost 4 or less in Battle/Practice Mode
+task_config,700033,desc,Use 3 items cost 2 or more in Battle/Practice Mode
+task_config,700034,desc,Use 2 items cost 3 or more in Battle/Practice Mode
+task_config,700035,desc,Use 2 cards cost 2 or less in Battle/Practice Mode
+task_config,700036,desc,Use 3 cards cost 3 or less in Battle/Practice Mode
+task_config,700037,desc,Use 4 cards cost 4 or less in Battle/Practice Mode
+task_config,700038,desc,Use 3 cards cost 2 or more in Battle/Practice Mode
+task_config,700039,desc,Use 2 cards cost 3 or more in Battle/Practice Mode
+task_config,700040,desc,Win 2 matches in Advance Mode
+task_config,800001,desc,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+task_config,800002,desc,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,800003,desc,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,800004,desc,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+task_config,800005,desc,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,800006,desc,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+task_config,800007,desc,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,800008,desc,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,800009,desc,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,800010,desc,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,800011,desc,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,800012,desc,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,800013,desc,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,800014,desc,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,800015,desc,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,800016,desc,Use 2 War clan items(red) in Battle/Practice Mode and win
+task_config,800017,desc,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,800018,desc,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,800019,desc,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+task_config,800020,desc,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,800021,desc,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,800022,desc,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,800023,desc,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,800024,desc,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,800025,desc,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,800026,desc,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,800027,desc,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,800028,desc,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,800029,desc,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,800030,desc,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,800031,desc,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,800032,desc,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,800033,desc,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,800034,desc,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,800035,desc,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,800036,desc,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,800037,desc,Use 4 War clan items(red) in Battle/Practice Mode and win
+task_config,800038,desc,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,800039,desc,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,800040,desc,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+task_config,800041,desc,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,800042,desc,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,800043,desc,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,800044,desc,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,800045,desc,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,800046,desc,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,800047,desc,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,800048,desc,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,800049,desc,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,800050,desc,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,800051,desc,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,800052,desc,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,800053,desc,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,800054,desc,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,800055,desc,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,800056,desc,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,800057,desc,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,800058,desc,Win 1 match in Battle/Practice Mode
+task_config,800059,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,800060,desc,Use 6 items in Battle/Practice Mode
+task_config,800061,desc,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+task_config,800062,desc,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+task_config,800063,desc,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+task_config,800064,desc,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+task_config,800065,desc,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+task_config,800066,desc,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+task_config,800067,desc,Win 1 match in Battle/Practice Mode
+task_config,800068,desc,Use 4 items cost 2 or less in Battle/Practice Mode
+task_config,800069,desc,Use 5 items cost 3 or less in Battle/Practice Mode
+task_config,800070,desc,Use 6 items cost 4 or less in Battle/Practice Mode
+task_config,800071,desc,Use 5 items cost 2 or more in Battle/Practice Mode
+task_config,800072,desc,Use 4 items cost 3 or more in Battle/Practice Mode
+task_config,800073,desc,Use 3 items cost 4 or more in Battle/Practice Mode
+task_config,800074,desc,Win 1 match in Battle/Practice Mode
+task_config,800075,desc,Use 4 cards cost 2 or less in Battle/Practice Mode
+task_config,800076,desc,Use 5 cards cost 3 or less in Battle/Practice Mode
+task_config,800077,desc,Use 6 cards cost 4 or less in Battle/Practice Mode
+task_config,800078,desc,Use 5 cards cost 2 or more in Battle/Practice Mode
+task_config,800079,desc,Use 4 cards cost 3 or more in Battle/Practice Mode
+task_config,800080,desc,Use 3 cards cost 4 or more in Battle/Practice Mode
+task_config,800081,desc,Win 1 match in Battle/Practice Mode
+task_config,800082,desc,Win 2 matches in Advance Mode
+task_config,900001,desc,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+task_config,900002,desc,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,900003,desc,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,900004,desc,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+task_config,900005,desc,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,900006,desc,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+task_config,900007,desc,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,900008,desc,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,900009,desc,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,900010,desc,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,900011,desc,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,900012,desc,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,900013,desc,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,900014,desc,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,900015,desc,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,900016,desc,Use 2 War clan items(red) in Battle/Practice Mode and win
+task_config,900017,desc,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,900018,desc,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,900019,desc,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+task_config,900020,desc,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,900021,desc,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,900022,desc,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,900023,desc,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,900024,desc,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,900025,desc,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,900026,desc,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,900027,desc,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,900028,desc,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,900029,desc,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,900030,desc,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,900031,desc,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,900032,desc,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,900033,desc,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,900034,desc,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,900035,desc,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,900036,desc,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,900037,desc,Use 4 War clan items(red) in Battle/Practice Mode and win
+task_config,900038,desc,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,900039,desc,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,900040,desc,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+task_config,900041,desc,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,900042,desc,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,900043,desc,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,900044,desc,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,900045,desc,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,900046,desc,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,900047,desc,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,900048,desc,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,900049,desc,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,900050,desc,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,900051,desc,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,900052,desc,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,900053,desc,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,900054,desc,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,900055,desc,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,900056,desc,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,900057,desc,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,900058,desc,Win 1 match in Battle/Practice Mode
+task_config,900059,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,900060,desc,Use 6 items in Battle/Practice Mode
+task_config,900061,desc,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+task_config,900062,desc,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+task_config,900063,desc,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+task_config,900064,desc,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+task_config,900065,desc,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+task_config,900066,desc,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+task_config,900067,desc,Win 1 match in Battle/Practice Mode
+task_config,900068,desc,Use 4 items cost 2 or less in Battle/Practice Mode
+task_config,900069,desc,Use 5 items cost 3 or less in Battle/Practice Mode
+task_config,900070,desc,Use 6 items cost 4 or less in Battle/Practice Mode
+task_config,900071,desc,Use 5 items cost 2 or more in Battle/Practice Mode
+task_config,900072,desc,Use 4 items cost 3 or more in Battle/Practice Mode
+task_config,900073,desc,Use 3 items cost 4 or more in Battle/Practice Mode
+task_config,900074,desc,Win 1 match in Battle/Practice Mode
+task_config,900075,desc,Use 4 cards cost 2 or less in Battle/Practice Mode
+task_config,900076,desc,Use 5 cards cost 3 or less in Battle/Practice Mode
+task_config,900077,desc,Use 6 cards cost 4 or less in Battle/Practice Mode
+task_config,900078,desc,Use 5 cards cost 2 or more in Battle/Practice Mode
+task_config,900079,desc,Use 4 cards cost 3 or more in Battle/Practice Mode
+task_config,900080,desc,Use 3 cards cost 4 or more in Battle/Practice Mode
+task_config,900081,desc,Win 1 match in Battle/Practice Mode
+task_config,900082,desc,Win 2 matches in Advance Mode
+task_config,1000001,desc,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+task_config,1000002,desc,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1000003,desc,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1000004,desc,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1000005,desc,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1000006,desc,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+task_config,1000007,desc,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1000008,desc,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1000009,desc,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1000010,desc,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1000011,desc,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1000012,desc,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1000013,desc,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1000014,desc,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1000015,desc,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1000016,desc,Use 2 War clan items(red) in Battle/Practice Mode and win
+task_config,1000017,desc,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1000018,desc,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1000019,desc,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1000020,desc,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1000021,desc,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1000022,desc,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1000023,desc,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1000024,desc,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1000025,desc,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1000026,desc,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1000027,desc,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1000028,desc,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1000029,desc,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1000030,desc,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1000031,desc,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1000032,desc,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1000033,desc,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1000034,desc,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1000035,desc,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1000036,desc,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1000037,desc,Use 4 War clan items(red) in Battle/Practice Mode and win
+task_config,1000038,desc,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1000039,desc,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1000040,desc,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1000041,desc,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1000042,desc,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1000043,desc,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1000044,desc,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1000045,desc,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1000046,desc,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1000047,desc,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1000048,desc,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1000049,desc,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1000050,desc,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1000051,desc,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1000052,desc,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1000053,desc,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1000054,desc,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1000055,desc,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1000056,desc,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1000057,desc,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1000058,desc,Win 1 match in Battle/Practice Mode
+task_config,1000059,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,1000060,desc,Use 6 items in Battle/Practice Mode
+task_config,1000061,desc,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+task_config,1000062,desc,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+task_config,1000063,desc,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+task_config,1000064,desc,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+task_config,1000065,desc,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+task_config,1000066,desc,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+task_config,1000067,desc,Win 1 match in Battle/Practice Mode
+task_config,1000068,desc,Use 4 items cost 2 or less in Battle/Practice Mode
+task_config,1000069,desc,Use 5 items cost 3 or less in Battle/Practice Mode
+task_config,1000070,desc,Use 6 items cost 4 or less in Battle/Practice Mode
+task_config,1000071,desc,Use 5 items cost 2 or more in Battle/Practice Mode
+task_config,1000072,desc,Use 4 items cost 3 or more in Battle/Practice Mode
+task_config,1000073,desc,Use 3 items cost 4 or more in Battle/Practice Mode
+task_config,1000074,desc,Win 1 match in Battle/Practice Mode
+task_config,1000075,desc,Use 4 cards cost 2 or less in Battle/Practice Mode
+task_config,1000076,desc,Use 5 cards cost 3 or less in Battle/Practice Mode
+task_config,1000077,desc,Use 6 cards cost 4 or less in Battle/Practice Mode
+task_config,1000078,desc,Use 5 cards cost 2 or more in Battle/Practice Mode
+task_config,1000079,desc,Use 4 cards cost 3 or more in Battle/Practice Mode
+task_config,1000080,desc,Use 3 cards cost 4 or more in Battle/Practice Mode
+task_config,1000081,desc,Win 1 match in Battle/Practice Mode
+task_config,1000082,desc,Win 2 matches in Advance Mode
+task_config,1100001,desc,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+task_config,1100002,desc,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1100003,desc,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1100004,desc,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1100005,desc,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1100006,desc,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+task_config,1100007,desc,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1100008,desc,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1100009,desc,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1100010,desc,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1100011,desc,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1100012,desc,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1100013,desc,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1100014,desc,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1100015,desc,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1100016,desc,Use 2 War clan items(red) in Battle/Practice Mode and win
+task_config,1100017,desc,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1100018,desc,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1100019,desc,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1100020,desc,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1100021,desc,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1100022,desc,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1100023,desc,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1100024,desc,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1100025,desc,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1100026,desc,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1100027,desc,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1100028,desc,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1100029,desc,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1100030,desc,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1100031,desc,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1100032,desc,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1100033,desc,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1100034,desc,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1100035,desc,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1100036,desc,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1100037,desc,Use 4 War clan items(red) in Battle/Practice Mode and win
+task_config,1100038,desc,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1100039,desc,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1100040,desc,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1100041,desc,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1100042,desc,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1100043,desc,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1100044,desc,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1100045,desc,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1100046,desc,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1100047,desc,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1100048,desc,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1100049,desc,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1100050,desc,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1100051,desc,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1100052,desc,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1100053,desc,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1100054,desc,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1100055,desc,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1100056,desc,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1100057,desc,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1100058,desc,Win 1 match in Battle/Practice Mode
+task_config,1100059,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,1100060,desc,Use 6 items in Battle/Practice Mode
+task_config,1100061,desc,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+task_config,1100062,desc,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+task_config,1100063,desc,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+task_config,1100064,desc,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+task_config,1100065,desc,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+task_config,1100066,desc,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+task_config,1100067,desc,Win 1 match in Battle/Practice Mode
+task_config,1100068,desc,Use 4 items cost 2 or less in Battle/Practice Mode
+task_config,1100069,desc,Use 5 items cost 3 or less in Battle/Practice Mode
+task_config,1100070,desc,Use 6 items cost 4 or less in Battle/Practice Mode
+task_config,1100071,desc,Use 5 items cost 2 or more in Battle/Practice Mode
+task_config,1100072,desc,Use 4 items cost 3 or more in Battle/Practice Mode
+task_config,1100073,desc,Use 3 items cost 4 or more in Battle/Practice Mode
+task_config,1100074,desc,Win 1 match in Battle/Practice Mode
+task_config,1100075,desc,Use 4 cards cost 2 or less in Battle/Practice Mode
+task_config,1100076,desc,Use 5 cards cost 3 or less in Battle/Practice Mode
+task_config,1100077,desc,Use 6 cards cost 4 or less in Battle/Practice Mode
+task_config,1100078,desc,Use 5 cards cost 2 or more in Battle/Practice Mode
+task_config,1100079,desc,Use 4 cards cost 3 or more in Battle/Practice Mode
+task_config,1100080,desc,Use 3 cards cost 4 or more in Battle/Practice Mode
+task_config,1100081,desc,Win 1 match in Battle/Practice Mode
+task_config,1100082,desc,Win 2 matches in Advance Mode
+task_config,1200001,desc,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+task_config,1200002,desc,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1200003,desc,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1200004,desc,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1200005,desc,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1200006,desc,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+task_config,1200007,desc,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1200008,desc,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1200009,desc,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1200010,desc,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1200011,desc,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1200012,desc,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1200013,desc,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1200014,desc,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1200015,desc,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1200016,desc,Use 2 War clan items(red) in Battle/Practice Mode and win
+task_config,1200017,desc,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1200018,desc,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1200019,desc,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1200020,desc,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1200021,desc,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1200022,desc,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1200023,desc,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1200024,desc,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1200025,desc,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1200026,desc,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1200027,desc,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1200028,desc,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1200029,desc,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1200030,desc,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1200031,desc,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1200032,desc,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1200033,desc,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1200034,desc,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1200035,desc,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1200036,desc,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1200037,desc,Use 4 War clan items(red) in Battle/Practice Mode and win
+task_config,1200038,desc,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1200039,desc,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1200040,desc,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1200041,desc,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1200042,desc,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1200043,desc,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1200044,desc,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1200045,desc,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1200046,desc,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1200047,desc,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1200048,desc,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1200049,desc,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1200050,desc,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1200051,desc,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1200052,desc,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1200053,desc,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1200054,desc,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1200055,desc,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1200056,desc,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1200057,desc,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1200058,desc,Win 1 match in Battle/Practice Mode
+task_config,1200059,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,1200060,desc,Use 6 items in Battle/Practice Mode
+task_config,1200061,desc,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+task_config,1200062,desc,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+task_config,1200063,desc,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+task_config,1200064,desc,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+task_config,1200065,desc,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+task_config,1200066,desc,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+task_config,1200067,desc,Win 1 match in Battle/Practice Mode
+task_config,1200068,desc,Use 4 items cost 2 or less in Battle/Practice Mode
+task_config,1200069,desc,Use 5 items cost 3 or less in Battle/Practice Mode
+task_config,1200070,desc,Use 6 items cost 4 or less in Battle/Practice Mode
+task_config,1200071,desc,Use 5 items cost 2 or more in Battle/Practice Mode
+task_config,1200072,desc,Use 4 items cost 3 or more in Battle/Practice Mode
+task_config,1200073,desc,Use 3 items cost 4 or more in Battle/Practice Mode
+task_config,1200074,desc,Win 1 match in Battle/Practice Mode
+task_config,1200075,desc,Use 4 cards cost 2 or less in Battle/Practice Mode
+task_config,1200076,desc,Use 5 cards cost 3 or less in Battle/Practice Mode
+task_config,1200077,desc,Use 6 cards cost 4 or less in Battle/Practice Mode
+task_config,1200078,desc,Use 5 cards cost 2 or more in Battle/Practice Mode
+task_config,1200079,desc,Use 4 cards cost 3 or more in Battle/Practice Mode
+task_config,1200080,desc,Use 3 cards cost 4 or more in Battle/Practice Mode
+task_config,1200081,desc,Win 1 match in Battle/Practice Mode
+task_config,1200082,desc,Win 2 matches in Advance Mode
+task_config,1300001,desc,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+task_config,1300002,desc,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1300003,desc,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1300004,desc,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1300005,desc,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1300006,desc,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+task_config,1300007,desc,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1300008,desc,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1300009,desc,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1300010,desc,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1300011,desc,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1300012,desc,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1300013,desc,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1300014,desc,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1300015,desc,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1300016,desc,Use 2 War clan items(red) in Battle/Practice Mode and win
+task_config,1300017,desc,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1300018,desc,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1300019,desc,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1300020,desc,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1300021,desc,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1300022,desc,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1300023,desc,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1300024,desc,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1300025,desc,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1300026,desc,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1300027,desc,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1300028,desc,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1300029,desc,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1300030,desc,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1300031,desc,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1300032,desc,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1300033,desc,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1300034,desc,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1300035,desc,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1300036,desc,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1300037,desc,Use 4 War clan items(red) in Battle/Practice Mode and win
+task_config,1300038,desc,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1300039,desc,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1300040,desc,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1300041,desc,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1300042,desc,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1300043,desc,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1300044,desc,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1300045,desc,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1300046,desc,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1300047,desc,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1300048,desc,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1300049,desc,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1300050,desc,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1300051,desc,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1300052,desc,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1300053,desc,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1300054,desc,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1300055,desc,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1300056,desc,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1300057,desc,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1300058,desc,Win 1 match in Battle/Practice Mode
+task_config,1300059,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,1300060,desc,Use 6 items in Battle/Practice Mode
+task_config,1300061,desc,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+task_config,1300062,desc,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+task_config,1300063,desc,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+task_config,1300064,desc,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+task_config,1300065,desc,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+task_config,1300066,desc,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+task_config,1300067,desc,Win 1 match in Battle/Practice Mode
+task_config,1300068,desc,Use 4 items cost 2 or less in Battle/Practice Mode
+task_config,1300069,desc,Use 5 items cost 3 or less in Battle/Practice Mode
+task_config,1300070,desc,Use 6 items cost 4 or less in Battle/Practice Mode
+task_config,1300071,desc,Use 5 items cost 2 or more in Battle/Practice Mode
+task_config,1300072,desc,Use 4 items cost 3 or more in Battle/Practice Mode
+task_config,1300073,desc,Use 3 items cost 4 or more in Battle/Practice Mode
+task_config,1300074,desc,Win 1 match in Battle/Practice Mode
+task_config,1300075,desc,Use 4 cards cost 2 or less in Battle/Practice Mode
+task_config,1300076,desc,Use 5 cards cost 3 or less in Battle/Practice Mode
+task_config,1300077,desc,Use 6 cards cost 4 or less in Battle/Practice Mode
+task_config,1300078,desc,Use 5 cards cost 2 or more in Battle/Practice Mode
+task_config,1300079,desc,Use 4 cards cost 3 or more in Battle/Practice Mode
+task_config,1300080,desc,Use 3 cards cost 4 or more in Battle/Practice Mode
+task_config,1300081,desc,Win 1 match in Battle/Practice Mode
+task_config,1300082,desc,Win 2 matches in Advance Mode
+task_config,1400001,desc,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+task_config,1400002,desc,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1400003,desc,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1400004,desc,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1400005,desc,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1400006,desc,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+task_config,1400007,desc,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1400008,desc,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1400009,desc,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1400010,desc,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+task_config,1400011,desc,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1400012,desc,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1400013,desc,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+task_config,1400014,desc,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1400015,desc,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+task_config,1400016,desc,Use 2 War clan items(red) in Battle/Practice Mode and win
+task_config,1400017,desc,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1400018,desc,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1400019,desc,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1400020,desc,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1400021,desc,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1400022,desc,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1400023,desc,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1400024,desc,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1400025,desc,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1400026,desc,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1400027,desc,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1400028,desc,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1400029,desc,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1400030,desc,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1400031,desc,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+task_config,1400032,desc,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1400033,desc,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1400034,desc,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1400035,desc,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1400036,desc,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1400037,desc,Use 4 War clan items(red) in Battle/Practice Mode and win
+task_config,1400038,desc,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+task_config,1400039,desc,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+task_config,1400040,desc,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+task_config,1400041,desc,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+task_config,1400042,desc,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+task_config,1400043,desc,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+task_config,1400044,desc,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1400045,desc,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1400046,desc,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1400047,desc,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1400048,desc,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+task_config,1400049,desc,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1400050,desc,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1400051,desc,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1400052,desc,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+task_config,1400053,desc,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1400054,desc,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1400055,desc,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+task_config,1400056,desc,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1400057,desc,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+task_config,1400058,desc,Win 1 match in Battle/Practice Mode
+task_config,1400059,desc,Defeat 6 monsters in Battle/Practice Mode
+task_config,1400060,desc,Use 6 items in Battle/Practice Mode
+task_config,1400061,desc,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+task_config,1400062,desc,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+task_config,1400063,desc,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+task_config,1400064,desc,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+task_config,1400065,desc,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+task_config,1400066,desc,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+task_config,1400067,desc,Win 1 match in Battle/Practice Mode
+task_config,1400068,desc,Use 4 items cost 2 or less in Battle/Practice Mode
+task_config,1400069,desc,Use 5 items cost 3 or less in Battle/Practice Mode
+task_config,1400070,desc,Use 6 items cost 4 or less in Battle/Practice Mode
+task_config,1400071,desc,Use 5 items cost 2 or more in Battle/Practice Mode
+task_config,1400072,desc,Use 4 items cost 3 or more in Battle/Practice Mode
+task_config,1400073,desc,Use 3 items cost 4 or more in Battle/Practice Mode
+task_config,1400074,desc,Win 1 match in Battle/Practice Mode
+task_config,1400075,desc,Use 4 cards cost 2 or less in Battle/Practice Mode
+task_config,1400076,desc,Use 5 cards cost 3 or less in Battle/Practice Mode
+task_config,1400077,desc,Use 6 cards cost 4 or less in Battle/Practice Mode
+task_config,1400078,desc,Use 5 cards cost 2 or more in Battle/Practice Mode
+task_config,1400079,desc,Use 4 cards cost 3 or more in Battle/Practice Mode
+task_config,1400080,desc,Use 3 cards cost 4 or more in Battle/Practice Mode
+task_config,1400081,desc,Win 1 match in Battle/Practice Mode
+task_config,1400082,desc,Win 2 matches in Advance Mode
+periphery_config,1,ladder_desc,The first step to become masters is to fight between newbies
+periphery_config,2,ladder_desc,The so-called Grant is only 2 meters high!
+periphery_config,3,ladder_desc,The silk of furryspider is the ordinary strong but 20 times injection quantity.
+periphery_config,4,ladder_desc,Let you know what is real kongfu! --Leezard
+periphery_config,5,ladder_desc,Why so strong accent curse can be successful released? --Heavily injured maggie apprentice
+periphery_config,6,ladder_desc,When it jump out of the sea， its huge body covers the sun which make you suddenly feel like night! That is sabershark!
+periphery_config,7,ladder_desc,Crocodine is always taking guns with him， becaue he is a deadbeat bambler!
+periphery_config,8,ladder_desc,Wind is its shadow and blade. There is no need to be heaten! --The Element Tutor
+periphery_config,9,ladder_desc,The bird people are all good Archers. However，Boocan is the God among them.
+periphery_config,10,ladder_desc,Is it a bird or a flying carpet?No，it's a cat knight! --Triglodite
+periphery_config,11,ladder_desc,OMG! I'm gonna be rich! --The last word of lobster catchers.
+periphery_config,12,ladder_desc,Me!The relative of power!   --Blue dragon
+battle_guide_event_config,1,dialogue_text,Come on，defeat all my monsters!
+battle_guide_event_config,2,dialogue_text,If there is no monster on your field，your deck will be punished
+battle_guide_event_config,3,dialogue_text,My attck type is Melee ，I can only attack in slot 1
+battle_guide_event_config,4,dialogue_text,Unnnn…I can't use Ranged attack in slot 1…
+battle_guide_event_config,5,dialogue_text,My monster is better than yours!
+battle_guide_event_config,6,dialogue_text,Hahahahaaaaaa~
+battle_guide_event_config,7,dialogue_text,Take your equip and have a nice fight!
+battle_guide_event_config,8,dialogue_text,We shall also be equiped!
+battle_guide_event_config,9,dialogue_text,Seems it time to show my "bomb"!
+battle_guide_event_config,10,dialogue_text,Hahaha，it doesn't works!
+battle_guide_event_config,11,dialogue_text,Armor can take all damages except Magic!
+battle_guide_event_config,12,dialogue_text,Magic attack???Noooooooo~
+battle_guide_event_config,13,dialogue_text,If there is no monster on your field，your deck will be punished
+battle_guide_event_config,14,dialogue_text,My attck type is Melee ，I can only attack in slot 1
+battle_guide_event_config,15,dialogue_text,Unnnn…I can't use Ranged attack in slot 1…
+battle_guide_event_config,1,dialogue_name,Will
+battle_guide_event_config,2,dialogue_name,Will
+battle_guide_event_config,3,dialogue_name,Sharp flake
+battle_guide_event_config,4,dialogue_name,Dust maiden
+battle_guide_event_config,5,dialogue_name,Will
+battle_guide_event_config,6,dialogue_name,Will
+battle_guide_event_config,7,dialogue_name,Challenger
+battle_guide_event_config,8,dialogue_name,Sharp flake
+battle_guide_event_config,9,dialogue_name,Challenger
+battle_guide_event_config,10,dialogue_name,Challenger
+battle_guide_event_config,11,dialogue_name,Challenger
+battle_guide_event_config,12,dialogue_name,Challenger
+battle_guide_event_config,13,dialogue_name,Challenger
+battle_guide_event_config,14,dialogue_name,Sharp flake
+battle_guide_event_config,15,dialogue_name,Dust maiden
+guide_step_config,1_2,step_info,Waitress@Hi，you looks unhappy，adventurer，can't find adventure tasks?
+guide_step_config,1_3,step_info,Waitress@Why don't you change your mood? Let me teach you a game! Come on，it's very easy~ Will~~ What about play "Card Monsters" with this adventurer?
+guide_step_config,3_2,step_info,Waitress@Woo! You are good at this! This is a gift to you，just take it
+guide_step_config,3_3,step_info,Waitress@uh，seems here comes another player，make good use of the cards you just obtained
+adventure_config,1,win_target,Defeat all monsters
+adventure_config,2,win_target,Defeat target monster
+adventure_config,3,win_target,Win th game in this turn
+adventure_config,1,play_desc,Test desc
+adventure_config,2,play_desc,Test desc
+adventure_config,3,play_desc,Test desc
+proficiency_config,1,UnlockSkillTitle,Sputter Attack!
+proficiency_config,2,UnlockSkillTitle,Sputter Attack!
+proficiency_config,3,UnlockSkillTitle,Sputter Attack!
+proficiency_config,1,UnlockSkillDesc,You think backrow is safe?
+proficiency_config,2,UnlockSkillDesc,You think backrow is safe?
+proficiency_config,3,UnlockSkillDesc,You think backrow is safe?
+proficiency_config,1,FullDes,Finish Section exam 1
+proficiency_config,2,FullDes,Play 1 ladder match
+proficiency_config,3,FullDes,Win 1 ladder match
+proficiency_config,1,Fun1Title,Unlock level test
+proficiency_config,2,Fun1Title,Unlock Ladder Tournament
+proficiency_config,2,Fun2Title,Unlock "ShuChao"
+proficiency_config,2,Fun3Title,Unlock the fifth card slot
+proficiency_config,1,LvUpDesc,Level Up! Congratulations!
+proficiency_config,2,LvUpDesc,Level Up! Congratulations!
+card_stat_config,1,desc,cause damage
+card_stat_config,2,desc,bear damage
+card_stat_config,3,desc,heal damage
+card_stat_config,4,desc,dodge damage
+card_stat_config,5,desc,kill monster
+card_stat_config,6,desc,destroy armor
+card_stat_config,7,desc,destroy equip
+card_stat_config,8,desc,drain crystal
+card_stat_config,9,desc,counter damage
+card_stat_config,10,desc,gain extra armor
+card_stat_config,11,desc,decrease enemy's damage
+card_stat_config,12,desc,increase our's damage
+card_stat_config,13,desc,splash damage
+card_stat_config,14,desc,entangle times
+card_stat_config,15,desc,disease enemy

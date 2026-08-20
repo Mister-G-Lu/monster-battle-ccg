@@ -1,0 +1,18 @@
+ID,战斗引导id,触发命令,触发函数,触发条件,触发怪兽id,触发道具id,触发对话,对话位置,对话ICON,对话者名
+number,number,string,string,string,number,number,string,string,string,string
+ID,battle_guide_id,trigger_command,trigger_func,trigger_condition,trigger_monster_id,trigger_item_id,dialogue_text,dialogue_pos,dialogue_icon,dialogue_name
+1,1,cmd_battle_move,cmd_battle_move_func,,110011,,AI对话：来吧！消灭我所有怪兽吧！,up,monster3,威尔
+2,1,cmd_battle_attack,battle_slot_emtpy,,,,AI对话：场上没有怪兽的话，牌组可是会遭殃的哦~,up,monster3,威尔
+3,1,cmd_battle_move,deploy_melee_error_func,melee,,,怪兽卡对话（雪刃）：我的攻击类型是近战，因此我只会在1号位进行攻击T T,down,monster2,雪刃
+4,1,cmd_battle_move,deploy_ranged_error_func,ranged,,,怪兽卡对话（拇指妖精）：那个...我在1号位无法进行远程攻击…,down,monster1,清洁少女
+5,1,cmd_battle_attack,cmd_battle_attack_func,melee,110011,,AI对话：我的怪兽可是占尽优势呢！,up,monster3,威尔
+6,1,cmd_battle_over,cmd_battle_over_func,random,,,AI对话：哈哈哈哈~,up,monster3,威尔
+7,2,cmd_battle_move,cmd_battle_move_func,,110011,21002,AI对话：穿上装备，我们好好打一场！,up,monster4,挑战者
+8,2,cmd_battle_prepa,cmd_battle_prepa_func,,110011,21002,怪兽对话：让我们也穿上装备吧！,down,monster2,雪刃
+9,2,cmd_battle_move,cmd_battle_move_func,,119001,21901,AI对话：看来是时候拿出我压箱底的卡牌了！,up,monster4,挑战者
+10,2,cmd_battle_attack,physics_attack,1,119001,,AI对话：哈哈哈，简直不痛不痒!,up,monster4,挑战者
+11,2,cmd_battle_attack,physics_attack,2,119001,,AI对话：护甲可以抵御魔法攻击以外的所有伤害！,up,monster4,挑战者
+12,2,cmd_battle_attack,magic_attack,magic,119001,,AI对话：魔法攻击？不~~~,up,monster4,挑战者
+13,2,cmd_battle_attack,battle_slot_emtpy,,,,AI对话：场上没有怪兽的话，牌组可是会遭殃的哦~,up,monster4,挑战者
+14,2,cmd_battle_move,deploy_melee_error_func,melee,,,怪兽卡对话（雪刃）：我的攻击类型是近战，因此我只会在1号位进行攻击T T,down,monster2,雪刃
+15,2,cmd_battle_move,deploy_ranged_error_func,ranged,,,怪兽卡对话（拇指妖精）：那个...我在1号位无法进行远程攻击…,down,monster1,清洁少女

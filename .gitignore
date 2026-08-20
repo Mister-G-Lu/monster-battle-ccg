@@ -1,0 +1,41 @@
+# Build artifacts
+build/decoded_apk/
+build/English_offline_unsigned.apk
+build/English_offline_signed.apk
+build/English_offline_aligned.apk
+build/offline.keystore
+build/assets/
+build/orig_lua/
+
+# Temp directories
+sim_save/
+sim_save_int/
+java_out/
+java_out2/
+jadx_tool/
+apk_contents/
+lua/
+lua51/
+build/decoded_apk/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Original APK (too large for git, user provides)
+English.apk
+
+# Encrypted Lua files (we track decrypted versions)
+*.mu
+!build/web/game.html
+
+# APK workspace temp files
+patch_server.py
+patch_battle.py
+zipalign.py
+dbg_battle.lua
+sim_test.py

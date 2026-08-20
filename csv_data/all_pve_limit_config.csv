@@ -1,0 +1,10 @@
+ID,周循环备注,限制阵营
+number,string,string
+ID,desc,limit
+1,周一,war
+2,周二,fortune
+3,周三,balance
+4,周四,nature
+5,周五,chaos
+6,周六,entire
+0,周日,entire

@@ -1,0 +1,5 @@
+ID,类型,参数,描述
+number,number,number,string
+ID,statistic_type,parm1,desc
+100001,14,,消耗金币总量
+200001,11,,获得三连胜次数
