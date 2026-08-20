@@ -61,6 +61,8 @@ function meta:Update(elapsed_time)
             self._standby_advanced = true
             print("[MATCH] WARNING: No standby response in 3s, auto-advancing battle")
             battle_logic.is_play_animation = false
+            -- Also transition out of match screen
+            self:PlayAnimation("exit_battle", false)
         end
     end
 end

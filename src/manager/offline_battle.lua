@@ -467,10 +467,12 @@ end
 function offline_battle:BeginPrep(user_id)
     local actor = user_id == self.own.user_id and self.own or self.enemy
     actor.is_sacrifice = true
+    -- Far-future timestamp: prevents auto-attack during sacrifice phase.
+    -- Player must manually sacrifice/deploy/end turn.
     self:PushCommand("cmd_battle_prepa", {
         user_id = actor.user_id,
         sync_crystal = actor.cur_crystal,
-        last_oper_time = 0,
+        last_oper_time = os.time() + 3600,
         is_sacrifice = true,
     })
 end

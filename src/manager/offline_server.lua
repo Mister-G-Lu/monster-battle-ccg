@@ -1060,7 +1060,7 @@ offline_server.handlers["req_pve_battle_start"] = function(self, req)
         pve_win_target = win_target,
         own_deck = own_deck,
         enemy_deck = enemy_deck,
-        enemy_name = pcfg and pcfg.play_name or "Enemy",
+        enemy_name = "[AI] " .. (pcfg and pcfg.play_name or "Enemy"),
         on_battle_over = function(battle, cmd_over)
             self:OnPveOver(battle, cmd_over, play_id, difficulty, pcfg)
         end,
@@ -1382,23 +1382,34 @@ end
 
 offline_server.handlers["req_guide_battle"] = function(self, req)
     local battle_process = req.battle_process or 1
-    -- guide battle decks: player uses own deck, AI uses a fixed weak deck
+    -- guide battle decks: player uses own deck, AI uses a scaled weak deck
     local own_deck = self:BuildPlayerDeck(false)
     local enemy_deck = { monster_list = {}, item_list = {} }
     if tonumber(battle_process) == 1 then
-        for _, m in ipairs({ 140011, 140011, 140011, 140011, 140011, 140011, 140011, 140011 }) do
-            table.insert(enemy_deck.monster_list, self:CardInfoFromModel(m, "g1_" .. m, nil, "enemy"))
+        -- Tutorial 1: easy war monsters (HP 3-5, cost 1-2)
+        for _, m in ipairs({ 110011, 110011, 110012, 110012, 110013, 110013, 110014, 110015 }) do
+            local card = self:CardInfoFromModel(m, "g1_" .. m, nil, "enemy")
+            if card then table.insert(enemy_deck.monster_list, card) end
         end
-        for _, m in ipairs({ 24001, 24002, 24003, 24006, 34001, 34008, 34003, 34004 }) do
-            table.insert(enemy_deck.item_list, self:CardInfoFromModel(m, "g1i_" .. m, nil, "enemy"))
+        for _, m in ipairs({ 21001, 21002, 22001, 22002, 23001, 23002, 24001, 24002 }) do
+            local card = self:CardInfoFromModel(m, "g1i_" .. m, nil, "enemy")
+            if card then table.insert(enemy_deck.item_list, card) end
         end
     else
-        for _, m in ipairs({ 110011, 110031, 110031, 110011, 119001, 119001, 120011, 120031 }) do
-            table.insert(enemy_deck.monster_list, self:CardInfoFromModel(m, "g2_" .. m, nil, "enemy"))
+        -- Tutorial 2: slightly stronger mixed deck
+        for _, m in ipairs({ 110011, 110013, 110015, 110021, 110023, 110025, 110031, 110033 }) do
+            local card = self:CardInfoFromModel(m, "g2_" .. m, nil, "enemy")
+            if card then table.insert(enemy_deck.monster_list, card) end
         end
-        for _, m in ipairs({ 21002, 21002, 21901, 22008, 23001, 24001, 34003, 34008 }) do
-            table.insert(enemy_deck.item_list, self:CardInfoFromModel(m, "g2i_" .. m, nil, "enemy"))
+        for _, m in ipairs({ 21001, 21002, 22001, 22002, 23001, 23002, 24001, 24002 }) do
+            local card = self:CardInfoFromModel(m, "g2i_" .. m, nil, "enemy")
+            if card then table.insert(enemy_deck.item_list, card) end
         end
+    end
+    -- Fallback: if no valid cards, generate a basic deck
+    if #enemy_deck.monster_list == 0 then
+        local fallback = self:PickPveEnemyDeck(1001, 1)
+        if fallback then enemy_deck = fallback end
     end
     self:StartBattle({
         battle_type = "guide",
@@ -1407,7 +1418,7 @@ offline_server.handlers["req_guide_battle"] = function(self, req)
         pve_win_target = 0,
         own_deck = own_deck,
         enemy_deck = enemy_deck,
-        enemy_name = "Will",
+        enemy_name = "[AI] Will",
         on_battle_over = function(battle, cmd_over)
             cmd_over.pve_info = { difficulty = 1 }
         end,

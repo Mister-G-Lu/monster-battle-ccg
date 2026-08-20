@@ -62,6 +62,7 @@ function meta:Clean()
     self.is_battle_over = false
     self.is_own = false
     self.pve_win_cur_value = 0
+    self._standby_block_time = 0
 end
 
 function meta:PushBattleQueue(name, data)
@@ -97,7 +98,7 @@ function meta:Update(elapsed_time)
     local now_time = timer:Now()
     self.elapsed_time = elapsed_time
 
-    if self.cur_stage == self.STAGE.own then
+    if self.cur_stage == self.STAGE.own and not self.own_player.is_sacrifice then
         local last_oper_time = self.own_player.last_oper_time
         if last_oper_time then
             local last_time = timer:GetDiffSecond(last_oper_time)
@@ -115,9 +116,21 @@ function meta:Update(elapsed_time)
             print("[BATTLE] WARNING: is_play_animation stuck for " .. self._anim_block_time .. "s, force-clearing")
             self.is_play_animation = false
             self._anim_block_time = 0
+            self._standby_block_time = 0
             self:CommandComplete()
         end
-        -- 如果正在部署，暂停所有的战斗指令的执行
+        -- standby-specific: if cmd_battle_standby set is_play_animation
+        -- but the exit_battle/anim_complete chain broke, force after 4s
+        if self._standby_block_time and self._standby_block_time > 0 then
+            self._standby_block_time = self._standby_block_time + elapsed_time
+            if self._standby_block_time > 4.0 then
+                print("[BATTLE] WARNING: standby chain broken, force-advancing")
+                self.is_play_animation = false
+                self._anim_block_time = 0
+                self._standby_block_time = 0
+                self:CommandComplete()
+            end
+        end
         return
     else
         self._anim_block_time = 0
@@ -935,6 +948,9 @@ function meta:RegisterCmdHandler()
     self:RegisterEvent("cmd_battle_standby", function (recv_msg)
         self.is_play_animation = true
         self:DispatchEvent("battle_panel_standby")
+        -- Start standby safety timer: if anim_complete never fires
+        -- within 4 seconds, the Update loop will force-complete
+        self._standby_block_time = 0.001
     end)
 
     self:RegisterEvent("cmd_battle_prepa",function (recv_msg)
@@ -1360,6 +1376,7 @@ function meta:RegisterCmdHandler()
 
     self:RegisterEvent("anim_complete",function (anim_name)
         self.is_play_animation = false
+        self._standby_block_time = 0
         self:CommandComplete()
     end)
 
