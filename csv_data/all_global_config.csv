@@ -1,6 +1,6 @@
-ID,KEY,value,备注
+ID,key,value,desc
 number,string,string,string
 ID,key,value,desc
-1,GOLD_REWARD_LIMIT,800,当日获取金币上限
-2,INVITE_INTERVAL,180,切磋邀请时间间隔（秒）
-3,test2,1,无用数据
+1,GOLD_REWARD_LIMIT,800,Daily gold cap
+2,INVITE_INTERVAL,180,Challenge invite interval（ seconds）
+3,test2,1,unused

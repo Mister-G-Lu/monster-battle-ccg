@@ -1,67 +1,67 @@
-ID,宝箱名称,描述,宝箱品质,等级,开启时间（s）,金币奖励,卡片奖励总数,卡片保底奖励（品质从低到高）,宝箱奖励Id,奖励数量,奖励掉落方式,备注
+ID,name,desc,quality,level,open_time,reward_money,card_num,guarantee,reward_group_id,reward_num,drop_mode,memo
 number,string,string,string,number,number,string,number,string,number,string,string,string
 ID,name,desc,quality,level,open_time,reward_money,card_num,guarantee,reward_group_id,reward_num,drop_mode,memo
-1,超级神奇,,normal,1,0,400|500,2,0|0|0|0,900004,2,random,
-2,神奇,,normal,1,0,400|500,1,0|0|0|0,900004,1,random,
-3,超大,,normal,1,0,400|500,2,0|0|0|0,900003,2,random,
-4,皇冠,,normal,1,0,400|500,5,0|0|0|0,900005,1,all,
-5,魔法,,normal,1,43200,400|500,3,0|0|0|0,900005,3,random,
-6,黄金,,normal,1,28800,400|500,5,1|0|0|0,900008,1,random,
-7,白银,,normal,1,10800,400|500,3,0|3|0|0,900009,1,random,
-8,木制,,normal,1,0,20|25,2,0|0|0|0,900005,2,random,
-9,破旧的扈从卡包,,normal,1,10800,0|1,3,0|1|0|0,900016,1,random,
-10,辉煌的骑士卡包,,rare,2,28800,0|1,4,0|0|1|0,900013,1,random,
-11,奢华的领主卡包,,rarity,3,43200,0|1,5,0|0|0|1,900017,1,all,
-12,丧心病狂的恶魔卡包,,rarity,4,43200,0|1,5,0|0|0|1,900010,1,all,
-13,破旧的庶民卡包,,normal,1,300,0|1,3,0|1|0|0,900020,1,all,
-14,破旧的新手卡包,,normal,1,600,0|1,3,0|1|0|0,900022,1,all,
-15,破旧的见习卡包,,normal,1,1800,0|1,3,0|1|0|0,900025,1,all,
-16,破旧的见习卡包,,normal,1,1800,0|1,3,0|1|0|0,900027,1,all,
-17,破旧的学徒卡包,,normal,1,3600,0|1,3,0|1|0|0,900025,1,all,
-18,开发组的爱和涌报,,rarity,1,0,0|1,5,0|0|0|1,900028,1,all,
-19,老板娘的日常卡包1级(旧）,,normal,1,0,0|1,4,0|0|0|0,810001,1,all,1段PVP卡包
-20,老板娘的日常卡包2级(旧）,,normal,1,0,0|1,4,0|0|0|0,810002,1,all,2段PVP卡包
-21,老板娘的日常卡包3级(旧）,,normal,1,0,0|1,4,0|0|0|0,810003,1,all,3段PVP卡包
-22,老板娘的日常卡包4级(旧）,,normal,1,0,0|1,4,0|0|0|0,810004,1,all,4段PVP卡包
-23,老板娘的日常卡包5级(旧）,,normal,1,0,0|1,4,0|0|0|0,810005,1,all,5段PVP卡包
-24,老板娘的日常卡包6级(旧）,,normal,1,0,0|1,4,0|0|0|0,810006,1,all,6段PVP卡包
-25,老板娘的日常卡包7级(旧）,,normal,1,0,0|1,4,0|0|0|0,810007,1,all,7段PVP卡包
-26,老板娘的日常卡包8级(旧）,,normal,1,0,0|1,4,0|0|0|0,810008,1,all,8段PVP卡包
-27,老板娘的日常卡包9级(旧）,,normal,1,0,0|1,4,0|0|0|0,810009,1,all,9段PVP卡包
-28,老板娘的日常卡包10级(旧）,,normal,1,0,0|1,4,0|0|0|0,810010,1,all,10段PVP卡包
-29,老板娘的日常卡包11级(旧）,,normal,1,0,0|1,4,0|0|0|0,810011,1,all,11段PVP卡包
-30,老板娘的日常卡包1级,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,1段PVP卡包
-31,老板娘的日常卡包2级,,normal,1,0,0|1,4,0|0|0|0,710002,1,all,2段PVP卡包
-32,老板娘的日常卡包3级,,normal,1,0,0|1,4,0|0|0|0,710003,1,all,3段PVP卡包
-33,老板娘的日常卡包4级,,normal,1,0,0|1,4,0|0|0|0,710004,1,all,4段PVP卡包
-34,老板娘的日常卡包5级,,normal,1,0,0|1,4,0|0|0|0,710005,1,all,5段PVP卡包
-35,老板娘的日常卡包6级,,normal,1,0,0|1,4,0|0|0|0,710006,1,all,6段PVP卡包
-36,老板娘的日常卡包最高级,,normal,1,0,0|1,4,0|0|0|0,710007,1,all,7段PVP卡包
-37,老板娘的日常卡包最高级,,normal,1,0,0|1,4,0|0|0|0,710008,1,all,7+段PVP卡包
-38,老板娘的日常卡包1级,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,1段PVP卡包
-39,老板娘的日常卡包2级,,normal,1,0,0|1,4,0|0|0|0,710002,1,all,2段PVP卡包
-40,老板娘的日常卡包3级,,normal,1,0,0|1,4,0|0|0|0,710002,1,all,2段PVP卡包
-41,老板娘的日常卡包4级,,normal,1,0,0|1,4,0|0|0|0,710003,1,all,3段PVP卡包
-42,老板娘的日常卡包5级,,normal,1,0,0|1,4,0|0|0|0,710003,1,all,3段PVP卡包
-43,老板娘的日常卡包6级,,normal,1,0,0|1,4,0|0|0|0,710004,1,all,4段PVP卡包
-44,老板娘的日常卡包7级,,normal,1,0,0|1,4,0|0|0|0,710004,1,all,4段PVP卡包
-45,老板娘的日常卡包8级,,normal,1,0,0|1,4,0|0|0|0,710005,1,all,5段PVP卡包
-46,老板娘的日常卡包9级,,normal,1,0,0|1,4,0|0|0|0,710005,1,all,5段PVP卡包
-47,老板娘的日常卡包10级,,normal,1,0,0|1,4,0|0|0|0,710006,1,all,6段PVP卡包
-48,老板娘的日常卡包11级,,normal,1,0,0|1,4,0|0|0|0,710006,1,all,6段PVP卡包
-49,老板娘的日常卡包12级,,normal,1,0,0|1,4,0|0|0|0,710007,1,all,7段PVP卡包
-50,老板娘的日常卡包13级,,normal,1,0,0|1,4,0|0|0|0,710007,1,all,7段PVP卡包
-51,老板娘的日常卡包最高级,,normal,1,0,0|1,4,0|0|0|0,710008,1,all,7+段PVP卡包
-52,老板娘的新手卡包,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,新手卡包
-53,天梯赛季卡包12段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-54,天梯赛季卡包11段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-55,天梯赛季卡包10段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-56,天梯赛季卡包9段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-57,天梯赛季卡包8段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-58,天梯赛季卡包7段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-59,天梯赛季卡包6段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-60,天梯赛季卡包5段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-61,天梯赛季卡包4段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-62,天梯赛季卡包3段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-63,天梯赛季卡包2段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
-64,天梯赛季卡包1段,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,天梯赛季卡包
+1,Super Amazing Pack,,normal,1,0,400|500,2,0|0|0|0,900004,2,random,
+2,Amazing Pack,,normal,1,0,400|500,1,0|0|0|0,900004,1,random,
+3,Tremendous Pack,,normal,1,0,400|500,2,0|0|0|0,900003,2,random,
+4,Carean Pack,,normal,1,0,400|500,5,0|0|0|0,900005,1,all,
+5,Magic Pack,,normal,1,43200,400|500,3,0|0|0|0,900005,3,random,
+6,Gold Pack,,normal,1,28800,400|500,5,1|0|0|0,900008,1,random,
+7,Silver Pack,,normal,1,10800,400|500,3,0|3|0|0,900009,1,random,
+8,Wood Pack,,normal,1,0,20|25,2,0|0|0|0,900005,2,random,
+9,Rusty Squire Pack,,normal,1,10800,0|1,3,0|1|0|0,900016,1,random,
+10,Glory Knight Pack,,rare,2,28800,0|1,4,0|0|1|0,900013,1,random,
+11,Deluxe Lord Pack,,rarity,3,43200,0|1,5,0|0|0|1,900017,1,all,
+12,Freaking Awesome Demon Pack,,rarity,4,43200,0|1,5,0|0|0|1,900010,1,all,
+13,Rusty Plebeian Pack,,normal,1,300,0|1,3,0|1|0|0,900020,1,all,
+14,Rusty Newbee Pack,,normal,1,600,0|1,3,0|1|0|0,900022,1,all,
+15,Rusty Novitiate Pack,,normal,1,1800,0|1,3,0|1|0|0,900025,1,all,
+16,Rusty Novitiate Pack,,normal,1,1800,0|1,3,0|1|0|0,900027,1,all,
+17,Rusty Apprentice Pack,,normal,1,3600,0|1,3,0|1|0|0,900025,1,all,
+18,Love and Peace from Staff,,rarity,1,0,0|1,5,0|0|0|1,900028,1,all,
+19,Tavern owner's daily booster pack Level 1,,normal,1,0,0|1,4,0|0|0|0,810001,1,all,1 rank PVP pack
+20,Tavern owner's daily booster pack Level 2,,normal,1,0,0|1,4,0|0|0|0,810002,1,all,2 rank PVP pack
+21,Tavern owner's daily booster pack Level 3,,normal,1,0,0|1,4,0|0|0|0,810003,1,all,3 rank PVP pack
+22,Tavern owner's daily booster pack Level 4,,normal,1,0,0|1,4,0|0|0|0,810004,1,all,4 rank PVP pack
+23,Tavern owner's daily booster pack Level 5,,normal,1,0,0|1,4,0|0|0|0,810005,1,all,5 rank PVP pack
+24,Tavern owner's daily booster pack Level 6,,normal,1,0,0|1,4,0|0|0|0,810006,1,all,6 rank PVP pack
+25,Tavern owner's daily booster pack Level 7,,normal,1,0,0|1,4,0|0|0|0,810007,1,all,7 rank PVP pack
+26,Tavern owner's daily booster pack Level 8,,normal,1,0,0|1,4,0|0|0|0,810008,1,all,8 rank PVP pack
+27,Tavern owner's daily booster pack Level 9,,normal,1,0,0|1,4,0|0|0|0,810009,1,all,9 rank PVP pack
+28,Tavern owner's daily booster pack Level 10,,normal,1,0,0|1,4,0|0|0|0,810010,1,all,10 rank PVP pack
+29,Tavern owner's daily booster pack Level 11,,normal,1,0,0|1,4,0|0|0|0,810011,1,all,11 rank PVP pack
+30,Tavern owner's daily booster pack Level 1(Old),,normal,1,0,0|1,4,0|0|0|0,710001,1,all,1 rank PVP pack
+31,Tavern owner's daily booster pack Level 2(Old),,normal,1,0,0|1,4,0|0|0|0,710002,1,all,2 rank PVP pack
+32,Tavern owner's daily booster pack Level 3(Old),,normal,1,0,0|1,4,0|0|0|0,710003,1,all,3 rank PVP pack
+33,Tavern owner's daily booster pack Level 4(Old),,normal,1,0,0|1,4,0|0|0|0,710004,1,all,4 rank PVP pack
+34,Tavern owner's daily booster pack Level 5(Old),,normal,1,0,0|1,4,0|0|0|0,710005,1,all,5 rank PVP pack
+35,Tavern owner's daily booster pack Level 6(Old),,normal,1,0,0|1,4,0|0|0|0,710006,1,all,6 rank PVP pack
+36,Tavern owner's daily booster pack Level Max,,normal,1,0,0|1,4,0|0|0|0,710007,1,all,7 rank PVP pack
+37,Tavern owner's daily booster pack Level Max,,normal,1,0,0|1,4,0|0|0|0,710008,1,all,7+ rank PVP pack
+38,Tavern owner's daily booster pack Level 1,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,1 rank PVP pack
+39,Tavern owner's daily booster pack Level 2,,normal,1,0,0|1,4,0|0|0|0,710002,1,all,2 rank PVP pack
+40,Tavern owner's daily booster pack Level 3,,normal,1,0,0|1,4,0|0|0|0,710002,1,all,2 rank PVP pack
+41,Tavern owner's daily booster pack Level 4,,normal,1,0,0|1,4,0|0|0|0,710003,1,all,3 rank PVP pack
+42,Tavern owner's daily booster pack Level 5,,normal,1,0,0|1,4,0|0|0|0,710003,1,all,3 rank PVP pack
+43,Tavern owner's daily booster pack Level 6,,normal,1,0,0|1,4,0|0|0|0,710004,1,all,4 rank PVP pack
+44,Tavern owner's daily booster pack Level 7,,normal,1,0,0|1,4,0|0|0|0,710004,1,all,4 rank PVP pack
+45,Tavern owner's daily booster pack Level 8,,normal,1,0,0|1,4,0|0|0|0,710005,1,all,5 rank PVP pack
+46,Tavern owner's daily booster pack Level 9,,normal,1,0,0|1,4,0|0|0|0,710005,1,all,5 rank PVP pack
+47,Tavern owner's daily booster pack Level 10,,normal,1,0,0|1,4,0|0|0|0,710006,1,all,6 rank PVP pack
+48,Tavern owner's daily booster pack Level 11,,normal,1,0,0|1,4,0|0|0|0,710006,1,all,6 rank PVP pack
+49,Tavern owner's daily booster pack Level 12,,normal,1,0,0|1,4,0|0|0|0,710007,1,all,7 rank PVP pack
+50,Tavern owner's daily booster pack Level 13,,normal,1,0,0|1,4,0|0|0|0,710007,1,all,7 rank PVP pack
+51,Tavern owner's daily booster pack Level Max,,normal,1,0,0|1,4,0|0|0|0,710008,1,all,7+ rank PVP pack
+52,Tavern owner's newbie booster pack,,normal,1,0,0|1,4,0|0|0|0,710001,1,all,Starter pack
+53,Season booster pack Rank 12,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+54,Season booster pack Rank 11,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+55,Season booster pack Rank 10,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+56,Season booster pack Rank 9,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+57,Season booster pack Rank 8,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+58,Season booster pack Rank 7,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+59,Season booster pack Rank 6,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+60,Season booster pack Rank 5,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+61,Season booster pack Rank 4,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+62,Season booster pack Rank 3,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+63,Season booster pack Rank 2,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack
+64,Season booster pack Rank 1,,normal,1,0,0|1,4,0|0|0|0,710001,1,all, daysladder season pack

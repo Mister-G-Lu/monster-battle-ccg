@@ -1,4 +1,4 @@
-ID,卡牌ID,卡牌品质,卡牌类型,卡牌种类,卡牌等级,道具ID,碎片数量,道具ID,碎片数量
+ID,card_id,kind,type,quality,level,item_id,item_num,item_id1,item_num1
 number,number,string,string,string,number,number,number,number,number
 ID,card_id,kind,type,quality,level,item_id,item_num,item_id1,item_num1
 1,110011,war,monster,normal,1,100001,4,300001,1

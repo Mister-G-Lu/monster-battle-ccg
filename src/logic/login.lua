@@ -17,13 +17,13 @@ local data_manager = require "manager.data_template"
 
 local meta = {}
 
--- 状态
+-- Stage
 meta.STAGE = {
-    init     = 1,       -- 初始化界面
-    wait     = 2,       -- 等待操作
-    passprot = 3,       -- 登陆界面
-    loading  = 4,       -- 加载界面
-    complete = 5,       -- 加载完毕，进入游戏世界
+    init     = 1,       -- init UI
+    wait     = 2,       -- waiting
+    passprot = 3,       -- login UI
+    loading  = 4,       -- loading UI
+    complete = 5,       -- loaded; enter world
 }
 
 meta.singin_type = {
@@ -40,7 +40,7 @@ meta.locale_list = {
     [cc.LANGUAGE_CHINESE] = "zh-CN",
 }
 
-meta.bandingEntrance = 1  -- 1为登录面板 2为设置面板
+meta.bandingEntrance = 1  -- 1 = login panel, 2 = settings panel
 
 local IMG_TASK_LIST =
 {
@@ -49,7 +49,7 @@ local IMG_TASK_LIST =
     { "atlas/card.png", "atlas/card.plist" },
 }
 
--- 初始化
+-- Init
 function meta:Init()
     platform_manager:Init()
     self:InitLoadingProgress()
@@ -61,20 +61,20 @@ function meta:DoEnterGame()
 
     local TARGET_PLATFORM = cc.Application:getInstance():getTargetPlatform()
 
-    -- 海外服务器
+    -- production server
     local server_ip = "game.mu77.com"
 
     if TARGET_PLATFORM == cc.PLATFORM_OS_MAC or TARGET_PLATFORM == cc.PLATFORM_OS_WINDOWS then
         -- server_ip = "127.0.0.1"
-        -- 内网测试服
+        -- intranet test server
         -- server_ip = "106.75.62.40"
         -- server_ip = "192.168.199.97"
     end
-    -- 内网服务器
+    -- intranet server
     -- server_ip = "106.75.62.40"
 
     print("server_ip = "..server_ip)
-    local err, status = network:Connect(server_ip, 28800) -- 外网测试
+    local err, status = network:Connect(server_ip, 28800) -- public test
     if err then
         print (err)
     end
@@ -86,7 +86,7 @@ function meta:DoEnterGame()
     graphic:DispatchEvent("switch_login_stage", self.STAGE.loading)
 end
 
--- 加载完毕进入游戏世界
+-- Loading finished; enter world
 function meta:DoLoadingComplete()
     print("[LOGIN] DoLoadingComplete() called")
     global:ChangeScene("world")
@@ -100,19 +100,19 @@ function meta:DoLoadingComplete()
         if user_logic.battle_replay_id then
             local battle_logic = require "logic.battle"
             battle_logic:ReqReplay()
-            print("有战斗还在进行", user_logic.battle_replay_id, "开始进行重回战局")
+            print("a battle is still in progress", user_logic.battle_replay_id, "rejoining the battle")
         end
     end
 
 end
 
--- 初始化加载数据信息
+-- Set up loading steps
 function meta:InitLoadingProgress()
     self.loading_progress_func = {}
 
     local texture_cache = cc.Director:getInstance():getTextureCache()
 
-    -- 加载图片缓存数据
+    -- load texture cache
     for i = 1, #IMG_TASK_LIST do
         self:AddAsyncLoadingProgress(function (compleate_callback, _)
             local img = IMG_TASK_LIST[i][1]
@@ -124,62 +124,62 @@ function meta:InitLoadingProgress()
         end)
     end
 
-    -- 加载用户数据
+    -- load user data
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         user_logic:QueryBaseInfo(compleate_callback, error_callback)
     end)
 
-    -- 加载资源数据
+    -- load resources
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         resource_logic:Query(compleate_callback, error_callback)
     end)
 
-    -- 加载卡组信息
+    -- load decks
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         deck_logic:QueryDeckInfo(compleate_callback, error_callback)
     end)
-    -- 加载卡牌信息
+    -- load cards
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         deck_logic:QueryCardInfo(compleate_callback, error_callback)
     end)
 
-    -- 加载宝箱数据
+    -- load chests
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         chest_logic:Query(compleate_callback, error_callback)
     end)
 
-    -- 加载竞技场数据
+    -- load arena
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         arena_logic:Query(compleate_callback, error_callback)
     end)
 
-    -- 加载日常数据
+    -- load daily
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         daily_logic:Query(compleate_callback, error_callback)
     end)
 
-    -- 加载用户概况数据
+    -- load overview
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         user_logic:QueryOverviewInfo(compleate_callback, error_callback)
     end)
 
-    --加载PVE数据
+    --load PvE
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         pve_logic:RefreshCount(compleate_callback, error_callback)
     end)
 
-    --登陆获取pve信息
+    --fetch PvE info on login
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback )
         pve_logic:ReqPveInfoOnLogin(compleate_callback, error_callback)
     end)
 
-    -- 加载任务数据
+    -- load tasks
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         local task_logic = require "logic.task"
         task_logic:Query(compleate_callback, error_callback)
     end)
 
-    -- 引导数据
+    -- guide data
     self:AddAsyncLoadingProgress(function (compleate_callback, error_callback)
         local guide_logic = require "logic.guide"
         guide_logic:Query(compleate_callback, error_callback)
@@ -191,11 +191,11 @@ function meta:AddAsyncLoadingProgress(executer)
     table.insert(self.loading_progress_func, executer)
 end
 
--- 执行滚动条时间
+-- Run loading bar steps
 function meta:DoAsyncLoadingProgress(callback)
-    if self:HasAccountSysFlow() then     --账号整包进入游戏
+    if self:HasAccountSysFlow() then     --full package account flow
         self:SendLoginReq(true, callback)
-    else                                 --热更包 进入游戏
+    else                                 --hot-update package flow
         self:SendLoginReq(false, callback)
     end
 end
@@ -204,17 +204,17 @@ function meta:SendLoginReq(newPKGBool, callback)
     local req = {}
     local max_progress = #self.loading_progress_func
     local cur_progress = 1
-    -- 失败回调
+    -- error callback
     local _error_callback = function ()
         graphic:DispatchEvent("switch_login_stage", self.STAGE.wait)
     end
 
-    -- 重置会话状态
+    -- reset session
     if network["ResetSession"] then
         network:ResetSession()
     end
 
-    -- 成功回调
+    -- success callback
     local _completa_callback = function ()
         cur_progress = cur_progress + 1
         callback((cur_progress - 1) / max_progress * 100)
@@ -315,7 +315,7 @@ function meta:SendLoginReq(newPKGBool, callback)
     end
 end
 
--- 注册网络事件
+-- Register network events
 function meta:RegisterMsgHandler()
     network:RegisterCommand("cmd_player_logout",function (_)
         network:Clear()
@@ -329,14 +329,14 @@ function meta:RegisterLoginEvent()
     platform_manager:RegisterEvent("signin_result", function(status_code, arg2)
         if status_code == 0 then  -- start
             -- start
-            -- TODO: 开始行为
+            -- TODO: start action
         elseif status_code == 1 then    --success
             local platform = arg2.platform
             local openid = arg2.openid
             local access_token = arg2.access_token
-            --发送给登录服  获取userId
+            --send to login server to get userId
             if self.bandingEntrance == 1 then
-                --过期验证 不再接受
+                --ignore expired auth
                 local rScene = cc.Director:getInstance():getRunningScene()
                 if rScene.schedulerID or config:GetUserId() == nil then
                     local mu77_account = require "logic.account.mu77_account"
@@ -358,7 +358,7 @@ function meta:RegisterLoginEvent()
                 mu77_account:SignIn("", "", self.singin_type.GUEST)
                 return
             end
-            --还原面板按钮状态
+            --restore panel button state
             if self.bandingEntrance == 1 then
                 graphic:DispatchEvent("signin_frame_state", 1)
             else
@@ -373,7 +373,7 @@ function meta:RegisterLoginEvent()
                 mu77_account:SignIn("", "", self.singin_type.GUEST)
                 return
             end
-            --还原面板按钮状态
+            --restore panel button state
             if self.bandingEntrance == 1 then
                 graphic:DispatchEvent("signin_frame_state", 1)
             else
@@ -383,16 +383,16 @@ function meta:RegisterLoginEvent()
                 graphic:DispatchEvent("show_message", "account_bind_log_tips")
             end
         elseif status_code == 4 then    -- inprogress
-            -- TODO: 改变文字  锁屏  显示 绑定中
+            -- TODO: change text / lock screen / show binding
         elseif status_code == 5 then    -- bind--error
-            -- TODO: 绑定失败
+            -- TODO: bind failed
         elseif status_code == 6 then    -- bind--success
-            -- TODO: 绑定成功
-        elseif status_code == 7 then    -- 请先安装
-            -- TODO: 请先安装
-            --print("请先安装")
+            -- TODO: bind success
+        elseif status_code == 7 then    -- please install first
+            -- TODO: please install first
+            --print("please install first")
             -- local platform = arg2.platform
-            -- todo 提示玩家请先安装 对应平台
+            -- todo tell the player to install the platform app
             if self.bandingEntrance == 1 then
                 graphic:DispatchEvent("signin_frame_state", 1)
             else
@@ -402,7 +402,7 @@ function meta:RegisterLoginEvent()
     end)
 
     platform_manager:RegisterEvent("signout_result", function(status_code, arg2)
-        --设置是否在登录面板显示多个按钮
+        --whether to show multiple login buttons
         config:SetNeedShowLoginBtn(1)
         config:Save()
         local global_manager = require "manager.global"

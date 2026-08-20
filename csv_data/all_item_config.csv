@@ -1,21 +1,21 @@
-道具ID,道具名称,资源路径,描述
+ID,name,res_path,desc
 number,string,string,string
 ID,name,res_path,desc
-100001,怪物粉末,m_monster,合成及升级所需的重要材料，可通过分解怪物卡牌获取。
-100002,怪物粉末（自然）,m_monster_nature,合成及升级所需的重要材料，可通过分解自然怪物卡牌获取。
-100003,怪物粉末（平衡）,m_monster_balance,合成及升级所需的重要材料，可通过分解平衡怪物卡牌获取。
-100004,怪物粉末（混乱）,m_monster_chaos,合成及升级所需的重要材料，可通过分解混乱怪物卡牌获取。
-100005,怪物粉末（命运）,m_monster_fortune,合成及升级所需的重要材料，可通过分解命运怪物卡牌获取。
-200001,道具粉末,m_item,合成及升级所需的重要材料，可通过分解道具卡牌获取。
-200002,道具粉末（自然）,m_item_nature,合成及升级所需的重要材料，可通过分解自然道具卡牌获取。
-200003,道具粉末（平衡）,m_item_balance,合成及升级所需的重要材料，可通过分解平衡道具卡牌获取。
-200004,道具粉末（混乱）,m_item_chaos,合成及升级所需的重要材料，可通过分解混乱道具卡牌获取。
-200005,道具粉末（命运）,m_item_fortune,合成及升级所需的重要材料，可通过分解命运道具卡牌获取。
-200006,道具粉末（中立）,m_item_all,合成及升级所需的重要材料，可通过分解中立道具卡牌获取。
-300001,普通玻璃水晶,quality_piece1,升级所需的重要材料，可通过分解普通品质怪物卡牌获取。
-300002,稀有湛蓝水晶,quality_piece2,升级所需的重要材料，可通过分解稀有品质怪物卡牌获取。
-300003,史诗橙黄水晶,quality_piece3,升级所需的重要材料，可通过分解史诗品质怪物卡牌获取。
-300004,传说血色水晶,quality_piece4,升级所需的重要材料，可通过分解传说品质怪物卡牌获取。
-400001,融合卷轴,fusion_scroll,升级所需的重要材料，可通过冒险系统获取。
-500001,游戏币,gold,游戏内重要资源之一。
-500002,代币,diamond,游戏内重要资源之一。
+100001,Monster Powder,m_monster,Material used to compose and upgrade Monster cards
+100002,Monster Powder(Nature),m_monster_nature,Material used to compose and upgrade Nature Monster cards
+100003,Monster Powder(Balance),m_monster_balance,Material used to compose and upgrade Balance Monster cards
+100004,Monster Powder(Chaos),m_monster_chaos,Material used to compose and upgrade Chaos Monster cards
+100005,Monster Powder(Fortune),m_monster_fortune,Material used to compose and upgrade Fortune Monster cards
+200001,Item Powder,m_item,Material used to compose and upgrade Item cards
+200002,Item Powder(Nature),m_item_nature,Material used to compose and upgrade Nature Item cards
+200003,Item Powder(Balance),m_item_balance,Material used to compose and upgrade Balance Item cards
+200004,Item Powder(Chaos),m_item_chaos,Material used to compose and upgrade Chaos Item cards
+200005,Item Powder(Fortune),m_item_fortune,Material used to compose and upgrade Fortune Item cards
+200006,Item Powder(All),m_item_all,Material used to compose and upgrade All Item cards
+300001,Common Glass Crystal,quality_piece1,Material used to upgrade Commonmonster cards
+300002,Rare Blue Crystal,quality_piece2,Material used to upgrade Rare monster cards
+300003,Epic Orange Crystal,quality_piece3,Material used to upgrade Epic monster cards
+300004,Legendary Blood Red Crystal,quality_piece4,Material used to upgrade Legendary monster cards
+400001,Scroll,fusion_scroll,Obtain materials to upgrade from Adventure System
+500001,Coin,gold,One of the most significant materials in the game
+500002,Diamond,diamond,One of the most significant materials in the game

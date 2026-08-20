@@ -1,688 +1,688 @@
-卡牌ID,熟练度等级下限,熟练度等级上限,任务类型,参数1,参数2,参数3,参数4,结果,随机概率,奖励类型,奖励id,奖励数量,奖励类型,奖励id,奖励数量,描述
+ID,level_lower_limit,level_upper_limit,task_type,parm1,parm2,parm3,parm4,value,random_probability,reward_type1,reward_id1,reward_num1,reward_type2,reward_id2,reward_num2,desc
 number,number,number,number,string,string,string,string,number,number,string,number,number,string,number,number,string
 ID,level_lower_limit,level_upper_limit,task_type,parm1,parm2,parm3,parm4,value,random_probability,reward_type1,reward_id1,reward_num1,reward_type2,reward_id2,reward_num2,desc
-1,0,0,3,0,0,0,0,1,100000,chest,52,1,resource,500001,10,赢得1场胜利
-2,0,0,9,war|fortune|balance|nature|chaos,monster,0,0,5,100000,chest,52,1,resource,500001,10,召唤5个怪物
-3,0,0,5,0,0,0,0,1,100000,chest,52,1,resource,500001,10,使用1次道具
-4,0,0,2,fortune,monster,1,0,1,100000,chest,52,1,resource,500001,10,召唤1个命运怪兽（黄色）并获得胜利
-5,0,0,6,0,monster,2,2,2,100000,chest,52,1,resource,500001,10,召唤2个费用2以下的怪兽（包含费用2）
-6,0,0,6,0,monster,3,1,1,100000,chest,52,1,resource,500001,10,召唤1个费用3以上的怪兽（包含费用3）
-7,0,0,3,0,0,0,0,1,100000,chest,52,1,resource,500001,10,赢得1场胜利
-100001,1,1,3,0,0,0,0,1,25000,chest,38,1,resource,500001,10,赢得1场胜利
-100002,1,1,4,0,0,0,0,4,25000,chest,38,1,resource,500001,10,消灭4个怪物
-100003,1,1,5,0,0,0,0,4,25000,chest,38,1,resource,500001,10,使用4个道具
-100004,1,1,3,0,0,0,0,1,25000,chest,38,1,resource,500001,10,赢得1场胜利
-200001,2,2,3,0,0,0,0,1,20000,chest,39,1,resource,500001,10,赢得1场胜利
-200002,2,2,4,0,0,0,0,6,20000,chest,39,1,resource,500001,10,消灭6个怪物
-200003,2,2,5,0,0,0,0,6,20000,chest,39,1,resource,500001,10,使用6个道具
-200004,2,2,6,0,monster,2,2,2,20000,chest,39,1,resource,500001,10,召唤2个费用2以下的怪兽（包含费用2）
-200005,2,2,3,0,0,0,0,1,20000,chest,39,1,resource,500001,10,赢得1场胜利
-300001,3,3,3,0,0,0,0,1,20000,chest,40,1,resource,500001,10,赢得1场胜利
-300002,3,3,4,0,0,0,0,6,20000,chest,40,1,resource,500001,10,消灭6个怪物
-300003,3,3,5,0,0,0,0,6,20000,chest,40,1,resource,500001,10,使用6个道具
-300004,3,3,6,0,armor|equip|consume,2,2,2,20000,chest,40,1,resource,500001,10,召唤2个费用2以下的道具（包含费用2）
-300005,3,3,3,0,0,0,0,1,20000,chest,40,1,resource,500001,10,赢得1场胜利
-400001,4,4,3,0,0,0,0,1,20000,chest,41,1,resource,500001,10,赢得1场胜利
-400002,4,4,4,0,0,0,0,6,20000,chest,41,1,resource,500001,10,消灭6个怪物
-400003,4,4,5,0,0,0,0,6,20000,chest,41,1,resource,500001,10,使用6个道具
-400004,4,4,6,0,monster|armor|equip|consume,2,2,4,20000,chest,41,1,resource,500001,10,召唤4个费用2以下的怪物或道具（包含费用2）
-400005,4,4,3,0,0,0,0,1,20000,chest,41,1,resource,500001,10,赢得1场胜利
-500001,5,5,3,0,0,0,0,1,20000,chest,42,1,resource,500001,10,赢得1场胜利
-500002,5,5,4,0,0,0,0,6,20000,chest,42,1,resource,500001,10,消灭6个怪物
-500003,5,5,5,0,0,0,0,6,20000,chest,42,1,resource,500001,10,使用6个道具
-500004,5,5,6,0,monster|armor|equip|consume,2,2,4,20000,chest,42,1,resource,500001,10,召唤4个费用2以下的怪物或道具（包含费用2）
-500005,5,5,3,0,0,0,0,1,20000,chest,42,1,resource,500001,10,赢得1场胜利
-600001,6,6,2,war,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,召唤2个战争（红色）卡片并获得1场胜利
-600002,6,6,2,fortune,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,召唤2个命运（黄色）卡片并获得1场胜利
-600003,6,6,2,balance,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,召唤2个平衡（蓝色）卡片并获得1场胜利
-600004,6,6,2,nature,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,召唤2个自然（绿色）卡片并获得1场胜利
-600005,6,6,2,chaos,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,召唤2个混乱（紫色）卡片并获得1场胜利
-600006,6,6,2,all,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,召唤2个全能（白色）卡片并获得1场胜利
-600007,6,6,2,war|fortune,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个战争或命运（红色或黄色）卡片并获得1场胜利
-600008,6,6,2,war|balance,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）卡片并获得1场胜利
-600009,6,6,2,war|nature,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个战争或自然（红色或绿色）卡片并获得1场胜利
-600010,6,6,2,war|chaos,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）卡片并获得1场胜利
-600011,6,6,2,war|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个战争或全能（红色或白色）卡片并获得1场胜利
-600012,6,6,2,fortune|balance,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）卡片并获得1场胜利
-600013,6,6,2,fortune|nature,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）卡片并获得1场胜利
-600014,6,6,2,fortune|chaos,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）卡片并获得1场胜利
-600015,6,6,2,fortune|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个命运或全能（黄色或白色）卡片并获得1场胜利
-600016,6,6,2,balance|nature,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）卡片并获得1场胜利
-600017,6,6,2,balance|chaos,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）卡片并获得1场胜利
-600018,6,6,2,balance|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个平衡或全能（蓝色或紫色）卡片并获得1场胜利
-600019,6,6,2,nature|chaos,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）卡片并获得1场胜利
-600020,6,6,2,nature|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个自然或全能（绿色或白色）卡片并获得1场胜利
-600021,6,6,2,chaos|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,召唤3个混乱或全能（紫色或白色）卡片并获得1场胜利
-600022,6,6,3,0,0,0,0,1,13990,chest,43,1,resource,500001,10,赢得一场胜利
-600023,6,6,4,0,0,0,0,6,15000,chest,43,1,resource,500001,10,消灭6个怪物
-600024,6,6,5,0,0,0,0,6,15000,chest,43,1,resource,500001,10,使用6个道具
-600025,6,6,6,0,monster,2,2,2,1334,chest,43,1,resource,500001,10,召唤2个费用2以下的怪物（包含费用2）
-600026,6,6,6,0,monster,3,2,3,1334,chest,43,1,resource,500001,10,召唤3个费用3以下的怪物（包含费用3）
-600027,6,6,6,0,monster,4,2,4,1334,chest,43,1,resource,500001,10,召唤4个费用4以下的怪物（包含费用4）
-600028,6,6,6,0,monster,2,1,3,1334,chest,43,1,resource,500001,10,召唤3个费用2以上的怪物（包含费用2）
-600029,6,6,6,0,monster,3,1,2,1334,chest,43,1,resource,500001,10,召唤2个费用3以上的怪物（包含费用3）
-600030,6,6,6,0,armor|equip|consume,2,2,2,1334,chest,43,1,resource,500001,10,召唤2个费用2以下的道具（包含费用2）
-600031,6,6,6,0,armor|equip|consume,3,2,3,1334,chest,43,1,resource,500001,10,召唤3个费用3以下的道具（包含费用3）
-600032,6,6,6,0,armor|equip|consume,4,2,4,1334,chest,43,1,resource,500001,10,召唤4个费用4以下的道具（包含费用4）
-600033,6,6,6,0,armor|equip|consume,2,1,3,1334,chest,43,1,resource,500001,10,召唤3个费用2以上的道具（包含费用2）
-600034,6,6,6,0,armor|equip|consume,3,1,2,1334,chest,43,1,resource,500001,10,召唤2个费用3以上的道具（包含费用3）
-600035,6,6,6,0,monster|armor|equip|consume,2,2,2,1334,chest,43,1,resource,500001,10,召唤2个费用2以下的卡片（包含费用2）
-600036,6,6,6,0,monster|armor|equip|consume,3,2,3,1334,chest,43,1,resource,500001,10,召唤3个费用3以下的卡片（包含费用3）
-600037,6,6,6,0,monster|armor|equip|consume,4,2,4,1334,chest,43,1,resource,500001,10,召唤4个费用4以下的卡片（包含费用4）
-600038,6,6,6,0,monster|armor|equip|consume,2,1,3,1334,chest,43,1,resource,500001,10,召唤3个费用2以上的卡片（包含费用2）
-600039,6,6,6,0,monster|armor|equip|consume,3,1,2,1334,chest,43,1,resource,500001,10,召唤2个费用3以上的卡片（包含费用3）
-600040,6,6,8,0,0,0,0,2,15000,chest,43,1,resource,500001,10,完成2次PVE胜利
-700001,7,7,2,war,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,召唤2个战争（红色）卡片并获得1场胜利
-700002,7,7,2,fortune,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,召唤2个命运（黄色）卡片并获得1场胜利
-700003,7,7,2,balance,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,召唤2个平衡（蓝色）卡片并获得1场胜利
-700004,7,7,2,nature,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,召唤2个自然（绿色）卡片并获得1场胜利
-700005,7,7,2,chaos,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,召唤2个混乱（紫色）卡片并获得1场胜利
-700006,7,7,2,all,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,召唤2个全能（白色）卡片并获得1场胜利
-700007,7,7,2,war|fortune,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个战争或命运（红色或黄色）卡片并获得1场胜利
-700008,7,7,2,war|balance,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）卡片并获得1场胜利
-700009,7,7,2,war|nature,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个战争或自然（红色或绿色）卡片并获得1场胜利
-700010,7,7,2,war|chaos,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）卡片并获得1场胜利
-700011,7,7,2,war|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个战争或全能（红色或白色）卡片并获得1场胜利
-700012,7,7,2,fortune|balance,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）卡片并获得1场胜利
-700013,7,7,2,fortune|nature,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）卡片并获得1场胜利
-700014,7,7,2,fortune|chaos,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）卡片并获得1场胜利
-700015,7,7,2,fortune|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个命运或全能（黄色或白色）卡片并获得1场胜利
-700016,7,7,2,balance|nature,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）卡片并获得1场胜利
-700017,7,7,2,balance|chaos,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）卡片并获得1场胜利
-700018,7,7,2,balance|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个平衡或全能（蓝色或紫色）卡片并获得1场胜利
-700019,7,7,2,nature|chaos,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）卡片并获得1场胜利
-700020,7,7,2,nature|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个自然或全能（绿色或白色）卡片并获得1场胜利
-700021,7,7,2,chaos|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,召唤3个混乱或全能（紫色或白色）卡片并获得1场胜利
-700022,7,7,3,0,0,0,0,1,13990,chest,44,1,resource,500001,10,赢得一场胜利
-700023,7,7,4,0,0,0,0,6,15000,chest,44,1,resource,500001,10,消灭6个怪物
-700024,7,7,5,0,0,0,0,6,15000,chest,44,1,resource,500001,10,使用6个道具
-700025,7,7,6,0,monster,2,2,2,1334,chest,44,1,resource,500001,10,召唤2个费用2以下的怪物（包含费用2）
-700026,7,7,6,0,monster,3,2,3,1334,chest,44,1,resource,500001,10,召唤3个费用3以下的怪物（包含费用3）
-700027,7,7,6,0,monster,4,2,4,1334,chest,44,1,resource,500001,10,召唤4个费用4以下的怪物（包含费用4）
-700028,7,7,6,0,monster,2,1,3,1334,chest,44,1,resource,500001,10,召唤3个费用2以上的怪物（包含费用2）
-700029,7,7,6,0,monster,3,1,2,1334,chest,44,1,resource,500001,10,召唤2个费用3以上的怪物（包含费用3）
-700030,7,7,6,0,armor|equip|consume,2,2,2,1334,chest,44,1,resource,500001,10,召唤2个费用2以下的道具（包含费用2）
-700031,7,7,6,0,armor|equip|consume,3,2,3,1334,chest,44,1,resource,500001,10,召唤3个费用3以下的道具（包含费用3）
-700032,7,7,6,0,armor|equip|consume,4,2,4,1334,chest,44,1,resource,500001,10,召唤4个费用4以下的道具（包含费用4）
-700033,7,7,6,0,armor|equip|consume,2,1,3,1334,chest,44,1,resource,500001,10,召唤3个费用2以上的道具（包含费用2）
-700034,7,7,6,0,armor|equip|consume,3,1,2,1334,chest,44,1,resource,500001,10,召唤2个费用3以上的道具（包含费用3）
-700035,7,7,6,0,monster|armor|equip|consume,2,2,2,1334,chest,44,1,resource,500001,10,召唤2个费用2以下的卡片（包含费用2）
-700036,7,7,6,0,monster|armor|equip|consume,3,2,3,1334,chest,44,1,resource,500001,10,召唤3个费用3以下的卡片（包含费用3）
-700037,7,7,6,0,monster|armor|equip|consume,4,2,4,1334,chest,44,1,resource,500001,10,召唤4个费用4以下的卡片（包含费用4）
-700038,7,7,6,0,monster|armor|equip|consume,2,1,3,1334,chest,44,1,resource,500001,10,召唤3个费用2以上的卡片（包含费用2）
-700039,7,7,6,0,monster|armor|equip|consume,3,1,2,1334,chest,44,1,resource,500001,10,召唤2个费用3以上的卡片（包含费用3）
-700040,7,7,8,0,0,0,0,2,15000,chest,44,1,resource,500001,10,完成2次PVE胜利
-800001,8,8,2,war,monster,2,0,1,334,chest,45,1,resource,500001,10,召唤2个战争（红色）怪物并获得1场胜利
-800002,8,8,2,fortune,monster,2,0,1,334,chest,45,1,resource,500001,10,召唤2个命运（黄色）怪物并获得1场胜利
-800003,8,8,2,balance,monster,2,0,1,334,chest,45,1,resource,500001,10,召唤2个平衡（蓝色）怪物并获得1场胜利
-800004,8,8,2,nature,monster,2,0,1,334,chest,45,1,resource,500001,10,召唤2个自然（绿色）怪物并获得1场胜利
-800005,8,8,2,chaos,monster,2,0,1,334,chest,45,1,resource,500001,10,召唤2个混乱（紫色）怪物并获得1场胜利
-800006,8,8,2,war|fortune,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个战争或命运（红色或黄色）怪物并获得1场胜利
-800007,8,8,2,war|balance,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）怪物并获得1场胜利
-800008,8,8,2,war|nature,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个战争或自然（红色或绿色）怪物并获得1场胜利
-800009,8,8,2,war|chaos,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）怪物并获得1场胜利
-800010,8,8,2,fortune|balance,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）怪物并获得1场胜利
-800011,8,8,2,fortune|nature,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）怪物并获得1场胜利
-800012,8,8,2,fortune|chaos,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）怪物并获得1场胜利
-800013,8,8,2,balance|nature,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）怪物并获得1场胜利
-800014,8,8,2,balance|chaos,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）怪物并获得1场胜利
-800015,8,8,2,nature|chaos,monster,3,0,1,334,chest,45,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）怪物并获得1场胜利
-800016,8,8,2,war,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,召唤2个战争（红色）道具并获得1场胜利
-800017,8,8,2,fortune,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,召唤2个命运（黄色）道具并获得1场胜利
-800018,8,8,2,balance,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,召唤2个平衡（蓝色）道具并获得1场胜利
-800019,8,8,2,nature,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,召唤2个自然（绿色）道具并获得1场胜利
-800020,8,8,2,chaos,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,召唤2个混乱（紫色）道具并获得1场胜利
-800021,8,8,2,all,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,召唤2个全能（白色）道具并获得1场胜利
-800022,8,8,2,war|fortune,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个战争或命运（红色或黄色）道具并获得1场胜利
-800023,8,8,2,war|balance,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）道具并获得1场胜利
-800024,8,8,2,war|nature,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个战争或自然（红色或绿色）道具并获得1场胜利
-800025,8,8,2,war|chaos,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）道具并获得1场胜利
-800026,8,8,2,war|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个战争或全能（红色或白色）道具并获得1场胜利
-800027,8,8,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）道具并获得1场胜利
-800028,8,8,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）道具并获得1场胜利
-800029,8,8,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）道具并获得1场胜利
-800030,8,8,2,fortune|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个命运或全能（黄色或白色）道具并获得1场胜利
-800031,8,8,2,balance|nature,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）道具并获得1场胜利
-800032,8,8,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）道具并获得1场胜利
-800033,8,8,2,balance|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个平衡或全能（蓝色或紫色）道具并获得1场胜利
-800034,8,8,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）道具并获得1场胜利
-800035,8,8,2,nature|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个自然或全能（绿色或白色）道具并获得1场胜利
-800036,8,8,2,chaos|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,召唤3个混乱或全能（紫色或白色）道具并获得1场胜利
-800037,8,8,2,war,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,召唤4个战争（红色）卡片并获得1场胜利
-800038,8,8,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,召唤4个命运（黄色）卡片并获得1场胜利
-800039,8,8,2,balance,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,召唤4个平衡（蓝色）卡片并获得1场胜利
-800040,8,8,2,nature,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,召唤4个自然（绿色）卡片并获得1场胜利
-800041,8,8,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,召唤4个混乱（紫色）卡片并获得1场胜利
-800042,8,8,2,all,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,召唤4个全能（白色）卡片并获得1场胜利
-800043,8,8,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个战争或命运（红色或黄色）卡片并获得1场胜利
-800044,8,8,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个战争或平衡（红色或蓝色）卡片并获得1场胜利
-800045,8,8,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个战争或自然（红色或绿色）卡片并获得1场胜利
-800046,8,8,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个战争或混乱（红色或紫色）卡片并获得1场胜利
-800047,8,8,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个战争或全能（红色或白色）卡片并获得1场胜利
-800048,8,8,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）卡片并获得1场胜利
-800049,8,8,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个命运或自然（黄色或绿色）卡片并获得1场胜利
-800050,8,8,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个命运或混乱（黄色或紫色）卡片并获得1场胜利
-800051,8,8,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个命运或全能（黄色或白色）卡片并获得1场胜利
-800052,8,8,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个平衡或自然（蓝色或绿色）卡片并获得1场胜利
-800053,8,8,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个平衡或混乱（蓝色或紫色）卡片并获得1场胜利
-800054,8,8,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个平衡或全能（蓝色或紫色）卡片并获得1场胜利
-800055,8,8,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个自然或混乱（绿色或紫色）卡片并获得1场胜利
-800056,8,8,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个自然或全能（绿色或白色）卡片并获得1场胜利
-800057,8,8,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,召唤5个混乱或全能（紫色或白色）卡片并获得1场胜利
-800058,8,8,3,0,0,0,0,1,14962,chest,45,1,resource,500001,10,赢得一场胜利
-800059,8,8,4,0,0,0,0,6,15000,chest,45,1,resource,500001,10,消灭6个怪物
-800060,8,8,5,0,0,0,0,6,15000,chest,45,1,resource,500001,10,使用6个道具
-800061,8,8,6,0,monster,2,2,4,1000,chest,45,1,resource,500001,10,召唤4个费用2以下的怪物（包含费用2）
-800062,8,8,6,0,monster,3,2,5,1000,chest,45,1,resource,500001,10,召唤5个费用3以下的怪物（包含费用3）
-800063,8,8,6,0,monster,4,2,6,1000,chest,45,1,resource,500001,10,召唤6个费用4以下的怪物（包含费用4）
-800064,8,8,6,0,monster,2,1,5,1000,chest,45,1,resource,500001,10,召唤5个费用2以上的怪物（包含费用2）
-800065,8,8,6,0,monster,3,1,4,1000,chest,45,1,resource,500001,10,召唤4个费用3以上的怪物（包含费用3）
-800066,8,8,6,0,monster,4,1,3,1000,chest,45,1,resource,500001,10,召唤3个费用4以上的怪物（包含费用4）
-800067,8,8,3,0,0,0,0,1,1000,chest,45,1,resource,500001,10,赢得一场胜利
-800068,8,8,6,0,armor|equip|consume,2,2,4,1000,chest,45,1,resource,500001,10,召唤4个费用2以下的道具（包含费用2）
-800069,8,8,6,0,armor|equip|consume,3,2,5,1000,chest,45,1,resource,500001,10,召唤5个费用3以下的道具（包含费用3）
-800070,8,8,6,0,armor|equip|consume,4,2,6,1000,chest,45,1,resource,500001,10,召唤6个费用4以下的道具（包含费用4）
-800071,8,8,6,0,armor|equip|consume,2,1,5,1000,chest,45,1,resource,500001,10,召唤5个费用2以上的道具（包含费用2）
-800072,8,8,6,0,armor|equip|consume,3,1,4,1000,chest,45,1,resource,500001,10,召唤4个费用3以上的道具（包含费用3）
-800073,8,8,6,0,armor|equip|consume,4,1,3,1000,chest,45,1,resource,500001,10,召唤3个费用4以上的道具（包含费用4）
-800074,8,8,3,0,0,0,0,1,1000,chest,45,1,resource,500001,10,赢得一场胜利
-800075,8,8,6,0,monster|armor|equip|consume,2,2,4,1000,chest,45,1,resource,500001,10,召唤4个费用2以下的卡片（包含费用2）
-800076,8,8,6,0,monster|armor|equip|consume,3,2,5,1000,chest,45,1,resource,500001,10,召唤5个费用3以下的卡片（包含费用3）
-800077,8,8,6,0,monster|armor|equip|consume,4,2,6,1000,chest,45,1,resource,500001,10,召唤6个费用4以下的卡片（包含费用4）
-800078,8,8,6,0,monster|armor|equip|consume,2,1,5,1000,chest,45,1,resource,500001,10,召唤5个费用2以上的卡片（包含费用2）
-800079,8,8,6,0,monster|armor|equip|consume,3,1,4,1000,chest,45,1,resource,500001,10,召唤4个费用3以上的卡片（包含费用3）
-800080,8,8,6,0,monster|armor|equip|consume,4,1,3,1000,chest,45,1,resource,500001,10,召唤3个费用4以上的卡片（包含费用4）
-800081,8,8,3,0,0,0,0,1,1000,chest,45,1,resource,500001,10,赢得一场胜利
-800082,8,8,8,0,0,0,0,2,15000,chest,45,1,resource,500001,10,完成2次PVE胜利
-900001,9,9,2,war,monster,2,0,1,334,chest,46,1,resource,500001,10,召唤2个战争（红色）怪物并获得1场胜利
-900002,9,9,2,fortune,monster,2,0,1,334,chest,46,1,resource,500001,10,召唤2个命运（黄色）怪物并获得1场胜利
-900003,9,9,2,balance,monster,2,0,1,334,chest,46,1,resource,500001,10,召唤2个平衡（蓝色）怪物并获得1场胜利
-900004,9,9,2,nature,monster,2,0,1,334,chest,46,1,resource,500001,10,召唤2个自然（绿色）怪物并获得1场胜利
-900005,9,9,2,chaos,monster,2,0,1,334,chest,46,1,resource,500001,10,召唤2个混乱（紫色）怪物并获得1场胜利
-900006,9,9,2,war|fortune,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个战争或命运（红色或黄色）怪物并获得1场胜利
-900007,9,9,2,war|balance,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）怪物并获得1场胜利
-900008,9,9,2,war|nature,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个战争或自然（红色或绿色）怪物并获得1场胜利
-900009,9,9,2,war|chaos,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）怪物并获得1场胜利
-900010,9,9,2,fortune|balance,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）怪物并获得1场胜利
-900011,9,9,2,fortune|nature,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）怪物并获得1场胜利
-900012,9,9,2,fortune|chaos,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）怪物并获得1场胜利
-900013,9,9,2,balance|nature,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）怪物并获得1场胜利
-900014,9,9,2,balance|chaos,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）怪物并获得1场胜利
-900015,9,9,2,nature|chaos,monster,3,0,1,334,chest,46,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）怪物并获得1场胜利
-900016,9,9,2,war,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,召唤2个战争（红色）道具并获得1场胜利
-900017,9,9,2,fortune,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,召唤2个命运（黄色）道具并获得1场胜利
-900018,9,9,2,balance,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,召唤2个平衡（蓝色）道具并获得1场胜利
-900019,9,9,2,nature,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,召唤2个自然（绿色）道具并获得1场胜利
-900020,9,9,2,chaos,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,召唤2个混乱（紫色）道具并获得1场胜利
-900021,9,9,2,all,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,召唤2个全能（白色）道具并获得1场胜利
-900022,9,9,2,war|fortune,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个战争或命运（红色或黄色）道具并获得1场胜利
-900023,9,9,2,war|balance,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）道具并获得1场胜利
-900024,9,9,2,war|nature,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个战争或自然（红色或绿色）道具并获得1场胜利
-900025,9,9,2,war|chaos,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）道具并获得1场胜利
-900026,9,9,2,war|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个战争或全能（红色或白色）道具并获得1场胜利
-900027,9,9,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）道具并获得1场胜利
-900028,9,9,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）道具并获得1场胜利
-900029,9,9,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）道具并获得1场胜利
-900030,9,9,2,fortune|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个命运或全能（黄色或白色）道具并获得1场胜利
-900031,9,9,2,balance|nature,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）道具并获得1场胜利
-900032,9,9,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）道具并获得1场胜利
-900033,9,9,2,balance|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个平衡或全能（蓝色或紫色）道具并获得1场胜利
-900034,9,9,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）道具并获得1场胜利
-900035,9,9,2,nature|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个自然或全能（绿色或白色）道具并获得1场胜利
-900036,9,9,2,chaos|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,召唤3个混乱或全能（紫色或白色）道具并获得1场胜利
-900037,9,9,2,war,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,召唤4个战争（红色）卡片并获得1场胜利
-900038,9,9,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,召唤4个命运（黄色）卡片并获得1场胜利
-900039,9,9,2,balance,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,召唤4个平衡（蓝色）卡片并获得1场胜利
-900040,9,9,2,nature,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,召唤4个自然（绿色）卡片并获得1场胜利
-900041,9,9,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,召唤4个混乱（紫色）卡片并获得1场胜利
-900042,9,9,2,all,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,召唤4个全能（白色）卡片并获得1场胜利
-900043,9,9,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个战争或命运（红色或黄色）卡片并获得1场胜利
-900044,9,9,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个战争或平衡（红色或蓝色）卡片并获得1场胜利
-900045,9,9,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个战争或自然（红色或绿色）卡片并获得1场胜利
-900046,9,9,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个战争或混乱（红色或紫色）卡片并获得1场胜利
-900047,9,9,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个战争或全能（红色或白色）卡片并获得1场胜利
-900048,9,9,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）卡片并获得1场胜利
-900049,9,9,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个命运或自然（黄色或绿色）卡片并获得1场胜利
-900050,9,9,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个命运或混乱（黄色或紫色）卡片并获得1场胜利
-900051,9,9,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个命运或全能（黄色或白色）卡片并获得1场胜利
-900052,9,9,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个平衡或自然（蓝色或绿色）卡片并获得1场胜利
-900053,9,9,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个平衡或混乱（蓝色或紫色）卡片并获得1场胜利
-900054,9,9,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个平衡或全能（蓝色或紫色）卡片并获得1场胜利
-900055,9,9,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个自然或混乱（绿色或紫色）卡片并获得1场胜利
-900056,9,9,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个自然或全能（绿色或白色）卡片并获得1场胜利
-900057,9,9,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,召唤5个混乱或全能（紫色或白色）卡片并获得1场胜利
-900058,9,9,3,0,0,0,0,1,14962,chest,46,1,resource,500001,10,赢得一场胜利
-900059,9,9,4,0,0,0,0,6,15000,chest,46,1,resource,500001,10,消灭6个怪物
-900060,9,9,5,0,0,0,0,6,15000,chest,46,1,resource,500001,10,使用6个道具
-900061,9,9,6,0,monster,2,2,4,1000,chest,46,1,resource,500001,10,召唤4个费用2以下的怪物（包含费用2）
-900062,9,9,6,0,monster,3,2,5,1000,chest,46,1,resource,500001,10,召唤5个费用3以下的怪物（包含费用3）
-900063,9,9,6,0,monster,4,2,6,1000,chest,46,1,resource,500001,10,召唤6个费用4以下的怪物（包含费用4）
-900064,9,9,6,0,monster,2,1,5,1000,chest,46,1,resource,500001,10,召唤5个费用2以上的怪物（包含费用2）
-900065,9,9,6,0,monster,3,1,4,1000,chest,46,1,resource,500001,10,召唤4个费用3以上的怪物（包含费用3）
-900066,9,9,6,0,monster,4,1,3,1000,chest,46,1,resource,500001,10,召唤3个费用4以上的怪物（包含费用4）
-900067,9,9,3,0,0,0,0,1,1000,chest,46,1,resource,500001,10,赢得一场胜利
-900068,9,9,6,0,armor|equip|consume,2,2,4,1000,chest,46,1,resource,500001,10,召唤4个费用2以下的道具（包含费用2）
-900069,9,9,6,0,armor|equip|consume,3,2,5,1000,chest,46,1,resource,500001,10,召唤5个费用3以下的道具（包含费用3）
-900070,9,9,6,0,armor|equip|consume,4,2,6,1000,chest,46,1,resource,500001,10,召唤6个费用4以下的道具（包含费用4）
-900071,9,9,6,0,armor|equip|consume,2,1,5,1000,chest,46,1,resource,500001,10,召唤5个费用2以上的道具（包含费用2）
-900072,9,9,6,0,armor|equip|consume,3,1,4,1000,chest,46,1,resource,500001,10,召唤4个费用3以上的道具（包含费用3）
-900073,9,9,6,0,armor|equip|consume,4,1,3,1000,chest,46,1,resource,500001,10,召唤3个费用4以上的道具（包含费用4）
-900074,9,9,3,0,0,0,0,1,1000,chest,46,1,resource,500001,10,赢得一场胜利
-900075,9,9,6,0,monster|armor|equip|consume,2,2,4,1000,chest,46,1,resource,500001,10,召唤4个费用2以下的卡片（包含费用2）
-900076,9,9,6,0,monster|armor|equip|consume,3,2,5,1000,chest,46,1,resource,500001,10,召唤5个费用3以下的卡片（包含费用3）
-900077,9,9,6,0,monster|armor|equip|consume,4,2,6,1000,chest,46,1,resource,500001,10,召唤6个费用4以下的卡片（包含费用4）
-900078,9,9,6,0,monster|armor|equip|consume,2,1,5,1000,chest,46,1,resource,500001,10,召唤5个费用2以上的卡片（包含费用2）
-900079,9,9,6,0,monster|armor|equip|consume,3,1,4,1000,chest,46,1,resource,500001,10,召唤4个费用3以上的卡片（包含费用3）
-900080,9,9,6,0,monster|armor|equip|consume,4,1,3,1000,chest,46,1,resource,500001,10,召唤3个费用4以上的卡片（包含费用4）
-900081,9,9,3,0,0,0,0,1,1000,chest,46,1,resource,500001,10,赢得一场胜利
-900082,9,9,8,0,0,0,0,2,15000,chest,46,1,resource,500001,10,完成2次PVE胜利
-1000001,10,10,2,war,monster,2,0,1,334,chest,47,1,resource,500001,10,召唤2个战争（红色）怪物并获得1场胜利
-1000002,10,10,2,fortune,monster,2,0,1,334,chest,47,1,resource,500001,10,召唤2个命运（黄色）怪物并获得1场胜利
-1000003,10,10,2,balance,monster,2,0,1,334,chest,47,1,resource,500001,10,召唤2个平衡（蓝色）怪物并获得1场胜利
-1000004,10,10,2,nature,monster,2,0,1,334,chest,47,1,resource,500001,10,召唤2个自然（绿色）怪物并获得1场胜利
-1000005,10,10,2,chaos,monster,2,0,1,334,chest,47,1,resource,500001,10,召唤2个混乱（紫色）怪物并获得1场胜利
-1000006,10,10,2,war|fortune,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个战争或命运（红色或黄色）怪物并获得1场胜利
-1000007,10,10,2,war|balance,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）怪物并获得1场胜利
-1000008,10,10,2,war|nature,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个战争或自然（红色或绿色）怪物并获得1场胜利
-1000009,10,10,2,war|chaos,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）怪物并获得1场胜利
-1000010,10,10,2,fortune|balance,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）怪物并获得1场胜利
-1000011,10,10,2,fortune|nature,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）怪物并获得1场胜利
-1000012,10,10,2,fortune|chaos,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）怪物并获得1场胜利
-1000013,10,10,2,balance|nature,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）怪物并获得1场胜利
-1000014,10,10,2,balance|chaos,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）怪物并获得1场胜利
-1000015,10,10,2,nature|chaos,monster,3,0,1,334,chest,47,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）怪物并获得1场胜利
-1000016,10,10,2,war,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,召唤2个战争（红色）道具并获得1场胜利
-1000017,10,10,2,fortune,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,召唤2个命运（黄色）道具并获得1场胜利
-1000018,10,10,2,balance,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,召唤2个平衡（蓝色）道具并获得1场胜利
-1000019,10,10,2,nature,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,召唤2个自然（绿色）道具并获得1场胜利
-1000020,10,10,2,chaos,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,召唤2个混乱（紫色）道具并获得1场胜利
-1000021,10,10,2,all,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,召唤2个全能（白色）道具并获得1场胜利
-1000022,10,10,2,war|fortune,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个战争或命运（红色或黄色）道具并获得1场胜利
-1000023,10,10,2,war|balance,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）道具并获得1场胜利
-1000024,10,10,2,war|nature,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个战争或自然（红色或绿色）道具并获得1场胜利
-1000025,10,10,2,war|chaos,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）道具并获得1场胜利
-1000026,10,10,2,war|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个战争或全能（红色或白色）道具并获得1场胜利
-1000027,10,10,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）道具并获得1场胜利
-1000028,10,10,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）道具并获得1场胜利
-1000029,10,10,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）道具并获得1场胜利
-1000030,10,10,2,fortune|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个命运或全能（黄色或白色）道具并获得1场胜利
-1000031,10,10,2,balance|nature,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）道具并获得1场胜利
-1000032,10,10,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）道具并获得1场胜利
-1000033,10,10,2,balance|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个平衡或全能（蓝色或紫色）道具并获得1场胜利
-1000034,10,10,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）道具并获得1场胜利
-1000035,10,10,2,nature|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个自然或全能（绿色或白色）道具并获得1场胜利
-1000036,10,10,2,chaos|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,召唤3个混乱或全能（紫色或白色）道具并获得1场胜利
-1000037,10,10,2,war,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,召唤4个战争（红色）卡片并获得1场胜利
-1000038,10,10,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,召唤4个命运（黄色）卡片并获得1场胜利
-1000039,10,10,2,balance,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,召唤4个平衡（蓝色）卡片并获得1场胜利
-1000040,10,10,2,nature,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,召唤4个自然（绿色）卡片并获得1场胜利
-1000041,10,10,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,召唤4个混乱（紫色）卡片并获得1场胜利
-1000042,10,10,2,all,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,召唤4个全能（白色）卡片并获得1场胜利
-1000043,10,10,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个战争或命运（红色或黄色）卡片并获得1场胜利
-1000044,10,10,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个战争或平衡（红色或蓝色）卡片并获得1场胜利
-1000045,10,10,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个战争或自然（红色或绿色）卡片并获得1场胜利
-1000046,10,10,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个战争或混乱（红色或紫色）卡片并获得1场胜利
-1000047,10,10,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个战争或全能（红色或白色）卡片并获得1场胜利
-1000048,10,10,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）卡片并获得1场胜利
-1000049,10,10,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个命运或自然（黄色或绿色）卡片并获得1场胜利
-1000050,10,10,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个命运或混乱（黄色或紫色）卡片并获得1场胜利
-1000051,10,10,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个命运或全能（黄色或白色）卡片并获得1场胜利
-1000052,10,10,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个平衡或自然（蓝色或绿色）卡片并获得1场胜利
-1000053,10,10,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个平衡或混乱（蓝色或紫色）卡片并获得1场胜利
-1000054,10,10,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个平衡或全能（蓝色或紫色）卡片并获得1场胜利
-1000055,10,10,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个自然或混乱（绿色或紫色）卡片并获得1场胜利
-1000056,10,10,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个自然或全能（绿色或白色）卡片并获得1场胜利
-1000057,10,10,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,召唤5个混乱或全能（紫色或白色）卡片并获得1场胜利
-1000058,10,10,3,0,0,0,0,1,14962,chest,47,1,resource,500001,10,赢得一场胜利
-1000059,10,10,4,0,0,0,0,6,15000,chest,47,1,resource,500001,10,消灭6个怪物
-1000060,10,10,5,0,0,0,0,6,15000,chest,47,1,resource,500001,10,使用6个道具
-1000061,10,10,6,0,monster,2,2,4,1000,chest,47,1,resource,500001,10,召唤4个费用2以下的怪物（包含费用2）
-1000062,10,10,6,0,monster,3,2,5,1000,chest,47,1,resource,500001,10,召唤5个费用3以下的怪物（包含费用3）
-1000063,10,10,6,0,monster,4,2,6,1000,chest,47,1,resource,500001,10,召唤6个费用4以下的怪物（包含费用4）
-1000064,10,10,6,0,monster,2,1,5,1000,chest,47,1,resource,500001,10,召唤5个费用2以上的怪物（包含费用2）
-1000065,10,10,6,0,monster,3,1,4,1000,chest,47,1,resource,500001,10,召唤4个费用3以上的怪物（包含费用3）
-1000066,10,10,6,0,monster,4,1,3,1000,chest,47,1,resource,500001,10,召唤3个费用4以上的怪物（包含费用4）
-1000067,10,10,3,0,0,0,0,1,1000,chest,47,1,resource,500001,10,赢得一场胜利
-1000068,10,10,6,0,armor|equip|consume,2,2,4,1000,chest,47,1,resource,500001,10,召唤4个费用2以下的道具（包含费用2）
-1000069,10,10,6,0,armor|equip|consume,3,2,5,1000,chest,47,1,resource,500001,10,召唤5个费用3以下的道具（包含费用3）
-1000070,10,10,6,0,armor|equip|consume,4,2,6,1000,chest,47,1,resource,500001,10,召唤6个费用4以下的道具（包含费用4）
-1000071,10,10,6,0,armor|equip|consume,2,1,5,1000,chest,46,1,resource,500001,10,召唤5个费用2以上的道具（包含费用2）
-1000072,10,10,6,0,armor|equip|consume,3,1,4,1000,chest,47,1,resource,500001,10,召唤4个费用3以上的道具（包含费用3）
-1000073,10,10,6,0,armor|equip|consume,4,1,3,1000,chest,47,1,resource,500001,10,召唤3个费用4以上的道具（包含费用4）
-1000074,10,10,3,0,0,0,0,1,1000,chest,47,1,resource,500001,10,赢得一场胜利
-1000075,10,10,6,0,monster|armor|equip|consume,2,2,4,1000,chest,47,1,resource,500001,10,召唤4个费用2以下的卡片（包含费用2）
-1000076,10,10,6,0,monster|armor|equip|consume,3,2,5,1000,chest,47,1,resource,500001,10,召唤5个费用3以下的卡片（包含费用3）
-1000077,10,10,6,0,monster|armor|equip|consume,4,2,6,1000,chest,47,1,resource,500001,10,召唤6个费用4以下的卡片（包含费用4）
-1000078,10,10,6,0,monster|armor|equip|consume,2,1,5,1000,chest,47,1,resource,500001,10,召唤5个费用2以上的卡片（包含费用2）
-1000079,10,10,6,0,monster|armor|equip|consume,3,1,4,1000,chest,47,1,resource,500001,10,召唤4个费用3以上的卡片（包含费用3）
-1000080,10,10,6,0,monster|armor|equip|consume,4,1,3,1000,chest,47,1,resource,500001,10,召唤3个费用4以上的卡片（包含费用4）
-1000081,10,10,3,0,0,0,0,1,1000,chest,47,1,resource,500001,10,赢得一场胜利
-1000082,10,10,8,0,0,0,0,2,15000,chest,47,1,resource,500001,10,完成2次PVE胜利
-1100001,11,11,2,war,monster,2,0,1,334,chest,48,1,resource,500001,10,召唤2个战争（红色）怪物并获得1场胜利
-1100002,11,11,2,fortune,monster,2,0,1,334,chest,48,1,resource,500001,10,召唤2个命运（黄色）怪物并获得1场胜利
-1100003,11,11,2,balance,monster,2,0,1,334,chest,48,1,resource,500001,10,召唤2个平衡（蓝色）怪物并获得1场胜利
-1100004,11,11,2,nature,monster,2,0,1,334,chest,48,1,resource,500001,10,召唤2个自然（绿色）怪物并获得1场胜利
-1100005,11,11,2,chaos,monster,2,0,1,334,chest,48,1,resource,500001,10,召唤2个混乱（紫色）怪物并获得1场胜利
-1100006,11,11,2,war|fortune,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个战争或命运（红色或黄色）怪物并获得1场胜利
-1100007,11,11,2,war|balance,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）怪物并获得1场胜利
-1100008,11,11,2,war|nature,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个战争或自然（红色或绿色）怪物并获得1场胜利
-1100009,11,11,2,war|chaos,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）怪物并获得1场胜利
-1100010,11,11,2,fortune|balance,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）怪物并获得1场胜利
-1100011,11,11,2,fortune|nature,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）怪物并获得1场胜利
-1100012,11,11,2,fortune|chaos,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）怪物并获得1场胜利
-1100013,11,11,2,balance|nature,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）怪物并获得1场胜利
-1100014,11,11,2,balance|chaos,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）怪物并获得1场胜利
-1100015,11,11,2,nature|chaos,monster,3,0,1,334,chest,48,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）怪物并获得1场胜利
-1100016,11,11,2,war,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,召唤2个战争（红色）道具并获得1场胜利
-1100017,11,11,2,fortune,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,召唤2个命运（黄色）道具并获得1场胜利
-1100018,11,11,2,balance,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,召唤2个平衡（蓝色）道具并获得1场胜利
-1100019,11,11,2,nature,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,召唤2个自然（绿色）道具并获得1场胜利
-1100020,11,11,2,chaos,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,召唤2个混乱（紫色）道具并获得1场胜利
-1100021,11,11,2,all,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,召唤2个全能（白色）道具并获得1场胜利
-1100022,11,11,2,war|fortune,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个战争或命运（红色或黄色）道具并获得1场胜利
-1100023,11,11,2,war|balance,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）道具并获得1场胜利
-1100024,11,11,2,war|nature,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个战争或自然（红色或绿色）道具并获得1场胜利
-1100025,11,11,2,war|chaos,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）道具并获得1场胜利
-1100026,11,11,2,war|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个战争或全能（红色或白色）道具并获得1场胜利
-1100027,11,11,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）道具并获得1场胜利
-1100028,11,11,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）道具并获得1场胜利
-1100029,11,11,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）道具并获得1场胜利
-1100030,11,11,2,fortune|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个命运或全能（黄色或白色）道具并获得1场胜利
-1100031,11,11,2,balance|nature,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）道具并获得1场胜利
-1100032,11,11,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）道具并获得1场胜利
-1100033,11,11,2,balance|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个平衡或全能（蓝色或紫色）道具并获得1场胜利
-1100034,11,11,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）道具并获得1场胜利
-1100035,11,11,2,nature|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个自然或全能（绿色或白色）道具并获得1场胜利
-1100036,11,11,2,chaos|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,召唤3个混乱或全能（紫色或白色）道具并获得1场胜利
-1100037,11,11,2,war,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,召唤4个战争（红色）卡片并获得1场胜利
-1100038,11,11,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,召唤4个命运（黄色）卡片并获得1场胜利
-1100039,11,11,2,balance,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,召唤4个平衡（蓝色）卡片并获得1场胜利
-1100040,11,11,2,nature,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,召唤4个自然（绿色）卡片并获得1场胜利
-1100041,11,11,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,召唤4个混乱（紫色）卡片并获得1场胜利
-1100042,11,11,2,all,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,召唤4个全能（白色）卡片并获得1场胜利
-1100043,11,11,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个战争或命运（红色或黄色）卡片并获得1场胜利
-1100044,11,11,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个战争或平衡（红色或蓝色）卡片并获得1场胜利
-1100045,11,11,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个战争或自然（红色或绿色）卡片并获得1场胜利
-1100046,11,11,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个战争或混乱（红色或紫色）卡片并获得1场胜利
-1100047,11,11,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个战争或全能（红色或白色）卡片并获得1场胜利
-1100048,11,11,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）卡片并获得1场胜利
-1100049,11,11,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个命运或自然（黄色或绿色）卡片并获得1场胜利
-1100050,11,11,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个命运或混乱（黄色或紫色）卡片并获得1场胜利
-1100051,11,11,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个命运或全能（黄色或白色）卡片并获得1场胜利
-1100052,11,11,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个平衡或自然（蓝色或绿色）卡片并获得1场胜利
-1100053,11,11,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个平衡或混乱（蓝色或紫色）卡片并获得1场胜利
-1100054,11,11,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个平衡或全能（蓝色或紫色）卡片并获得1场胜利
-1100055,11,11,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个自然或混乱（绿色或紫色）卡片并获得1场胜利
-1100056,11,11,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个自然或全能（绿色或白色）卡片并获得1场胜利
-1100057,11,11,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,召唤5个混乱或全能（紫色或白色）卡片并获得1场胜利
-1100058,11,11,3,0,0,0,0,1,14962,chest,48,1,resource,500001,10,赢得一场胜利
-1100059,11,11,4,0,0,0,0,6,15000,chest,48,1,resource,500001,10,消灭6个怪物
-1100060,11,11,5,0,0,0,0,6,15000,chest,48,1,resource,500001,10,使用6个道具
-1100061,11,11,6,0,monster,2,2,4,1000,chest,48,1,resource,500001,10,召唤4个费用2以下的怪物（包含费用2）
-1100062,11,11,6,0,monster,3,2,5,1000,chest,48,1,resource,500001,10,召唤5个费用3以下的怪物（包含费用3）
-1100063,11,11,6,0,monster,4,2,6,1000,chest,48,1,resource,500001,10,召唤6个费用4以下的怪物（包含费用4）
-1100064,11,11,6,0,monster,2,1,5,1000,chest,48,1,resource,500001,10,召唤5个费用2以上的怪物（包含费用2）
-1100065,11,11,6,0,monster,3,1,4,1000,chest,48,1,resource,500001,10,召唤4个费用3以上的怪物（包含费用3）
-1100066,11,11,6,0,monster,4,1,3,1000,chest,48,1,resource,500001,10,召唤3个费用4以上的怪物（包含费用4）
-1100067,11,11,3,0,0,0,0,1,1000,chest,48,1,resource,500001,10,赢得一场胜利
-1100068,11,11,6,0,armor|equip|consume,2,2,4,1000,chest,48,1,resource,500001,10,召唤4个费用2以下的道具（包含费用2）
-1100069,11,11,6,0,armor|equip|consume,3,2,5,1000,chest,48,1,resource,500001,10,召唤5个费用3以下的道具（包含费用3）
-1100070,11,11,6,0,armor|equip|consume,4,2,6,1000,chest,48,1,resource,500001,10,召唤6个费用4以下的道具（包含费用4）
-1100071,11,11,6,0,armor|equip|consume,2,1,5,1000,chest,48,1,resource,500001,10,召唤5个费用2以上的道具（包含费用2）
-1100072,11,11,6,0,armor|equip|consume,3,1,4,1000,chest,48,1,resource,500001,10,召唤4个费用3以上的道具（包含费用3）
-1100073,11,11,6,0,armor|equip|consume,4,1,3,1000,chest,48,1,resource,500001,10,召唤3个费用4以上的道具（包含费用4）
-1100074,11,11,3,0,0,0,0,1,1000,chest,48,1,resource,500001,10,赢得一场胜利
-1100075,11,11,6,0,monster|armor|equip|consume,2,2,4,1000,chest,48,1,resource,500001,10,召唤4个费用2以下的卡片（包含费用2）
-1100076,11,11,6,0,monster|armor|equip|consume,3,2,5,1000,chest,48,1,resource,500001,10,召唤5个费用3以下的卡片（包含费用3）
-1100077,11,11,6,0,monster|armor|equip|consume,4,2,6,1000,chest,48,1,resource,500001,10,召唤6个费用4以下的卡片（包含费用4）
-1100078,11,11,6,0,monster|armor|equip|consume,2,1,5,1000,chest,48,1,resource,500001,10,召唤5个费用2以上的卡片（包含费用2）
-1100079,11,11,6,0,monster|armor|equip|consume,3,1,4,1000,chest,48,1,resource,500001,10,召唤4个费用3以上的卡片（包含费用3）
-1100080,11,11,6,0,monster|armor|equip|consume,4,1,3,1000,chest,48,1,resource,500001,10,召唤3个费用4以上的卡片（包含费用4）
-1100081,11,11,3,0,0,0,0,1,1000,chest,48,1,resource,500001,10,赢得一场胜利
-1100082,11,11,8,0,0,0,0,2,15000,chest,48,1,resource,500001,10,完成2次PVE胜利
-1200001,12,12,2,war,monster,2,0,1,334,chest,49,1,resource,500001,10,召唤2个战争（红色）怪物并获得1场胜利
-1200002,12,12,2,fortune,monster,2,0,1,334,chest,49,1,resource,500001,10,召唤2个命运（黄色）怪物并获得1场胜利
-1200003,12,12,2,balance,monster,2,0,1,334,chest,49,1,resource,500001,10,召唤2个平衡（蓝色）怪物并获得1场胜利
-1200004,12,12,2,nature,monster,2,0,1,334,chest,49,1,resource,500001,10,召唤2个自然（绿色）怪物并获得1场胜利
-1200005,12,12,2,chaos,monster,2,0,1,334,chest,49,1,resource,500001,10,召唤2个混乱（紫色）怪物并获得1场胜利
-1200006,12,12,2,war|fortune,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个战争或命运（红色或黄色）怪物并获得1场胜利
-1200007,12,12,2,war|balance,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）怪物并获得1场胜利
-1200008,12,12,2,war|nature,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个战争或自然（红色或绿色）怪物并获得1场胜利
-1200009,12,12,2,war|chaos,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）怪物并获得1场胜利
-1200010,12,12,2,fortune|balance,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）怪物并获得1场胜利
-1200011,12,12,2,fortune|nature,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）怪物并获得1场胜利
-1200012,12,12,2,fortune|chaos,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）怪物并获得1场胜利
-1200013,12,12,2,balance|nature,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）怪物并获得1场胜利
-1200014,12,12,2,balance|chaos,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）怪物并获得1场胜利
-1200015,12,12,2,nature|chaos,monster,3,0,1,334,chest,49,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）怪物并获得1场胜利
-1200016,12,12,2,war,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,召唤2个战争（红色）道具并获得1场胜利
-1200017,12,12,2,fortune,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,召唤2个命运（黄色）道具并获得1场胜利
-1200018,12,12,2,balance,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,召唤2个平衡（蓝色）道具并获得1场胜利
-1200019,12,12,2,nature,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,召唤2个自然（绿色）道具并获得1场胜利
-1200020,12,12,2,chaos,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,召唤2个混乱（紫色）道具并获得1场胜利
-1200021,12,12,2,all,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,召唤2个全能（白色）道具并获得1场胜利
-1200022,12,12,2,war|fortune,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个战争或命运（红色或黄色）道具并获得1场胜利
-1200023,12,12,2,war|balance,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）道具并获得1场胜利
-1200024,12,12,2,war|nature,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个战争或自然（红色或绿色）道具并获得1场胜利
-1200025,12,12,2,war|chaos,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）道具并获得1场胜利
-1200026,12,12,2,war|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个战争或全能（红色或白色）道具并获得1场胜利
-1200027,12,12,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）道具并获得1场胜利
-1200028,12,12,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）道具并获得1场胜利
-1200029,12,12,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）道具并获得1场胜利
-1200030,12,12,2,fortune|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个命运或全能（黄色或白色）道具并获得1场胜利
-1200031,12,12,2,balance|nature,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）道具并获得1场胜利
-1200032,12,12,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）道具并获得1场胜利
-1200033,12,12,2,balance|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个平衡或全能（蓝色或紫色）道具并获得1场胜利
-1200034,12,12,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）道具并获得1场胜利
-1200035,12,12,2,nature|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个自然或全能（绿色或白色）道具并获得1场胜利
-1200036,12,12,2,chaos|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,召唤3个混乱或全能（紫色或白色）道具并获得1场胜利
-1200037,12,12,2,war,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,召唤4个战争（红色）卡片并获得1场胜利
-1200038,12,12,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,召唤4个命运（黄色）卡片并获得1场胜利
-1200039,12,12,2,balance,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,召唤4个平衡（蓝色）卡片并获得1场胜利
-1200040,12,12,2,nature,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,召唤4个自然（绿色）卡片并获得1场胜利
-1200041,12,12,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,召唤4个混乱（紫色）卡片并获得1场胜利
-1200042,12,12,2,all,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,召唤4个全能（白色）卡片并获得1场胜利
-1200043,12,12,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个战争或命运（红色或黄色）卡片并获得1场胜利
-1200044,12,12,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个战争或平衡（红色或蓝色）卡片并获得1场胜利
-1200045,12,12,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个战争或自然（红色或绿色）卡片并获得1场胜利
-1200046,12,12,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个战争或混乱（红色或紫色）卡片并获得1场胜利
-1200047,12,12,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个战争或全能（红色或白色）卡片并获得1场胜利
-1200048,12,12,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）卡片并获得1场胜利
-1200049,12,12,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个命运或自然（黄色或绿色）卡片并获得1场胜利
-1200050,12,12,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个命运或混乱（黄色或紫色）卡片并获得1场胜利
-1200051,12,12,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个命运或全能（黄色或白色）卡片并获得1场胜利
-1200052,12,12,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个平衡或自然（蓝色或绿色）卡片并获得1场胜利
-1200053,12,12,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个平衡或混乱（蓝色或紫色）卡片并获得1场胜利
-1200054,12,12,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个平衡或全能（蓝色或紫色）卡片并获得1场胜利
-1200055,12,12,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个自然或混乱（绿色或紫色）卡片并获得1场胜利
-1200056,12,12,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个自然或全能（绿色或白色）卡片并获得1场胜利
-1200057,12,12,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,召唤5个混乱或全能（紫色或白色）卡片并获得1场胜利
-1200058,12,12,3,0,0,0,0,1,14962,chest,49,1,resource,500001,10,赢得一场胜利
-1200059,12,12,4,0,0,0,0,6,15000,chest,49,1,resource,500001,10,消灭6个怪物
-1200060,12,12,5,0,0,0,0,6,15000,chest,49,1,resource,500001,10,使用6个道具
-1200061,12,12,6,0,monster,2,2,4,1000,chest,49,1,resource,500001,10,召唤4个费用2以下的怪物（包含费用2）
-1200062,12,12,6,0,monster,3,2,5,1000,chest,49,1,resource,500001,10,召唤5个费用3以下的怪物（包含费用3）
-1200063,12,12,6,0,monster,4,2,6,1000,chest,49,1,resource,500001,10,召唤6个费用4以下的怪物（包含费用4）
-1200064,12,12,6,0,monster,2,1,5,1000,chest,49,1,resource,500001,10,召唤5个费用2以上的怪物（包含费用2）
-1200065,12,12,6,0,monster,3,1,4,1000,chest,49,1,resource,500001,10,召唤4个费用3以上的怪物（包含费用3）
-1200066,12,12,6,0,monster,4,1,3,1000,chest,49,1,resource,500001,10,召唤3个费用4以上的怪物（包含费用4）
-1200067,12,12,3,0,0,0,0,1,1000,chest,49,1,resource,500001,10,赢得一场胜利
-1200068,12,12,6,0,armor|equip|consume,2,2,4,1000,chest,49,1,resource,500001,10,召唤4个费用2以下的道具（包含费用2）
-1200069,12,12,6,0,armor|equip|consume,3,2,5,1000,chest,49,1,resource,500001,10,召唤5个费用3以下的道具（包含费用3）
-1200070,12,12,6,0,armor|equip|consume,4,2,6,1000,chest,49,1,resource,500001,10,召唤6个费用4以下的道具（包含费用4）
-1200071,12,12,6,0,armor|equip|consume,2,1,5,1000,chest,48,1,resource,500001,10,召唤5个费用2以上的道具（包含费用2）
-1200072,12,12,6,0,armor|equip|consume,3,1,4,1000,chest,49,1,resource,500001,10,召唤4个费用3以上的道具（包含费用3）
-1200073,12,12,6,0,armor|equip|consume,4,1,3,1000,chest,49,1,resource,500001,10,召唤3个费用4以上的道具（包含费用4）
-1200074,12,12,3,0,0,0,0,1,1000,chest,49,1,resource,500001,10,赢得一场胜利
-1200075,12,12,6,0,monster|armor|equip|consume,2,2,4,1000,chest,49,1,resource,500001,10,召唤4个费用2以下的卡片（包含费用2）
-1200076,12,12,6,0,monster|armor|equip|consume,3,2,5,1000,chest,49,1,resource,500001,10,召唤5个费用3以下的卡片（包含费用3）
-1200077,12,12,6,0,monster|armor|equip|consume,4,2,6,1000,chest,49,1,resource,500001,10,召唤6个费用4以下的卡片（包含费用4）
-1200078,12,12,6,0,monster|armor|equip|consume,2,1,5,1000,chest,49,1,resource,500001,10,召唤5个费用2以上的卡片（包含费用2）
-1200079,12,12,6,0,monster|armor|equip|consume,3,1,4,1000,chest,49,1,resource,500001,10,召唤4个费用3以上的卡片（包含费用3）
-1200080,12,12,6,0,monster|armor|equip|consume,4,1,3,1000,chest,49,1,resource,500001,10,召唤3个费用4以上的卡片（包含费用4）
-1200081,12,12,3,0,0,0,0,1,1000,chest,49,1,resource,500001,10,赢得一场胜利
-1200082,12,12,8,0,0,0,0,2,15000,chest,49,1,resource,500001,10,完成2次PVE胜利
-1300001,13,13,2,war,monster,2,0,1,334,chest,50,1,resource,500001,10,召唤2个战争（红色）怪物并获得1场胜利
-1300002,13,13,2,fortune,monster,2,0,1,334,chest,50,1,resource,500001,10,召唤2个命运（黄色）怪物并获得1场胜利
-1300003,13,13,2,balance,monster,2,0,1,334,chest,50,1,resource,500001,10,召唤2个平衡（蓝色）怪物并获得1场胜利
-1300004,13,13,2,nature,monster,2,0,1,334,chest,50,1,resource,500001,10,召唤2个自然（绿色）怪物并获得1场胜利
-1300005,13,13,2,chaos,monster,2,0,1,334,chest,50,1,resource,500001,10,召唤2个混乱（紫色）怪物并获得1场胜利
-1300006,13,13,2,war|fortune,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个战争或命运（红色或黄色）怪物并获得1场胜利
-1300007,13,13,2,war|balance,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）怪物并获得1场胜利
-1300008,13,13,2,war|nature,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个战争或自然（红色或绿色）怪物并获得1场胜利
-1300009,13,13,2,war|chaos,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）怪物并获得1场胜利
-1300010,13,13,2,fortune|balance,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）怪物并获得1场胜利
-1300011,13,13,2,fortune|nature,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）怪物并获得1场胜利
-1300012,13,13,2,fortune|chaos,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）怪物并获得1场胜利
-1300013,13,13,2,balance|nature,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）怪物并获得1场胜利
-1300014,13,13,2,balance|chaos,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）怪物并获得1场胜利
-1300015,13,13,2,nature|chaos,monster,3,0,1,334,chest,50,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）怪物并获得1场胜利
-1300016,13,13,2,war,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,召唤2个战争（红色）道具并获得1场胜利
-1300017,13,13,2,fortune,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,召唤2个命运（黄色）道具并获得1场胜利
-1300018,13,13,2,balance,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,召唤2个平衡（蓝色）道具并获得1场胜利
-1300019,13,13,2,nature,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,召唤2个自然（绿色）道具并获得1场胜利
-1300020,13,13,2,chaos,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,召唤2个混乱（紫色）道具并获得1场胜利
-1300021,13,13,2,all,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,召唤2个全能（白色）道具并获得1场胜利
-1300022,13,13,2,war|fortune,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个战争或命运（红色或黄色）道具并获得1场胜利
-1300023,13,13,2,war|balance,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）道具并获得1场胜利
-1300024,13,13,2,war|nature,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个战争或自然（红色或绿色）道具并获得1场胜利
-1300025,13,13,2,war|chaos,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）道具并获得1场胜利
-1300026,13,13,2,war|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个战争或全能（红色或白色）道具并获得1场胜利
-1300027,13,13,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）道具并获得1场胜利
-1300028,13,13,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）道具并获得1场胜利
-1300029,13,13,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）道具并获得1场胜利
-1300030,13,13,2,fortune|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个命运或全能（黄色或白色）道具并获得1场胜利
-1300031,13,13,2,balance|nature,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）道具并获得1场胜利
-1300032,13,13,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）道具并获得1场胜利
-1300033,13,13,2,balance|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个平衡或全能（蓝色或紫色）道具并获得1场胜利
-1300034,13,13,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）道具并获得1场胜利
-1300035,13,13,2,nature|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个自然或全能（绿色或白色）道具并获得1场胜利
-1300036,13,13,2,chaos|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,召唤3个混乱或全能（紫色或白色）道具并获得1场胜利
-1300037,13,13,2,war,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,召唤4个战争（红色）卡片并获得1场胜利
-1300038,13,13,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,召唤4个命运（黄色）卡片并获得1场胜利
-1300039,13,13,2,balance,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,召唤4个平衡（蓝色）卡片并获得1场胜利
-1300040,13,13,2,nature,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,召唤4个自然（绿色）卡片并获得1场胜利
-1300041,13,13,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,召唤4个混乱（紫色）卡片并获得1场胜利
-1300042,13,13,2,all,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,召唤4个全能（白色）卡片并获得1场胜利
-1300043,13,13,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个战争或命运（红色或黄色）卡片并获得1场胜利
-1300044,13,13,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个战争或平衡（红色或蓝色）卡片并获得1场胜利
-1300045,13,13,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个战争或自然（红色或绿色）卡片并获得1场胜利
-1300046,13,13,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个战争或混乱（红色或紫色）卡片并获得1场胜利
-1300047,13,13,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个战争或全能（红色或白色）卡片并获得1场胜利
-1300048,13,13,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）卡片并获得1场胜利
-1300049,13,13,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个命运或自然（黄色或绿色）卡片并获得1场胜利
-1300050,13,13,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个命运或混乱（黄色或紫色）卡片并获得1场胜利
-1300051,13,13,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个命运或全能（黄色或白色）卡片并获得1场胜利
-1300052,13,13,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个平衡或自然（蓝色或绿色）卡片并获得1场胜利
-1300053,13,13,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个平衡或混乱（蓝色或紫色）卡片并获得1场胜利
-1300054,13,13,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个平衡或全能（蓝色或紫色）卡片并获得1场胜利
-1300055,13,13,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个自然或混乱（绿色或紫色）卡片并获得1场胜利
-1300056,13,13,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个自然或全能（绿色或白色）卡片并获得1场胜利
-1300057,13,13,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,召唤5个混乱或全能（紫色或白色）卡片并获得1场胜利
-1300058,13,13,3,0,0,0,0,1,14962,chest,50,1,resource,500001,10,赢得一场胜利
-1300059,13,13,4,0,0,0,0,6,15000,chest,50,1,resource,500001,10,消灭6个怪物
-1300060,13,13,5,0,0,0,0,6,15000,chest,50,1,resource,500001,10,使用6个道具
-1300061,13,13,6,0,monster,2,2,4,1000,chest,50,1,resource,500001,10,召唤4个费用2以下的怪物（包含费用2）
-1300062,13,13,6,0,monster,3,2,5,1000,chest,50,1,resource,500001,10,召唤5个费用3以下的怪物（包含费用3）
-1300063,13,13,6,0,monster,4,2,6,1000,chest,50,1,resource,500001,10,召唤6个费用4以下的怪物（包含费用4）
-1300064,13,13,6,0,monster,2,1,5,1000,chest,50,1,resource,500001,10,召唤5个费用2以上的怪物（包含费用2）
-1300065,13,13,6,0,monster,3,1,4,1000,chest,50,1,resource,500001,10,召唤4个费用3以上的怪物（包含费用3）
-1300066,13,13,6,0,monster,4,1,3,1000,chest,50,1,resource,500001,10,召唤3个费用4以上的怪物（包含费用4）
-1300067,13,13,3,0,0,0,0,1,1000,chest,50,1,resource,500001,10,赢得一场胜利
-1300068,13,13,6,0,armor|equip|consume,2,2,4,1000,chest,50,1,resource,500001,10,召唤4个费用2以下的道具（包含费用2）
-1300069,13,13,6,0,armor|equip|consume,3,2,5,1000,chest,50,1,resource,500001,10,召唤5个费用3以下的道具（包含费用3）
-1300070,13,13,6,0,armor|equip|consume,4,2,6,1000,chest,50,1,resource,500001,10,召唤6个费用4以下的道具（包含费用4）
-1300071,13,13,6,0,armor|equip|consume,2,1,5,1000,chest,50,1,resource,500001,10,召唤5个费用2以上的道具（包含费用2）
-1300072,13,13,6,0,armor|equip|consume,3,1,4,1000,chest,50,1,resource,500001,10,召唤4个费用3以上的道具（包含费用3）
-1300073,13,13,6,0,armor|equip|consume,4,1,3,1000,chest,50,1,resource,500001,10,召唤3个费用4以上的道具（包含费用4）
-1300074,13,13,3,0,0,0,0,1,1000,chest,50,1,resource,500001,10,赢得一场胜利
-1300075,13,13,6,0,monster|armor|equip|consume,2,2,4,1000,chest,50,1,resource,500001,10,召唤4个费用2以下的卡片（包含费用2）
-1300076,13,13,6,0,monster|armor|equip|consume,3,2,5,1000,chest,50,1,resource,500001,10,召唤5个费用3以下的卡片（包含费用3）
-1300077,13,13,6,0,monster|armor|equip|consume,4,2,6,1000,chest,50,1,resource,500001,10,召唤6个费用4以下的卡片（包含费用4）
-1300078,13,13,6,0,monster|armor|equip|consume,2,1,5,1000,chest,50,1,resource,500001,10,召唤5个费用2以上的卡片（包含费用2）
-1300079,13,13,6,0,monster|armor|equip|consume,3,1,4,1000,chest,50,1,resource,500001,10,召唤4个费用3以上的卡片（包含费用3）
-1300080,13,13,6,0,monster|armor|equip|consume,4,1,3,1000,chest,50,1,resource,500001,10,召唤3个费用4以上的卡片（包含费用4）
-1300081,13,13,3,0,0,0,0,1,1000,chest,50,1,resource,500001,10,赢得一场胜利
-1300082,13,13,8,0,0,0,0,2,15000,chest,50,1,resource,500001,10,完成2次PVE胜利
-1400001,14,50,2,war,monster,2,0,1,334,chest,51,1,resource,500001,10,召唤2个战争（红色）怪物并获得1场胜利
-1400002,14,50,2,fortune,monster,2,0,1,334,chest,51,1,resource,500001,10,召唤2个命运（黄色）怪物并获得1场胜利
-1400003,14,50,2,balance,monster,2,0,1,334,chest,51,1,resource,500001,10,召唤2个平衡（蓝色）怪物并获得1场胜利
-1400004,14,50,2,nature,monster,2,0,1,334,chest,51,1,resource,500001,10,召唤2个自然（绿色）怪物并获得1场胜利
-1400005,14,50,2,chaos,monster,2,0,1,334,chest,51,1,resource,500001,10,召唤2个混乱（紫色）怪物并获得1场胜利
-1400006,14,50,2,war|fortune,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个战争或命运（红色或黄色）怪物并获得1场胜利
-1400007,14,50,2,war|balance,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）怪物并获得1场胜利
-1400008,14,50,2,war|nature,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个战争或自然（红色或绿色）怪物并获得1场胜利
-1400009,14,50,2,war|chaos,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）怪物并获得1场胜利
-1400010,14,50,2,fortune|balance,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）怪物并获得1场胜利
-1400011,14,50,2,fortune|nature,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）怪物并获得1场胜利
-1400012,14,50,2,fortune|chaos,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）怪物并获得1场胜利
-1400013,14,50,2,balance|nature,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）怪物并获得1场胜利
-1400014,14,50,2,balance|chaos,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）怪物并获得1场胜利
-1400015,14,50,2,nature|chaos,monster,3,0,1,334,chest,51,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）怪物并获得1场胜利
-1400016,14,50,2,war,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,召唤2个战争（红色）道具并获得1场胜利
-1400017,14,50,2,fortune,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,召唤2个命运（黄色）道具并获得1场胜利
-1400018,14,50,2,balance,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,召唤2个平衡（蓝色）道具并获得1场胜利
-1400019,14,50,2,nature,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,召唤2个自然（绿色）道具并获得1场胜利
-1400020,14,50,2,chaos,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,召唤2个混乱（紫色）道具并获得1场胜利
-1400021,14,50,2,all,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,召唤2个全能（白色）道具并获得1场胜利
-1400022,14,50,2,war|fortune,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个战争或命运（红色或黄色）道具并获得1场胜利
-1400023,14,50,2,war|balance,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个战争或平衡（红色或蓝色）道具并获得1场胜利
-1400024,14,50,2,war|nature,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个战争或自然（红色或绿色）道具并获得1场胜利
-1400025,14,50,2,war|chaos,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个战争或混乱（红色或紫色）道具并获得1场胜利
-1400026,14,50,2,war|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个战争或全能（红色或白色）道具并获得1场胜利
-1400027,14,50,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）道具并获得1场胜利
-1400028,14,50,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个命运或自然（黄色或绿色）道具并获得1场胜利
-1400029,14,50,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个命运或混乱（黄色或紫色）道具并获得1场胜利
-1400030,14,50,2,fortune|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个命运或全能（黄色或白色）道具并获得1场胜利
-1400031,14,50,2,balance|nature,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个平衡或自然（蓝色或绿色）道具并获得1场胜利
-1400032,14,50,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个平衡或混乱（蓝色或紫色）道具并获得1场胜利
-1400033,14,50,2,balance|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个平衡或全能（蓝色或紫色）道具并获得1场胜利
-1400034,14,50,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个自然或混乱（绿色或紫色）道具并获得1场胜利
-1400035,14,50,2,nature|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个自然或全能（绿色或白色）道具并获得1场胜利
-1400036,14,50,2,chaos|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,召唤3个混乱或全能（紫色或白色）道具并获得1场胜利
-1400037,14,50,2,war,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,召唤4个战争（红色）卡片并获得1场胜利
-1400038,14,50,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,召唤4个命运（黄色）卡片并获得1场胜利
-1400039,14,50,2,balance,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,召唤4个平衡（蓝色）卡片并获得1场胜利
-1400040,14,50,2,nature,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,召唤4个自然（绿色）卡片并获得1场胜利
-1400041,14,50,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,召唤4个混乱（紫色）卡片并获得1场胜利
-1400042,14,50,2,all,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,召唤4个全能（白色）卡片并获得1场胜利
-1400043,14,50,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个战争或命运（红色或黄色）卡片并获得1场胜利
-1400044,14,50,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个战争或平衡（红色或蓝色）卡片并获得1场胜利
-1400045,14,50,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个战争或自然（红色或绿色）卡片并获得1场胜利
-1400046,14,50,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个战争或混乱（红色或紫色）卡片并获得1场胜利
-1400047,14,50,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个战争或全能（红色或白色）卡片并获得1场胜利
-1400048,14,50,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤3个命运或平衡（黄色或蓝色）卡片并获得1场胜利
-1400049,14,50,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个命运或自然（黄色或绿色）卡片并获得1场胜利
-1400050,14,50,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个命运或混乱（黄色或紫色）卡片并获得1场胜利
-1400051,14,50,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个命运或全能（黄色或白色）卡片并获得1场胜利
-1400052,14,50,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个平衡或自然（蓝色或绿色）卡片并获得1场胜利
-1400053,14,50,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个平衡或混乱（蓝色或紫色）卡片并获得1场胜利
-1400054,14,50,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个平衡或全能（蓝色或紫色）卡片并获得1场胜利
-1400055,14,50,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个自然或混乱（绿色或紫色）卡片并获得1场胜利
-1400056,14,50,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个自然或全能（绿色或白色）卡片并获得1场胜利
-1400057,14,50,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,召唤5个混乱或全能（紫色或白色）卡片并获得1场胜利
-1400058,14,50,3,0,0,0,0,1,14962,chest,51,1,resource,500001,10,赢得一场胜利
-1400059,14,50,4,0,0,0,0,6,15000,chest,51,1,resource,500001,10,消灭6个怪物
-1400060,14,50,5,0,0,0,0,6,15000,chest,51,1,resource,500001,10,使用6个道具
-1400061,14,50,6,0,monster,2,2,4,1000,chest,51,1,resource,500001,10,召唤4个费用2以下的怪物（包含费用2）
-1400062,14,50,6,0,monster,3,2,5,1000,chest,51,1,resource,500001,10,召唤5个费用3以下的怪物（包含费用3）
-1400063,14,50,6,0,monster,4,2,6,1000,chest,51,1,resource,500001,10,召唤6个费用4以下的怪物（包含费用4）
-1400064,14,50,6,0,monster,2,1,5,1000,chest,51,1,resource,500001,10,召唤5个费用2以上的怪物（包含费用2）
-1400065,14,50,6,0,monster,3,1,4,1000,chest,51,1,resource,500001,10,召唤4个费用3以上的怪物（包含费用3）
-1400066,14,50,6,0,monster,4,1,3,1000,chest,51,1,resource,500001,10,召唤3个费用4以上的怪物（包含费用4）
-1400067,14,50,3,0,0,0,0,1,1000,chest,51,1,resource,500001,10,赢得一场胜利
-1400068,14,50,6,0,armor|equip|consume,2,2,4,1000,chest,51,1,resource,500001,10,召唤4个费用2以下的道具（包含费用2）
-1400069,14,50,6,0,armor|equip|consume,3,2,5,1000,chest,51,1,resource,500001,10,召唤5个费用3以下的道具（包含费用3）
-1400070,14,50,6,0,armor|equip|consume,4,2,6,1000,chest,51,1,resource,500001,10,召唤6个费用4以下的道具（包含费用4）
-1400071,14,50,6,0,armor|equip|consume,2,1,5,1000,chest,51,1,resource,500001,10,召唤5个费用2以上的道具（包含费用2）
-1400072,14,50,6,0,armor|equip|consume,3,1,4,1000,chest,51,1,resource,500001,10,召唤4个费用3以上的道具（包含费用3）
-1400073,14,50,6,0,armor|equip|consume,4,1,3,1000,chest,51,1,resource,500001,10,召唤3个费用4以上的道具（包含费用4）
-1400074,14,50,3,0,0,0,0,1,1000,chest,51,1,resource,500001,10,赢得一场胜利
-1400075,14,50,6,0,monster|armor|equip|consume,2,2,4,1000,chest,51,1,resource,500001,10,召唤4个费用2以下的卡片（包含费用2）
-1400076,14,50,6,0,monster|armor|equip|consume,3,2,5,1000,chest,51,1,resource,500001,10,召唤5个费用3以下的卡片（包含费用3）
-1400077,14,50,6,0,monster|armor|equip|consume,4,2,6,1000,chest,51,1,resource,500001,10,召唤6个费用4以下的卡片（包含费用4）
-1400078,14,50,6,0,monster|armor|equip|consume,2,1,5,1000,chest,51,1,resource,500001,10,召唤5个费用2以上的卡片（包含费用2）
-1400079,14,50,6,0,monster|armor|equip|consume,3,1,4,1000,chest,51,1,resource,500001,10,召唤4个费用3以上的卡片（包含费用3）
-1400080,14,50,6,0,monster|armor|equip|consume,4,1,3,1000,chest,51,1,resource,500001,10,召唤3个费用4以上的卡片（包含费用4）
-1400081,14,50,3,0,0,0,0,1,1000,chest,51,1,resource,500001,10,赢得一场胜利
-1400082,14,50,8,0,0,0,0,2,15000,chest,51,1,resource,500001,10,完成2次PVE胜利
+1,0,0,3,0,0,0,0,1,100000,chest,52,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+2,0,0,9,war|fortune|balance|nature|chaos,monster,0,0,5,100000,chest,52,1,resource,500001,10,Summon 5 monsters in Battle/Practice Mode
+3,0,0,5,0,0,0,0,1,100000,chest,52,1,resource,500001,10,Use 1 item in Battle/Practice Mode
+4,0,0,2,fortune,monster,1,0,1,100000,chest,52,1,resource,500001,10,Summon 1 Fortune clan monster(yellow) in Battle/Practice Mode and win
+5,0,0,6,0,monster,2,2,2,100000,chest,52,1,resource,500001,10,Summon 2 monsters cost 2 or less in Battle/Practice Mode
+6,0,0,6,0,monster,3,1,1,100000,chest,52,1,resource,500001,10,Summon 1 monster cost 3 or more in Battle
+7,0,0,3,0,0,0,0,1,100000,chest,52,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+100001,1,1,3,0,0,0,0,1,25000,chest,38,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+100002,1,1,4,0,0,0,0,4,25000,chest,38,1,resource,500001,10,Defeat 4 monsters in Battle/Practice Mode
+100003,1,1,5,0,0,0,0,4,25000,chest,38,1,resource,500001,10,Use 4 items in Battle/Practice Mode
+100004,1,1,3,0,0,0,0,1,25000,chest,38,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+200001,2,2,3,0,0,0,0,1,20000,chest,39,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+200002,2,2,4,0,0,0,0,6,20000,chest,39,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+200003,2,2,5,0,0,0,0,6,20000,chest,39,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+200004,2,2,6,0,monster,2,2,2,20000,chest,39,1,resource,500001,10,Summon 2 monsters cost 2 or less in Battle/Practice Mode
+200005,2,2,3,0,0,0,0,1,20000,chest,39,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+300001,3,3,3,0,0,0,0,1,20000,chest,40,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+300002,3,3,4,0,0,0,0,6,20000,chest,40,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+300003,3,3,5,0,0,0,0,6,20000,chest,40,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+300004,3,3,6,0,armor|equip|consume,2,2,2,20000,chest,40,1,resource,500001,10,Use 2 items cost 2 or less in Battle/Practice Mode
+300005,3,3,3,0,0,0,0,1,20000,chest,40,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+400001,4,4,3,0,0,0,0,1,20000,chest,41,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+400002,4,4,4,0,0,0,0,6,20000,chest,41,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+400003,4,4,5,0,0,0,0,6,20000,chest,41,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+400004,4,4,6,0,monster|armor|equip|consume,2,2,4,20000,chest,41,1,resource,500001,10,Use 4 cards cost 2 or less in Battle/Practice Mode
+400005,4,4,3,0,0,0,0,1,20000,chest,41,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+500001,5,5,3,0,0,0,0,1,20000,chest,42,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+500002,5,5,4,0,0,0,0,6,20000,chest,42,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+500003,5,5,5,0,0,0,0,6,20000,chest,42,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+500004,5,5,6,0,monster|armor|equip|consume,2,2,4,20000,chest,42,1,resource,500001,10,Use 4 cards cost 2 or less in Battle/Practice Mode
+500005,5,5,3,0,0,0,0,1,20000,chest,42,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+600001,6,6,2,war,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,Use 2 War clan cards(red) in Battle/Practice Mode and win
+600002,6,6,2,fortune,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,Use 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+600003,6,6,2,balance,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,Use 2 Balance clan cards(blue) in Battle/Practice Mode and win
+600004,6,6,2,nature,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,Use 2 Nature clan cards(green) in Battle/Practice Mode and win
+600005,6,6,2,chaos,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,Use 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+600006,6,6,2,all,monster|armor|equip|consume,2,0,1,1000,chest,43,1,resource,500001,10,Use 2 Neutral clan cards(white) in Battle/Practice Mode and win
+600007,6,6,2,war|fortune,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+600008,6,6,2,war|balance,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+600009,6,6,2,war|nature,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+600010,6,6,2,war|chaos,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+600011,6,6,2,war|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+600012,6,6,2,fortune|balance,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+600013,6,6,2,fortune|nature,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+600014,6,6,2,fortune|chaos,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+600015,6,6,2,fortune|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+600016,6,6,2,balance|nature,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+600017,6,6,2,balance|chaos,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+600018,6,6,2,balance|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+600019,6,6,2,nature|chaos,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+600020,6,6,2,nature|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+600021,6,6,2,chaos|all,monster|armor|equip|consume,3,0,1,1000,chest,43,1,resource,500001,10,Use 3 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+600022,6,6,3,0,0,0,0,1,13990,chest,43,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+600023,6,6,4,0,0,0,0,6,15000,chest,43,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+600024,6,6,5,0,0,0,0,6,15000,chest,43,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+600025,6,6,6,0,monster,2,2,2,1334,chest,43,1,resource,500001,10,Summon 2 monsters cost 2 or less in Battle/Practice Mode
+600026,6,6,6,0,monster,3,2,3,1334,chest,43,1,resource,500001,10,Summon 3 monsters cost 3 or less in Battle/Practice Mode
+600027,6,6,6,0,monster,4,2,4,1334,chest,43,1,resource,500001,10,Summon 4 monsters cost 4 or less in Battle/Practice Mode
+600028,6,6,6,0,monster,2,1,3,1334,chest,43,1,resource,500001,10,Summon 3 monsters cost 2 or more in Battle/Practice Mode
+600029,6,6,6,0,monster,3,1,2,1334,chest,43,1,resource,500001,10,Summon 2 monsters cost 3 or more in Battle/Practice Mode
+600030,6,6,6,0,armor|equip|consume,2,2,2,1334,chest,43,1,resource,500001,10,Use 2 items cost 2 or less in Battle/Practice Mode
+600031,6,6,6,0,armor|equip|consume,3,2,3,1334,chest,43,1,resource,500001,10,Use 3 items cost 3 or less in Battle/Practice Mode
+600032,6,6,6,0,armor|equip|consume,4,2,4,1334,chest,43,1,resource,500001,10,Use 4 items cost 4 or less in Battle/Practice Mode
+600033,6,6,6,0,armor|equip|consume,2,1,3,1334,chest,43,1,resource,500001,10,Use 3 items cost 2 or more in Battle/Practice Mode
+600034,6,6,6,0,armor|equip|consume,3,1,2,1334,chest,43,1,resource,500001,10,Use 2 items cost 3 or more in Battle/Practice Mode
+600035,6,6,6,0,monster|armor|equip|consume,2,2,2,1334,chest,43,1,resource,500001,10,Use 2 cards cost 2 or less in Battle/Practice Mode
+600036,6,6,6,0,monster|armor|equip|consume,3,2,3,1334,chest,43,1,resource,500001,10,Use 3 cards cost 3 or less in Battle/Practice Mode
+600037,6,6,6,0,monster|armor|equip|consume,4,2,4,1334,chest,43,1,resource,500001,10,Use 4 cards cost 4 or less in Battle/Practice Mode
+600038,6,6,6,0,monster|armor|equip|consume,2,1,3,1334,chest,43,1,resource,500001,10,Use 3 cards cost 2 or more in Battle/Practice Mode
+600039,6,6,6,0,monster|armor|equip|consume,3,1,2,1334,chest,43,1,resource,500001,10,Use 2 cards cost 3 or more in Battle/Practice Mode
+600040,6,6,8,0,0,0,0,2,15000,chest,43,1,resource,500001,10,Win 2 matches in Advance Mode
+700001,7,7,2,war,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,Use 2 War clan cards(red) in Battle/Practice Mode and win
+700002,7,7,2,fortune,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,Use 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+700003,7,7,2,balance,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,Use 2 Balance clan cards(blue) in Battle/Practice Mode and win
+700004,7,7,2,nature,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,Use 2 Nature clan cards(green) in Battle/Practice Mode and win
+700005,7,7,2,chaos,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,Use 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+700006,7,7,2,all,monster|armor|equip|consume,2,0,1,1000,chest,44,1,resource,500001,10,Use 2 Neutral clan cards(white) in Battle/Practice Mode and win
+700007,7,7,2,war|fortune,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+700008,7,7,2,war|balance,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+700009,7,7,2,war|nature,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+700010,7,7,2,war|chaos,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+700011,7,7,2,war|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+700012,7,7,2,fortune|balance,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+700013,7,7,2,fortune|nature,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+700014,7,7,2,fortune|chaos,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+700015,7,7,2,fortune|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+700016,7,7,2,balance|nature,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+700017,7,7,2,balance|chaos,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+700018,7,7,2,balance|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+700019,7,7,2,nature|chaos,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+700020,7,7,2,nature|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+700021,7,7,2,chaos|all,monster|armor|equip|consume,3,0,1,1000,chest,44,1,resource,500001,10,Use 3 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+700022,7,7,3,0,0,0,0,1,13990,chest,44,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+700023,7,7,4,0,0,0,0,6,15000,chest,44,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+700024,7,7,5,0,0,0,0,6,15000,chest,44,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+700025,7,7,6,0,monster,2,2,2,1334,chest,44,1,resource,500001,10,Summon 2 monsters cost 2 or less in Battle/Practice Mode
+700026,7,7,6,0,monster,3,2,3,1334,chest,44,1,resource,500001,10,Summon 3 monsters cost 3 or less in Battle/Practice Mode
+700027,7,7,6,0,monster,4,2,4,1334,chest,44,1,resource,500001,10,Summon 4 monsters cost 4 or less in Battle/Practice Mode
+700028,7,7,6,0,monster,2,1,3,1334,chest,44,1,resource,500001,10,Summon 3 monsters cost 2 or more in Battle/Practice Mode
+700029,7,7,6,0,monster,3,1,2,1334,chest,44,1,resource,500001,10,Summon 2 monsters cost 3 or more in Battle/Practice Mode
+700030,7,7,6,0,armor|equip|consume,2,2,2,1334,chest,44,1,resource,500001,10,Use 2 items cost 2 or less in Battle/Practice Mode
+700031,7,7,6,0,armor|equip|consume,3,2,3,1334,chest,44,1,resource,500001,10,Use 3 items cost 3 or less in Battle/Practice Mode
+700032,7,7,6,0,armor|equip|consume,4,2,4,1334,chest,44,1,resource,500001,10,Use 4 items cost 4 or less in Battle/Practice Mode
+700033,7,7,6,0,armor|equip|consume,2,1,3,1334,chest,44,1,resource,500001,10,Use 3 items cost 2 or more in Battle/Practice Mode
+700034,7,7,6,0,armor|equip|consume,3,1,2,1334,chest,44,1,resource,500001,10,Use 2 items cost 3 or more in Battle/Practice Mode
+700035,7,7,6,0,monster|armor|equip|consume,2,2,2,1334,chest,44,1,resource,500001,10,Use 2 cards cost 2 or less in Battle/Practice Mode
+700036,7,7,6,0,monster|armor|equip|consume,3,2,3,1334,chest,44,1,resource,500001,10,Use 3 cards cost 3 or less in Battle/Practice Mode
+700037,7,7,6,0,monster|armor|equip|consume,4,2,4,1334,chest,44,1,resource,500001,10,Use 4 cards cost 4 or less in Battle/Practice Mode
+700038,7,7,6,0,monster|armor|equip|consume,2,1,3,1334,chest,44,1,resource,500001,10,Use 3 cards cost 2 or more in Battle/Practice Mode
+700039,7,7,6,0,monster|armor|equip|consume,3,1,2,1334,chest,44,1,resource,500001,10,Use 2 cards cost 3 or more in Battle/Practice Mode
+700040,7,7,8,0,0,0,0,2,15000,chest,44,1,resource,500001,10,Win 2 matches in Advance Mode
+800001,8,8,2,war,monster,2,0,1,334,chest,45,1,resource,500001,10,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+800002,8,8,2,fortune,monster,2,0,1,334,chest,45,1,resource,500001,10,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+800003,8,8,2,balance,monster,2,0,1,334,chest,45,1,resource,500001,10,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+800004,8,8,2,nature,monster,2,0,1,334,chest,45,1,resource,500001,10,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+800005,8,8,2,chaos,monster,2,0,1,334,chest,45,1,resource,500001,10,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+800006,8,8,2,war|fortune,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+800007,8,8,2,war|balance,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+800008,8,8,2,war|nature,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+800009,8,8,2,war|chaos,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+800010,8,8,2,fortune|balance,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+800011,8,8,2,fortune|nature,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+800012,8,8,2,fortune|chaos,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+800013,8,8,2,balance|nature,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+800014,8,8,2,balance|chaos,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+800015,8,8,2,nature|chaos,monster,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+800016,8,8,2,war,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,Use 2 War clan items(red) in Battle/Practice Mode and win
+800017,8,8,2,fortune,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+800018,8,8,2,balance,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+800019,8,8,2,nature,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+800020,8,8,2,chaos,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+800021,8,8,2,all,armor|equip|consume,2,0,1,334,chest,45,1,resource,500001,10,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+800022,8,8,2,war|fortune,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+800023,8,8,2,war|balance,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+800024,8,8,2,war|nature,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+800025,8,8,2,war|chaos,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+800026,8,8,2,war|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+800027,8,8,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+800028,8,8,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+800029,8,8,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+800030,8,8,2,fortune|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+800031,8,8,2,balance|nature,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+800032,8,8,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+800033,8,8,2,balance|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+800034,8,8,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+800035,8,8,2,nature|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+800036,8,8,2,chaos|all,armor|equip|consume,3,0,1,334,chest,45,1,resource,500001,10,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+800037,8,8,2,war,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,Use 4 War clan items(red) in Battle/Practice Mode and win
+800038,8,8,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+800039,8,8,2,balance,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+800040,8,8,2,nature,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+800041,8,8,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+800042,8,8,2,all,monster|armor|equip|consume,4,0,1,334,chest,45,1,resource,500001,10,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+800043,8,8,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+800044,8,8,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+800045,8,8,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+800046,8,8,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+800047,8,8,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+800048,8,8,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+800049,8,8,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+800050,8,8,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+800051,8,8,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+800052,8,8,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+800053,8,8,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+800054,8,8,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+800055,8,8,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+800056,8,8,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+800057,8,8,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,45,1,resource,500001,10,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+800058,8,8,3,0,0,0,0,1,14962,chest,45,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+800059,8,8,4,0,0,0,0,6,15000,chest,45,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+800060,8,8,5,0,0,0,0,6,15000,chest,45,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+800061,8,8,6,0,monster,2,2,4,1000,chest,45,1,resource,500001,10,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+800062,8,8,6,0,monster,3,2,5,1000,chest,45,1,resource,500001,10,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+800063,8,8,6,0,monster,4,2,6,1000,chest,45,1,resource,500001,10,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+800064,8,8,6,0,monster,2,1,5,1000,chest,45,1,resource,500001,10,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+800065,8,8,6,0,monster,3,1,4,1000,chest,45,1,resource,500001,10,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+800066,8,8,6,0,monster,4,1,3,1000,chest,45,1,resource,500001,10,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+800067,8,8,3,0,0,0,0,1,1000,chest,45,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+800068,8,8,6,0,armor|equip|consume,2,2,4,1000,chest,45,1,resource,500001,10,Use 4 items cost 2 or less in Battle/Practice Mode
+800069,8,8,6,0,armor|equip|consume,3,2,5,1000,chest,45,1,resource,500001,10,Use 5 items cost 3 or less in Battle/Practice Mode
+800070,8,8,6,0,armor|equip|consume,4,2,6,1000,chest,45,1,resource,500001,10,Use 6 items cost 4 or less in Battle/Practice Mode
+800071,8,8,6,0,armor|equip|consume,2,1,5,1000,chest,45,1,resource,500001,10,Use 5 items cost 2 or more in Battle/Practice Mode
+800072,8,8,6,0,armor|equip|consume,3,1,4,1000,chest,45,1,resource,500001,10,Use 4 items cost 3 or more in Battle/Practice Mode
+800073,8,8,6,0,armor|equip|consume,4,1,3,1000,chest,45,1,resource,500001,10,Use 3 items cost 4 or more in Battle/Practice Mode
+800074,8,8,3,0,0,0,0,1,1000,chest,45,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+800075,8,8,6,0,monster|armor|equip|consume,2,2,4,1000,chest,45,1,resource,500001,10,Use 4 cards cost 2 or less in Battle/Practice Mode
+800076,8,8,6,0,monster|armor|equip|consume,3,2,5,1000,chest,45,1,resource,500001,10,Use 5 cards cost 3 or less in Battle/Practice Mode
+800077,8,8,6,0,monster|armor|equip|consume,4,2,6,1000,chest,45,1,resource,500001,10,Use 6 cards cost 4 or less in Battle/Practice Mode
+800078,8,8,6,0,monster|armor|equip|consume,2,1,5,1000,chest,45,1,resource,500001,10,Use 5 cards cost 2 or more in Battle/Practice Mode
+800079,8,8,6,0,monster|armor|equip|consume,3,1,4,1000,chest,45,1,resource,500001,10,Use 4 cards cost 3 or more in Battle/Practice Mode
+800080,8,8,6,0,monster|armor|equip|consume,4,1,3,1000,chest,45,1,resource,500001,10,Use 3 cards cost 4 or more in Battle/Practice Mode
+800081,8,8,3,0,0,0,0,1,1000,chest,45,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+800082,8,8,8,0,0,0,0,2,15000,chest,45,1,resource,500001,10,Win 2 matches in Advance Mode
+900001,9,9,2,war,monster,2,0,1,334,chest,46,1,resource,500001,10,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+900002,9,9,2,fortune,monster,2,0,1,334,chest,46,1,resource,500001,10,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+900003,9,9,2,balance,monster,2,0,1,334,chest,46,1,resource,500001,10,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+900004,9,9,2,nature,monster,2,0,1,334,chest,46,1,resource,500001,10,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+900005,9,9,2,chaos,monster,2,0,1,334,chest,46,1,resource,500001,10,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+900006,9,9,2,war|fortune,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+900007,9,9,2,war|balance,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+900008,9,9,2,war|nature,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+900009,9,9,2,war|chaos,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+900010,9,9,2,fortune|balance,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+900011,9,9,2,fortune|nature,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+900012,9,9,2,fortune|chaos,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+900013,9,9,2,balance|nature,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+900014,9,9,2,balance|chaos,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+900015,9,9,2,nature|chaos,monster,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+900016,9,9,2,war,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,Use 2 War clan items(red) in Battle/Practice Mode and win
+900017,9,9,2,fortune,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+900018,9,9,2,balance,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+900019,9,9,2,nature,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+900020,9,9,2,chaos,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+900021,9,9,2,all,armor|equip|consume,2,0,1,334,chest,46,1,resource,500001,10,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+900022,9,9,2,war|fortune,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+900023,9,9,2,war|balance,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+900024,9,9,2,war|nature,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+900025,9,9,2,war|chaos,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+900026,9,9,2,war|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+900027,9,9,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+900028,9,9,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+900029,9,9,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+900030,9,9,2,fortune|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+900031,9,9,2,balance|nature,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+900032,9,9,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+900033,9,9,2,balance|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+900034,9,9,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+900035,9,9,2,nature|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+900036,9,9,2,chaos|all,armor|equip|consume,3,0,1,334,chest,46,1,resource,500001,10,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+900037,9,9,2,war,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,Use 4 War clan items(red) in Battle/Practice Mode and win
+900038,9,9,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+900039,9,9,2,balance,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+900040,9,9,2,nature,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+900041,9,9,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+900042,9,9,2,all,monster|armor|equip|consume,4,0,1,334,chest,46,1,resource,500001,10,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+900043,9,9,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+900044,9,9,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+900045,9,9,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+900046,9,9,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+900047,9,9,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+900048,9,9,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+900049,9,9,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+900050,9,9,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+900051,9,9,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+900052,9,9,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+900053,9,9,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+900054,9,9,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+900055,9,9,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+900056,9,9,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+900057,9,9,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,46,1,resource,500001,10,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+900058,9,9,3,0,0,0,0,1,14962,chest,46,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+900059,9,9,4,0,0,0,0,6,15000,chest,46,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+900060,9,9,5,0,0,0,0,6,15000,chest,46,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+900061,9,9,6,0,monster,2,2,4,1000,chest,46,1,resource,500001,10,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+900062,9,9,6,0,monster,3,2,5,1000,chest,46,1,resource,500001,10,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+900063,9,9,6,0,monster,4,2,6,1000,chest,46,1,resource,500001,10,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+900064,9,9,6,0,monster,2,1,5,1000,chest,46,1,resource,500001,10,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+900065,9,9,6,0,monster,3,1,4,1000,chest,46,1,resource,500001,10,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+900066,9,9,6,0,monster,4,1,3,1000,chest,46,1,resource,500001,10,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+900067,9,9,3,0,0,0,0,1,1000,chest,46,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+900068,9,9,6,0,armor|equip|consume,2,2,4,1000,chest,46,1,resource,500001,10,Use 4 items cost 2 or less in Battle/Practice Mode
+900069,9,9,6,0,armor|equip|consume,3,2,5,1000,chest,46,1,resource,500001,10,Use 5 items cost 3 or less in Battle/Practice Mode
+900070,9,9,6,0,armor|equip|consume,4,2,6,1000,chest,46,1,resource,500001,10,Use 6 items cost 4 or less in Battle/Practice Mode
+900071,9,9,6,0,armor|equip|consume,2,1,5,1000,chest,46,1,resource,500001,10,Use 5 items cost 2 or more in Battle/Practice Mode
+900072,9,9,6,0,armor|equip|consume,3,1,4,1000,chest,46,1,resource,500001,10,Use 4 items cost 3 or more in Battle/Practice Mode
+900073,9,9,6,0,armor|equip|consume,4,1,3,1000,chest,46,1,resource,500001,10,Use 3 items cost 4 or more in Battle/Practice Mode
+900074,9,9,3,0,0,0,0,1,1000,chest,46,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+900075,9,9,6,0,monster|armor|equip|consume,2,2,4,1000,chest,46,1,resource,500001,10,Use 4 cards cost 2 or less in Battle/Practice Mode
+900076,9,9,6,0,monster|armor|equip|consume,3,2,5,1000,chest,46,1,resource,500001,10,Use 5 cards cost 3 or less in Battle/Practice Mode
+900077,9,9,6,0,monster|armor|equip|consume,4,2,6,1000,chest,46,1,resource,500001,10,Use 6 cards cost 4 or less in Battle/Practice Mode
+900078,9,9,6,0,monster|armor|equip|consume,2,1,5,1000,chest,46,1,resource,500001,10,Use 5 cards cost 2 or more in Battle/Practice Mode
+900079,9,9,6,0,monster|armor|equip|consume,3,1,4,1000,chest,46,1,resource,500001,10,Use 4 cards cost 3 or more in Battle/Practice Mode
+900080,9,9,6,0,monster|armor|equip|consume,4,1,3,1000,chest,46,1,resource,500001,10,Use 3 cards cost 4 or more in Battle/Practice Mode
+900081,9,9,3,0,0,0,0,1,1000,chest,46,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+900082,9,9,8,0,0,0,0,2,15000,chest,46,1,resource,500001,10,Win 2 matches in Advance Mode
+1000001,10,10,2,war,monster,2,0,1,334,chest,47,1,resource,500001,10,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+1000002,10,10,2,fortune,monster,2,0,1,334,chest,47,1,resource,500001,10,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+1000003,10,10,2,balance,monster,2,0,1,334,chest,47,1,resource,500001,10,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+1000004,10,10,2,nature,monster,2,0,1,334,chest,47,1,resource,500001,10,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+1000005,10,10,2,chaos,monster,2,0,1,334,chest,47,1,resource,500001,10,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+1000006,10,10,2,war|fortune,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+1000007,10,10,2,war|balance,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1000008,10,10,2,war|nature,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+1000009,10,10,2,war|chaos,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1000010,10,10,2,fortune|balance,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1000011,10,10,2,fortune|nature,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+1000012,10,10,2,fortune|chaos,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1000013,10,10,2,balance|nature,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+1000014,10,10,2,balance|chaos,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1000015,10,10,2,nature|chaos,monster,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1000016,10,10,2,war,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,Use 2 War clan items(red) in Battle/Practice Mode and win
+1000017,10,10,2,fortune,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+1000018,10,10,2,balance,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+1000019,10,10,2,nature,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+1000020,10,10,2,chaos,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+1000021,10,10,2,all,armor|equip|consume,2,0,1,334,chest,47,1,resource,500001,10,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+1000022,10,10,2,war|fortune,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+1000023,10,10,2,war|balance,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+1000024,10,10,2,war|nature,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+1000025,10,10,2,war|chaos,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+1000026,10,10,2,war|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+1000027,10,10,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+1000028,10,10,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+1000029,10,10,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+1000030,10,10,2,fortune|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+1000031,10,10,2,balance|nature,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+1000032,10,10,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+1000033,10,10,2,balance|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+1000034,10,10,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+1000035,10,10,2,nature|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+1000036,10,10,2,chaos|all,armor|equip|consume,3,0,1,334,chest,47,1,resource,500001,10,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+1000037,10,10,2,war,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,Use 4 War clan items(red) in Battle/Practice Mode and win
+1000038,10,10,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+1000039,10,10,2,balance,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+1000040,10,10,2,nature,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+1000041,10,10,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+1000042,10,10,2,all,monster|armor|equip|consume,4,0,1,334,chest,47,1,resource,500001,10,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+1000043,10,10,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+1000044,10,10,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+1000045,10,10,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+1000046,10,10,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1000047,10,10,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+1000048,10,10,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+1000049,10,10,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+1000050,10,10,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1000051,10,10,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+1000052,10,10,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+1000053,10,10,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1000054,10,10,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+1000055,10,10,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1000056,10,10,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+1000057,10,10,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,47,1,resource,500001,10,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+1000058,10,10,3,0,0,0,0,1,14962,chest,47,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1000059,10,10,4,0,0,0,0,6,15000,chest,47,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+1000060,10,10,5,0,0,0,0,6,15000,chest,47,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+1000061,10,10,6,0,monster,2,2,4,1000,chest,47,1,resource,500001,10,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+1000062,10,10,6,0,monster,3,2,5,1000,chest,47,1,resource,500001,10,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+1000063,10,10,6,0,monster,4,2,6,1000,chest,47,1,resource,500001,10,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+1000064,10,10,6,0,monster,2,1,5,1000,chest,47,1,resource,500001,10,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+1000065,10,10,6,0,monster,3,1,4,1000,chest,47,1,resource,500001,10,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+1000066,10,10,6,0,monster,4,1,3,1000,chest,47,1,resource,500001,10,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+1000067,10,10,3,0,0,0,0,1,1000,chest,47,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1000068,10,10,6,0,armor|equip|consume,2,2,4,1000,chest,47,1,resource,500001,10,Use 4 items cost 2 or less in Battle/Practice Mode
+1000069,10,10,6,0,armor|equip|consume,3,2,5,1000,chest,47,1,resource,500001,10,Use 5 items cost 3 or less in Battle/Practice Mode
+1000070,10,10,6,0,armor|equip|consume,4,2,6,1000,chest,47,1,resource,500001,10,Use 6 items cost 4 or less in Battle/Practice Mode
+1000071,10,10,6,0,armor|equip|consume,2,1,5,1000,chest,46,1,resource,500001,10,Use 5 items cost 2 or more in Battle/Practice Mode
+1000072,10,10,6,0,armor|equip|consume,3,1,4,1000,chest,47,1,resource,500001,10,Use 4 items cost 3 or more in Battle/Practice Mode
+1000073,10,10,6,0,armor|equip|consume,4,1,3,1000,chest,47,1,resource,500001,10,Use 3 items cost 4 or more in Battle/Practice Mode
+1000074,10,10,3,0,0,0,0,1,1000,chest,47,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1000075,10,10,6,0,monster|armor|equip|consume,2,2,4,1000,chest,47,1,resource,500001,10,Use 4 cards cost 2 or less in Battle/Practice Mode
+1000076,10,10,6,0,monster|armor|equip|consume,3,2,5,1000,chest,47,1,resource,500001,10,Use 5 cards cost 3 or less in Battle/Practice Mode
+1000077,10,10,6,0,monster|armor|equip|consume,4,2,6,1000,chest,47,1,resource,500001,10,Use 6 cards cost 4 or less in Battle/Practice Mode
+1000078,10,10,6,0,monster|armor|equip|consume,2,1,5,1000,chest,47,1,resource,500001,10,Use 5 cards cost 2 or more in Battle/Practice Mode
+1000079,10,10,6,0,monster|armor|equip|consume,3,1,4,1000,chest,47,1,resource,500001,10,Use 4 cards cost 3 or more in Battle/Practice Mode
+1000080,10,10,6,0,monster|armor|equip|consume,4,1,3,1000,chest,47,1,resource,500001,10,Use 3 cards cost 4 or more in Battle/Practice Mode
+1000081,10,10,3,0,0,0,0,1,1000,chest,47,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1000082,10,10,8,0,0,0,0,2,15000,chest,47,1,resource,500001,10,Win 2 matches in Advance Mode
+1100001,11,11,2,war,monster,2,0,1,334,chest,48,1,resource,500001,10,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+1100002,11,11,2,fortune,monster,2,0,1,334,chest,48,1,resource,500001,10,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+1100003,11,11,2,balance,monster,2,0,1,334,chest,48,1,resource,500001,10,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+1100004,11,11,2,nature,monster,2,0,1,334,chest,48,1,resource,500001,10,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+1100005,11,11,2,chaos,monster,2,0,1,334,chest,48,1,resource,500001,10,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+1100006,11,11,2,war|fortune,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+1100007,11,11,2,war|balance,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1100008,11,11,2,war|nature,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+1100009,11,11,2,war|chaos,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1100010,11,11,2,fortune|balance,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1100011,11,11,2,fortune|nature,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+1100012,11,11,2,fortune|chaos,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1100013,11,11,2,balance|nature,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+1100014,11,11,2,balance|chaos,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1100015,11,11,2,nature|chaos,monster,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1100016,11,11,2,war,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,Use 2 War clan items(red) in Battle/Practice Mode and win
+1100017,11,11,2,fortune,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+1100018,11,11,2,balance,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+1100019,11,11,2,nature,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+1100020,11,11,2,chaos,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+1100021,11,11,2,all,armor|equip|consume,2,0,1,334,chest,48,1,resource,500001,10,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+1100022,11,11,2,war|fortune,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+1100023,11,11,2,war|balance,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+1100024,11,11,2,war|nature,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+1100025,11,11,2,war|chaos,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+1100026,11,11,2,war|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+1100027,11,11,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+1100028,11,11,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+1100029,11,11,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+1100030,11,11,2,fortune|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+1100031,11,11,2,balance|nature,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+1100032,11,11,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+1100033,11,11,2,balance|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+1100034,11,11,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+1100035,11,11,2,nature|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+1100036,11,11,2,chaos|all,armor|equip|consume,3,0,1,334,chest,48,1,resource,500001,10,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+1100037,11,11,2,war,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,Use 4 War clan items(red) in Battle/Practice Mode and win
+1100038,11,11,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+1100039,11,11,2,balance,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+1100040,11,11,2,nature,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+1100041,11,11,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+1100042,11,11,2,all,monster|armor|equip|consume,4,0,1,334,chest,48,1,resource,500001,10,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+1100043,11,11,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+1100044,11,11,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+1100045,11,11,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+1100046,11,11,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1100047,11,11,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+1100048,11,11,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+1100049,11,11,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+1100050,11,11,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1100051,11,11,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+1100052,11,11,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+1100053,11,11,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1100054,11,11,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+1100055,11,11,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1100056,11,11,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+1100057,11,11,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,48,1,resource,500001,10,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+1100058,11,11,3,0,0,0,0,1,14962,chest,48,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1100059,11,11,4,0,0,0,0,6,15000,chest,48,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+1100060,11,11,5,0,0,0,0,6,15000,chest,48,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+1100061,11,11,6,0,monster,2,2,4,1000,chest,48,1,resource,500001,10,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+1100062,11,11,6,0,monster,3,2,5,1000,chest,48,1,resource,500001,10,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+1100063,11,11,6,0,monster,4,2,6,1000,chest,48,1,resource,500001,10,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+1100064,11,11,6,0,monster,2,1,5,1000,chest,48,1,resource,500001,10,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+1100065,11,11,6,0,monster,3,1,4,1000,chest,48,1,resource,500001,10,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+1100066,11,11,6,0,monster,4,1,3,1000,chest,48,1,resource,500001,10,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+1100067,11,11,3,0,0,0,0,1,1000,chest,48,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1100068,11,11,6,0,armor|equip|consume,2,2,4,1000,chest,48,1,resource,500001,10,Use 4 items cost 2 or less in Battle/Practice Mode
+1100069,11,11,6,0,armor|equip|consume,3,2,5,1000,chest,48,1,resource,500001,10,Use 5 items cost 3 or less in Battle/Practice Mode
+1100070,11,11,6,0,armor|equip|consume,4,2,6,1000,chest,48,1,resource,500001,10,Use 6 items cost 4 or less in Battle/Practice Mode
+1100071,11,11,6,0,armor|equip|consume,2,1,5,1000,chest,48,1,resource,500001,10,Use 5 items cost 2 or more in Battle/Practice Mode
+1100072,11,11,6,0,armor|equip|consume,3,1,4,1000,chest,48,1,resource,500001,10,Use 4 items cost 3 or more in Battle/Practice Mode
+1100073,11,11,6,0,armor|equip|consume,4,1,3,1000,chest,48,1,resource,500001,10,Use 3 items cost 4 or more in Battle/Practice Mode
+1100074,11,11,3,0,0,0,0,1,1000,chest,48,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1100075,11,11,6,0,monster|armor|equip|consume,2,2,4,1000,chest,48,1,resource,500001,10,Use 4 cards cost 2 or less in Battle/Practice Mode
+1100076,11,11,6,0,monster|armor|equip|consume,3,2,5,1000,chest,48,1,resource,500001,10,Use 5 cards cost 3 or less in Battle/Practice Mode
+1100077,11,11,6,0,monster|armor|equip|consume,4,2,6,1000,chest,48,1,resource,500001,10,Use 6 cards cost 4 or less in Battle/Practice Mode
+1100078,11,11,6,0,monster|armor|equip|consume,2,1,5,1000,chest,48,1,resource,500001,10,Use 5 cards cost 2 or more in Battle/Practice Mode
+1100079,11,11,6,0,monster|armor|equip|consume,3,1,4,1000,chest,48,1,resource,500001,10,Use 4 cards cost 3 or more in Battle/Practice Mode
+1100080,11,11,6,0,monster|armor|equip|consume,4,1,3,1000,chest,48,1,resource,500001,10,Use 3 cards cost 4 or more in Battle/Practice Mode
+1100081,11,11,3,0,0,0,0,1,1000,chest,48,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1100082,11,11,8,0,0,0,0,2,15000,chest,48,1,resource,500001,10,Win 2 matches in Advance Mode
+1200001,12,12,2,war,monster,2,0,1,334,chest,49,1,resource,500001,10,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+1200002,12,12,2,fortune,monster,2,0,1,334,chest,49,1,resource,500001,10,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+1200003,12,12,2,balance,monster,2,0,1,334,chest,49,1,resource,500001,10,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+1200004,12,12,2,nature,monster,2,0,1,334,chest,49,1,resource,500001,10,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+1200005,12,12,2,chaos,monster,2,0,1,334,chest,49,1,resource,500001,10,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+1200006,12,12,2,war|fortune,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+1200007,12,12,2,war|balance,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1200008,12,12,2,war|nature,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+1200009,12,12,2,war|chaos,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1200010,12,12,2,fortune|balance,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1200011,12,12,2,fortune|nature,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+1200012,12,12,2,fortune|chaos,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1200013,12,12,2,balance|nature,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+1200014,12,12,2,balance|chaos,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1200015,12,12,2,nature|chaos,monster,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1200016,12,12,2,war,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,Use 2 War clan items(red) in Battle/Practice Mode and win
+1200017,12,12,2,fortune,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+1200018,12,12,2,balance,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+1200019,12,12,2,nature,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+1200020,12,12,2,chaos,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+1200021,12,12,2,all,armor|equip|consume,2,0,1,334,chest,49,1,resource,500001,10,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+1200022,12,12,2,war|fortune,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+1200023,12,12,2,war|balance,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+1200024,12,12,2,war|nature,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+1200025,12,12,2,war|chaos,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+1200026,12,12,2,war|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+1200027,12,12,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+1200028,12,12,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+1200029,12,12,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+1200030,12,12,2,fortune|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+1200031,12,12,2,balance|nature,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+1200032,12,12,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+1200033,12,12,2,balance|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+1200034,12,12,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+1200035,12,12,2,nature|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+1200036,12,12,2,chaos|all,armor|equip|consume,3,0,1,334,chest,49,1,resource,500001,10,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+1200037,12,12,2,war,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,Use 4 War clan items(red) in Battle/Practice Mode and win
+1200038,12,12,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+1200039,12,12,2,balance,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+1200040,12,12,2,nature,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+1200041,12,12,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+1200042,12,12,2,all,monster|armor|equip|consume,4,0,1,334,chest,49,1,resource,500001,10,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+1200043,12,12,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+1200044,12,12,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+1200045,12,12,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+1200046,12,12,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1200047,12,12,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+1200048,12,12,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+1200049,12,12,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+1200050,12,12,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1200051,12,12,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+1200052,12,12,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+1200053,12,12,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1200054,12,12,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+1200055,12,12,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1200056,12,12,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+1200057,12,12,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,49,1,resource,500001,10,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+1200058,12,12,3,0,0,0,0,1,14962,chest,49,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1200059,12,12,4,0,0,0,0,6,15000,chest,49,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+1200060,12,12,5,0,0,0,0,6,15000,chest,49,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+1200061,12,12,6,0,monster,2,2,4,1000,chest,49,1,resource,500001,10,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+1200062,12,12,6,0,monster,3,2,5,1000,chest,49,1,resource,500001,10,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+1200063,12,12,6,0,monster,4,2,6,1000,chest,49,1,resource,500001,10,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+1200064,12,12,6,0,monster,2,1,5,1000,chest,49,1,resource,500001,10,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+1200065,12,12,6,0,monster,3,1,4,1000,chest,49,1,resource,500001,10,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+1200066,12,12,6,0,monster,4,1,3,1000,chest,49,1,resource,500001,10,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+1200067,12,12,3,0,0,0,0,1,1000,chest,49,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1200068,12,12,6,0,armor|equip|consume,2,2,4,1000,chest,49,1,resource,500001,10,Use 4 items cost 2 or less in Battle/Practice Mode
+1200069,12,12,6,0,armor|equip|consume,3,2,5,1000,chest,49,1,resource,500001,10,Use 5 items cost 3 or less in Battle/Practice Mode
+1200070,12,12,6,0,armor|equip|consume,4,2,6,1000,chest,49,1,resource,500001,10,Use 6 items cost 4 or less in Battle/Practice Mode
+1200071,12,12,6,0,armor|equip|consume,2,1,5,1000,chest,48,1,resource,500001,10,Use 5 items cost 2 or more in Battle/Practice Mode
+1200072,12,12,6,0,armor|equip|consume,3,1,4,1000,chest,49,1,resource,500001,10,Use 4 items cost 3 or more in Battle/Practice Mode
+1200073,12,12,6,0,armor|equip|consume,4,1,3,1000,chest,49,1,resource,500001,10,Use 3 items cost 4 or more in Battle/Practice Mode
+1200074,12,12,3,0,0,0,0,1,1000,chest,49,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1200075,12,12,6,0,monster|armor|equip|consume,2,2,4,1000,chest,49,1,resource,500001,10,Use 4 cards cost 2 or less in Battle/Practice Mode
+1200076,12,12,6,0,monster|armor|equip|consume,3,2,5,1000,chest,49,1,resource,500001,10,Use 5 cards cost 3 or less in Battle/Practice Mode
+1200077,12,12,6,0,monster|armor|equip|consume,4,2,6,1000,chest,49,1,resource,500001,10,Use 6 cards cost 4 or less in Battle/Practice Mode
+1200078,12,12,6,0,monster|armor|equip|consume,2,1,5,1000,chest,49,1,resource,500001,10,Use 5 cards cost 2 or more in Battle/Practice Mode
+1200079,12,12,6,0,monster|armor|equip|consume,3,1,4,1000,chest,49,1,resource,500001,10,Use 4 cards cost 3 or more in Battle/Practice Mode
+1200080,12,12,6,0,monster|armor|equip|consume,4,1,3,1000,chest,49,1,resource,500001,10,Use 3 cards cost 4 or more in Battle/Practice Mode
+1200081,12,12,3,0,0,0,0,1,1000,chest,49,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1200082,12,12,8,0,0,0,0,2,15000,chest,49,1,resource,500001,10,Win 2 matches in Advance Mode
+1300001,13,13,2,war,monster,2,0,1,334,chest,50,1,resource,500001,10,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+1300002,13,13,2,fortune,monster,2,0,1,334,chest,50,1,resource,500001,10,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+1300003,13,13,2,balance,monster,2,0,1,334,chest,50,1,resource,500001,10,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+1300004,13,13,2,nature,monster,2,0,1,334,chest,50,1,resource,500001,10,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+1300005,13,13,2,chaos,monster,2,0,1,334,chest,50,1,resource,500001,10,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+1300006,13,13,2,war|fortune,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+1300007,13,13,2,war|balance,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1300008,13,13,2,war|nature,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+1300009,13,13,2,war|chaos,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1300010,13,13,2,fortune|balance,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1300011,13,13,2,fortune|nature,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+1300012,13,13,2,fortune|chaos,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1300013,13,13,2,balance|nature,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+1300014,13,13,2,balance|chaos,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1300015,13,13,2,nature|chaos,monster,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1300016,13,13,2,war,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,Use 2 War clan items(red) in Battle/Practice Mode and win
+1300017,13,13,2,fortune,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+1300018,13,13,2,balance,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+1300019,13,13,2,nature,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+1300020,13,13,2,chaos,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+1300021,13,13,2,all,armor|equip|consume,2,0,1,334,chest,50,1,resource,500001,10,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+1300022,13,13,2,war|fortune,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+1300023,13,13,2,war|balance,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+1300024,13,13,2,war|nature,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+1300025,13,13,2,war|chaos,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+1300026,13,13,2,war|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+1300027,13,13,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+1300028,13,13,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+1300029,13,13,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+1300030,13,13,2,fortune|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+1300031,13,13,2,balance|nature,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+1300032,13,13,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+1300033,13,13,2,balance|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+1300034,13,13,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+1300035,13,13,2,nature|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+1300036,13,13,2,chaos|all,armor|equip|consume,3,0,1,334,chest,50,1,resource,500001,10,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+1300037,13,13,2,war,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,Use 4 War clan items(red) in Battle/Practice Mode and win
+1300038,13,13,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+1300039,13,13,2,balance,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+1300040,13,13,2,nature,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+1300041,13,13,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+1300042,13,13,2,all,monster|armor|equip|consume,4,0,1,334,chest,50,1,resource,500001,10,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+1300043,13,13,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+1300044,13,13,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+1300045,13,13,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+1300046,13,13,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1300047,13,13,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+1300048,13,13,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+1300049,13,13,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+1300050,13,13,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1300051,13,13,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+1300052,13,13,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+1300053,13,13,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1300054,13,13,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+1300055,13,13,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1300056,13,13,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+1300057,13,13,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,50,1,resource,500001,10,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+1300058,13,13,3,0,0,0,0,1,14962,chest,50,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1300059,13,13,4,0,0,0,0,6,15000,chest,50,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+1300060,13,13,5,0,0,0,0,6,15000,chest,50,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+1300061,13,13,6,0,monster,2,2,4,1000,chest,50,1,resource,500001,10,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+1300062,13,13,6,0,monster,3,2,5,1000,chest,50,1,resource,500001,10,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+1300063,13,13,6,0,monster,4,2,6,1000,chest,50,1,resource,500001,10,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+1300064,13,13,6,0,monster,2,1,5,1000,chest,50,1,resource,500001,10,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+1300065,13,13,6,0,monster,3,1,4,1000,chest,50,1,resource,500001,10,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+1300066,13,13,6,0,monster,4,1,3,1000,chest,50,1,resource,500001,10,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+1300067,13,13,3,0,0,0,0,1,1000,chest,50,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1300068,13,13,6,0,armor|equip|consume,2,2,4,1000,chest,50,1,resource,500001,10,Use 4 items cost 2 or less in Battle/Practice Mode
+1300069,13,13,6,0,armor|equip|consume,3,2,5,1000,chest,50,1,resource,500001,10,Use 5 items cost 3 or less in Battle/Practice Mode
+1300070,13,13,6,0,armor|equip|consume,4,2,6,1000,chest,50,1,resource,500001,10,Use 6 items cost 4 or less in Battle/Practice Mode
+1300071,13,13,6,0,armor|equip|consume,2,1,5,1000,chest,50,1,resource,500001,10,Use 5 items cost 2 or more in Battle/Practice Mode
+1300072,13,13,6,0,armor|equip|consume,3,1,4,1000,chest,50,1,resource,500001,10,Use 4 items cost 3 or more in Battle/Practice Mode
+1300073,13,13,6,0,armor|equip|consume,4,1,3,1000,chest,50,1,resource,500001,10,Use 3 items cost 4 or more in Battle/Practice Mode
+1300074,13,13,3,0,0,0,0,1,1000,chest,50,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1300075,13,13,6,0,monster|armor|equip|consume,2,2,4,1000,chest,50,1,resource,500001,10,Use 4 cards cost 2 or less in Battle/Practice Mode
+1300076,13,13,6,0,monster|armor|equip|consume,3,2,5,1000,chest,50,1,resource,500001,10,Use 5 cards cost 3 or less in Battle/Practice Mode
+1300077,13,13,6,0,monster|armor|equip|consume,4,2,6,1000,chest,50,1,resource,500001,10,Use 6 cards cost 4 or less in Battle/Practice Mode
+1300078,13,13,6,0,monster|armor|equip|consume,2,1,5,1000,chest,50,1,resource,500001,10,Use 5 cards cost 2 or more in Battle/Practice Mode
+1300079,13,13,6,0,monster|armor|equip|consume,3,1,4,1000,chest,50,1,resource,500001,10,Use 4 cards cost 3 or more in Battle/Practice Mode
+1300080,13,13,6,0,monster|armor|equip|consume,4,1,3,1000,chest,50,1,resource,500001,10,Use 3 cards cost 4 or more in Battle/Practice Mode
+1300081,13,13,3,0,0,0,0,1,1000,chest,50,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1300082,13,13,8,0,0,0,0,2,15000,chest,50,1,resource,500001,10,Win 2 matches in Advance Mode
+1400001,14,50,2,war,monster,2,0,1,334,chest,51,1,resource,500001,10,Summon 2 War clan cards(red) in Battle/Practice Mode and win
+1400002,14,50,2,fortune,monster,2,0,1,334,chest,51,1,resource,500001,10,Summon 2 Fortune clan cards(yellow) in Battle/Practice Mode and win
+1400003,14,50,2,balance,monster,2,0,1,334,chest,51,1,resource,500001,10,Summon 2 Balance clan cards(blue) in Battle/Practice Mode and win
+1400004,14,50,2,nature,monster,2,0,1,334,chest,51,1,resource,500001,10,Summon 2 Nature clan cards(green) in Battle/Practice Mode and win
+1400005,14,50,2,chaos,monster,2,0,1,334,chest,51,1,resource,500001,10,Summon 2 Chaos clan cards(purple) in Battle/Practice Mode and win
+1400006,14,50,2,war|fortune,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 War clan monsters(red) or Fortune clan monsters(yellow) in Battle/Practice Mode and win
+1400007,14,50,2,war|balance,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 War clan monsters(red) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1400008,14,50,2,war|nature,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 War clan monsters(red) or Nature clan monsters(green) in Battle/Practice Mode and win
+1400009,14,50,2,war|chaos,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 War clan monsters(red) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1400010,14,50,2,fortune|balance,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Balance clan monsters(blue) in Battle/Practice Mode and win
+1400011,14,50,2,fortune|nature,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Nature clan monsters(green) in Battle/Practice Mode and win
+1400012,14,50,2,fortune|chaos,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Fortuen clan monsters(yellow) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1400013,14,50,2,balance|nature,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Nature clan monsters(green) in Battle/Practice Mode and win
+1400014,14,50,2,balance|chaos,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Balance clan monsters(blue) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1400015,14,50,2,nature|chaos,monster,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Nature clan monsters(green) or Chaos clan monsters(purple) in Battle/Practice Mode and win
+1400016,14,50,2,war,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,Use 2 War clan items(red) in Battle/Practice Mode and win
+1400017,14,50,2,fortune,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,Use 2 Fortune clan items(yellow) in Battle/Practice Mode and win
+1400018,14,50,2,balance,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,Use 2 Balance clan items(blue) in Battle/Practice Mode and win
+1400019,14,50,2,nature,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,Use 2 Nature clan items(green) in Battle/Practice Mode and win
+1400020,14,50,2,chaos,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,Use 2 Chaos clan items(purple) in Battle/Practice Mode and win
+1400021,14,50,2,all,armor|equip|consume,2,0,1,334,chest,51,1,resource,500001,10,Use 2 Neutral clan items(white) in Battle/Practice Mode and win
+1400022,14,50,2,war|fortune,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 War clan items(red) or Fortune clan items(yellow) in Battle/Practice Mode and win
+1400023,14,50,2,war|balance,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 War clan items(red) or Balance clan items(blue) in Battle/Practice Mode and win
+1400024,14,50,2,war|nature,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 War clan items(red) or Nature clan items(green) in Battle/Practice Mode and win
+1400025,14,50,2,war|chaos,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 War clan items(red) or Chaos clan items(purple) in Battle/Practice Mode and win
+1400026,14,50,2,war|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 War clan items(red) or Neutral clan items(white) in Battle/Practice Mode and win
+1400027,14,50,2,fortune|balance,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Balance clan items(blue) in Battle/Practice Mode and win
+1400028,14,50,2,fortune|nature,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Nature clan items(green) in Battle/Practice Mode and win
+1400029,14,50,2,fortune|chaos,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Chaos clan items(purple) in Battle/Practice Mode and win
+1400030,14,50,2,fortune|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Fortune clan items(yellow) or Neutral clan items(white) in Battle/Practice Mode and win
+1400031,14,50,2,balance|nature,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Balance clan items(blue) or Nature clan items(green) in Battle/Practice Mode and win
+1400032,14,50,2,balance|chaos,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Balance clan items(blue) or Chaos clan items(purple) in Battle/Practice Mode and win
+1400033,14,50,2,balance|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Balance clan items(blue) or Neutral clan items(white) in Battle/Practice Mode and win
+1400034,14,50,2,nature|chaos,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Nature clan items(green) or Chaos clan items(purple) in Battle/Practice Mode and win
+1400035,14,50,2,nature|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Nature clan items(green) or Neutral clan items(white) in Battle/Practice Mode and win
+1400036,14,50,2,chaos|all,armor|equip|consume,3,0,1,334,chest,51,1,resource,500001,10,Use 3 Chaos clan items(purple) or Neutral clan items(white) in Battle/Practice Mode and win
+1400037,14,50,2,war,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,Use 4 War clan items(red) in Battle/Practice Mode and win
+1400038,14,50,2,fortune,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,Use 4 Fortune clan items(yellow) in Battle/Practice Mode and win
+1400039,14,50,2,balance,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,Use 4 Balance clan items(blue) in Battle/Practice Mode and win
+1400040,14,50,2,nature,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,Use 4 Nature clan items(green) in Battle/Practice Mode and win
+1400041,14,50,2,chaos,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,Use 4 Chaos clan items(purple) in Battle/Practice Mode and win
+1400042,14,50,2,all,monster|armor|equip|consume,4,0,1,334,chest,51,1,resource,500001,10,Use 4 Neutral clan items(white) in Battle/Practice Mode and win
+1400043,14,50,2,war|fortune,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 War clan cards(red) or Fortune clan cards(yellow) in Battle/Practice Mode and win
+1400044,14,50,2,war|balance,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 War clan cards(red) or Balance clan cards(blue) in Battle/Practice Mode and win
+1400045,14,50,2,war|nature,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 War clan cards(red) or Nature clan cards(green) in Battle/Practice Mode and win
+1400046,14,50,2,war|chaos,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 War clan cards(red) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1400047,14,50,2,war|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 War clan cards(red) or Neutral clan cards(white) in Battle/Practice Mode and win
+1400048,14,50,2,fortune|balance,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Balance clan cards(blue) in Battle/Practice Mode and win
+1400049,14,50,2,fortune|nature,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Nature clan cards(green) in Battle/Practice Mode and win
+1400050,14,50,2,fortune|chaos,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1400051,14,50,2,fortune|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Fortune clan cards(yellow) or Neutral clan cards(white) in Battle/Practice Mode and win
+1400052,14,50,2,balance|nature,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Balance clan cards(blue) or Nature clan cards(green) in Battle/Practice Mode and win
+1400053,14,50,2,balance|chaos,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Balance clan cards(blue) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1400054,14,50,2,balance|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Balance clan cards(blue) or Neutral clan cards(white) in Battle/Practice Mode and win
+1400055,14,50,2,nature|chaos,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Nature clan cards(green) or Chaos clan cards(purple) in Battle/Practice Mode and win
+1400056,14,50,2,nature|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Nature clan cards(green) or Neutral clan cards(white) in Battle/Practice Mode and win
+1400057,14,50,2,chaos|all,monster|armor|equip|consume,5,0,1,334,chest,51,1,resource,500001,10,Use 5 Chaos clan cards(purple) or Neutral clan cards(white) in Battle/Practice Mode and win
+1400058,14,50,3,0,0,0,0,1,14962,chest,51,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1400059,14,50,4,0,0,0,0,6,15000,chest,51,1,resource,500001,10,Defeat 6 monsters in Battle/Practice Mode
+1400060,14,50,5,0,0,0,0,6,15000,chest,51,1,resource,500001,10,Use 6 items in Battle/Practice Mode
+1400061,14,50,6,0,monster,2,2,4,1000,chest,51,1,resource,500001,10,Summon 4 monsters cost 2 or less in Battle/Practice Mode
+1400062,14,50,6,0,monster,3,2,5,1000,chest,51,1,resource,500001,10,Summon 5 monsters cost 3 or less in Battle/Practice Mode
+1400063,14,50,6,0,monster,4,2,6,1000,chest,51,1,resource,500001,10,Summon 6 monsters cost 4 or less in Battle/Practice Mode
+1400064,14,50,6,0,monster,2,1,5,1000,chest,51,1,resource,500001,10,Summon 5 monsters cost 2 or more in Battle/Practice Mode
+1400065,14,50,6,0,monster,3,1,4,1000,chest,51,1,resource,500001,10,Summon 4 monsters cost 3 or more in Battle/Practice Mode
+1400066,14,50,6,0,monster,4,1,3,1000,chest,51,1,resource,500001,10,Summon 3 monsters cost 4 or more in Battle/Practice Mode
+1400067,14,50,3,0,0,0,0,1,1000,chest,51,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1400068,14,50,6,0,armor|equip|consume,2,2,4,1000,chest,51,1,resource,500001,10,Use 4 items cost 2 or less in Battle/Practice Mode
+1400069,14,50,6,0,armor|equip|consume,3,2,5,1000,chest,51,1,resource,500001,10,Use 5 items cost 3 or less in Battle/Practice Mode
+1400070,14,50,6,0,armor|equip|consume,4,2,6,1000,chest,51,1,resource,500001,10,Use 6 items cost 4 or less in Battle/Practice Mode
+1400071,14,50,6,0,armor|equip|consume,2,1,5,1000,chest,51,1,resource,500001,10,Use 5 items cost 2 or more in Battle/Practice Mode
+1400072,14,50,6,0,armor|equip|consume,3,1,4,1000,chest,51,1,resource,500001,10,Use 4 items cost 3 or more in Battle/Practice Mode
+1400073,14,50,6,0,armor|equip|consume,4,1,3,1000,chest,51,1,resource,500001,10,Use 3 items cost 4 or more in Battle/Practice Mode
+1400074,14,50,3,0,0,0,0,1,1000,chest,51,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1400075,14,50,6,0,monster|armor|equip|consume,2,2,4,1000,chest,51,1,resource,500001,10,Use 4 cards cost 2 or less in Battle/Practice Mode
+1400076,14,50,6,0,monster|armor|equip|consume,3,2,5,1000,chest,51,1,resource,500001,10,Use 5 cards cost 3 or less in Battle/Practice Mode
+1400077,14,50,6,0,monster|armor|equip|consume,4,2,6,1000,chest,51,1,resource,500001,10,Use 6 cards cost 4 or less in Battle/Practice Mode
+1400078,14,50,6,0,monster|armor|equip|consume,2,1,5,1000,chest,51,1,resource,500001,10,Use 5 cards cost 2 or more in Battle/Practice Mode
+1400079,14,50,6,0,monster|armor|equip|consume,3,1,4,1000,chest,51,1,resource,500001,10,Use 4 cards cost 3 or more in Battle/Practice Mode
+1400080,14,50,6,0,monster|armor|equip|consume,4,1,3,1000,chest,51,1,resource,500001,10,Use 3 cards cost 4 or more in Battle/Practice Mode
+1400081,14,50,3,0,0,0,0,1,1000,chest,51,1,resource,500001,10,Win 1 match in Battle/Practice Mode
+1400082,14,50,8,0,0,0,0,2,15000,chest,51,1,resource,500001,10,Win 2 matches in Advance Mode

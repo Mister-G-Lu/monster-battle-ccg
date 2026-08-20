@@ -13,7 +13,7 @@ function meta:Init()
     self.complete_event = nil
 end
 
--- 转换文本信息
+-- Apply localized text
 local function TranslationText(text_config, key, row)
     key = tostring(key)
     row = row or {}
@@ -26,7 +26,7 @@ local function TranslationText(text_config, key, row)
     return row
 end
 
--- 加载道具表
+-- Load item table
 local function LoadItemConfig()
     local list = csv.Load("all_item_config")
         local text_config = text_loader["item_config"] or {}
@@ -39,7 +39,7 @@ local function LoadItemConfig()
     return item_list
 end
 
--- 加载卡牌分解表
+-- Load card resolve table
 local function LoadCardResolveConfig()
     local list = csv.Load("all_card_resolve_config")
     local card_resolve_config = {}
@@ -78,7 +78,7 @@ local function LoadCardResolveConfig()
     return card_resolve_config
 end
 
--- 加载卡牌升级表
+-- Load card upgrade table
 local function LoadCardUpgradeConfig()
     local list = csv.Load("all_card_upgrade_config")
     local card_upgrade_config = {}
@@ -96,7 +96,7 @@ local function LoadCardUpgradeConfig()
                 if m_t and m_id and m_num then
                     table.insert(config.req_material_list, {kind = m_t, attr_id = tonumber(m_id), num = tonumber(m_num)})
                 else
-                    print("配置未解析出来， str = "..str)
+                    print("failed to parse config， str = "..str)
                 end
             end
         end
@@ -105,7 +105,7 @@ local function LoadCardUpgradeConfig()
 
     return card_upgrade_config
 end
--- 加载卡牌合成表
+-- Load card compose table
 local function LoadCardComposeConfig()
     local list = csv.Load("all_card_compose_config")
     local card_compose_config = {}
@@ -136,7 +136,7 @@ local function LoadCardComposeConfig()
     return card_compose_config
     -- body
 end
--- 熟练度配置
+-- Proficiency config
 local function LoadProficiencyConfig()
     local list = csv.Load("all_proficiency_config")
     local proficiency_list = {}
@@ -150,7 +150,7 @@ local function LoadProficiencyConfig()
     return proficiency_list
 end
 
---冒险配置
+--Adventure config
 local function LoadAdventureConfig()
     local list = csv.Load("all_adventure_config")
     local adventure_list = {}
@@ -164,7 +164,7 @@ local function LoadAdventureConfig()
     return adventure_list
 end 
 
--- 加载卡包模板信息
+-- Load chest templates
 local function LoadChestConfig()
     local list = csv.Load("all_chest_config")
     local chest_map = {}
@@ -195,7 +195,7 @@ local function LoadChestConfig()
     end
     return chest_map
 end
--- 加载卡牌模板
+-- Load card templates
 local function LoadCardConfig()
     local list = csv.Load("all_power_config")
     local power_map = {}
@@ -282,7 +282,7 @@ local function LoadCardConfig()
 
     return card_config_list
 end
--- 加载技能模板
+-- Load power templates
 local function LoadPowerConfig()
     local list = csv.Load("all_power_config")
     local text_config = text_loader["power_config"] or {}
@@ -293,7 +293,7 @@ local function LoadPowerConfig()
     end
     return power_map
 end
--- 加载状态模板
+-- Load status templates
 local function LoadStatusConfig()
     local list = csv.Load("all_status_config")
     local text_config = text_loader["status_config"] or {}
@@ -306,7 +306,7 @@ local function LoadStatusConfig()
     end
     return config_map
 end
--- 提示文本配置
+-- Tips text config
 local function LoadTipsConfig()
     local list = csv.Load("client_tips_config")
     local text_config = text_loader["tips_config"] or {}
@@ -316,7 +316,7 @@ local function LoadTipsConfig()
     return list
 end
 
--- 加载任务表
+-- Load task table
 local function LoadTaskConfig()
     local list = csv.Load("all_task_config")
     local text_config = text_loader["task_config"] or {}
@@ -343,7 +343,7 @@ local function LoadTaskConfig()
     return map
 end
 
--- 加载成就表
+-- Load achievement table
 local function LoadAchievementConfig()
     local list = csv.Load("all_achievement_config")
     local text_config = text_loader["achievement_config"] or {}
@@ -370,7 +370,7 @@ local function LoadAchievementConfig()
     return map
 end
 
--- 加载统计表
+-- Load statistic table
 local function LoadStatisticConfig()
     local list = csv.Load("all_statistic_config")
     local text_config = text_loader["statistic_config"] or {}
@@ -408,7 +408,7 @@ local function LoadPveLimitPlay()
 
     return map
 end
---天梯
+--Ladder
 local function LoadPeripheryConfig()
     local list = csv.Load("all_periphery_config")
     local text_config = text_loader["periphery_config"] or {}
@@ -420,7 +420,7 @@ local function LoadPeripheryConfig()
     return map
 end
 
---MVP伤害统计表
+--MVP damage stats table
 local function LoadCardStateConfig()
     local list = csv.Load("all_card_stat_config")
     local text_config = text_loader["card_stat_config"] or {}
@@ -447,7 +447,7 @@ local function LoadBattleGuideEventConfig()
     return map
 end
 
--- 引导表
+-- Guide table
 local function LoadGuideConfig()
     local list = csv.Load("all_guide_config")
     local text_config = text_loader["guide_config"] or {}
@@ -459,7 +459,7 @@ local function LoadGuideConfig()
     return map
 end
 
--- 引导步骤表
+-- Guide step table
 local function LoadGuideStepConfig()
     local list = csv.Load("client_guide_step_config")
     local text_config = text_loader["guide_step_config"] or {}

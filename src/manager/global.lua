@@ -13,7 +13,7 @@ local _moudle_list = {
 
 local director = cc.Director:getInstance()
 
--- 统一消息层，是最高层
+-- Top-most message overlay
 local MESSAGE_TIPS_ZORDER = 9000
 local MAX_RECONNECT_NUM = 3
 
@@ -32,7 +32,7 @@ function meta:Init()
     self.is_reconnect = false
     self.reconnect_time = 0
 
-    -- 预先加载游戏层场景
+    -- pre-cache battle scene
     self.battle_scene_cache = nil
     self.is_waring = false
     math.randseed()
@@ -78,24 +78,24 @@ function meta:Init()
 
     data_template:LoadFromCSV()
     self.schedule_id = director:getScheduler():scheduleScriptFunc(function(elapsed_time)
-        -- 数据表
+        -- data tables
         data_template:LoadFromCSV()
-        --  更新时间
+        --  update time
         time_manager:Update(elapsed_time)
-        --  网络层
+        --  network
         network:Update(elapsed_time)
-        -- 动作
+        -- actions
         action_manager:Update(elapsed_time)
 
         error_tracer:Update(elapsed_time)
 
-        -- 如果连接中断了就立刻回到大厅界面
+        -- if connection is lost, return to lobby
         if network:HasLostConnection() then
             if self.resume_network then
                 local err = network:Reconnect()
                 self.reconnect_time = time_manager:Now()
                 if not err then
-                    -- 静默重连后。如果是战斗场景，就发自动同步协议
+                    -- after silent reconnect in battle, auto-sync
                     self:SendReconnectGame(function (result)
                         if result == "success" then
                             if self.current_scene_name == "battle" then
@@ -103,7 +103,7 @@ function meta:Init()
                                 battle_logic:ReqSyncBattlefield()
                             end
                         else
-                            -- 静默重连失败后，就进行主动重连
+                            -- silent reconnect failed; prompt the player
                             self:DoNetworkFail()
                         end
                         self.reconnect_num = 0
@@ -123,7 +123,7 @@ function meta:Init()
             if scene then
                 if scene.__name == "battle" or scene.__name == "world" then
                     self:CheckReconnect()
-                    --检查网络情况 异常后提示
+                    --warn on poor network
                     self:NetworkWarning(scene, elapsed_time)
                 end
                 if scene.Update then
@@ -147,11 +147,11 @@ function meta:Init()
     self.initd = true
 end
 
---网络不好时提示
+--Warn when the network is poor
 function meta:NetworkWarning(scene, elapsed_time)
     local deily_time = network:GetPingTimer()
     local waring_panel = scene.waring_panel
-    if waring_panel then        --当前延迟 大于最大延迟时间
+    if waring_panel then        --current ping exceeds max
         if deily_time >= self.defines.NET_WORK_DAILY_TIME and self.is_waring == false then
             waring_panel:Show()
             self.is_waring = true
@@ -162,7 +162,7 @@ function meta:NetworkWarning(scene, elapsed_time)
     end
 end
 
--- 进入后台游戏
+-- App backgrounded
 function meta:PauseBackground()
     if not self.initd then
         return
@@ -171,18 +171,18 @@ function meta:PauseBackground()
     graphic_manager:DispatchEvent("pause_back_ground")
 
     if self.current_scene_name == "world" then
-        -- 设置推送计划
+        -- schedule local notifications
         local user_logic = require "logic.user"
         user_logic:SetNofiyPlan()
 
     elseif self.current_scene_name == "battle" then
-        -- 设置推送计划
+        -- schedule local notifications
         local user_logic = require "logic.user"
         user_logic:SetNofiyPlan()
     end
 end
 
--- 恢复游戏
+-- App resumed
 function meta:ResumeBackground()
     if not self.initd then
         return
@@ -193,7 +193,7 @@ function meta:ResumeBackground()
     end
     self.resume_network = true
     graphic_manager:DispatchEvent("resume_back_ground")
-    -- 强行同步服务器时间
+    -- force-sync server time
     network:Send("req_sync_time", { client_time = os.time() }, function (result, recv_msg)
         if not recv_msg then
             return
@@ -207,7 +207,7 @@ function meta:ResumeBackground()
     end
 end
 
--- 主动重连网络弹出框
+-- Show reconnect dialog
 function meta:TakeReconnectNetwork(success_callback, fail_callback)
     if self.take_recent_status then
         return
@@ -260,10 +260,10 @@ function meta:TakeReconnectNetwork(success_callback, fail_callback)
     confirm_box:ShowConfirm(title_txt, desc_txt, confirm_txt, cancel_txt, ok_callback, cancel_callback)
 end
 
--- 重连操作失败
+-- Reconnect failed
 function meta:DoNetworkFail()
     if self.current_scene_name == "world" then
-        -- 如果是world状态，弹出状态重连
+        -- in world: show reconnect dialog
         local success_callback = function ()
             print("success_callback>>world")
         end
@@ -274,10 +274,10 @@ function meta:DoNetworkFail()
         end
         self:TakeReconnectNetwork(success_callback, fail_callback)
     elseif self.current_scene_name == "battle" then
-        -- 如果是battle状态，弹出状态重连
+        -- in battle: show reconnect dialog
         local success_callback = function ()
             print("success_callback>>battle")
-            -- 向服务器同步战斗信息&客户端进行战斗复盘
+            -- sync battle and replay on the client
             local battle_logic = require "logic.battle"
             battle_logic:ReqSyncBattlefield()
         end
@@ -295,11 +295,11 @@ function meta:DoNetworkFail()
 
 end
 
--- 检查连接状态
+-- Check connection
 function meta:CheckReconnect()
     local cur_time = time_manager:Now()
     if self.is_reconnect then
-        --2秒之后仍旧没有得到服务器响应
+        --no server response after timeout
         if (cur_time - self.reconnect_time) > MAX_RECONNECT_NUM then
             self:DoNetworkFail()
         end
@@ -307,7 +307,7 @@ function meta:CheckReconnect()
     end
     network:HeartBeat()
     if not network:HasTryConnection() then
-        -- 如果没有丢失连接的话，就返回
+        -- return if still connected
         return
     end
 
@@ -317,13 +317,13 @@ function meta:CheckReconnect()
     end
 
     if self.reconnect_time == 0  or cur_time > (self.reconnect_time + 1) then
-        --自动进行重连
+        --auto reconnect
         self:DoReconnect()
     end
 end
 
 
--- 发送重连游戏
+-- Send reconnect request
 function meta:SendReconnectGame(callback)
     self.is_reconnect = true
     local user_logic = require "logic.user"
@@ -357,7 +357,7 @@ function meta:SendReconnectGame(callback)
     end)
 end
 
--- 进行网络重连操作
+-- Perform reconnect
 function meta:DoReconnect()
     local cur_time = time_manager:Now()
     self.reconnect_num = self.reconnect_num + 1
@@ -377,7 +377,7 @@ function meta:DoReconnect()
 end
 
 
---初始化所有模块信息
+--Init all modules
 function meta:InitAllModules()
     for key, var in pairs(_moudle_list) do
         local logic = require("logic."..var)
@@ -438,7 +438,7 @@ function meta:GetCurrentSceneName()
     return self.current_scene_name
 end
 
--- 预先加载战斗场景
+-- Preload battle scene
 function meta:PreviouslyBattleScene()
     -- self.battle_scene_cache = require("scenes.battle_scene").new()
     -- self.battle_scene_cache:retain()
