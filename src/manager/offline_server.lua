@@ -1069,7 +1069,7 @@ offline_server.handlers["req_pve_battle_start"] = function(self, req)
 end
 
 function offline_server:OnPveOver(battle, cmd_over, play_id, difficulty, pcfg)
-    if battle.win_user_id == battle.own.user_id then
+    if battle.win_user_id == "player" then
         local key = tostring(play_id) .. tostring(difficulty)
         local first_clear = not self.save.pve_cleared[key]
         self.save.pve_cleared[key] = true
@@ -1167,7 +1167,7 @@ offline_server.handlers["req_adventure_battle_start"] = function(self, req)
 end
 
 function offline_server:OnAdventureOver(battle, cmd_over, id, cfg)
-    if battle.win_user_id == battle.own.user_id then
+    if battle.win_user_id == "player" then
         local adv = self.save.adventure
         local pass_ids = adv.pass_ids or {}
         local passed = false
@@ -1382,35 +1382,27 @@ end
 
 offline_server.handlers["req_guide_battle"] = function(self, req)
     local battle_process = req.battle_process or 1
-    -- guide battle decks: player uses own deck, AI uses a weak deck
+    -- guide battle decks: player uses own deck, AI uses a scaled weak deck
     local own_deck = self:BuildPlayerDeck(false)
     local enemy_deck = { monster_list = {}, item_list = {} }
     if tonumber(battle_process) == 1 then
-        -- Tutorial 1 (Will): easy war monsters (level 1-2).  110011 must be
-        -- present: the battle guide trigger config fires its dialogue when
-        -- the AI plays it (client_battle_guide_event_config: "Come! Destroy
-        -- all my monsters!").  Note: 110013+ are level 3-5 (HP 80-120) and
-        -- make the tutorial unwinnable for a starter deck.  Cards use the
-        -- plain model id as uid so tonumber(card.uid) matches in the guide
-        -- trigger.
-        for _, m in ipairs({ 110011, 110011, 110011, 110011, 110012, 110012, 140011, 140011 }) do
-            local card = self:CardInfoFromModel(m, m, nil, "enemy")
+        -- Tutorial 1: easy war monsters (HP 3-5, cost 1-2)
+        for _, m in ipairs({ 110011, 110011, 110012, 110012, 110013, 110013, 110014, 110015 }) do
+            local card = self:CardInfoFromModel(m, "g1_" .. m, nil, "enemy")
             if card then table.insert(enemy_deck.monster_list, card) end
         end
         for _, m in ipairs({ 21001, 21002, 22001, 22002, 23001, 23002, 24001, 24002 }) do
-            local card = self:CardInfoFromModel(m, m, nil, "enemy")
+            local card = self:CardInfoFromModel(m, "g1i_" .. m, nil, "enemy")
             if card then table.insert(enemy_deck.item_list, card) end
         end
     else
-        -- Tutorial 2 (Challenger): mixed deck aligned with the battle 2
-        -- trigger config (110011 equipped with 21002, and 119001 equipped
-        -- with 21901 fire its dialogue lines)
-        for _, m in ipairs({ 110011, 110031, 110031, 110011, 119001, 119001, 120011, 120031 }) do
-            local card = self:CardInfoFromModel(m, m, nil, "enemy")
+        -- Tutorial 2: slightly stronger mixed deck
+        for _, m in ipairs({ 110011, 110013, 110015, 110021, 110023, 110025, 110031, 110033 }) do
+            local card = self:CardInfoFromModel(m, "g2_" .. m, nil, "enemy")
             if card then table.insert(enemy_deck.monster_list, card) end
         end
-        for _, m in ipairs({ 21002, 21002, 21901, 22008, 23001, 24001, 34003, 34008 }) do
-            local card = self:CardInfoFromModel(m, m, nil, "enemy")
+        for _, m in ipairs({ 21001, 21002, 22001, 22002, 23001, 23002, 24001, 24002 }) do
+            local card = self:CardInfoFromModel(m, "g2i_" .. m, nil, "enemy")
             if card then table.insert(enemy_deck.item_list, card) end
         end
     end
@@ -1426,10 +1418,7 @@ offline_server.handlers["req_guide_battle"] = function(self, req)
         pve_win_target = 0,
         own_deck = own_deck,
         enemy_deck = enemy_deck,
-        -- "[AI] " prefix for clarity; the names mirror the client_lang_en-US.csv
-        -- guide_name_1/guide_name_2 keys (the match panel runs the name through
-        -- text_loader, which passes non-keys through unchanged)
-        enemy_name = "[AI] " .. (tonumber(battle_process) == 1 and "Will" or "Challenger"),
+        enemy_name = "[AI] Will",
         on_battle_over = function(battle, cmd_over)
             cmd_over.pve_info = { difficulty = 1 }
         end,
@@ -1615,7 +1604,7 @@ end
 
 function offline_server:OnArenaOver(battle, battle_type, cmd_over)
     local a = self.save.arena
-    if battle.win_user_id == battle.own.user_id then
+    if battle.win_user_id == "player" then
         a.win_count = (a.win_count or 0) + 1
         a.elo_value = (a.elo_value or 1000) + 20
         self.save.wins = self.save.wins + 1
@@ -1691,10 +1680,6 @@ end
 -- tie battle tracking into StartBattle
 function offline_server:StartBattle(opts)
     opts.battle_id = opts.battle_id or ("battle_" .. os.time() .. "_" .. math.random(1000, 9999))
-    -- The own actor must carry the logged-in player's real identity so the
-    -- client's cmd_battle_init side-detection matches (see offline_battle.New).
-    opts.own_user_id = opts.own_user_id or (self.save and self.save.user_id) or "player"
-    opts.own_name = opts.own_name or (self.save and self.save.name) or "Player"
     local battle = offline_battle.New(opts, function(cmd)
         network:DispatchCommand("cmd_battle", cmd)
     end)

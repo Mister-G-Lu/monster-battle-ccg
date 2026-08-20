@@ -16,15 +16,6 @@ local IMMOLATION = constants.CARD_IMMOLATION_CRYSTAL
 
 local MAX_ROUNDS = 50  -- force game over after this many rounds to prevent infinite battles
 
--- Seconds the client gives the human to act each turn.  The client computes
--- GetDiffSecond(last_oper_time) and auto-attacks when it hits 0.  Sending 0
--- made the client auto-attack immediately every turn, skipping the player's
--- deployment phase entirely.  The offline edition uses a far-future window
--- (effectively unlimited): the player must manually sacrifice/deploy and end
--- the turn, and is never rushed mid-sacrifice.  The client also skips its
--- auto-attack entirely while own_player.is_sacrifice is true.
-local TURN_TIME = 3600
-
 local offline_battle = {}
 
 -- =====================================================================
@@ -354,15 +345,8 @@ function offline_battle.New(opts, emit)
     self.pve_win_cur_value = (opts.pve_info and opts.pve_info.pve_win_cur_value) or 0
     self.pve_win_target = opts.pve_win_target or 0
 
-    -- IMPORTANT: the own actor's user_id must match the logged-in player's
-    -- user_id (user_logic.user_id), because the client picks "which side is
-    -- me" in cmd_battle_init by comparing player1/player2.user_id with its
-    -- own id.  If we hardcode "player" here while the login returns a
-    -- different id, the client swaps the sides: the player sees the AI's
-    -- name and deck as their own and the battle deadlocks on the loading /
-    -- battlefield screen.
-    self.own = Actor.New(opts.own_user_id or "player", opts.own_name or "Player")
-    self.enemy = Actor.New(opts.enemy_user_id or "enemy", opts.enemy_name or "Enemy")
+    self.own = Actor.New("player", opts.own_name or "Player")
+    self.enemy = Actor.New("enemy", opts.enemy_name or "Enemy")
     self.own.is_ai = false
     self.enemy.is_ai = true
 
@@ -449,14 +433,14 @@ function offline_battle:Start()
     })
 
     self:PushCommand("cmd_battle_init", {
-        first_actor = self.own.user_id,
+        first_actor = "player",
         player1 = self:BuildActorMessage(self.own),
         player2 = self:BuildActorMessage(self.enemy),
     })
 
     self:PushCommand("cmd_battle_round", { round = self.round, effect_list = {} })
 
-    self:BeginPrep(self.own.user_id)
+    self:BeginPrep("player")
 end
 
 function offline_battle:BuildActorMessage(actor)
@@ -479,7 +463,7 @@ function offline_battle:BuildActorMessage(actor)
     }
 end
 
--- Begin the preparation phase for a player (own or enemy actor)
+-- Begin the preparation phase for a player ("player" or "enemy")
 function offline_battle:BeginPrep(user_id)
     local actor = user_id == self.own.user_id and self.own or self.enemy
     actor.is_sacrifice = true
@@ -488,7 +472,7 @@ function offline_battle:BeginPrep(user_id)
     self:PushCommand("cmd_battle_prepa", {
         user_id = actor.user_id,
         sync_crystal = actor.cur_crystal,
-        last_oper_time = os.time() + TURN_TIME,
+        last_oper_time = os.time() + 3600,
         is_sacrifice = true,
     })
 end
@@ -502,19 +486,19 @@ function offline_battle:CheckGameOver()
     -- PvE win condition: kill target reached
     if self.opts.battle_object_type == "pve" and self.pve_win_target and self.pve_win_target > 0 then
         if self.pve_win_cur_value >= self.pve_win_target then
-            self:FinishBattle(self.own.user_id)
+            self:FinishBattle("player")
             return true
         end
     end
 
     -- Player lost all monsters
     if self.own:GetMonsterTotal() == 0 then
-        self:FinishBattle(self.enemy.user_id)
+        self:FinishBattle("enemy")
         return true
     end
     -- Enemy lost all monsters (non-pve win condition)
     if self.enemy:GetMonsterTotal() == 0 then
-        self:FinishBattle(self.own.user_id)
+        self:FinishBattle("player")
         return true
     end
     return false
@@ -732,9 +716,9 @@ function offline_battle:HandleAttack(req)
             end
         end
         if own_count >= enemy_count then
-            self:FinishBattle(self.own.user_id)
+            self:FinishBattle("player")
         else
-            self:FinishBattle(self.enemy.user_id)
+            self:FinishBattle("enemy")
         end
         return nil
     end
@@ -762,7 +746,7 @@ function offline_battle:HandleAttack(req)
     self.own.cur_crystal = self.own.cur_crystal + 1
     self.enemy.cur_crystal = self.enemy.cur_crystal + 1
     self:PushCommand("cmd_battle_round", { round = self.round, effect_list = {} })
-    self:BeginPrep(self.own.user_id)
+    self:BeginPrep("player")
     return nil
 end
 
@@ -775,7 +759,7 @@ function offline_battle:HandleSurrender()
     if self.is_over then
         return "battle_is_null"
     end
-    self:FinishBattle(self.enemy.user_id)
+    self:FinishBattle("enemy")
     return nil
 end
 
@@ -896,10 +880,7 @@ function offline_battle:ApplyCardPowers(card, target_slot, caster_actor, target_
             -- move target monster back to its owner's deck
             local act = target_slot.actor
             act.battle_slot[target_slot.pos] = nil
-            -- NOTE: no CompactSlots() here.  The client's DoUnsummonEvent only
-            -- nils the lane (it never shifts), so compacting server-side would
-            -- desync every subsequent slot position (client holes vs server
-            -- lanes) and break later attack events.
+            act:CompactSlots()
             if target_slot.monster then
                 table.insert(act.monster_card, target_slot.monster)
                 act.monster_len = #act.monster_card
@@ -1006,12 +987,7 @@ function offline_battle:DamageSlot(slot, damage, events, src_slot, damage_type)
         end
         table.insert(events, { type = "dead", tar_user_id = tid, tar_pos = tpos })
         slot.actor.battle_slot[slot.pos] = nil
-        -- NOTE: no CompactSlots() here.  The client's DoDeadEvent nils the
-        -- lane without shifting the others (lanes are fixed positions in the
-        -- original game), so the server must leave the hole too — otherwise
-        -- every later damage/dead/attack event references a slot position the
-        -- client no longer has ("没有找到战斗位置" spam, broken animations,
-        -- and guide-trigger crashes on nil battle slots).
+        slot.actor:CompactSlots()
         slot.actor.dead_num = slot.actor.dead_num + 1
         if src_slot then
             src_slot.actor.cur_crystal = src_slot.actor.cur_crystal + 1
@@ -1036,9 +1012,8 @@ function offline_battle:RunCombat()
     self:ApplyRoundStartPowers()
 
     -- Build attacker list: snapshot which slots are occupied NOW.
-    -- Slot swaps (swap power) can move slots mid-combat, so we take a
-    -- snapshot of slot objects before the loop and re-check liveness
-    -- each pass.
+    -- CompactSlots can shift slots mid-combat, so we take a snapshot
+    -- of slot objects before the loop and re-check liveness each pass.
     local function collect_attackers(actor)
         local list = {}
         for i = 1, BATTLE_SLOT_MAX do
