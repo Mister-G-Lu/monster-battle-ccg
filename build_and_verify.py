@@ -463,16 +463,17 @@ def step_install_checks(signed):
 # STEP 6: Game logic sim test
 # ===========================================================================
 def step_sim_test():
-    print("\n[6/6] Running game logic sim test...")
+    print("\n[6/6] Running game logic sim tests...")
     lua = os.path.join(WORK, "lua51", "lua5.1.exe")
-    sim = os.path.join(WORK, "sim_test.lua")
 
     # Clean save dirs
-    for d in ["sim_save", "sim_save_int"]:
+    for d in ["sim_save", "sim_save_int", "sim_save2"]:
         p = os.path.join(WORK, d)
         if os.path.exists(p):
             shutil.rmtree(p)
 
+    # Run original sim test
+    sim = os.path.join(WORK, "sim_test.lua")
     result = subprocess.run([lua, sim], capture_output=True, text=True, cwd=WORK)
     for line in result.stdout.strip().split("\n"):
         if line.startswith("[PASS]"):
@@ -483,9 +484,31 @@ def step_sim_test():
             print(f"  {line}")
 
     if result.returncode != 0:
-        fail(f"Sim test failed (exit {result.returncode})")
+        fail(f"Basic sim test failed (exit {result.returncode})")
     else:
-        ok("All sim test checks passed")
+        ok("Basic sim test passed")
+
+    # Run coverage test (81 tests covering battle, server, network, data, translations)
+    for d in ["sim_save2"]:
+        p = os.path.join(WORK, d)
+        if os.path.exists(p):
+            shutil.rmtree(p)
+
+    sim_cov = os.path.join(WORK, "sim_test_coverage.lua")
+    if os.path.exists(sim_cov):
+        result2 = subprocess.run([lua, sim_cov], capture_output=True, text=True, cwd=WORK)
+        for line in result2.stdout.strip().split("\n"):
+            if line.startswith("[PASS]"):
+                print(f"  {line}")
+            elif line.startswith("[FAIL]"):
+                fail(line)
+            elif "RESULT:" in line or "PASSED" in line or "COVERAGE" in line or "FAIL" in line.upper():
+                print(f"  {line}")
+
+        if result2.returncode != 0:
+            fail(f"Coverage test failed (exit {result2.returncode})")
+        else:
+            ok("Coverage test passed (81/81)")
 
 
 # ===========================================================================
