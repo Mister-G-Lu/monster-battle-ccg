@@ -1,0 +1,19 @@
+{
+  "name": "monster-battle-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Browser build of Monster Battle CCG — runs the real Lua engine in WebAssembly (wasmoon).",
+  "scripts": {
+    "prepare-assets": "python3 scripts/prepare_web.py",
+    "dev": "npm run prepare-assets && vite",
+    "build": "npm run prepare-assets && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "wasmoon": "1.16.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}

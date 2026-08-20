@@ -14,6 +14,15 @@ A fully offline, single-player version of the English Card Battle game — origi
 - **Adds** a splash/loading screen for immediate visual feedback
 
 > The earlier HTML prototype (web campaign + JS battle engine + PWA shell) has been **scrapped** — the HTML battle was a poor parallel of the native mechanics. There is no browser version; the Android app is the client. `index.html` is now a simple landing page that points at the APK.
+>
+> **A real browser version is feasible, though** — not by reimplementing the rules
+> in JS (the mistake above), but by running the *actual Lua engine* in WebAssembly
+> so the mechanics are byte-for-byte identical to the APK. This was proven with a
+> spike (`web-poc/prove_engine.mjs`): the unmodified engine boots in WASM and loads
+> all 1,595 cards + the 19-node campaign. See
+> [`docs/BROWSER_VERSION_RESEARCH.md`](docs/BROWSER_VERSION_RESEARCH.md) for the
+> full landscape (APK-in-browser options, dead ends, and the recommended
+> Wasmoon-based architecture).
 
 ## Quick Start
 
