@@ -122,8 +122,7 @@ function playOutBattle(maxRounds = 60) {
         }
       });
       if (best === -1) break;
-      D.deployCard(best);
-      deployed = true;
+      deployed = D.deployCard(best);
     }
     // attack phase: swing with everything that can
     for (let i = 0; i < 3; i++) {
@@ -165,7 +164,7 @@ console.log('== campaign_sim: loading ' + path.relative(ROOT, HTML) + ' ==');
 
 // 1) boot sanity + UI-path smoke (intro modal, map re-render, deck view)
 freshSave();
-assert(D.save.collection.length === 16, 'starter collection has 16 cards');
+assert(D.save.collection.length === 21, 'starter collection has 21 cards (16 monsters + 5 items)');
 assert(D.currentNodeId() === 'w1', 'first current node is w1');
 assert(typeof globalThis.openIntro === 'function', 'page functions are reachable on globalThis');
 globalThis.openIntro('w1');       // exercises previewDeckNames + chip rendering
@@ -180,9 +179,9 @@ D.battle = null; D.startBattle(D.NODE_BY_ID['w2']);
 {
   const b = D.battle;
   // force a scenario: put a ready creature on both sides of lane 0
-  b.playerHand = [{ id: 110011, cost: 2, currentHp: 4, hp: 4, attack: 2, canAttack: true, name: 'Triglodite', kind: 'war' }];
+  b.playerHand = [{ id: 110011, type: 'monster', cost: 2, currentHp: 4, hp: 4, attack: 2, canAttack: true, name: 'Triglodite', kind: 'war', powers: [{name:'melee',value:2}] }];
   b.playerField = [null, null, null];
-  b.enemyField = [{ id: 140021, cost: 2, currentHp: 4, hp: 4, attack: 2, canAttack: false, name: 'Mushrhum', kind: 'nature' }, null, null];
+  b.enemyField = [{ id: 140021, type: 'monster', cost: 2, currentHp: 4, hp: 4, attack: 2, canAttack: false, name: 'Mushrhum', kind: 'nature', powers: [{name:'melee',value:2}] }, null, null];
   b.playerCrystal = 10;
   D.deployCard(0);
   assert(b.playerField[0].canAttack === false, 'deployed creature has summoning sickness');
@@ -253,7 +252,7 @@ D.battle = null; D.startBattle(D.NODE_BY_ID['w1']);
 const r = playOutBattle();
 assert(r.won, 'w1 win for save test');
 D.openReward(D.battle.node); D.pickReward(0);
-assert(D.save.collection.length === 17, 'reward card added to collection');
+assert(D.save.collection.length === 22, 'reward card added to collection (started with 21, now 22)');
 const snap = JSON.parse(JSON.stringify(D.save));
 D.save = D.loadSave();
 assert(JSON.stringify(D.save) === JSON.stringify(snap), 'save round-trips through localStorage');
