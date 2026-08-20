@@ -52,6 +52,7 @@ CHANGED = {
     "src/manager/global.lua": os.path.join(DECRYPTED, "manager", "global.lua"),
     "src/logic/login.lua": os.path.join(DECRYPTED, "logic", "login.lua"),
     "src/manager/data_template.lua": os.path.join(DECRYPTED, "manager", "data_template.lua"),
+    "src/logic/guide.lua": os.path.join(DECRYPTED, "logic", "guide.lua"),
 }
 
 errors = []
