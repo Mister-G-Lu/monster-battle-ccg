@@ -81,9 +81,9 @@ function network:Clear()
     self.session = 1
     self.push_number = 1
 
-    -- <请求名，buff_session>
+    -- <request name, session record>
     self.req_record_map = {}
-    -- <session, 处理器>
+    -- <session, handler>
     self.callback_map = {}
     self.waiting_heart_beat_response = false
 
@@ -98,7 +98,7 @@ function network:ResetSession()
     self.ping_time = 0
 end
 
--- 设置心跳延迟时间
+-- Set heartbeat delay
 function network:SetHeartBeatDelay(time)
     HEART_BEAT_DELAY = time
     self.next_heart_beat_time = timer:Now() + HEART_BEAT_DELAY
@@ -161,7 +161,7 @@ function network:Connect(ip, port)
     return err, self.status
 end
 
--- 重连上次连接
+-- Reconnect last server
 function network:Reconnect()
     if OFFLINE_MODE then
         return nil, self.status
@@ -169,7 +169,7 @@ function network:Reconnect()
     return self:Connect(self.server_ip, self.server_prot)
 end
 
--- 发送断线后积压的请求
+-- Resend queued requests after disconnect
 function network:SendRecordMsg()
     if OFFLINE_MODE then
         return
@@ -177,17 +177,17 @@ function network:SendRecordMsg()
     if not self:IsConnected() then
         return
     end
-    -- 重连后，重发堆积的请求
+    -- resend queued requests after reconnect
     for req_name, record_info in pairs(self.req_record_map) do
         local session = record_info.session
         local post_data = record_info.post_data
-        print("重连后，重新发送 req_name = "..req_name, tostring(post_data))
+        print("resend after reconnect req_name = "..req_name, tostring(post_data))
         local t = protobuf.encode("GS2C", post_data)
         local size = #t
         local buf = string.char(bit_band(bit_rshift(size, 8), 0xff)) .. string.char(bit_band(size, 0xff)) .. t
         local i, err = self.socket:send(buf)
         if err then
-            print("重连send err", err)
+            print("reconnect send err", err)
             if err == "closed" then
                 self:Disconnect(NET_STATUS["lost_connection"])
             end
@@ -260,7 +260,7 @@ function network:Update()
                     local callback = func_info.callback
                     local req_name = func_info.req_name
                     if msg_name == "result" and msg_content.status == "user_is_offline" then
-                        -- 如果用户已经离线，尝试走重连协议，重连成功后，并重复发送上一次未成功的请求
+                        -- user offline: reconnect then resend last request
                         self.waiting_heart_beat_response = false
                         self:Disconnect(NET_STATUS["try_connect"])
                     else
@@ -273,7 +273,7 @@ function network:Update()
                             end
                             self.callback_map[cur_session] = nil
                         else
-                            print("cur_session = "..cur_session.." 没有找到回调接口")
+                            print("cur_session = "..cur_session.." no callback found")
                         end
                     end
                 else
@@ -283,7 +283,7 @@ function network:Update()
                 local push_number = msg["push_number"] or self.push_number
                 msg["push_number"] = nil
                 if push_number == self.push_number then
-                    -- 如果推送ID相同的话，就执行处理
+                    -- same push id: handle it
                     for k, v in pairs(msg) do
                         if k ~= "session" then
                             self.event_listener:Dispatch(k, v or {})
@@ -291,14 +291,14 @@ function network:Update()
                     end
                     self.push_number = push_number + 1
                 elseif push_number < self.push_number then
-                    -- 如果推送ID>的话，就是重复推送了，抛弃不要
+                    -- older push id: duplicate, drop
                     print("push_number is repeat > ", push_number, self.push_number)
                     for k, v in pairs(msg) do
                         print("k >>"..k, tostring(v))
                     end
                 elseif push_number > self.push_number then
-                    -- 如果推送ID<的话，就说明客户端丢了几个推送包，再次通知服务器，重新推送丢的包
-                    print("丢包了 》》》", push_number, self.push_number)
+                    -- gap in push ids: ask server to resend
+                    print("packet loss 》》》", push_number, self.push_number)
                     self.next_heart_beat_time = timer:Now() - 1
                     self:HeartBeat()
                 end
@@ -307,7 +307,7 @@ function network:Update()
     end
 end
 
--- 心跳
+-- Heartbeat
 function network:HeartBeat()
     if OFFLINE_MODE then
         return
@@ -338,14 +338,14 @@ function network:HeartBeat()
     end
 end
 
--- 获取Ping的时间
+-- Get ping time
 function network:GetPingTimer()
     return self.ping_time
 end
 
--- 请求
--- @msg 消息体
--- @callback 处理器
+-- Send request
+-- @msg message body
+-- @callback callback
 function network:Send(req_name, ...)
     local param1 = select(1, ...)
     local param2 = select(2, ...)
@@ -364,7 +364,7 @@ function network:Send(req_name, ...)
         self.req_record_map[req_name] = nil
     end
 
-    -- 是否连接交给上层去判定，不在处判定了
+    -- connection check is the caller's job
     if not self:IsConnected() then
         if callback then callback("lost_connection") end
         return
@@ -372,11 +372,11 @@ function network:Send(req_name, ...)
 
     req_key = req_key or req_name
     if self.req_record_map[req_key] then
-        print("重复请求 req_name = "..req_key, tostring(msg[req_name]))
+        print("duplicate request req_name = "..req_key, tostring(msg[req_name]))
         return
     end
 
-    -- 主动请求比如加入session
+    -- outbound request gets a session id
     self.session = self.session + 1
     if self.session <= 0 then
         self.session = 1
@@ -445,7 +445,7 @@ function network:DispatchCommand(msg_name, msg_content)
     self.event_listener:Dispatch(msg_name, msg_content)
 end
 
--- 是否已经丢失连接
+-- Has lost connection
 function network:HasLostConnection()
     if OFFLINE_MODE then
         return false
@@ -453,7 +453,7 @@ function network:HasLostConnection()
     return self.status == NET_STATUS["lost_connection"]
 end
 
--- 是否正在尝试重连
+-- Is trying to reconnect
 function network:HasTryConnection()
     if OFFLINE_MODE then
         return false

@@ -1,4 +1,4 @@
-类型,索引,替换目标,文本值(英语）
+Type,Key,Target,English Text
 type,key,object,value
 editer,interface/achievement/achievement_panel.csb,msgbox.page_btn1.desc,Achievement
 editer,interface/achievement/achievement_panel.csb,msgbox.page_btn1.desc,Achievement
@@ -325,10 +325,10 @@ text,the_battle_card,,Deployed Card
 text,input_room_num,,enter room number
 text,room_not_exist,,invalid room number
 text,room_is_full,,match already started，please wait
-text,challenge_3,,比赛已经开始，无法加入
+text,challenge_3,,The match has already started; cannot join
 text,challenge_4,,Attend sucessfully
-text,challenge_5,,等待对手加入…
-text,challenge_6,,（我）
+text,challenge_5,,Waiting for opponent…
+text,challenge_6,,(Me)
 text,the_countdown_began,,Ready to start!
 text,challenge_prompt_txt,,Confirm quit?
 text,fail_the_battle,,Sorry but you are out

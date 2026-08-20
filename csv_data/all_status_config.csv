@@ -1,13 +1,13 @@
-ID,名称,描述,图标,修正属性,增幅属性,状态显示,禁用列表,回合说明,技能描述
+ID,name,desc,icon,fix_symbol,fix_power,show_status,against_power_list,round_desc,info_desc
 number,string,string,string,number,string,string,string,string,string
 ID,name,desc,icon,fix_symbol,fix_power,show_status,against_power_list,round_desc,info_desc
-1,entangled,混乱,debuff_entangle,,,debuff_entangle,,混乱(剩%d回合),失去飞翔，无法行动
-2,diseased,疾病,debuff_disease,,,debuff_disease,"demoralize,antimagic,rally,regenerate",疾病(需加%d生命),失去鼓舞、恫吓及魔法反射能力，并移除祝福状态
-3,silenced,沉默,debuff_flying,,,,"heal_all,heal,magic",沉默(剩%d回合),无法使用魔法攻击和治疗
-4,painted,标记,debuff_flying,,,,,标记(剩%d回合),被远程攻击会无视嘲讽和潜行优先攻击
-5,demoralized,恫吓,debuff_melee,-1,melee,,,恫吓(剩%d回合),近战攻击力降低 -%d
-6,antimagicd,法术抑制,debuff_magic,-1,magic,,,法术抑制(剩%d回合),魔法攻击力降低-%d
-7,rallied,鼓舞士气,buff_melee,1,melee,,,鼓舞士气(剩%d回合),近战攻击力增加 +%d
-8,charged,冲锋,buff_melee,1,melee,,,冲锋(剩%d回合),近战攻击力增加 +%d
-9,against_melee,禁用近战,debuff_melee,,,,,站位错误,不能近战攻击
-10,against_ranged,禁用远程,debuff_ranged,,,,,站位错误,不能远程攻击
+1,entangled,Entangled,debuff_entangle,,,debuff_entangle,,Entangled (%d turns left),Loses Flying and skips next battle phase
+2,diseased,Diseased,debuff_disease,,,debuff_disease,"demoralize,antimagic,rally,regenerate",Diseased (%d Heal needed),Lose Encourage，Demoralize and Magic Reflect. Remove Blessed. Can be removed by Heal
+3,silenced,Silenced,debuff_flying,,,,"heal_all,heal,magic",Silenced,Loses Magic Attack and Heal
+4,painted,Marked,debuff_flying,,,,,Marked (%d turns left),Become the most preferred target for Ranged Attack，ignoring Taunt and Stealth
+5,demoralized,Intimidated,debuff_melee,-1,melee,,,Demoralized,Melee Attack decreases by %d
+6,antimagicd,Antimagic,debuff_magic,-1,magic,,,Magic Suppressed,Magic Attack decreases by %d
+7,rallied,Rallied,buff_melee,1,melee,,,Encouraged,Melee Attack increases by %d
+8,charged,Charged,buff_melee,1,melee,,,Charge,Melee Attack increases by %d
+9,against_melee,DisabledMelee,debuff_melee,,,,,Melee Attack Unavailable,May not do Melee Attack from support slot
+10,against_ranged,DisabledRanged,debuff_ranged,,,,,Ranged Attack Unavailable,May not do Ranged Attack from engagement slot

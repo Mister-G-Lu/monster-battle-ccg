@@ -1,4 +1,4 @@
-卡牌ID,卡牌ID,下一级别卡牌ID,需求游戏币,需求代币,需求材料2,需求材料3,需求材料4,需求材料5,需求材料6,需求材料7,需求材料8,需求材料9
+ID,card_id,next_card_id,req_money,req_coin,req_material_2,req_material_3,req_material_4,req_material_5,req_material_6,req_material_7,req_material_8,req_material_9
 number,number,number,number,number,string,string,string,string,string,string,string,string
 ID,card_id,next_card_id,req_money,req_coin,req_material_2,req_material_3,req_material_4,req_material_5,req_material_6,req_material_7,req_material_8,req_material_9
 1,110011,110012,25,,item|100001|39,item|400001|1,,,,,,

@@ -190,7 +190,7 @@ function offline_server:NewPlayer(user_id)
 
     -- starter chests
     save.chests["8"] = 2   -- wooden chest
-    save.chests["1"] = 1   -- 超级神奇
+    save.chests["1"] = 1   -- super rare
 
     return save
 end

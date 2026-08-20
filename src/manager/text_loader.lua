@@ -4,7 +4,7 @@ local locale_list = {
     [cc.LANGUAGE_ENGLISH] = "en-US",
     [cc.LANGUAGE_CHINESE] = "zh-CN",
 }
--- 加载语言文件
+-- Load language file
 function meta:Init(lang)
     local language = cc.Application:getInstance():getCurrentLanguage()
 
@@ -12,17 +12,17 @@ function meta:Init(lang)
         locale_list[language] = locale_list[cc.LANGUAGE_ENGLISH]
     end
 
-    -- 如果是中文区，要检查是否繁体。
+    -- If Chinese locale, check Traditional vs Simplified.
     if language == cc.LANGUAGE_CHINESE and  self:IsTraditional() then
         lang = "zh-TW"
     end
 
     lang = lang or locale_list[language]
 
-    -- 开发中，默认是英文字体
+    -- desktop builds default to English
     local TARGET_PLATFORM = cc.Application:getInstance():getTargetPlatform()
     if TARGET_PLATFORM == cc.PLATFORM_OS_WINDOWS or TARGET_PLATFORM == cc.PLATFORM_OS_MAC or TARGET_PLATFORM == cc.PLATFORM_OS_LINUX then
-        lang = locale_list[cc.LANGUAGE_ENGLISH] --英文版本
+        lang = locale_list[cc.LANGUAGE_ENGLISH] --English
     end
 
     local temp = self:Load(lang)
@@ -33,7 +33,7 @@ function meta:Init(lang)
     self.cur_lang = lang
 end
 
--- 需要提前判定是否中文
+-- Detect Traditional Chinese early
 function meta:IsTraditional()
     local cur_lang = cc.Application:getInstance():getCurrentLanguage()
     if cur_lang ~= cc.LANGUAGE_CHINESE then
@@ -43,8 +43,8 @@ function meta:IsTraditional()
     local language = nil
     if ThirdHelper and ThirdHelper["getCurrentLanguage"] then
         language = ThirdHelper["getCurrentLanguage"]()
-        -- IOS返回是zh-Hans-CN , zh-Hans
-        -- Android返回的是zh-CN
+        -- iOS returns zh-Hans-CN / zh-Hans
+        -- Android returns zh-CN
         if language == "zh-CN" or language == "zh-Hans-CN" or language == "zh-Hans" then
             return false
         else
@@ -55,7 +55,7 @@ function meta:IsTraditional()
     return false
 end
 
--- 加载文字资源
+-- Load text resources
 function meta:Load(lang)
 
     local function _read_csv_line(line)
@@ -98,7 +98,7 @@ function meta:Load(lang)
             local value = values[4] or ""
 
             if tbl_type ~= "" then
-                -- 获取该表格位子配置表
+                -- look up this table's localization
                 local table = table_info[tbl_type] or {}
                 -- print("object = "..object)
                 if object == "" then
@@ -121,17 +121,17 @@ function meta:Load(lang)
     return table_info
 end
 
--- 清除语言配置
+-- Clear language config
 function meta:Clean()
 end
 
--- 读取编辑器设置
+-- Read editor settings
 function meta:GetEditerSetting(path)
     local editer_setting = self.editer or {}
     return editer_setting[path] or {}
 end
 
--- 获取文本文字
+-- Get localized text
 function meta:GetText(str, ...)
     local info = self.text[str] or str
     return string.format(info,...)

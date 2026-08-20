@@ -23,13 +23,13 @@ local BATTLE_RESULT = constants.BATTLE_RESULT
 local EVENT_TYPE = constants.BATTLE_EVENT_TYPE
 local POWER_NAME = constants.POWER_NAME
 
--- 战斗阶段
+-- Battle stage
 meta.STAGE = {
-    init  = 1,        -- 1.战斗初始化
-    own   = 2,        -- 2.我方行动阶段
-    wait  = 3,        -- 3.等待操作阶段
-    enemy = 4,        -- 4.敌方行动阶段
-    over  = 5,        -- 5.战斗结束了
+    init  = 1,        -- 1.battle init
+    own   = 2,        -- 2.own turn
+    wait  = 3,        -- 3.waiting for input
+    enemy = 4,        -- 4.enemy turn
+    over  = 5,        -- 5.battle over
 }
 
 function meta:Init()
@@ -46,19 +46,19 @@ function meta:Clean()
     self.cur_stage = self.STAGE.init
     self.battle_result = nil
     self.sub_event_complete = true
-    -- 是否正在部署中
+    -- whether a deploy animation is playing
     self.is_play_animation = false
-    -- 水晶同步动画播放
+    -- crystal-sync animation callback
     self.sync_crystal_callback = nil
-    -- 战斗准备阶段, 0 未准备好 1 客户端已经准备 2 服务起已经回报
+    -- standby: 0 not ready, 1 client ready, 2 server replied
     self.standby_status = 0
-    -- 先手动画提示的开关
+    -- first-player animation toggle
     self.is_first_animation = true
-    -- command之间的间隔
+    -- delay between commands
     self.command_interval = 0
-    -- event之间的间隔
+    -- delay between events
     self.event_interval = 0
-    -- 战斗是否结束
+    -- whether the battle is over
     self.is_battle_over = false
     self.is_own = false
     self.pve_win_cur_value = 0
@@ -79,21 +79,21 @@ function meta:PopBattleQueue()
     return self.battle_command_queue[1]
 end
 
--- 完成指令
+-- Complete command
 function meta:CommandComplete()
     if #self.battle_command_queue == 0 then
         return false
     end
     local command = self.battle_command_queue[1]
     if command.name == "cmd_battle_over" and self.battle_result == nil then
-        -- 认输，确保执行完毕后。才清空
+        -- surrender: only clear after fully executed
         return
     end
     table.remove(self.battle_command_queue, 1)
     self.command_interval = 0.5
 end
 
--- 逻辑更新
+-- Logic update
 function meta:Update(elapsed_time)
     local now_time = timer:Now()
     self.elapsed_time = elapsed_time
@@ -103,7 +103,7 @@ function meta:Update(elapsed_time)
         if last_oper_time then
             local last_time = timer:GetDiffSecond(last_oper_time)
             if last_time <= 0 then
-                -- 自动战斗
+                -- auto-battle
                 self:ReqBattleAttack("auto")
             end
         end
@@ -144,25 +144,25 @@ function meta:Update(elapsed_time)
     self.command_handler:Dispatch(command.name, command.data)
 end
 
--- 卡牌是否可以操作
+-- Whether the card can be played
 function meta:IsOperation(card)
     if not card then
         return false
     end
 
     local battle_card_list = self.own_player.battle_slot
-    -- 1.检查水晶是否满足
+    -- 1.check crystal cost
     if self.own_player.cur_crystal < card.cost then
         return false
     end
 
     if card.type == CARD_TYPE.monster then
-        -- 如果是怪物卡，是否有位置
+        -- monster card: is there a free slot
         if not battle_card_list[BATTLE_SLOT_MAX] then
             return true
         end
     elseif card.type == CARD_TYPE.consume then
-        -- 如果是消耗卡,第一个Power为是否对敌方使用
+        -- consume card: first power decides enemy vs ally target
         if not card.power_list or #card.power_list == 0 then
             return false
         end
@@ -183,7 +183,7 @@ function meta:IsOperation(card)
             end
         end
     else
-        -- 如果是装备卡
+        -- equip card
         local first_slot = battle_card_list[1]
 
         if bit:GetBitNum(card.kind, CARD_KIND.all) == 1 and first_slot and first_slot.monster then
@@ -202,7 +202,7 @@ function meta:IsOperation(card)
     return false
 end
 
--- 执行手牌
+-- Play a hand card
 function meta:DoHandCard(select_pos, is_enemy, target_pos)
     local own_player = self.own_player
     local select_card = own_player:GetHandCard(select_pos)
@@ -210,14 +210,14 @@ function meta:DoHandCard(select_pos, is_enemy, target_pos)
         return false
     end
 
-    -- 1. 水晶不足
+    -- 1. not enough crystal
     if own_player.cur_crystal < select_card.cost then
         graphic:DispatchEvent("show_message", "battle_crystal_not_enough")
         return false
     end
 
     if select_card.type == constants.CARD_TYPE.monster then
-        -- 2. 怪兽卡->检查位置
+        -- 2. monster: check slot
         local allow_pos = own_player:GetCurMonsterSlotPos()
         -- print("allow_pos = "..allow_pos..",target_pos = "..target_pos)
         if allow_pos == 0 or target_pos > allow_pos  or is_enemy then
@@ -226,7 +226,7 @@ function meta:DoHandCard(select_pos, is_enemy, target_pos)
         end
         return true
     elseif select_card.type == constants.CARD_TYPE.consume then
-        -- 3. 消耗卡->检查是否有怪兽
+        -- 3. consume: check there is a monster
         local is_target_enemy = false
         local power_count = 0
         local is_crystal_power = false
@@ -258,7 +258,7 @@ function meta:DoHandCard(select_pos, is_enemy, target_pos)
             return false
         end
 
-        -- 检查使用目标
+        -- validate target
         if not can_use then
             graphic:DispatchEvent("show_message", "battle_consume_deploy_target_fail")
             return false
@@ -280,7 +280,7 @@ function meta:DoHandCard(select_pos, is_enemy, target_pos)
 
         return false
     else
-        -- 4. 装备卡->检查是否有怪兽
+        -- 4. equip: check there is a monster
         if is_enemy then
             return false
         end
@@ -304,7 +304,7 @@ function meta:DoHandCard(select_pos, is_enemy, target_pos)
     end
 end
 
--- 检查卡费不足
+-- Check insufficient cost
 function meta:CheckCardCost(idx)
     local hand_card = self.own_player.hand_card[idx]
     if not hand_card then
@@ -318,7 +318,7 @@ function meta:CheckCardCost(idx)
     return true
 end
 
--- 获取可操作的手牌下标
+-- Get playable hand indices
 function meta:GetOperationCardIdx()
     local hand_card_list = self.own_player.hand_card
     local idxs = {}
@@ -328,7 +328,7 @@ function meta:GetOperationCardIdx()
     return idxs
 end
 
--- 获取可放置的位置
+-- Get legal placement slots
 function meta:GetPlaceSlotPos(hand_slot_pos)
     local cur_card = self.own_player.hand_card[hand_slot_pos]
     if not cur_card then
@@ -345,7 +345,7 @@ function meta:GetPlaceSlotPos(hand_slot_pos)
     local enemy_slot_list = self.enemy_player.battle_slot
 
     if cur_card.type == CARD_TYPE.monster then
-        -- 怪兽卡
+        -- monster card
         for i = 1, BATTLE_SLOT_MAX  do
             own_tips[i] = true
             if own_slot_list[i] == nil then
@@ -353,9 +353,9 @@ function meta:GetPlaceSlotPos(hand_slot_pos)
             end
         end
     elseif cur_card.type == CARD_TYPE.consume then
-        -- 消耗卡
+        -- consume card
 
-        -- 如果是消耗卡,第一个Power为是否对敌方使用
+        -- consume card: first power decides enemy vs ally target
         if not cur_card.power_list or #cur_card.power_list == 0 then
             return
         end
@@ -366,7 +366,7 @@ function meta:GetPlaceSlotPos(hand_slot_pos)
         local target_player = nil
 
         if power.target_type == "enemy" then
-            -- 如果是针对敌方的
+            -- if targeting the enemy
             local slot_list = self.enemy_player.battle_slot
             for i = 1, BATTLE_SLOT_MAX do
                 if slot_list[i] and slot_list[i].monster then
@@ -374,7 +374,7 @@ function meta:GetPlaceSlotPos(hand_slot_pos)
                 end
             end
         elseif power.target_type == "own" then
-            -- 如果是针对于我方的
+            -- if targeting allies
             local slot_list = self.own_player.battle_slot
             for i = 1, BATTLE_SLOT_MAX do
                 if slot_list[i] and slot_list[i].monster then
@@ -399,7 +399,7 @@ function meta:GetPlaceSlotPos(hand_slot_pos)
 
 
     else
-        -- 装备卡
+        -- equip card
         for idx, m in pairs(own_slot_list) do
             if m and m.monster then
                 if bit:GetBitNum(cur_card.kind, CARD_KIND.all) == 1 then
@@ -416,7 +416,7 @@ function meta:GetPlaceSlotPos(hand_slot_pos)
     return own_tips, enemy_tips
 end
 
--- 退出战斗
+-- Leave battle
 function meta:ExitBattle()
     global:PopScene()
     if self.battle_type == "challenge" then
@@ -464,18 +464,18 @@ function meta:SendBattle(msg_name, msg_data, callback)
     end
 end
 
--- 进行重连战局
+-- Replay / reconnect battle
 function meta:ReqReplay()
-    -- 进行战斗重连
-    print("进行战斗重连")
+    -- reconnect battle
+    print("reconnect battle")
     self:SendBattle("req_battle_replay", {}, function (result, recv_msg)
     end)
 end
 
--- 认输
+-- Surrender
 function meta:ReqBattleSurrender()
     if self.is_battle_over then
-        -- 如果已经退出了。在点退出。直接退出战斗
+        -- if already over, exit battle immediately
         self:ExitBattle()
     else
         self:SendBattle("req_battle_surrender", {}, function (result, recv_msg)
@@ -485,7 +485,7 @@ function meta:ReqBattleSurrender()
     end
 end
 
--- 设置战斗状态
+-- Set battle stage
 function meta:SetBattleStage(stage)
     if self.cur_stage == stage then
         return
@@ -501,7 +501,7 @@ function meta:SetBattleStage(stage)
     self:DispatchEvent("update_battle_stage", self.cur_stage)
 end
 
--- 战斗
+-- Battle attack / end turn
 function meta:ReqBattleAttack(req_type)
     if self.cur_stage ~= self.STAGE.own then
         return
@@ -521,14 +521,14 @@ function meta:ReqBattleAttack(req_type)
     end)
 end
 
--- 出牌
+-- Play card / move
 function meta:ReqBattleMove(src_pos, is_enemy, desc_slot_pos, callback)
-    -- 是否正在播放部署动画
+    -- deploy animation playing
     self.is_play_animation = true
     local oper_player = self.own_player
     local hand_card = oper_player:GetHandCard(src_pos)
-    local is_deploy = false -- 是否已经部署完毕了，如果部署完毕了。服务器响应失败，好回滚部署
-    local is_req_deploy = false -- 请求是否成功，如果失败了。就不要尝试部署了
+    local is_deploy = false -- deployed locally; roll back if the server rejects
+    local is_req_deploy = false -- request failed; do not finish deploy
     local req_data = {src_pos = src_pos, is_enemy = is_enemy, target_pos = desc_slot_pos}
     self:SendBattle("req_battle_move", req_data, function (result, recv_msg)
         if result ~= "success" then
@@ -536,9 +536,9 @@ function meta:ReqBattleMove(src_pos, is_enemy, desc_slot_pos, callback)
             self.is_play_animation = false
             if hand_card.type == CARD_TYPE.monster then
                 if is_deploy then
-                    -- 1. 取消数据赋值
+                    -- 1. clear slot data
                     oper_player.battle_slot[desc_slot_pos] = nil
-                    -- 2. 取消战场部署
+                    -- 2. undo battlefield deploy
                     self:DispatchEvent("deploy_monster_card",true, desc_slot_pos, nil)
                     self:DoUnDeployBattleSlot(oper_player.user_id, desc_slot_pos)
                 end
@@ -554,26 +554,26 @@ function meta:ReqBattleMove(src_pos, is_enemy, desc_slot_pos, callback)
         local function hand_card_callback()
             is_deploy = true
             if is_req_deploy then
-                -- 回滚手牌状态
+                -- restore hand card
                 self:DispatchEvent("update_hand_card", true, src_pos, hand_card)
                 return
             end
             self:DoDeployBattleSlot(oper_player.user_id, desc_slot_pos)
-            -- * 立即部署怪兽卡
+            -- * deploy monster immediately
             local slot = require("common.entity.slot").New()
             slot:Init(oper_player.user_id, desc_slot_pos)
             slot:SetMonster(hand_card)
             oper_player.battle_slot[desc_slot_pos] = slot
             self:DispatchEvent("deploy_monster_card",true, desc_slot_pos, hand_card)
         end
-        -- 执行放置卡牌动画
+        -- play drop animation
         self:DispatchEvent("drop_hand_monster_card", src_pos, desc_slot_pos, hand_card_callback)
     elseif hand_card.type == CARD_TYPE.consume then
         self:DispatchEvent("consume_hand_card", src_pos, desc_slot_pos, function ()
             is_deploy = true
             self.is_play_animation = false
             if is_req_deploy then
-                -- 回滚手牌状态
+                -- restore hand card
                 self:DispatchEvent("update_hand_card", true, src_pos, hand_card)
                 return
             end
@@ -583,7 +583,7 @@ function meta:ReqBattleMove(src_pos, is_enemy, desc_slot_pos, callback)
             is_deploy = true
             self.is_play_animation = false
             if is_req_deploy then
-                -- 回滚手牌状态
+                -- restore hand card
                 self:DispatchEvent("update_hand_card", true, src_pos, hand_card)
                 return
             end
@@ -593,7 +593,7 @@ function meta:ReqBattleMove(src_pos, is_enemy, desc_slot_pos, callback)
     end
 end
 
--- 战斗准备结束
+-- Battle standby request
 function meta:ReqBattleStandby()
     if self.standby_status ~= 0 then
         return
@@ -604,7 +604,7 @@ function meta:ReqBattleStandby()
     end)
 end
 
--- 献祭卡牌
+-- Sacrifice a card
 function meta:ReqSacrificeCard(is_hand, pos, callback)
     if self.cur_stage ~= self.STAGE.own then
         return false
@@ -637,17 +637,17 @@ function meta:ParseBattleEvent(event_name, ...)
     end
 end
 
--- 注册战斗指令
+-- Register battle command
 function meta:RegisterEvent(command_name, callback)
     self.command_handler:Register(command_name, callback)
 end
 
--- 分发指令
+-- Dispatch command
 function meta:DispatchEvent(event_name, ...)
     self.command_handler:Dispatch(event_name, ...)
 end
 
--- 获取角色数据
+-- Get player by user id
 function meta:GetPlayer(user_id)
     if self.own_player.user_id == user_id then
         return self.own_player
@@ -656,7 +656,7 @@ function meta:GetPlayer(user_id)
     end
 end
 
--- 获取角色数据根据own
+-- Get player by is_own
 function meta:GetPlayerByOwn(is_own)
     if is_own then
         return self.own_player
@@ -665,7 +665,7 @@ function meta:GetPlayerByOwn(is_own)
     end
 end
 
--- 获取敌人数据
+-- Get enemy player
 function meta:GetEnemy(is_own)
     if is_own then
         return self.enemy_player
@@ -674,31 +674,31 @@ function meta:GetEnemy(is_own)
     end
 end
 
--- 是否可以献祭
+-- Can sacrifice
 function meta:IsSacrifice()
     return self.own_player.is_sacrifice
 end
 
--- 执行部署战斗位置
+-- Shift slots on deploy
 function meta:DoDeployBattleSlot(deploy_user_id, deploy_pos)
     local is_own = deploy_user_id == self.own_player.user_id
     local oper_player = self:GetPlayer(deploy_user_id)
-    -- * 部署怪兽卡
+    -- * Deploy monster card
     local slot = oper_player.battle_slot[deploy_pos]
     if slot then
-        -- * 当前有怪兽要产生位置移动
+        -- * Occupied slot: shift existing monsters right
         for i = BATTLE_SLOT_MAX - 1 , deploy_pos, -1 do
             if oper_player.battle_slot[i] then
                 oper_player.battle_slot[i].pos = i + 1
                 oper_player.battle_slot[i + 1] = oper_player.battle_slot[i]
-                print("落卡事件>>>>补位规则>>>>src = "..i..", dest = "..(i+1))
+                print("deploy shift src = "..i..", dest = "..(i+1))
                 self:DispatchEvent("move_battle_card",is_own, i, i + 1)
             end
         end
     end
 end
 
--- 取消部署战斗位置
+-- Undo slot deploy
 function meta:DoUnDeployBattleSlot(deploy_user_id, deploy_pos)
     local is_own = deploy_user_id == self.own_player.user_id
     local oper_player = self:GetPlayer(deploy_user_id)
@@ -710,15 +710,15 @@ function meta:DoUnDeployBattleSlot(deploy_user_id, deploy_pos)
         if src_slot then
             src_slot.pos = i
         end
-        print("取消落卡事件>>>>补位规则>>>>src = "..(i+1)..", dest = "..i)
+        print("undeploy shift src = "..(i+1)..", dest = "..i)
         self:DispatchEvent("move_battle_card",is_own, i, i + 1)
     end
 end
 
--- 注册战斗指令处理器
+-- Register command handlers
 function meta:RegisterCmdHandler()
 
-    -- 执行动画事件
+    -- Play power animation
     local DoAnimEvent = function (tar_user_id, tar_pos, tar_pos_list, power_name, src_user_id, src_pos, value)
         local callback = function ()
 
@@ -726,17 +726,17 @@ function meta:RegisterCmdHandler()
         self:DispatchEvent("do_power_animation", tar_user_id, tar_pos, tar_pos_list, power_name, src_user_id, src_pos, value, callback)
     end
 
-    -- 执行伤害动画
+    -- Play damage animation
     local DoDamageEvent = function (tar_user_id, tar_pos, value)
         local target_actor = self:GetPlayer(tar_user_id)
         if not target_actor then
-            print("没有找到目标角色 = "..tar_user_id)
+            print("target actor not found = "..tar_user_id)
             self.sub_event_complete = true
             return
         end
         local tar_slot = target_actor:GetBattleCard(tar_pos)
         if not tar_slot then
-            print("没有找到战斗位置 = "..tar_pos)
+            print("battle slot not found = "..tar_pos)
             self.sub_event_complete = true
             return
         end
@@ -751,17 +751,17 @@ function meta:RegisterCmdHandler()
         end)
     end
 
-    -- 执行死亡事件
+    -- Play death event
     local DoDeadEvent = function (tar_user_id, tar_pos)
         local is_own = tar_user_id == self.user_id
         local target_actor = self:GetPlayer(tar_user_id)
         if not target_actor then
-            print("没有找到目标角色 = "..tar_user_id)
+            print("target actor not found = "..tar_user_id)
             self.sub_event_complete = true
             return
         end
 
-        -- 死亡后的回调事件
+        -- after-death callback
         local function callback()
             target_actor.battle_slot[tar_pos] = nil
             self:DispatchEvent("update_monster_num",is_own, target_actor:GetAllMonsterLenght())
@@ -784,28 +784,28 @@ function meta:RegisterCmdHandler()
         self:DispatchEvent("do_dead_animation", is_own, tar_pos, callback)
     end
 
-    -- 执行状态事件
+    -- Play status event
     local DoStatusEvent = function (tar_user_id, tar_pos, name, round, value)
         local is_own = tar_user_id == self.user_id
         local target_actor = self:GetPlayer(tar_user_id)
         if not target_actor then
-            print("没有找到目标角色 = "..tar_user_id)
+            print("target actor not found = "..tar_user_id)
             self.sub_event_complete = true
             return
         end
 
         local tar_slot = target_actor:GetBattleCard(tar_pos)
         if not tar_slot then
-            print("没有找到战斗位置 = "..tar_pos)
+            print("battle slot not found = "..tar_pos)
             self.sub_event_complete = true
             return
         end
 
         if round == 0 then
-            -- 删除状态
+            -- remove status
             value = tar_slot:DelStatus(name)
         else
-            -- 添加状态
+            -- add status
             value = tar_slot:PushStatus(name, round, value)
         end
 
@@ -814,19 +814,19 @@ function meta:RegisterCmdHandler()
         end)
     end
 
-    -- 治疗事件
+    -- Heal event
     local DoHealEvent = function (tar_user_id, tar_pos, value)
         local is_own = tar_user_id == self.user_id
         local target_actor = self:GetPlayer(tar_user_id)
         if not target_actor then
-            print("没有找到目标角色 = "..tar_user_id)
+            print("target actor not found = "..tar_user_id)
             self.sub_event_complete = true
             return
         end
 
         local tar_slot = target_actor:GetBattleCard(tar_pos)
         if not tar_slot then
-            print("没有找到战斗位置 = "..tar_pos)
+            print("battle slot not found = "..tar_pos)
             self.sub_event_complete = true
             return
         end
@@ -835,19 +835,19 @@ function meta:RegisterCmdHandler()
         self:DispatchEvent("update_slot_hp", is_own, tar_pos, value)
     end
 
-    -- 护甲事件
+    -- Armor event
     local DoArmorEvent = function (tar_user_id, tar_pos, value)
         local is_own = tar_user_id == self.user_id
         local target_actor = self:GetPlayer(tar_user_id)
         if not target_actor then
-            print("没有找到目标角色 = "..tar_user_id)
+            print("target actor not found = "..tar_user_id)
             self.sub_event_complete = true
             return
         end
 
         local tar_slot = target_actor:GetBattleCard(tar_pos)
         if not tar_slot then
-            print("没有找到战斗位置 = "..tar_pos)
+            print("battle slot not found = "..tar_pos)
             self.sub_event_complete = true
             return
         end
@@ -868,23 +868,23 @@ function meta:RegisterCmdHandler()
         end)
     end
 
-    -- 摧毁事件
+    -- Destroy event
     local DoDestroyEvent = function ( tar_user_id, tar_pos )
         local target_actor = self:GetPlayer(tar_user_id)
         if not target_actor then
-            print("没有找到目标角色 = "..tar_user_id)
+            print("target actor not found = "..tar_user_id)
             self.sub_event_complete = true
             return
         end
         local tar_slot = target_actor:GetBattleCard(tar_pos)
         if not tar_slot then
-            print("没有找到战斗位置 = "..tar_pos)
+            print("battle slot not found = "..tar_pos)
             self.sub_event_complete = true
             return
         end
         local is_own = tar_user_id == self.user_id
         tar_slot:CleanItem()
-        print("摧毁时间", tostring(is_own), tostring(tar_pos))
+        print("destroy event", tostring(is_own), tostring(tar_pos))
 
         self:DispatchEvent("destroy_slot_item", is_own, tar_pos)
         self.sub_event_complete = true
@@ -916,7 +916,7 @@ function meta:RegisterCmdHandler()
         self.sub_event_complete = true
     end
 
-    -- 子事件处理完成
+    -- sub-event complete
     self:RegisterEvent("sub_event_complete", function ()
         self.sub_event_complete = true
     end)
@@ -938,10 +938,10 @@ function meta:RegisterCmdHandler()
             table.merge(self.own_player, player2)
         end
 
-        -- 初始化选手信息
+        -- init player info
         self:DispatchEvent("init_player_info", self.own_player, self.enemy_player)
 
-        -- 指令执行完毕
+        -- command complete
         self:CommandComplete()
     end)
 
@@ -955,11 +955,11 @@ function meta:RegisterCmdHandler()
 
     self:RegisterEvent("cmd_battle_prepa",function (recv_msg)
         self:ParseBattleEvent("cmd_battle_prepa", recv_msg)
-        -- 谁出手
+        -- whose turn
         local user_id = recv_msg.user_id
-        -- 水晶同步
+        -- sync crystal
         local sync_crystal = recv_msg.sync_crystal
-        -- 最后一次操作时间
+        -- last operate time
         local last_oper_time = recv_msg.last_oper_time
         local is_sacrifice = recv_msg.is_sacrifice
         local is_own = self.own_player.user_id == user_id
@@ -991,9 +991,9 @@ function meta:RegisterCmdHandler()
 
     self:RegisterEvent("cmd_battle_round",function (recv_msg)
         self.round = recv_msg.round
-        -- 初始化选手信息
+        -- init player info
         self:DispatchEvent("update_battle_round", self.round)
-        -- 指令执行完毕
+        -- command complete
         self:CommandComplete()
     end)
 
@@ -1008,11 +1008,11 @@ function meta:RegisterCmdHandler()
         local sync_crystal = recv_msg.sync_crystal
         local new_card = recv_msg.new_card
 
-        -- 是否是当前显示角色
+        -- Whether this is the local player
         local is_own = self.own_player.user_id == src_user_id
 
         local oper_player = self:GetPlayer(src_user_id)
-        -- 1.同步水晶数量
+        -- 1. Sync crystal count
         local diff_crystal = sync_crystal - oper_player.cur_crystal
         oper_player.cur_crystal = sync_crystal
         self:DispatchEvent("update_crystal_num",is_own, sync_crystal, diff_crystal)
@@ -1025,11 +1025,11 @@ function meta:RegisterCmdHandler()
             return
         end
 
-        -- 2.执行卡牌效果
+        -- 2.apply card effect
         if card.type == CARD_TYPE.monster then
             if not is_own then
                 self:DoDeployBattleSlot(src_user_id ,desc_slot_pos)
-                -- * 立即部署怪兽卡
+                -- * deploy monster immediately
                 local slot = require("common.entity.slot").New()
                 slot:Init(src_user_id, desc_slot_pos)
                 slot:SetMonster(card)
@@ -1038,7 +1038,7 @@ function meta:RegisterCmdHandler()
             end
         elseif card.type == CARD_TYPE.equip or card.type == CARD_TYPE.armor then
             local slot = oper_player.battle_slot[desc_slot_pos]
-            -- * 检查是否有怪兽
+            -- * check monster exists
             if not slot or not slot.monster then
                 self:CommandComplete()
                 print("slot or monster is full")
@@ -1050,13 +1050,13 @@ function meta:RegisterCmdHandler()
 
         end
 
-        -- 3.设置新的卡牌
+        -- 3.set replacement hand card
         oper_player:SetHandCard(src_hand_pos, new_card)
-        -- 如果是我方的选手，在手牌中显示
+        -- show in own hand
         self:DispatchEvent("update_hand_card", is_own, src_hand_pos, new_card, true)
 
         if new_card then
-            -- 4.更新卡牌数量
+            -- 4.update card counts
             if card.type == CARD_TYPE.monster then
                 oper_player.monster_len = oper_player.monster_len - 1
             else
@@ -1068,7 +1068,7 @@ function meta:RegisterCmdHandler()
         self:DispatchEvent("update_monster_num",is_own, oper_player:GetAllMonsterLenght())
         self:DispatchEvent("update_item_num",is_own, oper_player:GetAllItemLenght())
 
-        -- 5.设置指令完成
+        -- 5.mark command complete
         self:CommandComplete()
     end)
 
@@ -1099,32 +1099,32 @@ function meta:RegisterCmdHandler()
         self:ParseBattleEvent("cmd_battle_attack", cur_event)
 
         if cur_event.type == EVENT_TYPE.anim then
-            -- 技能动画
+            -- skill animation
             DoAnimEvent(cur_event.tar_user_id, cur_event.tar_pos, cur_event.tar_pos_list, cur_event.power_name, cur_event.src_user_id, cur_event.src_pos, cur_event.value)
         elseif cur_event.type == EVENT_TYPE.damage then
-            -- 伤害
+            -- damage
             DoDamageEvent(cur_event.tar_user_id, cur_event.tar_pos, cur_event.value)
         elseif cur_event.type == EVENT_TYPE.dead then
-            -- 死亡
+            -- death
             DoDeadEvent(cur_event.tar_user_id, cur_event.tar_pos)
         elseif cur_event.type == EVENT_TYPE.status then
             DoStatusEvent(cur_event.tar_user_id, cur_event.tar_pos, cur_event.power_name, cur_event.round, cur_event.value)
         elseif cur_event.type == EVENT_TYPE.armor_block then
-            -- 护盾格挡动画
+            -- armor block animation
             local tar_user_id = cur_event.tar_user_id
             local tar_pos = cur_event.tar_pos
             self:DispatchEvent("do_armor_block", tar_user_id, tar_pos)
         elseif cur_event.type == EVENT_TYPE.heal then
-            -- 治疗
+            -- heal
             DoHealEvent(cur_event.tar_user_id, cur_event.tar_pos, cur_event.value)
         elseif cur_event.type == EVENT_TYPE.armor then
-            -- 护盾值
+            -- armor value
             DoArmorEvent(cur_event.tar_user_id, cur_event.tar_pos, cur_event.value)
         elseif cur_event.type == EVENT_TYPE.crystal then
-            -- 水晶事件
+            -- crystal event
             local target_actor = self:GetPlayer(cur_event.tar_user_id)
             if not target_actor then
-                print("没有找到目标角色 = "..cur_event.tar_user_id)
+                print("target actor not found = "..cur_event.tar_user_id)
                 return
             end
             target_actor.cur_crystal = target_actor.cur_crystal + cur_event.value
@@ -1133,10 +1133,10 @@ function meta:RegisterCmdHandler()
             self:DispatchEvent("update_operate_card")
             self.sub_event_complete = true
         elseif cur_event.type == EVENT_TYPE.swap then
-            -- 交换位置事件
+            -- swap event
             local target_actor = self:GetPlayer(cur_event.tar_user_id)
             if not target_actor then
-                print("没有找到目标角色 = "..cur_event.tar_user_id)
+                print("target actor not found = "..cur_event.tar_user_id)
                 return
             end
             local is_own = cur_event.tar_user_id == self.user_id
@@ -1153,7 +1153,7 @@ function meta:RegisterCmdHandler()
         end
     end)
 
-    -- 战斗献祭
+    -- battle sacrifice
     self:RegisterEvent("cmd_battle_discard", function (recv_msg)
         local src_user_id = recv_msg.src_user_id
         local is_own = self.own_player.user_id == src_user_id
@@ -1169,7 +1169,7 @@ function meta:RegisterCmdHandler()
         end
 
         if sync_crystal then
-            -- 同步水晶事件回调
+            -- sync crystal callback
             local diff_crystal = sync_crystal - cur_actor.cur_crystal
             cur_actor.cur_crystal = sync_crystal
             self.command_handler:Dispatch("update_crystal_num", is_own, sync_crystal, diff_crystal)
@@ -1192,7 +1192,7 @@ function meta:RegisterCmdHandler()
                     self:DispatchEvent("update_item_num",is_own, cur_actor:GetAllItemLenght())
                 end
 
-                -- 手牌丢弃
+                -- discard from hand
                 local function callback()
                     cur_actor.hand_card[pos] = new_card
                     self:DispatchEvent("update_hand_card", is_own, pos, cur_actor.hand_card[pos], true)
@@ -1204,11 +1204,11 @@ function meta:RegisterCmdHandler()
                     self:DispatchEvent("discard_deck_card", is_own, new_card)
                 end
             else
-                -- 战牌丢弃
+                -- discard from board
                 cur_actor.battle_slot[pos] = nil
                 local function callback()
                     cur_actor:CheckSlotDead(function (src, dest)
-                        -- print("献祭事件>>>>补位规则>>>>src = "..src..", dest = "..dest)
+                        -- print("sacrifice shift src = "..src..", dest = "..dest)
                         self:DispatchEvent("move_battle_card", is_own, src, dest)
                     end)
                 end
@@ -1220,9 +1220,9 @@ function meta:RegisterCmdHandler()
         self:CommandComplete()
     end)
 
-    -- 战斗结束指令
+    -- battle over command
     self:RegisterEvent("cmd_battle_over", function (recv_msg)
-        -- 战斗结果，立即到达
+        -- battle result arrives immediately
         local result = nil
         local win_user_id = recv_msg.win_user_id
 
@@ -1239,7 +1239,7 @@ function meta:RegisterCmdHandler()
         local reward_info = recv_msg.reward_info
         self.battle_result = result
         
-        -- 竞技场相关更新
+        -- arena updates
         if recv_msg.arena_info then
             arena_logic:SetLastEloValue(arena_logic:GetEloValue())
             arena_logic:SetLastLevel(arena_logic:GetLevel())
@@ -1249,7 +1249,7 @@ function meta:RegisterCmdHandler()
             graphic:DispatchEvent("check_pve_is_turned",recv_msg.arena_info.stage,recv_msg.arena_info.level)
             graphic:DispatchEvent("refresh_staircase_panel")
         end
-        -- PVE-鼠巢相关更新
+        -- PvE gerbil updates
         if recv_msg.pve_info then
             dump("recv_msg11", recv_msg.pve_info)
             local pve_info = recv_msg.pve_info
@@ -1259,7 +1259,7 @@ function meta:RegisterCmdHandler()
         graphic:DispatchEvent("pve_gerbil_over")
         graphic:DispatchEvent("pve_gerbil_panel_fresh")
 
-        -- 冒险模式相关更新
+        -- adventure mode updates
         if recv_msg.adventure_info then
             local adventure_info = recv_msg.adventure_info
             if adventure_info["pass_id"] then
@@ -1279,12 +1279,12 @@ function meta:RegisterCmdHandler()
         self:CommandComplete()
     end)
 
-    -- 操作焦点
+    -- operation focus
     self:RegisterEvent("cmd_battle_focus", function (recv_msg)
         -- print("cmd_battle_focus = ", tostring(recv_msg))
     end)
 
-    -- 战场同步
+    -- battlefield sync
     self:RegisterEvent("cmd_battle_sync", function (recv_msg)
         local cur_oper_user_id = recv_msg.cur_oper_user_id
         local last_oper_time = recv_msg.last_oper_time
@@ -1337,13 +1337,13 @@ function meta:RegisterCmdHandler()
                 end
                 actor.battle_slot[tar_pos] = battle_slot
 
-                -- 重置卡牌数据
+-- Reset card data
                 battle_slot.pos = tar_pos
                 battle_slot:SetMonster(slot_info.monster)
                 battle_slot:SetItem(slot_info.item)
                 battle_slot.cur_hp = slot_info.cur_hp
                 battle_slot.cur_ad = slot_info.cur_ad
-                -- 更新界面渲染
+-- Refresh UI
                 self:DispatchEvent("deploy_monster_card",is_own, tar_pos, slot_info.monster)
                 self:DispatchEvent("deploy_item_card",is_own, tar_pos, slot_info.item)
                 local diff_hp = slot_info.cur_hp - battle_slot.init_hp
@@ -1366,7 +1366,7 @@ function meta:RegisterCmdHandler()
     end)
 
 
-    -- 显示水晶同步动画
+    -- show crystal animation
     self:RegisterEvent("show_crystal_animation",function ()
         if self.sync_crystal_callback then
             self.sync_crystal_callback()
@@ -1383,7 +1383,7 @@ function meta:RegisterCmdHandler()
 
 end
 
--- 同步战局情况
+-- sync battlefield
 function meta:ReqSyncBattlefield()
     if self.standby_status == 1 then
         self:ReqBattleStandby()
@@ -1440,13 +1440,13 @@ function meta:ReqSyncBattlefield()
     --             end
     --             actor.battle_slot[tar_pos] = battle_slot
 
-    --             -- 重置卡牌数据
+    --             -- Reset card data
     --             battle_slot.pos = tar_pos
     --             battle_slot:SetMonster(slot_info.monster)
     --             battle_slot:SetItem(slot_info.item)
     --             battle_slot.cur_hp = slot_info.cur_hp
     --             battle_slot.cur_ad = slot_info.cur_ad
-    --             -- 更新界面渲染
+    --             -- Refresh UI
     --             self:DispatchEvent("deploy_item_card",is_own, tar_pos, slot_info.item)
     --             self:DispatchEvent("deploy_monster_card",is_own, tar_pos, slot_info.monster)
     --             local diff_hp = slot_info.cur_hp - battle_slot.init_hp
@@ -1469,21 +1469,21 @@ function meta:ReqSyncBattlefield()
     -- end)
 end
 
--- 操作焦点
+-- operation focus
 function meta:ReqOperationFoucs(is_hand, is_own, pos)
     -- self:SendBattle("req_battle_focus", { is_hand = is_hand, pos = pos, is_own = is_own })
 end
 
--- 战斗结束
+-- fight over
 function meta:ReqFightOver()
     -- self:SendBattle("req_battle_stage", {}, function (result, recv_msg)
         -- print("req_battle_stage>req_battle_stage>req_battle_stage")
     -- end)
 end
 
--- 注册网络事件，所有的战斗指令压入队列中。逐条进行执行
+-- Register network events; queue battle commands and run them one by one
 function meta:RegisterNetworkEvent()
-    -- 战场初始化
+    -- battlefield init
     network:RegisterCommand("cmd_battle",function (recv_msg)
         for k,v in pairs(recv_msg) do
             if k == "cmd_battle_start" then

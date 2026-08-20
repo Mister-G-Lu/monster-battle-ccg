@@ -91,7 +91,7 @@ function meta:RegisterWidgetEvent()
 end
 
 
--- 设置主视角的角色
+-- Set own player
 function meta:SetOwnPlayer(actor)
     if not actor then
         return
@@ -102,7 +102,7 @@ function meta:SetOwnPlayer(actor)
     ui_helper:SetTextByKey(self.match_ourside_level_txt, 1)
 end
 
--- 设置对手的角色
+-- Set enemy player
 function meta:SetEnemyPlayer(actor)
     if not actor then
         return
@@ -115,7 +115,7 @@ function meta:SetEnemyPlayer(actor)
 end
 
 function meta:RegisterEvent()
-    -- 战斗初始化
+    -- battle init
     battle_logic:RegisterEvent("init_player_info",function (own_player, enemy_player)
         self:SetOwnPlayer(own_player)
         -- print("init_player_info", battle_logic.battle_object_type, pve_logic.play_id, tostring(data_template.pve_play_config))

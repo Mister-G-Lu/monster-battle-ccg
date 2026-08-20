@@ -113,12 +113,12 @@ function mu77_account:SignIn(openId, openToken, platform)
             local response = xhr.response
             local ret_msg = json:decode(response)
             if ret_msg.result ~= 0 or ret_msg.errmsg ~= "" or ret_msg.user_id == nil then
-                --todo 账号申请出错 提示
+                --TODO: show account request error
                 --print("ret_msg.errmsg:"..ret_msg.errmsg)
                 return
             end
 
-            --保存ID到本地
+            --save id locally
             local login_logic = require "logic.login"
             self:SetAllBandedPlatform(ret_msg.binds)
             config:SetUserId(ret_msg.user_id)
@@ -126,7 +126,7 @@ function mu77_account:SignIn(openId, openToken, platform)
             config:SetNeedShowLoginBtn(0)
             config:Save()
             user_logic:Init(ret_msg.user_id, "", "")
-            --进入游戏
+            --enter game
             login_logic:DoEnterGame()
         end
         xhr:unregisterScriptHandler()
@@ -138,7 +138,7 @@ function mu77_account:SignIn(openId, openToken, platform)
 
     -- local callback = function  (status_code, content)
     --     if status_code ~= 200 then
-    --         --todo  网络连接错误 提示
+    --         --TODO: network error prompt
     --         --print("errmsg status_code"..status_code)
     --         http_client:Post(mu77_account.authAdd, post_dataStr_res, callback)
     --         return
@@ -146,12 +146,12 @@ function mu77_account:SignIn(openId, openToken, platform)
     --     --print("auth--content"..content)
     --     local ret_msg = json:decode(content)
     --     if ret_msg.result ~= 0 or ret_msg.errmsg ~= "" or ret_msg.user_id == nil then
-    --         --todo 账号申请出错 提示
+    --         --TODO: show account request error
     --         --print("ret_msg.errmsg:"..ret_msg.errmsg)
     --         return
     --     end
     --
-    --     --保存ID到本地
+    --     --save id locally
     --     local login_logic = require "logic.login"
     --     self:SetAllBandedPlatform(ret_msg.binds)
     --     config:SetUserId(ret_msg.user_id)
@@ -159,7 +159,7 @@ function mu77_account:SignIn(openId, openToken, platform)
     --     config:SetNeedShowLoginBtn(0)
     --     config:Save()
     --     user_logic:Init(ret_msg.user_id, "", "")
-    --     --进入游戏
+    --     --enter game
     --     login_logic:DoEnterGame()
     -- end
     -- http_client:Post(mu77_account.authAdd, post_dataStr_res, callback)
@@ -226,13 +226,13 @@ function mu77_account:BindAccount(openId, openToken, platform)
                 local response = xhr.response
                 local ret_msg = json:decode(response)
                 if ret_msg.result ~= 0 or ret_msg.errmsg ~= "" then
-                    --todo 账号申请出错 提示
+                    --TODO: show account request error
                     --print("ret_msg.errmsg:"..ret_msg.errmsg)
                     return
                 end
 
                 local login_logic = require "logic.login"
-                --隐藏面板
+                --hide panel
                 if cur_scene then
                     local sub_panel = cur_scene:GetSubPanel("setting", "account_panel")
                     if sub_panel and sub_panel.schedulerID then
@@ -242,7 +242,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
 
                 --print("ret_msg"..content)
                 if ret_msg.user_id ~= nil and userId ~= ret_msg.user_id then
-                    --绑定的平台账号已存在账户 弹出面板让玩家选择
+                    --platform account already bound; let the player choose
                     local confirm_box = require("modules.common.confirm_box").new()
                     local title_txt = text_loader:GetText("account_bind_name_bd", login_logic:GetPlatformNameByType(platform))
                     local desc_txt = text_loader:GetText("account_bind_alert", login_logic:GetPlatformNameByType(platform))
@@ -256,7 +256,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
                             config:SetSessionId(ret_msg.session_id)
                             config:SetNeedShowLoginBtn(0)
                             config:Save()
-                            --重载
+                            --reload
                             local global_manager = require "manager.global"
                             global_manager:Init()
                             global_manager:ChangeScene("login")
@@ -264,7 +264,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
                         function ()
                             graphic:DispatchEvent("signin_frame_state_setting", 1)
                             cur_scene:removeChild(confirm_box)
-                            --显示面板
+                            --show panel
                             local sub_panel = cur_scene:GetSubPanel("setting", "account_panel")
                             if sub_panel then
                                 sub_panel:setVisible(true)
@@ -280,7 +280,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
                 config:SetSessionId(ret_msg.session_id)
                 config:Save()
 
-                --提示玩家绑定成功
+                --notify bind success
                 local confirm_box = require("modules.common.confirm_box").new()
                 local title = text_loader:GetText("account_bind_name_bd", login_logic:GetPlatformNameByType(platform))
                 local desc = text_loader:GetText("account_bind_success_t", login_logic:GetPlatformNameByType(platform))
@@ -288,7 +288,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
                 confirm_box:ShowNofity(title, desc,confirm_txt, function()
                     graphic:DispatchEvent("signin_frame_state_setting", 1)
                         cur_scene:removeChild(confirm_box)
-                        --显示面板
+                        --show panel
                         if cur_scene then
                             local sub_panel = cur_scene:GetSubPanel("setting", "account_panel")
                             if sub_panel then
@@ -311,17 +311,17 @@ function mu77_account:BindAccount(openId, openToken, platform)
     --     local cur_scene = cc.Director:getInstance():getRunningScene()
     --     local ret_msg = json:decode(content)
     --      if status_code ~= 200 then
-    --         --todo  网络连接错误 提示
+    --         --TODO: network error prompt
     --         --print("errmsg status_code"..status_code)
     --         return
     --     end
     --     if ret_msg.result ~= 0 or ret_msg.errmsg ~= "" then
-    --         --todo 账号出错 提示
+    --         --TODO: account error prompt
     --         --print("ret_msg.errmsg:"..ret_msg.errmsg)
     --         return
     --     end
     --
-    --     --隐藏面板
+    --     --hide panel
     --     if cur_scene then
     --         local sub_panel = cur_scene:GetSubPanel("setting", "account_panel")
     --         if sub_panel and sub_panel.schedulerID then
@@ -331,7 +331,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
     --
     --     --print("ret_msg"..content)
     --     if ret_msg.user_id ~= nil and userId ~= ret_msg.user_id then
-    --         --绑定的平台账号已存在账户 弹出面板让玩家选择
+    --         --platform account already bound; let the player choose
     --         local confirm_box = require("modules.common.confirm_box").new()
     --         local title_txt = text_loader:GetText("account_bind_name_bd", login_logic:GetPlatformNameByType(platform))
     --         local desc_txt = text_loader:GetText("account_bind_alert", login_logic:GetPlatformNameByType(platform))
@@ -345,7 +345,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
     --                 config:SetSessionId(ret_msg.session_id)
     --                 config:SetNeedShowLoginBtn(0)
     --                 config:Save()
-    --                 --重载
+    --                 --reload
     --                 local global_manager = require "manager.global"
     --                 global_manager:Init()
     --                 global_manager:ChangeScene("login")
@@ -353,7 +353,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
     --             function ()
     --                 graphic:DispatchEvent("signin_frame_state_setting", 1)
     --                 cur_scene:removeChild(confirm_box)
-    --                 --显示面板
+    --                 --show panel
     --                 local sub_panel = cur_scene:GetSubPanel("setting", "account_panel")
     --                 if sub_panel then
     --                     sub_panel:setVisible(true)
@@ -369,7 +369,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
     --     config:SetSessionId(ret_msg.session_id)
     --     config:Save()
     --
-    --     --提示玩家绑定成功
+    --     --notify bind success
     --     local confirm_box = require("modules.common.confirm_box").new()
     --     local title = text_loader:GetText("account_bind_name_bd", login_logic:GetPlatformNameByType(platform))
     --     local desc = text_loader:GetText("account_bind_success_t", login_logic:GetPlatformNameByType(platform))
@@ -377,7 +377,7 @@ function mu77_account:BindAccount(openId, openToken, platform)
     --     confirm_box:ShowNofity(title, desc,confirm_txt, function()
     --         graphic:DispatchEvent("signin_frame_state_setting", 1)
     --             cur_scene:removeChild(confirm_box)
-    --             --显示面板
+    --             --show panel
     --             if cur_scene then
     --                 local sub_panel = cur_scene:GetSubPanel("setting", "account_panel")
     --                 if sub_panel then

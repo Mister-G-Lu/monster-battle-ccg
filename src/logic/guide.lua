@@ -157,7 +157,7 @@ local BATTLE_GUIDE_FUNC = {
     }
 }
 
--- 战斗阶段
+-- Battle stage
 local meta = {}
 
 function meta:Init()
@@ -188,14 +188,14 @@ function meta:Query(compleate_func, error_func)
 end
 
 
--- 请求指引完成
+-- Request guide complete
 function meta:ReqGuideComplete()
     network:Send("req_guide_complete", { guide_id = self.cur_guide_id }, function ()
         self:DoGuide()
     end)
 end
 
--- 检查引导是否完成
+-- Check if guide is complete
 function meta:CheckGuideComplete(guide_id)
     return bit:GetBitNum(self.guide_flag, guide_id) == 1
 end
@@ -256,25 +256,25 @@ function meta:DoGuide()
     end
 end
 
--- 是否开启战斗设置
+-- Whether battle settings are unlocked
 function meta:IsOpenBattleSetting()
     return self:CheckGuideComplete(1) and self:CheckGuideComplete(3)
 end
 
--- 检查新的引导
+-- Check for a new guide
 function meta:CheckNewGuide()
     local guide_config = data_manager.guide_config
     for _, v in pairs(guide_config) do
         local guide_id = v.ID
         local trigger_cond = v.trigger_cond
         local trigger_value = v.trigger_value
-        -- 检查引导是否完成
+        -- Check if guide is complete
         if not self:CheckGuideComplete(guide_id) then
             if trigger_cond == "" then
                 self:SetGuide(guide_id)
                 return true
             end
-            -- 检查引导是否完成
+            -- Check if guide is complete
             if trigger_cond == "check_guide" and self:CheckGuideComplete(trigger_value) then
                 self:SetGuide(guide_id)
                 return true

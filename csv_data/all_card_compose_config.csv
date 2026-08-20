@@ -1,4 +1,4 @@
-ID,卡牌ID,道具ID,道具数量,道具1ID,道具1数量
+ID,card_id,item_id,item_num,item_id1,item_num1
 number,number,number,number,number,number
 ID,card_id,item_id,item_num,item_id1,item_num1
 1,110011,100001,40,,
