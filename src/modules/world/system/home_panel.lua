@@ -186,7 +186,8 @@ function meta:RegisterWidgetEvent()
     end)
     -- PVP
     ui_helper:AddClick(self.pvp_btn, function ()
-        graphic:DispatchEvent("show_arena_panel")
+        -- PVP disabled: redirect to PVE
+        pve_logic:ShowPve()
     end)
     -- PVE
     ui_helper:AddClick(self.pve_btn, function ()
