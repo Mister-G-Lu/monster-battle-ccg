@@ -121,6 +121,14 @@ def check_pwa_shell() -> list[str]:
         ("viewport-fit=cover", "the viewport must opt into display cutouts / safe areas"),
         ("display-mode: standalone", "the shell must adapt when launched as an installed app"),
         ("serviceWorker", "the page must register its offline service worker"),
+        ("text-size-adjust", "Android font boosting must be disabled"),
+        ("position: fixed", "overlays must be viewport-fixed on Android Chrome"),
+        ("user-select: none", "long-press must not select card text"),
+        ("visualViewport", "shell must track the Android visual viewport"),
+        ("updateViaCache", "service worker script must not be stuck in HTTP cache"),
+        ("contextmenu", "long-press context menu must be suppressed"),
+        ("pagehide", "save must flush when Android backgrounds the page"),
+        ("isStandalone", "hardware back must not hijack history in a regular browser tab"),
     ):
         if needle not in html:
             errors.append(f"index.html: {why} ({needle!r} not found)")

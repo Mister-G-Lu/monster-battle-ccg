@@ -150,3 +150,20 @@ make web               # serve at http://localhost:8000/ and try it
 Install prompts and service workers require a secure context: `http://localhost`
 counts, `file://` does not. Opening the file directly still plays fine — the
 service worker registration is skipped.
+
+## Android Chrome pitfalls the shell now avoids
+
+These are the mistakes that show up over and over in Android web games (Chrome
+tab, installed PWA, and WebView). Each one had a concrete bug in this page:
+
+| Mistake | What it did here | Fix |
+|---|---|---|
+| A second `body { overflow-x: hidden }` after `overflow: hidden` | CSS overflow pairing resets `overflow-y` to `auto`, so the document itself scrolled. Pull-to-refresh reloaded the game; the tab strip was no longer stuck to the bottom. | One `html, body { height: 100dvh / var(--app-h); overflow: hidden; overscroll-behavior: none }` rule. |
+| `100vh` / `100dvh` without `visualViewport` | Android Chrome's URL bar lies about the viewport; the HUD/tabs clipped or left a gap. | `--app-h` is set from `visualViewport.height` on resize/orientation. |
+| `position: absolute` overlays | Modals were tied to the document, not the visual viewport — they drifted under the URL bar and didn't cover the HUD. | `.overlay` / `.snackbar` are `position: fixed` and padded with `safe-area-inset-*` (including left/right for landscape notches). |
+| `history.pushState` on every load | Hardware Back in a regular Chrome tab was hijacked so the first press did nothing. | Trap Back only in `display-mode: standalone`. |
+| Sticky `:hover` after a tap | Buttons stayed in the hover color until the next tap. | Hover styles gated on `@media (hover: hover) and (pointer: fine)`. |
+| Long-press on cards | Android Chrome showed Save-image / text-select / the system context menu. | `user-select: none`, `-webkit-touch-callout: none`, `contextmenu`/`dragstart` cancelled. |
+| Android font boosting | `text-size-adjust` inflated the small card type and broke the frame. | `text-size-adjust: 100%`. |
+| Cache-first HTML / cached `sw.js` | Players could be stuck on a stale build; `sw.js` itself sat in the HTTP cache. | Network-first for documents + manifest; `updateViaCache: 'none'`. |
+| No save flush on background | Android may kill a background WebView; an unsaved recruit could vanish. | `pagehide` + `visibilitychange` call `writeSave()`. |
