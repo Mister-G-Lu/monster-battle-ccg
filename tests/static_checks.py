@@ -46,25 +46,8 @@ def check_text_loader_forces_english() -> list[str]:
     return []
 
 
-def check_web_data_marks_special_cards() -> list[str]:
-    data = json.loads((ROOT / "build/web/game_data.json").read_text(encoding="utf-8"))
-    errors: list[str] = []
-    for cid in ("119001", "149018", "21901"):
-        card = data["cards"].get(cid)
-        if not card:
-            errors.append(f"special card {cid} missing from web data")
-        elif card.get("flags") != 0:
-            errors.append(f"special card {cid} must remain flags=0")
-    html = (ROOT / "build/web/game.html").read_text(encoding="utf-8")
-    if "c.flags === 1" not in html:
-        errors.append("web prototype random/starter pools must filter to flags=1 collectible cards")
-    if "card.attack || 1" not in html and "attacker.attack || 1" not in html:
-        errors.append("web prototype should use attack values, not current HP as damage")
-    return errors
-
-
 def check_campaign_generators() -> list[str]:
-    """PR F: checked-in campaign/web blobs must match the generators."""
+    """PR F: the checked-in native campaign module must match the generator."""
     errors: list[str] = []
     result = subprocess.run(
         [sys.executable, str(ROOT / "scripts/refresh_campaign_data.py"), "--verify"],
@@ -77,76 +60,7 @@ def check_campaign_generators() -> list[str]:
         errors.append("refresh_campaign_data.py --verify failed")
         errors.append(result.stdout)
         errors.append(result.stderr)
-    html_a = (ROOT / "index.html").read_bytes()
-    html_b = (ROOT / "build/web/game.html").read_bytes()
-    if html_a != html_b:
-        errors.append("index.html and build/web/game.html must stay byte-identical")
     return errors
-
-
-def check_pwa_shell() -> list[str]:
-    """The page ships as an installable game view: both copies of the HTML
-    need their own manifest + service worker + icons, and the two HTML copies
-    must stay byte-identical (asserted in check_campaign_generators)."""
-    errors: list[str] = []
-    copies = [
-        (ROOT, "build/web/assets/"),                 # repo root: index.html
-        (ROOT / "build" / "web", "assets/"),         # mirror: game.html
-    ]
-    for base, prefix in copies:
-        rel_base = base.relative_to(ROOT) if base != ROOT else Path(".")
-        manifest = base / "manifest.webmanifest"
-        sw = base / "sw.js"
-        if not manifest.is_file():
-            errors.append(f"missing {rel_base / 'manifest.webmanifest'}")
-            continue
-        if not sw.is_file():
-            errors.append(f"missing {rel_base / 'sw.js'}")
-        data = json.loads(manifest.read_text(encoding="utf-8"))
-        if data.get("display") != "standalone":
-            errors.append(f"{rel_base}/manifest.webmanifest must use display=standalone")
-        if not any(i.get("purpose") == "maskable" for i in data.get("icons", [])):
-            errors.append(f"{rel_base}/manifest.webmanifest needs a maskable (adaptive) icon")
-        for icon in data.get("icons", []):
-            src = icon.get("src", "")
-            if not src.startswith(prefix):
-                errors.append(f"{rel_base}/manifest.webmanifest icon {src} must start with {prefix}")
-            elif not (base / src).is_file():
-                errors.append(f"{rel_base}/manifest.webmanifest references missing icon {src}")
-
-    html = (ROOT / "index.html").read_text(encoding="utf-8")
-    for needle, why in (
-        ('rel="manifest"', "the page must link its web app manifest"),
-        ('name="theme-color"', "the page must theme the Android system bars"),
-        ("viewport-fit=cover", "the viewport must opt into display cutouts / safe areas"),
-        ("display-mode: standalone", "the shell must adapt when launched as an installed app"),
-        ("serviceWorker", "the page must register its offline service worker"),
-        ("text-size-adjust", "Android font boosting must be disabled"),
-        ("position: fixed", "overlays must be viewport-fixed on Android Chrome"),
-        ("user-select: none", "long-press must not select card text"),
-        ("visualViewport", "shell must track the Android visual viewport"),
-        ("updateViaCache", "service worker script must not be stuck in HTTP cache"),
-        ("contextmenu", "long-press context menu must be suppressed"),
-        ("pagehide", "save must flush when Android backgrounds the page"),
-        ("isStandalone", "hardware back must not hijack history in a regular browser tab"),
-    ):
-        if needle not in html:
-            errors.append(f"index.html: {why} ({needle!r} not found)")
-    return errors
-
-
-def check_app_shell_test() -> list[str]:
-    """Run the Node app-shell regression test when node is available."""
-    node = shutil.which("node")
-    if not node:
-        return []
-    result = subprocess.run(
-        [node, str(ROOT / "tests/app_shell_test.js")],
-        cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-    )
-    if result.returncode != 0:
-        return ["app_shell_test.js failed", result.stdout, result.stderr]
-    return []
 
 
 def check_balance_audit() -> list[str]:
@@ -180,10 +94,7 @@ def main() -> int:
     for check in (
         check_no_chinese_artifacts,
         check_text_loader_forces_english,
-        check_web_data_marks_special_cards,
         check_campaign_generators,
-        check_pwa_shell,
-        check_app_shell_test,
         check_balance_audit,
     ):
         errors.extend(check())

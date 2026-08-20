@@ -207,7 +207,7 @@ def summarize(cards: list[dict]) -> str:
 
     lines.append("## Special/tutorial cards")
     lines.append("")
-    lines.append("Cards with `flags=0` are intentionally excluded from random reward pools and the web prototype's generated decks. They can remain extreme because they teach mechanics or act as scripted bosses.")
+    lines.append("Cards with `flags=0` are intentionally excluded from random reward pools and the campaign.s generated decks. They can remain extreme because they teach mechanics or act as scripted bosses.")
     lines.append("")
     lines.append("| Card | Type | Rarity | Cost | HP | Attack | Abilities |")
     lines.append("|---|---|---|---:|---:|---:|---|")
@@ -228,7 +228,7 @@ def summarize(cards: list[dict]) -> str:
     lines.append("")
     lines.append("- The collectible level-1 monster set is not wildly pay-to-win on raw HP: Common/Rare averages sit close together at costs 1-4.")
     lines.append("- Legendary averages do jump at cost 3, so Legendary designs should be reviewed card-by-card and pushed toward conditional/choice-heavy effects instead of more HP plus more attack.")
-    lines.append("- The worst apparent power-creep example is actually the `flags=0` tutorial card Vibranium Armor; Gerbip king has been moved out of the 1-cost slot and remains non-collectible. The bug was exposure: the web prototype treated special cards as normal random cards.")
+    lines.append("- The worst apparent power-creep example is actually the `flags=0` tutorial card Vibranium Armor; Gerbip king has been moved out of the 1-cost slot and remains non-collectible. The bug was exposure: the old HTML prototype treated special cards as normal random cards.")
     lines.append("- The production offline reward pool is already curated; keep it that way and do not switch rewards to sample from all cards without applying `flags=1` and budget checks.")
     lines.append("")
     lines.append("## Recommended next design pass")

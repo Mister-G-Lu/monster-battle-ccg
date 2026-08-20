@@ -1191,9 +1191,15 @@ offline_server.handlers["req_campaign_battle_start"] = function(self, req)
     self:StartBattle({
         battle_type = "campaign",
         battle_object_type = "pve",
-        -- The native engine decides the fight: a side loses when its
-        -- monster army is exhausted. node.hp travels as metadata for the
-        -- client's encounter header; no web-style commander HP here.
+        -- The Shadow Road campaign duel: commander HP decides the fight.
+        -- node.hp is the enemy commander's vitality; the player's commander
+        -- vitality comes from the campaign save (grows with bosses slain).
+        campaign = {
+            node_type = node.type,
+            power = node.power,
+            player_hp = csave.vitality,
+            enemy_hp = node.hp,
+        },
         pve_info = {
             play_id = 0,
             difficulty = 1,

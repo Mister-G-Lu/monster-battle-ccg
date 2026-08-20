@@ -231,6 +231,7 @@ local function LoadCardConfig()
 
         config.quality = v["quality"]
         config.hp = v["hp"]
+        config.flags = v["flags"]
         config.res_path = v["res_path"]
         config.cost = v["cost"]
         config.score = v["score"]

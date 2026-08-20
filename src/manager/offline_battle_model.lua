@@ -273,6 +273,27 @@ function Slot:CleanItem()
     self:RebuildPowers()
 end
 
+-- Permanently raise this creature's attack power (used by scripted boss
+-- powers such as Bloodlust / Molten Core ENRAGE). Mutates the monster's
+-- power_list so the buff survives RebuildPowers().
+function Slot:AddAttack(amount)
+    if not self.monster then return end
+    amount = amount or 0
+    if amount == 0 then return end
+    local attack_name = self.attack_type or "melee"
+    local found = false
+    for _, p in ipairs(self.monster.power_list or {}) do
+        if p.name == attack_name then
+            p.value = (tonumber(p.value) or 0) + amount
+            found = true
+        end
+    end
+    if not found then
+        table.insert(self.monster.power_list, { name = attack_name, value = amount, target_type = "enemy", type = "passive" })
+    end
+    self:RebuildPowers()
+end
+
 -- =====================================================================
 
 return { Actor = Actor, Slot = Slot }
