@@ -57,6 +57,8 @@ CHANGED = {
     "src/modules/battle/match_panel.lua": os.path.join(DECRYPTED, "modules", "battle", "match_panel.lua"),
     "src/manager/text_loader.lua": os.path.join(DECRYPTED, "manager", "text_loader.lua"),
     "src/utils/csv.lua": os.path.join(DECRYPTED, "utils", "csv.lua"),
+    "src/manager/campaign_data.lua": os.path.join(DECRYPTED, "manager", "campaign_data.lua"),
+    "src/modules/world/system/campaign_panel.lua": os.path.join(DECRYPTED, "modules", "world", "system", "campaign_panel.lua"),
 }
 
 errors = []

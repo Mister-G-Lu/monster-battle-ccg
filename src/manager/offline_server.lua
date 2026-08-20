@@ -148,6 +148,16 @@ function offline_server:NewPlayer(user_id)
     save.wins = 0
     save.losses = 0
     save.pve_cleared = {}    -- play_id..difficulty -> true
+    save.campaign = {        -- The Shadow Road progress
+        cleared = {},        -- node_id -> true
+        collection = {},     -- recruited model ids (record)
+        bosses_slain = 0,
+        max_hp_bonus = 0,    -- +2 per boss, capped at 8
+        complete = false,
+        exp = 0,
+        wins = 0,
+        losses = 0,
+    }
 
     -- starter cards (uid == model_id so deck positions are unambiguous)
     local monster_models, item_models = self:GetStarterDeck()
@@ -243,7 +253,9 @@ function offline_server:CardInfoFromModel(model_id, uid, hand_pos, user_id)
     if not cfg then
         return nil
     end
-    return offline_battle.BuildCardInfo(cfg, uid or model_id, hand_pos, user_id)
+    local card = offline_battle.BuildCardInfo(cfg, uid or model_id, hand_pos, user_id)
+    card.model_id = tostring(model_id)
+    return card
 end
 
 -- parse "a|b|c" strings from CSVs
@@ -1107,6 +1119,174 @@ function offline_server:OnPveOver(battle, cmd_over, play_id, difficulty, pcfg)
         cmd_over.pve_info = { difficulty = tonumber(difficulty) }
     else
         cmd_over.pve_info = { difficulty = tonumber(difficulty) }
+    end
+    self:Save()
+end
+
+-- =====================================================================
+-- Handlers: The Shadow Road campaign
+-- =====================================================================
+
+function offline_server:CampaignPlayerMaxHp()
+    local cam = self.save.campaign or {}
+    return 30 + (tonumber(cam.max_hp_bonus) or 0)
+end
+
+function offline_server:BuildCampaignInfo()
+    local cam = self.save.campaign or {}
+    return {
+        cleared = cam.cleared or {},
+        collection = cam.collection or {},
+        bosses_slain = tonumber(cam.bosses_slain) or 0,
+        max_hp_bonus = tonumber(cam.max_hp_bonus) or 0,
+        complete = cam.complete or false,
+        exp = tonumber(cam.exp) or 0,
+        wins = tonumber(cam.wins) or 0,
+        losses = tonumber(cam.losses) or 0,
+        player_max_hp = self:CampaignPlayerMaxHp(),
+    }
+end
+
+offline_server.handlers["query_campaign_info"] = function(self)
+    return self:BuildCampaignInfo()
+end
+
+offline_server.handlers["req_campaign_reset"] = function(self)
+    self.save.campaign = {
+        cleared = {}, collection = {}, bosses_slain = 0,
+        max_hp_bonus = 0, complete = false, exp = 0, wins = 0, losses = 0,
+    }
+    self:Save()
+    return self:BuildCampaignInfo()
+end
+
+-- The campaign battle deck: starter deck plus every recruited card (the web
+-- prototype's "collection IS your deck"). Recruits join automatically, so the
+-- player's power grows act over act, matching the enemy curve.
+function offline_server:BuildCampaignPlayerDeck()
+    local deck = { monster_list = {}, item_list = {} }
+    local uid = 1
+    local monster_models, item_models = self:GetStarterDeck()
+    for _, m in ipairs(monster_models) do
+        local c = self:CardInfoFromModel(m, uid, nil, self.save.user_id)
+        if c then table.insert(deck.monster_list, c) end
+        uid = uid + 1
+    end
+    for _, m in ipairs(item_models) do
+        local c = self:CardInfoFromModel(m, uid, nil, self.save.user_id)
+        if c then table.insert(deck.item_list, c) end
+        uid = uid + 1
+    end
+    local cam = self.save.campaign or {}
+    for _, model_id in ipairs(cam.collection or {}) do
+        local cfg = self:GetCardConfig(model_id)
+        if cfg and cfg.type == "monster" then
+            local c = self:CardInfoFromModel(model_id, uid, nil, self.save.user_id)
+            if c then table.insert(deck.monster_list, c) end
+            uid = uid + 1
+        end
+    end
+    return deck
+end
+
+-- tiered first-clear recruit (mirrors the web reward ladder)
+function offline_server:CampaignRecruitCard(node)
+    local campaign_data = require "manager.campaign_data"
+    local pool = campaign_data:RecruitPool(node)
+    if not pool or #pool == 0 then
+        return self:RandomCardFromPool()
+    end
+    return pool[math.random(#pool)]
+end
+
+offline_server.handlers["req_campaign_battle_start"] = function(self, req)
+    local campaign_data = require "manager.campaign_data"
+    local node = campaign_data:GetNode(req.node_id)
+    if not node then
+        return "campaign_node_null"
+    end
+
+    local monsters = campaign_data:ResolveEnemyDeck(node)
+    if #monsters == 0 then
+        return "campaign_deck_empty"
+    end
+
+    local own_deck = self:BuildCampaignPlayerDeck()
+    local enemy_deck = { monster_list = {}, item_list = {} }
+    local uid = 1
+    for _, m in ipairs(monsters) do
+        local c = self:CardInfoFromModel(m, uid, nil, "enemy")
+        if c then table.insert(enemy_deck.monster_list, c) end
+        uid = uid + 1
+    end
+
+    self:StartBattle({
+        battle_type = "campaign",
+        battle_object_type = "pvp",
+        pve_info = nil,
+        own_deck = own_deck,
+        enemy_deck = enemy_deck,
+        enemy_name = node.enemy_name,
+        campaign = {
+            node_id = node.id,
+            node_type = node.type,
+            enemy_hp = tonumber(node.hp) or 20,
+            player_hp = self:CampaignPlayerMaxHp(),
+            power = node.power,
+        },
+        on_battle_over = function(battle, cmd_over)
+            self:OnCampaignOver(battle, cmd_over, node)
+        end,
+    })
+    return nil
+end
+
+function offline_server:OnCampaignOver(battle, cmd_over, node)
+    local cam = self.save.campaign
+    if not cam then
+        cam = { cleared = {}, collection = {}, bosses_slain = 0, max_hp_bonus = 0, complete = false, exp = 0, wins = 0, losses = 0 }
+        self.save.campaign = cam
+    end
+
+    if battle.win_user_id == "player" then
+        cam.wins = (cam.wins or 0) + 1
+        local first_clear = not cam.cleared[node.id]
+        local exp_gain = tonumber(node.exp) or 0
+        if first_clear then
+            cam.cleared[node.id] = true
+            if node.type == "boss" then
+                cam.bosses_slain = (cam.bosses_slain or 0) + 1
+                cam.max_hp_bonus = math.min(8, (cam.max_hp_bonus or 0) + 2)
+            end
+            if node.final then
+                cam.complete = true
+            end
+            -- recruit a tiered card after the first victory
+            local recruit = self:CampaignRecruitCard(node)
+            if recruit then
+                table.insert(cam.collection, recruit)
+                self:AddCard(recruit)
+            end
+            cmd_over.campaign_info = {
+                node_id = node.id,
+                first_clear = true,
+                boss = node.type == "boss",
+                recruit = recruit,
+                exp = exp_gain,
+                max_hp_bonus = cam.max_hp_bonus,
+                complete = cam.complete,
+            }
+        else
+            exp_gain = 5   -- replay bonus
+            cmd_over.campaign_info = { node_id = node.id, first_clear = false, exp = exp_gain }
+        end
+        cam.exp = (cam.exp or 0) + exp_gain
+        local rewards = { { type = "resource", attr_id = 400001, value = exp_gain } }
+        self:ApplyRewards(rewards)
+        cmd_over.reward_info = rewards
+    else
+        cam.losses = (cam.losses or 0) + 1
+        cmd_over.campaign_info = { node_id = node.id, first_clear = false }
     end
     self:Save()
 end

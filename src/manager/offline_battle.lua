@@ -325,6 +325,27 @@ function Slot:CleanItem()
     self:RebuildPowers()
 end
 
+-- Permanently raise this creature's attack power (used by scripted boss
+-- powers such as Bloodlust / Molten Core ENRAGE). Mutates the monster's
+-- power_list so the buff survives RebuildPowers().
+function Slot:AddAttack(amount)
+    if not self.monster then return end
+    amount = amount or 0
+    if amount == 0 then return end
+    local attack_name = self.attack_type or "melee"
+    local found = false
+    for _, p in ipairs(self.monster.power_list or {}) do
+        if p.name == attack_name then
+            p.value = (tonumber(p.value) or 0) + amount
+            found = true
+        end
+    end
+    if not found then
+        table.insert(self.monster.power_list, { name = attack_name, value = amount, target_type = "enemy", type = "passive" })
+    end
+    self:RebuildPowers()
+end
+
 -- =====================================================================
 -- Battle engine
 -- =====================================================================
@@ -344,6 +365,30 @@ function offline_battle.New(opts, emit)
     self.win_user_id = nil
     self.pve_win_cur_value = (opts.pve_info and opts.pve_info.pve_win_cur_value) or 0
     self.pve_win_target = opts.pve_win_target or 0
+
+    -- Campaign hero-HP duel (The Shadow Road). When opts.campaign is present the
+    -- battle is decided by hero HP instead of the PvE kill target / monster-count
+    -- model: creatures with no blocker strike the enemy hero, killing blows spill
+    -- overkill damage onto the hero, and boss/elite scripted powers run on the
+    -- enemy turn.
+    self.campaign = opts.campaign
+    self.hero_mode = self.campaign ~= nil
+    self.own_hp = 0
+    self.own_max_hp = 0
+    self.enemy_hp = 0
+    self.enemy_max_hp = 0
+    self.gathering = 0
+    self.power = self.campaign and self.campaign.power or nil
+    self.power_phase2 = false
+    self.phase2_applied = false
+    self.power_used = false
+    self.hero_dirty = false
+    if self.hero_mode then
+        self.own_max_hp = tonumber(self.campaign.player_hp) or 30
+        self.own_hp = self.own_max_hp
+        self.enemy_max_hp = tonumber(self.campaign.enemy_hp) or 20
+        self.enemy_hp = self.enemy_max_hp
+    end
 
     self.own = Actor.New("player", opts.own_name or "Player")
     self.enemy = Actor.New("enemy", opts.enemy_name or "Enemy")
@@ -408,6 +453,120 @@ function offline_battle:PushCommand(name, data)
 end
 
 -- =====================================================================
+-- Campaign: hero HP + scripted-power plumbing
+-- =====================================================================
+
+-- Damage a hero (face hits, Gathering Power, Umbral Toll, overkill). Does not
+-- finish the battle directly; CheckGameOver() handles hero HP <= 0 at the end
+-- of the current combat/power phase. Hero HP changes are pushed separately via
+-- cmd_battle_hero, so no hero_* events ever enter the client's event_list.
+function offline_battle:DamageHero(actor, amount)
+    if not self.hero_mode or not actor or not amount or amount <= 0 then return end
+    if actor == self.own then
+        self.own_hp = math.max(0, self.own_hp - amount)
+    else
+        self.enemy_hp = math.max(0, self.enemy_hp - amount)
+        self:CheckCampaignPhase2()
+    end
+    self.hero_dirty = true
+end
+
+-- Heal a hero (Overgrowth / Hungering Dark / Umbral Toll life-gain).
+function offline_battle:HealHero(actor, amount)
+    if not self.hero_mode or not actor or not amount or amount <= 0 then return 0 end
+    local healed = 0
+    if actor == self.own then
+        healed = math.min(amount, self.own_max_hp - self.own_hp)
+        self.own_hp = self.own_hp + healed
+    else
+        healed = math.min(amount, self.enemy_max_hp - self.enemy_hp)
+        self.enemy_hp = self.enemy_hp + healed
+    end
+    if healed > 0 then
+        self.hero_dirty = true
+    end
+    return healed
+end
+
+-- push the current hero HP totals to the client (cmd_battle_hero)
+function offline_battle:PushHeroSync()
+    if not self.hero_mode then return end
+    self.hero_dirty = false
+    self:PushCommand("cmd_battle_hero", {
+        own_user_id = self.own.user_id,
+        own_hp = self.own_hp,
+        own_max_hp = self.own_max_hp,
+        enemy_user_id = self.enemy.user_id,
+        enemy_hp = self.enemy_hp,
+        enemy_max_hp = self.enemy_max_hp,
+    })
+end
+
+-- full board re-sync (used to reveal tokens the scripted powers summon)
+function offline_battle:PushBoardSync(cur_user_id)
+    local function actor_info(actor)
+        local slots = {}
+        for i = 1, BATTLE_SLOT_MAX do
+            local s = actor.battle_slot[i]
+            if s and s.monster then
+                table.insert(slots, {
+                    pos = i,
+                    monster = s.monster,
+                    item = s.item,
+                    cur_hp = s.cur_hp,
+                    cur_ad = s.cur_ad,
+                })
+            end
+        end
+        local hand = {}
+        for i = 1, 4 do
+            local c = actor.hand_card[i]
+            if c then table.insert(hand, c) end
+        end
+        return {
+            user_id = actor.user_id,
+            crystal = actor.cur_crystal,
+            monster_size = actor.monster_len,
+            item_size = actor.item_len,
+            hand_card_list = hand,
+            battle_slot_list = slots,
+        }
+    end
+    self:PushCommand("cmd_battle_sync", {
+        cur_oper_user_id = cur_user_id or self.enemy.user_id,
+        last_oper_time = os.time(),
+        is_sacrifice = false,
+        sync_actor_list = { actor_info(self.own), actor_info(self.enemy) },
+    })
+end
+
+-- summon a scripted token into an empty enemy lane (or any actor's lane)
+function offline_battle:SummonToken(actor, token_key)
+    local campaign_data = require "manager.campaign_data"
+    local cfg = campaign_data.TOKENS[token_key]
+    if not cfg then return false end
+    local pos = actor:GetCurMonsterSlotPos()
+    if pos == 0 then return false end
+    local uid = "tok_" .. token_key .. "_" .. self.round .. "_" .. math.random(1000, 9999)
+    local card = offline_battle.BuildCardInfo(cfg, uid, nil, actor.user_id)
+    self:DeployMonster(actor, card, pos)
+    return true
+end
+
+-- permanently raise every enemy creature's attack by `amount`
+function offline_battle:AddEnemyBoardAttack(amount)
+    local n = 0
+    for i = 1, BATTLE_SLOT_MAX do
+        local s = self.enemy.battle_slot[i]
+        if s and s.monster then
+            s:AddAttack(amount)
+            n = n + 1
+        end
+    end
+    return n
+end
+
+-- =====================================================================
 -- Public flow
 -- =====================================================================
 
@@ -439,6 +598,11 @@ function offline_battle:Start()
     })
 
     self:PushCommand("cmd_battle_round", { round = self.round, effect_list = {} })
+
+    -- campaign hero-HP duel: reveal both commanders' HP before the first prep
+    if self.hero_mode then
+        self:PushHeroSync()
+    end
 
     self:BeginPrep("player")
 end
@@ -482,6 +646,19 @@ end
 function offline_battle:CheckGameOver()
     if self.is_over then
         return true
+    end
+
+    -- Campaign hero-HP duel: only hero HP decides the battle.
+    if self.hero_mode then
+        if self.enemy_hp <= 0 then
+            self:FinishBattle("player")
+            return true
+        end
+        if self.own_hp <= 0 then
+            self:FinishBattle("enemy")
+            return true
+        end
+        return false
     end
 
     -- PvE win condition: kill target reached
@@ -704,6 +881,17 @@ function offline_battle:HandleAttack(req)
     end
     -- safety: force game over if max rounds exceeded
     if self.round >= MAX_ROUNDS then
+        if self.hero_mode then
+            -- long wars are decided by whoever kept more HP (fraction)
+            local p_pct = self.own_hp / math.max(1, self.own_max_hp)
+            local e_pct = self.enemy_hp / math.max(1, self.enemy_max_hp)
+            if p_pct >= e_pct then
+                self:FinishBattle("player")
+            else
+                self:FinishBattle("enemy")
+            end
+            return nil
+        end
         local own_count = 0
         for i = 1, BATTLE_SLOT_MAX do
             if self.own.battle_slot[i] and self.own.battle_slot[i].monster then
@@ -734,6 +922,17 @@ function offline_battle:HandleAttack(req)
         is_sacrifice = true,
     })
 
+    -- scripted campaign powers fire at the start of the enemy turn
+    if self.hero_mode then
+        self:FireCampaignPower()
+        if self.hero_dirty then
+            self:PushHeroSync()
+        end
+        if self:CheckGameOver() then
+            return nil
+        end
+    end
+
     -- AI deploys
     self:AIDoPrep()
 
@@ -742,6 +941,11 @@ function offline_battle:HandleAttack(req)
 
     if self.is_over then
         return nil
+    end
+
+    -- reveal any hero HP changes this combat caused
+    if self.hero_dirty then
+        self:PushHeroSync()
     end
 
     -- next round
@@ -956,6 +1160,13 @@ function offline_battle:DamageSlot(slot, damage, events, src_slot, damage_type)
         damage = math.max(0, damage - shield)
     end
 
+    -- campaign Warding: the Vault Sentinel's creatures shrug off 1 damage from
+    -- blows of 3 or more (glancing blows still slip through).
+    if self.hero_mode and self.power and self.power.id == "warding"
+        and slot.actor == self.enemy and damage >= 3 then
+        damage = damage - 1
+    end
+
     -- armor absorbs physical damage
     if (damage_type == "melee" or damage_type == "ranged") and slot.cur_ad > 0 then
         local breaker = src_slot and src_slot:GetPowerValue(POWER_NAME.breaker) or 0
@@ -987,6 +1198,14 @@ function offline_battle:DamageSlot(slot, damage, events, src_slot, damage_type)
             slot.used_regenerate = true
             slot.cur_hp = 1
             return dealt
+        end
+        -- overkill carry-through: a killing blow's excess damage hits the
+        -- defender's hero, so trades always progress the game.
+        if self.hero_mode then
+            local overkill = -slot.cur_hp
+            if overkill > 0 then
+                self:DamageHero(slot.actor, overkill)
+            end
         end
         table.insert(events, { type = "dead", tar_user_id = tid, tar_pos = tpos })
         slot.actor.battle_slot[slot.pos] = nil
@@ -1147,6 +1366,9 @@ function offline_battle:SlotAttack(attacker, events)
             table.insert(events, { type = "anim", tar_user_id = target.actor.user_id, tar_pos = target.pos, power_name = POWER_NAME.magic, src_user_id = attacker.actor.user_id, src_pos = attacker.pos, value = magic })
             self:DamageSlot(target, magic, events, attacker, "magic")
             self:AfterHit(attacker, target, events, "magic", magic)
+        elseif self.hero_mode then
+            -- no blocker: strike the enemy hero directly
+            self:DamageHero(enemy, magic)
         end
         return
     end
@@ -1190,6 +1412,8 @@ function offline_battle:SlotAttack(attacker, events)
                     end
                 end
             end
+        elseif self.hero_mode then
+            self:DamageHero(enemy, attacker:GetMeleeStrength())
         end
         return
     end
@@ -1232,6 +1456,8 @@ function offline_battle:SlotAttack(attacker, events)
                     self:AfterHit(attacker, target, events, "ranged", dmg)
                 end
             end
+        elseif self.hero_mode then
+            self:DamageHero(enemy, attacker:GetRangedStrength())
         end
         return
     end
@@ -1292,6 +1518,145 @@ function offline_battle:AfterHit(attacker, target, events, attack_type, dmg)
     end
 
     -- drain crystal on kill (handled in DamageSlot caller path)
+end
+
+-- =====================================================================
+-- Campaign scripted powers
+-- =====================================================================
+
+-- Fire a node's scripted power at the start of the enemy turn (mirrors the web
+-- prototype's tickEnemyPower). Only runs in hero_mode.
+function offline_battle:FireCampaignPower()
+    if not self.hero_mode then return end
+    local node_type = self.campaign and self.campaign.node_type or "skirmish"
+    local round = self.round
+
+    -- Apply a pending phase-2 trigger (ENRAGE / ECLIPSE) at the start of the
+    -- enemy turn that follows the hit that dropped the boss below half HP.
+    if self.power_phase2 and not self.phase2_applied then
+        self.phase2_applied = true
+        local power = self.power
+        if power then
+            local board_changed = false
+            if power.id == "flamewave" then
+                self:AddEnemyBoardAttack(1)
+                board_changed = true
+            elseif power.id == "toll" then
+                if self:SummonToken(self.enemy, "wraith") then board_changed = true end
+                if self:SummonToken(self.enemy, "wraith") then board_changed = true end
+            end
+            if board_changed then
+                self:PushBoardSync()
+            end
+        end
+    end
+
+    -- GATHERING POWER (every boss): on turns 3,6,9,... the boss grows +1 and
+    -- lashes the player directly. Walls can't save you.
+    if node_type == "boss" and round >= 3 and round % 3 == 0 then
+        self.gathering = self.gathering + 1
+        self:DamageHero(self.own, self.gathering)
+    end
+
+    local power = self.power
+    if not power then return end
+    local id = power.id
+
+    if id == "muster" then
+        if round == 3 or round == 4 then
+            if self:SummonToken(self.enemy, "whelp") then
+                self:PushBoardSync()
+            end
+        end
+    elseif id == "plunder" then
+        -- faithful to the web prototype: Vex steals 1 of YOUR crystal each of
+        -- his turns (the enemy's own crystal economy is untouched).
+        if round >= 2 and self.own.cur_crystal > 0 then
+            self.own.cur_crystal = self.own.cur_crystal - 1
+            self:PushCommand("cmd_battle_attack", {
+                event_list = {
+                    { type = "crystal", tar_user_id = self.own.user_id, value = -1 },
+                },
+                is_fight_stage = false,
+            })
+        end
+    elseif id == "bloodlust" then
+        if round >= 4 and not self.power_used then
+            self.power_used = true
+            self:AddEnemyBoardAttack(1)
+            self:PushBoardSync()
+        end
+    elseif id == "overgrowth" then
+        -- "still fed" = any cards left in deck OR hand (matches the web)
+        local hand_count = 0
+        for i = 1, 4 do if self.enemy.hand_card[i] then hand_count = hand_count + 1 end end
+        local still_fed = (#self.enemy.monster_card + #self.enemy.item_card + hand_count) > 0
+        local count = still_fed and (round >= 5 and 2 or 1) or 0
+        local summoned = false
+        for _ = 1, count do
+            if not self:SummonToken(self.enemy, "sapling") then break end
+            summoned = true
+        end
+        if summoned then
+            self:PushBoardSync()
+        end
+        local has_sapling = false
+        for i = 1, BATTLE_SLOT_MAX do
+            local s = self.enemy.battle_slot[i]
+            if s and s.monster and s.monster.name == "Sapling" then has_sapling = true break end
+        end
+        if has_sapling then
+            self:HealHero(self.enemy, 1)
+        end
+    elseif id == "hunger" then
+        if round >= 4 then
+            local events = {}
+            local devoured = 0
+            for i = 1, BATTLE_SLOT_MAX do
+                local s = self.own.battle_slot[i]
+                if s and s.monster then
+                    self:DamageSlot(s, 1, events, nil, "others")
+                    if not s.monster or s:IsDead() then devoured = devoured + 1 end
+                end
+            end
+            if #events > 0 then
+                self:PushCommand("cmd_battle_attack", { event_list = events, is_fight_stage = false })
+            end
+            if devoured > 0 then
+                self:HealHero(self.enemy, devoured)
+            end
+        end
+    elseif id == "flamewave" then
+        if round >= 3 and round % 3 == 0 then
+            local events = {}
+            for i = 1, BATTLE_SLOT_MAX do
+                local s = self.own.battle_slot[i]
+                if s and s.monster then
+                    self:DamageSlot(s, 2, events, nil, "others")
+                end
+            end
+            if #events > 0 then
+                self:PushCommand("cmd_battle_attack", { event_list = events, is_fight_stage = false })
+            end
+        end
+    elseif id == "toll" then
+        if round >= 3 then
+            self:DamageHero(self.own, 1)
+            self:HealHero(self.enemy, 1)
+        end
+    end
+end
+
+-- Phase-2 boss triggers (ENRAGE / ECLIPSE). Marked as soon as a boss drops
+-- below half HP (from DamageHero); the actual board change is applied at the
+-- start of the next enemy turn (FireCampaignPower) so the single board re-sync
+-- lands cleanly between turns, not mid-combat.
+function offline_battle:CheckCampaignPhase2()
+    if not self.hero_mode then return end
+    local power = self.power
+    if not power or self.power_phase2 then return end
+    if self.enemy_hp > (self.enemy_max_hp / 2) then return end
+    self.power_phase2 = true
 end
 
 -- =====================================================================
