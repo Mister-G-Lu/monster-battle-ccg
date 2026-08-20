@@ -14,6 +14,10 @@ local meta = class("match_panel",function ()
     return ui_helper:LoadCocosUI("interface/battle/battle_ui_match_panel.csb")
 end)
 
+local ENTER_ANIMATION_TIMEOUT = 1.5
+local STANDBY_RESPONSE_TIMEOUT = 4.0
+local EXIT_ANIMATION_TIMEOUT = 6.0
+
 function meta:ctor()
 
     local match_info = self:getChildByName("match_info")
@@ -40,33 +44,84 @@ function meta:ctor()
     self:RegisterEvent()
 end
 
-function meta:Update(elapsed_time)
+function meta:_RequestStandby(reason)
+    if self._standby_requested then
+        return
+    end
+    self._standby_requested = true
+    print("[MATCH] Requesting battle standby" .. (reason and (" (" .. reason .. ")") or ""))
+    battle_logic:ReqBattleStandby()
+    self:PlayAnimation("loop_battle", true)
+end
+
+function meta:_CompleteStandby(reason)
+    if self._standby_complete then
+        return
+    end
+    self._standby_complete = true
+    self._standby_advanced = true
+    self:setVisible(false)
+    battle_logic:DispatchEvent("anim_complete", reason or "battle_panel_standby")
+end
+
+function meta:_ExitMatchPanel(reason)
+    if self._exit_requested then
+        return
+    end
+    self._exit_requested = true
+    self._exit_timer = 0
+    print("[MATCH] Exiting match panel" .. (reason and (" (" .. reason .. ")") or ""))
+    self:PlayAnimation("exit_battle", false, function ()
+        self:_CompleteStandby("battle_panel_standby")
+    end)
 end
 
 function meta:Show()
     self:setVisible(true)
     self._standby_timer = 0
+    self._exit_timer = 0
+    self._standby_requested = false
+    self._exit_requested = false
     self._standby_advanced = false
-    self:PlayAnimation("enter_battle",false, function ()
-        battle_logic:ReqBattleStandby()
-        self:PlayAnimation("loop_battle", true)
+    self._standby_complete = false
+    self:PlayAnimation("enter_battle", false, function ()
+        self:_RequestStandby("enter_animation_complete")
     end)
 end
 
 function meta:Update(elapsed_time)
-    -- safety: if standby response never arrives within 3 seconds, auto-advance
-    if not self._standby_advanced then
-        self._standby_timer = (self._standby_timer or 0) + elapsed_time
-        if self._standby_timer > 3.0 then
-            self._standby_advanced = true
-            print("[MATCH] WARNING: No standby response in 3s, auto-advancing battle")
-            battle_logic.is_play_animation = false
-            -- Also transition out of match screen
-            self:PlayAnimation("exit_battle", false)
+    if self._standby_complete then
+        return
+    end
+
+    self._standby_timer = (self._standby_timer or 0) + elapsed_time
+
+    -- Some APK/resource builds do not fire the enter_battle completion callback.
+    -- Without this fallback the first offline battle can sit on the opponent
+    -- placeholder forever because req_battle_standby is never sent.
+    if not self._standby_requested and self._standby_timer > ENTER_ANIMATION_TIMEOUT then
+        print("[MATCH] WARNING: enter_battle callback missing; sending standby request")
+        self:_RequestStandby("enter_timeout")
+        return
+    end
+
+    if self._exit_requested then
+        self._exit_timer = (self._exit_timer or 0) + elapsed_time
+        if self._exit_timer > EXIT_ANIMATION_TIMEOUT then
+            print("[MATCH] WARNING: exit_battle callback missing; completing standby")
+            self:_CompleteStandby("battle_panel_standby_timeout")
         end
+        return
+    end
+
+    -- If the in-process server response or command dispatch gets swallowed,
+    -- leave the match screen rather than hanging forever.
+    if self._standby_requested and self._standby_timer > STANDBY_RESPONSE_TIMEOUT then
+        print("[MATCH] WARNING: No standby response; auto-advancing battle")
+        battle_logic.is_play_animation = false
+        self:_ExitMatchPanel("standby_response_timeout")
     end
 end
-
 
 function meta:RegisterWidgetEvent()
 
@@ -83,13 +138,13 @@ function meta:RegisterWidgetEvent()
         elseif event_name == "gold_coin_ready" then
             if battle_logic.start_type ~= "replay" or battle_logic.battle_status == BATTLE_STATUS.standby then
                 battle_logic:DispatchEvent("gold_coin_ready")
+                self:_CompleteStandby("battle_panel_standby")
             else
                 battle_logic:DispatchEvent("anim_complete", "gold_coin_ready")
             end
         end
     end)
 end
-
 
 -- Set own player
 function meta:SetOwnPlayer(actor)
@@ -107,7 +162,6 @@ function meta:SetEnemyPlayer(actor)
     if not actor then
         return
     end
-    ui_helper:SetTextByKey(self.match_enemy_name_txt, actor.user_name)
     ui_helper:SetTextByKey(self.match_enemy_name_txt, actor.user_name)
     -- ui_helper:SetTextByKey(self.match_enemy_power_txt, "battle_power_desc", actor.strength)
     -- self.match_enemy_power_txt:setVisible(false)
@@ -132,7 +186,7 @@ function meta:RegisterEvent()
     end)
 
     battle_logic:RegisterEvent("battle_panel_standby", function (recv_msg)
-        self:PlayAnimation("exit_battle", false)
+        self:_ExitMatchPanel("server_standby")
     end)
 end
 

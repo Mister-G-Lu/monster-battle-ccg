@@ -30,7 +30,7 @@ local function _parse_csv_line(line, key_col, keys)
         local id_text = string.sub(line, 1, startp-1)
 
         if id_text == "" then
-            --忽略注释行
+            -- Ignore comment lines
             return
 
         else
@@ -84,7 +84,7 @@ local function _parse_csv_line(line, key_col, keys)
                         txt = txt == "1" and true or false
 
                     elseif cur_csv_locale then
-                        --转换文本
+                        -- Convert text
                         local a = cur_csv_locale[res.ID .. "_" .. key]
                         if a then
                             txt = a
@@ -219,7 +219,7 @@ function csv.Load(file_name)
     _type = {}
     local keys
     for line in string.gmatch(str, "[^\n]+") do
-        --print("表的line",path,line)
+        --print("table line", path, line)
         if string.find(line, "\r", -1) then
             line = string.sub(line, 1, -2)
         end
@@ -232,12 +232,12 @@ function csv.Load(file_name)
             end
 
         elseif line_num == key_row then
-            --解析字段名
+            -- Parse field names
             keys = _parse_csv_line(line, key_col)
             _check_col_name(keys, key_col, path)
 
         elseif(line_num == key_row - 1) then
-            --解析类型
+            -- Parse types
             _type =  _parse_csv_line(line, key_col)
             _check_data_type(_type, key_col, path)
         end

@@ -27,7 +27,7 @@ function meta:ctor()
     arena_node:setVisible(false)
     self:addChild(arena_node)
     self.arena_node = arena_node
-    -- 邮件入口
+    -- Mail entry
     self.mail_btn = self:getChildByName("mailbox")
     -- new mail tips animation
     self.mail_btn_newtip = self.mail_btn:getChildByName("newtip")
@@ -36,15 +36,15 @@ function meta:ctor()
 
     -- PVP
     self.pvp_btn = self:getChildByName("pvpbtn")
-    -- 事件
+    -- Events
     self.event_btn = self:getChildByName("event")
-    -- 补充包
+    -- Booster packs
     self.card_chest_btn = self:getChildByName("cardbag")
-    -- 卡本
+    -- Card album
     self.card_book_btn = self:getChildByName("cardbook")
-    -- 商店
+    -- Shop
     self.shop_btn = self:getChildByName("shop")
-    -- 帮助
+    -- Help
     self.help_btn = self:getChildByName("helpbtn")
     local path = "interface/world/help_btn.csb"
     ui_helper:BindTimeLine(self.help_btn, path)
@@ -55,10 +55,10 @@ function meta:ctor()
         self.help_btn:PlayAnimation("loop", true)
     end
 
-    -- 账号绑定
+    -- Account binding
     self.setting_btn = self:getChildByName("setting")
 
-    -- 好友
+    -- Friends
     self.friend_btn = self:getChildByName("friend")
 
     self.friend_btn_newtip = self.friend_btn:getChildByName("newtip")
@@ -70,7 +70,7 @@ function meta:ctor()
         self.friend_btn_newtip:setVisible(true)
     end
 
-    -- 社区
+    -- Community
     -- self.community_btn = self:getChildByName("community")
     -- PVE
     self.pve_btn = self:getChildByName("pvebtn")
@@ -87,14 +87,14 @@ function meta:ctor()
         -- self.community_btn:setVisible(false)
     -- end
 
-    -- 排行
+    -- Rankings
     self.rank_btn = self:getChildByName("ladder")
 
-    -- -- 每日奖励
+    -- -- Daily reward
     -- self.reward_tip_node = self:getChildByName("reward_tip")
     -- self.reward_tip_node:setVisible(daily_logic.login_reward > 0)
 
-    -- 任务
+    -- Tasks
     self.task_btn = self:getChildByName("task")
     local tip = self.task_btn:getChildByName("newtip")
     ui_helper:BindTimeLine(tip, "interface/world/newtip.csb")
@@ -102,7 +102,7 @@ function meta:ctor()
     tip:setVisible(user_logic.task_hint)
     self.task_btn.tips_node = tip
 
-    -- 成就
+    -- Achievements
     self.achievement_btn = self:getChildByName("achievement")
     local tip = self.achievement_btn:getChildByName("newtip")
     ui_helper:BindTimeLine(tip, "interface/world/newtip.csb")
@@ -123,7 +123,7 @@ function meta:Update(elapsed_time)
 end
 
 
--- 注册渲染事件
+-- Register render events
 function meta:RegisterEvent()
     graphic:RegisterEvent("refresh_new_task", function (is_show)
         if is_show then
@@ -141,7 +141,7 @@ function meta:RegisterEvent()
         end
     end)
 
-    -- 新邮件
+    -- New mail
     graphic:RegisterEvent("refresh_new_mail", function(new_mail_num)
         if new_mail_num > 0 then
             self.mail_btn_newtip:setVisible(true)
@@ -149,7 +149,7 @@ function meta:RegisterEvent()
             self.mail_btn_newtip:setVisible(false)
         end
     end)
-    --好友消息提示
+    -- Friend message indicator
     graphic:RegisterEvent("refresh_new_friendtip", function(show)
         if show then
             self.friend_btn_newtip:setVisible(true)
@@ -157,7 +157,7 @@ function meta:RegisterEvent()
             self.friend_btn_newtip:setVisible(false)
         end
     end)
-    --检查是否开放PVE
+    -- Check whether PVE is unlocked
     graphic:RegisterEvent("check_pve_is_turned", function (stage,level)
         if stage == constants.ARENA_STAGE.casual and level == 1 then
             self.pve_btn:setVisible(false)
@@ -178,9 +178,9 @@ end
 function meta:Refresh()
 end
 
--- 注册UI事件
+-- Register UI events
 function meta:RegisterWidgetEvent()
-    -- 邮件
+    -- Mail
     ui_helper:AddClick(self.mail_btn, function ()
         mail_logic:Query()
     end)
@@ -194,32 +194,32 @@ function meta:RegisterWidgetEvent()
         pve_logic:ShowPve()
     end)
 
-    -- 事件 --约战
+    -- Events / challenge
     ui_helper:AddClick(self.event_btn, function ()
         challenge_logic:Query()
     end)
 
-    -- 任务
+    -- Tasks
     ui_helper:AddClick(self.task_btn, function ()
         local task_logic = require "logic.task"
         task_logic:ShowTaskPanel()
     end)
 
-    -- 补充包
+    -- Booster packs
     ui_helper:AddClick(self.card_chest_btn, function ()
         graphic:DispatchEvent("push_world_panel", "chest", "bag_panel")
     end)
 
-    -- 卡本
+    -- Card album
     ui_helper:AddClick(self.card_book_btn, function ()
         graphic:DispatchEvent("switch_system_module", "deck")
     end)
 
-    -- 商店
+    -- Shop
     ui_helper:AddClick(self.shop_btn, function ()
     end)
 
-    -- 帮助
+    -- Help
     local button = self.help_btn:getChildByName("helpbtn")
     ui_helper:AddClick(button, function ()
         if not configuration:IsShowHelp() then
@@ -229,24 +229,24 @@ function meta:RegisterWidgetEvent()
         graphic:DispatchEvent("push_world_panel", "world", "help_panel")
     end)
 
-    --账号绑定
+    -- Account binding
     ui_helper:AddClick(self.setting_btn, function ()
         graphic:DispatchEvent("push_world_panel", "setting", "global_setting_panel")
     end)
 
-    --好友
+    -- Friends
     ui_helper:AddClick(self.friend_btn, function ()
         friend_logic:Query()
     end)
 
     -- community_btn removed (ThirdHelper unavailable offline)
 
-    -- 排行
+    -- Rankings
     ui_helper:AddClick(self.rank_btn, function ()
         rank_logic:QueryRank()
     end)
 
-    -- 成就
+    -- Achievements
     ui_helper:AddClick(self.achievement_btn, function ()
         local achievement_logic = require "logic.achievement"
         achievement_logic:Query()

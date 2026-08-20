@@ -1377,6 +1377,18 @@ function meta:RegisterCmdHandler()
     self:RegisterEvent("anim_complete",function (anim_name)
         self.is_play_animation = false
         self._standby_block_time = 0
+
+        -- The match panel has multiple safety paths (animation frame,
+        -- animation callback, and timeout). Late duplicate standby completions
+        -- must not pop the next battle command from the queue.
+        if anim_name == "battle_panel_standby" or anim_name == "battle_panel_standby_timeout" then
+            local command = self:PopBattleQueue()
+            if not command or command.name ~= "cmd_battle_standby" then
+                print("[BATTLE] Ignoring duplicate standby anim_complete: " .. tostring(anim_name))
+                return
+            end
+        end
+
         self:CommandComplete()
     end)
 

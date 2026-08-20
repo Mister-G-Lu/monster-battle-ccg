@@ -1606,6 +1606,6 @@ ID,group_id,level,name,type,quality,kind,hp,flags,res_path,cost,score,deck_limit
 ,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,
 119001,11900,1,Triglodite Brute,monster,normal,war,1,0,triglodite,2,40,2,melee,3,,,,
-149018,14901,8,Gerbip king,monster,epic,nature,9,0,gerbip,1,120,2,melee,3,ranged,3,draft,3
+149018,14901,8,Gerbip king,monster,epic,nature,9,0,gerbip,5,640,2,melee,3,ranged,3,draft,3
 ,,,,,,,,,,,,,,,,,,
 21901,21901,1,Vibranium Armor,armor,epic,war,99,0,chain_mail,1,140,2,,,,,,
