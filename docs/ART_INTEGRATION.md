@@ -150,16 +150,12 @@ icons the APK atlas lacks. For a commercially-safe re-release, Kenney + OpenGame
 
 ## 5. Roadmap — how far the Android look can be pushed next
 
-Already present in the assets, not yet wired into the DOM:
+Wired into the DOM (presentation-parity slice):
 
-1. **Full card frame** — `ui/border/card_border.png`, `battlecard_*.png`,
-   `title_goldborder.png` (the Android card chrome) layered behind the art.
-2. **Skill icons on cards** — `ui/skill/*.png` for each keyword instead of the
-   text keyword line (80 icons cover nearly every power name).
-3. **Crystal & HP icons** — `ui/crystal.png`, `ui/border/hp_bg.png` to replace the
-   ⚔/❤ glyphs with real stat icons.
-4. **Encounter intro portraits** — show a boss's creature art in the intro
-   overlay instead of the emoji.
+1. **Full card frame** — `ui/border/card_border.png` / equip frames layered over art.
+2. **Skill icons on cards** — `ui/skill/*.png` for each keyword (missing names fall back to a blank icon tile).
+3. **Crystal & HP icons** — `ui/crystal.png`, `ui/border/hp_bg.png` on cards and the crystal bar.
+4. **Encounter intro portraits** — boss/elite deck art (faction emblem placeholder for pool-only skirmishes).
 5. **Animated sprites** — `assets/animation.zip` (6.9 MB) holds Cocos2d-x
    animations that could drive attack/death effects.
 6. **Sound** — `assets/sound.zip` (4.9 MB) for card/battle SFX.

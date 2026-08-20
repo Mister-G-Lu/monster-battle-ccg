@@ -105,19 +105,16 @@ This directly satisfies VP §3 (data layer), §16 (one campaign), and §10
 
 In dependency order, each a small vertical slice:
 
-- **Slice 2** — adopt `campaign_data_generated.lua` in PR #9's native module:
-  `campaign_data.lua` should `require` the generated tables instead of
-  hand-maintaining its own (kills the Android/Web campaign duplication).
+- **Slice 2** — adopt `campaign_data_generated.lua` in the native module:
+  `src/manager/campaign_data.lua` `require`s the generated tables (no hand-copied nodes).
 - **Slice 3** — one playable level, end-to-end: drive the *native* engine from
   canonical JSON for `w1` (Forest Trail), verify identical combat semantics
   (VP §14) against `offline_battle.lua`.
-- **Slice 4** — collapse the two web copies (`index.html` ↔ `game.html`) into
-  one shell so `main` stops drifting.
-- **Slice 5** — shared-engine investigation (VP §8): feasibility of LuaJIT→WASM
-  vs. a WebView/Capacitor shell vs. hosting the Lua battle server behind a thin
-  web client. *Decision, not code, first.*
-- **Slice 6+** — migration of remaining campaign nodes, then presentation
-  parity (animations/effects) per VP §7/§15.
+- **Slice 4** — keep `index.html` ↔ `build/web/game.html` byte-identical.
+- **Slice 5** — **DECIDED** (see `docs/ENGINE_STRATEGY.md`): stay on the thin JS
+  port + APK art for the HTML host; do not start WASM/Capacitor this phase.
+- **Slice 6** — presentation parity (card frames, skill icons, crystal/HP chrome,
+  encounter portraits) so the HTML host uses the Android visual language.
 
 ## 6. Guardrails agreed from the VP plan (kept in force)
 
