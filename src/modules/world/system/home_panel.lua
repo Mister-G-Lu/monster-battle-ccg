@@ -16,6 +16,17 @@ function meta:ctor()
     arena_node:setVisible(false)
     self:addChild(arena_node)
     self.arena_node = arena_node
+
+    -- Campaign map (The Shadow Road) - the Play/Battle destination
+    self.campaign_node = nil
+    local ok, campaign_node = pcall(function ()
+        return require("modules.world.system.campaign_panel").new()
+    end)
+    if ok and campaign_node then
+        campaign_node:setVisible(false)
+        self:addChild(campaign_node)
+        self.campaign_node = campaign_node
+    end
     -- Mail entry
     self.mail_btn = self:getChildByName("mailbox")
     -- new mail tips animation
@@ -23,9 +34,9 @@ function meta:ctor()
     ui_helper:BindTimeLine(self.mail_btn_newtip, "interface/world/newtip.csb")
     self.mail_btn_newtip:PlayAnimation("loop", true)
 
-    -- Battle: original PVP + PVE both opened the same campaign in offline
-    -- mode. Keep one Play button (the PVE node) and hide the duplicate PVP
-    -- entry so the home bar isn't two doors to the same room.
+    -- Battle: the single Play button (the PVE node) now opens "The Shadow
+    -- Road" campaign map. The original PVP entry is hidden (offline has no
+    -- second player), so the home bar isn't two doors to the same room.
     self.pvp_btn = self:getChildByName("pvpbtn")
     if self.pvp_btn then self.pvp_btn:setVisible(false) end
 
@@ -103,6 +114,9 @@ end
 function meta:Update(elapsed_time)
     -- self.reward_tip_node:setVisible(daily_logic.login_reward > 0)
     self.arena_node:Update(elapsed_time)
+    if self.campaign_node then
+        self.campaign_node:Update(elapsed_time)
+    end
 end
 
 
@@ -152,10 +166,14 @@ function meta:RegisterWidgetEvent()
     ui_helper:AddClick(self.mail_btn, function ()
         mail_logic:Query()
     end)
-    -- PVE / Play
+    -- PVE / Play -> The Shadow Road campaign map
     if self.pve_btn then
         ui_helper:AddClick(self.pve_btn, function ()
-            pve_logic:ShowPve()
+            if self.campaign_node then
+                self.campaign_node:Show()
+            else
+                pve_logic:ShowPve()
+            end
         end)
     end
 

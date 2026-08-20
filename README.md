@@ -107,6 +107,7 @@ python3 scripts/setup_test_env.py     # decrypt game Lua from the APK into decry
 luajit tests/sim_test.lua             # 29-check game logic simulation
 luajit tests/integration_test.lua     # 106-check integration tests
 luajit tests/guide_battle_test.lua    # tutorial battle end-to-end regression (client side)
+luajit tests/campaign_test.lua        # native "Shadow Road" campaign: map, hero-HP duels, powers, rewards
 node tests/campaign_sim.js 80         # web campaign: engine regression + difficulty curve report
 ```
 
@@ -149,6 +150,7 @@ monster-battle-ccg/
 ├── tests/                        # Headless test suites
 │   ├── sim_test.lua              # 29-check game logic simulation
 │   ├── integration_test.lua      # 106-check integration tests
+│   ├── campaign_test.lua         # Native Shadow Road campaign integration
 │   └── guide_battle_test.lua     # Tutorial battle client-side end-to-end regression
 ├── csv_data/                     # Game configuration (plain CSV)
 ├── English_offline.apk           # Final installable APK (~55 MB) — install THIS one

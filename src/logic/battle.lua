@@ -62,6 +62,11 @@ function meta:Clean()
     self.is_battle_over = false
     self.is_own = false
     self.pve_win_cur_value = 0
+    -- campaign hero HP (defaults; updated by cmd_battle_hero)
+    self.own_hero_hp = 0
+    self.own_hero_max_hp = 0
+    self.enemy_hero_hp = 0
+    self.enemy_hero_max_hp = 0
     self._standby_block_time = 0
     self._auto_standby_wait = 0
     self._enemy_think_time = 0
@@ -1024,6 +1029,26 @@ function meta:RegisterCmdHandler()
         self:CommandComplete()
     end)
 
+    -- Campaign hero-HP sync (The Shadow Road). The offline server pushes the
+    -- current hero totals; forward them to the battle UI and keep the flow
+    -- moving. Any UI can subscribe to "update_hero_hp".
+    self:RegisterEvent("cmd_battle_hero", function (recv_msg)
+        local is_own = self.own_player and (recv_msg.own_user_id == self.own_player.user_id)
+        if is_own then
+            self.own_hero_hp = recv_msg.own_hp
+            self.own_hero_max_hp = recv_msg.own_max_hp
+            self.enemy_hero_hp = recv_msg.enemy_hp
+            self.enemy_hero_max_hp = recv_msg.enemy_max_hp
+        else
+            self.own_hero_hp = recv_msg.enemy_hp
+            self.own_hero_max_hp = recv_msg.enemy_max_hp
+            self.enemy_hero_hp = recv_msg.own_hp
+            self.enemy_hero_max_hp = recv_msg.own_max_hp
+        end
+        self:DispatchEvent("update_hero_hp", self.own_hero_hp, self.own_hero_max_hp, self.enemy_hero_hp, self.enemy_hero_max_hp)
+        self:CommandComplete()
+    end)
+
     self:RegisterEvent("cmd_battle_move",function (recv_msg)
         self:ParseBattleEvent("cmd_battle_move", recv_msg)
         local src_user_id = recv_msg.src_user_id
@@ -1297,6 +1322,11 @@ function meta:RegisterCmdHandler()
             end
         end
         graphic:DispatchEvent("pve_exam_update", result, recv_msg.adventure_info)
+
+        -- campaign battle over: tell the campaign map to refresh its nodes
+        if self.battle_type == "campaign" then
+            graphic:DispatchEvent("refresh_campaign", recv_msg.campaign_info)
+        end
 
         self:DispatchEvent("show_battle_result", result, recv_msg)
         
