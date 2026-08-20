@@ -406,6 +406,8 @@ def build_web_data(rows: list[dict], pve: dict) -> dict:
             "flags": to_int(r["flags"]),
             "score": to_int(r["score"]),
             "attack": attack,
+            "res_path": r.get("res_path", ""),
+            "group_id": r.get("group_id", ""),
             "powers": powers,
         }
     return {"cards": cards, "pve": pve}
