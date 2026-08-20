@@ -55,6 +55,7 @@ CHANGED = {
     "src/logic/guide.lua": os.path.join(DECRYPTED, "logic", "guide.lua"),
     "src/logic/battle.lua": os.path.join(DECRYPTED, "logic", "battle.lua"),
     "src/modules/battle/match_panel.lua": os.path.join(DECRYPTED, "modules", "battle", "match_panel.lua"),
+    "src/manager/text_loader.lua": os.path.join(DECRYPTED, "manager", "text_loader.lua"),
 }
 
 errors = []
@@ -141,7 +142,21 @@ def step_rebuild_mu():
 # STEP 3: Build APK from decoded_apk (has fixed manifest)
 # ===========================================================================
 def step_apktool_build():
-    print("\n[3/6] Building APK with apktool...")
+    # Extract CSVs from data.mu into assets/ so aandm.loadConfig can find them
+    # without needing successful decompression (fixes SIGFPE crash on some devices)
+    print("\n[3a/6] Extracting CSVs from data.mu into assets/...")
+    data_mu_path = os.path.join(WORK, "build", "decoded_apk", "assets", "data.mu")
+    assets_dir = os.path.join(WORK, "build", "decoded_apk", "assets")
+    with zipfile.ZipFile(data_mu_path, "r") as zin:
+        for entry in zin.namelist():
+            if entry.startswith("res/data/") and entry.endswith(".csv"):
+                out_path = os.path.join(assets_dir, entry)
+                os.makedirs(os.path.dirname(out_path), exist_ok=True)
+                with open(out_path, "wb") as f:
+                    f.write(zin.read(entry))
+    ok("CSVs extracted from data.mu into assets/")
+
+    print("\n[3b/6] Building APK with apktool...")
 
     # Copy patched src.mu into decoded APK assets
     assets_dir = os.path.join(DECODED_APK, "assets")

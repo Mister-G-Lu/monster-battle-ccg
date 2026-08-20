@@ -6,10 +6,7 @@ local locale_list = {
 }
 -- 加载语言文件
 function meta:Init(lang)
-    -- This is the English offline edition.  Do not infer the device locale:
-    -- doing so previously loaded Chinese UI text on Chinese-language emulators.
-    local language = cc.LANGUAGE_ENGLISH
-    lang = "en-US"
+    local language = cc.Application:getInstance():getCurrentLanguage()
 
     if not locale_list[language] then
         locale_list[language] = locale_list[cc.LANGUAGE_ENGLISH]
@@ -81,7 +78,12 @@ function meta:Load(lang)
     end
 
     local table_info = {}
-    local str = aandm.loadConfig(string.format("res/data/client_lang_%s.csv", lang))
+    local str = nil
+    pcall(function() str = aandm.loadConfig(string.format("res/data/client_lang_%s.csv", lang)) end)
+    if not str or str == "" then
+        print("[TEXT_LOADER] WARNING: language CSV not found for lang=" .. tostring(lang))
+        return table_info
+    end
     local line_num = 0
     for line in string.gmatch(str, "[^\n]+") do
         if string.find(line, "\r", -1) then

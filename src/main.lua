@@ -15,19 +15,8 @@ require "config"
 require "cocos.init"
 local json = require "utils.json"
 
--- The original error tracer uploads failures over the retired game service.  Load
--- it only after the runtime is available and never let diagnostics abort startup.
-local error_tracer = nil
-local function init_error_tracer()
-    local ok, tracer = pcall(require, "manager.error_tracer")
-    if ok and tracer then
-        error_tracer = tracer
-        pcall(function() error_tracer:Init() end)
-        dbg("Legacy error tracer initialized (remote uploads disabled)")
-    else
-        dbg("Legacy error tracer unavailable: " .. tostring(tracer))
-    end
-end
+local error_tracer = require "manager.error_tracer"
+error_tracer:Init()
 
 function __G__TRACKBACK__(msg)
     dbg("CRASH: " .. tostring(msg))
@@ -42,35 +31,19 @@ function __G__TRACKBACK__(msg)
     str = str .. debug.traceback()
 
     if error_tracer then
-        pcall(function() error_tracer:PushErrorInfo(str) end)
-        -- Keep the diagnostic locally.  The original upload endpoint is retired,
-        -- and invoking its native upload path during an exception can terminate
-        -- the process before the useful local log has been written.
-        dbg("Crash recorded locally; remote upload intentionally disabled")
+        error_tracer:PushErrorInfo(str)
+        if error_tracer:GetUpdateDelay() == 0 then
+            pcall(function() error_tracer:UploadCrash() end)
+        end
     end
-
-    -- A native log is difficult to retrieve from BlueStacks after a launch
-    -- failure.  Show the same failure on-screen whenever Cocos is usable.
-    pcall(function()
-        local scene = cc.Scene:create()
-        local layer = cc.LayerColor:create(cc.Color(55, 15, 20, 255))
-        scene:addChild(layer)
-        local size = cc.Director:getInstance():getWinSize()
-        local text = "Startup error. A report was saved to offline_debug.log.\n\n" .. tostring(msg)
-        local label = cc.Label:createWithSystemFont(text, "Helvetica", 16)
-        label:setDimensions(size.width * 0.9, size.height * 0.8)
-        label:setAlignment(cc.TEXT_ALIGNMENT_LEFT)
-        label:setPosition(cc.p(size.width / 2, size.height / 2))
-        scene:addChild(label)
-        cc.Director:getInstance():replaceScene(scene)
-    end)
 
     return msg
 end
 
 function main()
+    -- OFFLINE MODE: ensure flag is set before any decompression
+    _G["OFFLINE_MODE"] = true
     dbg("=== main() START ===")
-    init_error_tracer()
     local cc_app = cc.Application:getInstance()
     dbg("Platform: " .. tostring(cc_app and cc_app:getTargetPlatform() or "nil"))
     local file_util = cc.FileUtils:getInstance()
@@ -139,6 +112,8 @@ function main()
 
                 local do_decompress = false
                 pcall(function() do_decompress = aandm.needDecompress() end)
+                -- OFFLINE MODE: always decompress to ensure CSVs are extracted from data.mu
+                do_decompress = true
                 dbg("needDecompress = " .. tostring(do_decompress))
                 if do_decompress then
                     local file_list = {
@@ -187,7 +162,7 @@ function main()
                         end
                     end
 
-                    dbg("Decompression completed; remote crash upload disabled")
+                    pcall(function() error_tracer:UploadCrash() end)
 
                     pcall(function()
                         local str = cc.FileUtils:getInstance():getStringFromFile("assets.manifest")
