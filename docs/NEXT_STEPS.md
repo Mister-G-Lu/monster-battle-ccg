@@ -1,173 +1,104 @@
 # Next Steps — PR Roadmap for the Android + Web Consolidation
 
-Status of the consolidation at the time of writing:
+Status after **PR #13 merged** (`arena/01a020de-monster-battle-ccg`):
 
-- **PR #10 merged** — the art integration **and** the first consolidation slice
-  (one canonical campaign source: `content/campaign_data.json` →
-  `scripts/refresh_campaign_data.py` → web blob + `campaign_data_generated.lua`).
-- **PR #11 merged earlier** — the Android battle engine ported to the web shell
-  (items/equip/armor/consume, full keywords, strategic AI).
-- **Web shells are identical again** (`index.html` == `build/web/game.html`),
-  both running the full engine + real art + the canonical campaign.
-- **PR #9 is still OPEN** — the native "Shadow Road" campaign, which currently
-  **hand-copies** the campaign in `src/manager/campaign_data.lua`. That copy is
-  now the main consolidation debt: it duplicates the canonical JSON.
+- **PR #10–#12 merged** — canonical campaign JSON, web engine port, art extract.
+- **PR #13 merged** — HTML presentation parity (Android card chrome, skill/crystal/HP
+  icons, encounter portraits); `index.html` == `build/web/game.html`;
+  `docs/ENGINE_STRATEGY.md` (stay on JS port + APK art for the HTML host);
+  native `src/manager/campaign_data.lua` is an adapter over
+  `campaign_data_generated.lua` (no hand-copied nodes).
+- **Still open:** drive the *native* Lua battle engine from that same data for
+  one full level; lift elite/boss powers out of web-only hooks; generator
+  freshness in CI.
 
 The order below is deliberately small, vertical slices (VP §10). Each PR must
 land independently, with its own green tests, before the next starts.
 
 ---
 
-## PR A — Reconcile the native campaign with the canonical data (unblock PR #9)
-
-**Goal.** Kill the "AndroidCampaign vs WebCampaign" duplication (VP §16) that
-PR #9 introduced: its `src/manager/campaign_data.lua` hand-copies the same
-Shadow Road the web uses.
-
-**Problem it solves.** Two definitions of the same 19 nodes/powers/tokens now
-exist (the canonical JSON and PR #9's Lua). Any balance change must be made
-twice; they are already drifting (PR #9's nodes lack the newest power text).
-
-**Scope.**
-- Rebase PR #9 (`arena/01a0205d-monster-battle-ccg`) onto the merged `main`.
-- Replace the inline `REGIONS`/`TOKENS`/starter tables in
-  `src/manager/campaign_data.lua` with `require("manager.campaign_data_generated")`
-  and expose `M.REGIONS` / `M.TOKENS` / `M.STARTER_COLLECTION` from it
-  (keeping any native-only helpers like `kind_flag`, pool resolution, lookups).
-- Update the JSON if the generator's snake_case field names differ from what the
-  panel/engine expect — add a small adapter in `campaign_data.lua`, **not** a
-  second copy of the data.
-
-**Done when.**
-- `campaign_data.lua` contains **no** hand-written node/deck/power literals.
-- `scripts/refresh_campaign_data.py --verify` passes.
-- `luajit tests/campaign_test.lua` and `tests/campaign_balance_diag.lua` pass
-  unchanged (same campaign semantics as before, VP §14).
-- A one-line edit to a node in `content/campaign_data.json`, re-run of the
-  generator, changes both the web and the native game.
-
----
-
-## PR B — One playable level end-to-end on the native engine (the "proving slice")
+## Next PR — One playable level end-to-end on the native engine (`w1`)
 
 **Goal.** Prove the architecture on **one** complete level before migrating the
 rest (VP §10: "start with ONE complete playable campaign level").
 
-**Problem it solves.** Right now the canonical data drives the web engine; we
-have not yet demonstrated it driving the **canonical Android engine** through a
-full level with identical semantics.
+**Problem it solves.** Canonical JSON already drives the web engine and the
+native data tables. We have not yet shown it driving `offline_battle.lua`
+through a full Forest Trail (`w1`) with identical semantics.
 
-**Scope.** Use `w1` (Forest Trail, skirmish, nature pool, HP 14):
+**Scope.** Use `w1` (skirmish, nature pool, HP 14):
 - Drive `offline_battle` from the canonical node: pool resolution → enemy deck,
   player starter deck, HP/crystal/round rules, win/loss.
-- Keep the web and native outputs comparable: capture the `cmd_battle` event
-  stream from the native engine for `w1` and diff the *state transitions* against
-  the web engine's log for the same seed/deck (a mechanics-parity harness, not a
-  pixel diff).
+- Capture the `cmd_battle` event stream from the native engine for `w1` and
+  diff *state transitions* against the web engine log for the same seed/deck
+  (mechanics-parity harness, not a pixel diff).
 
 **Done when.**
 - `w1` is playable end-to-end on the native build with no new gameplay code —
-  only data plumbing (VP §4: "the campaign should configure the engine").
-- The parity harness lists every observed difference and each is either fixed
-  (native is authoritative, VP §14) or explicitly waived with a reason.
-- A new test (`tests/level_w1_test.lua`) asserts victory and defeat for `w1`.
+  only data plumbing (VP §4).
+- The parity harness lists every observed difference; each is fixed (native is
+  authoritative, VP §14) or explicitly waived.
+- `tests/level_w1_test.lua` asserts victory and defeat for `w1`.
 
 ---
 
-## PR C — Shared-engine feasibility decision (VP §8, decision first, no code)
+## Landed (do not re-open)
 
-**Goal.** Pick the long-term "one engine, two shells" route and stop the
-speculative drift.
+### PR A — Native campaign adapter — **done in #13**
 
-**Problem it solves.** The web shell is a JS **port** of the Lua engine, which
-violates the spirit of "one canonical engine" — but the Cocos2d-x/LuaJIT binary
-cannot run in a browser today. We need a documented, decided answer.
+`campaign_data.lua` has no node/deck/power literals; it requires
+`campaign_data_generated.lua`. Remaining work if PR #9's panel still exists
+elsewhere: rebase that panel onto this adapter, do not copy tables again.
 
-**Scope (a decision doc, not a rewrite).**
-- Evaluate: (1) LuaJIT → WebAssembly (e.g. WASI/Lua.WASM hosting the existing
-  `offline_battle.lua`/`offline_server.lua`), (2) a WebView/Capacitor wrapper
-  shipping the existing APK core, (3) the current "thin JS port fed by the same
-  canonical data + a parity harness" as a deliberate interim.
-- Recommend one, with cost/risk, and the concrete first spike for it.
+### PR C — Engine strategy — **done in #13**
 
-**Done when.** `docs/ENGINE_STRATEGY.md` exists with a recommendation and a
-go/no-go; the choice is recorded in `docs/CONSOLIDATION_PLAN.md`.
+`docs/ENGINE_STRATEGY.md`: HTML host stays on the thin JS port + APK art.
+WASM/Capacitor is a later spike only.
 
----
+### PR D — Presentation parity (chrome) — **done in #13**
 
-## PR D — Presentation parity for the web shell (VP §7 / §15)
-
-**Goal.** Close the visual gap between the web shell and the Android game now
-that the engine is shared.
-
-**Problem it solves.** The web cards/backdrops look good but are still
-hand-built approximations; the Android atlas contains the real frames, icons and
-effects we already extracted.
-
-**Scope (incremental, one PR each if needed):**
-- Item cards: verify the full-size art frame for equip/armor/consume reads
-  clearly (the merge just reconciled the CSS; needs a visual pass).
-- Card chrome: layer the real frame sprites (`ui/border/*`, `frame/bg_*.png`)
-  behind the art instead of the gradient card background.
-- Skill icons: replace the text keyword line with `ui/skill/*.png`.
-- Stat icons: replace ⚔/❤ glyphs with `ui/crystal.png`, `ui/border/hp_bg.png`.
-- Encounter intro: show boss/creature art instead of emoji.
-- (Later) `animation.zip` sprite sequences and `sound.zip` SFX.
-
-**Done when.** A side-by-side review of the web shell vs the Android game shows
-the same visual language (VP §7), and `tests/campaign_sim.js` still passes.
+Frames, skill icons, crystal/HP sprites, encounter portraits. Follow-ups
+(`animation.zip`, `sound.zip`) are optional polish, not blockers.
 
 ---
 
-## PR E — Migrate the remaining campaign nodes (the payoff)
+## After `w1`: remaining campaign powers (was PR E)
 
-**Goal.** Move all 19 nodes fully onto the canonical data path and drop any
-remaining per-level JS hooks.
+**Goal.** Move all 19 nodes fully onto the canonical data path and drop
+web-only per-level JS hooks.
 
-**Problem it solves.** The web engine still has `POWER_IMPL` scripted hooks for
-the 8 elite/boss powers. If the native engine's power system can express them
-(muster/plunder/bloodlust/warding/overgrowth/hunger/flamewave/toll), the powers
-should become **data + engine features**, not web-only code (VP §4).
-
-**Scope.**
-- For each scripted power, decide: existing engine system vs new shared mechanic.
-  New mechanics go into the engine (`offline_battle.lua` + the JS port), gated by
-  the canonical power `id`, never a web-only workaround (VP §14).
-- Delete the web-only `POWER_IMPL` in favour of the shared implementation.
+**Problem it solves.** The web engine still scripts the 8 elite/boss powers
+(`muster` / `plunder` / `bloodlust` / `warding` / `overgrowth` / `hunger` /
+`flamewave` / `toll`). If the native engine can express them, they become
+**data + engine features**, not web-only code (VP §4).
 
 **Done when.** Adding a level is **only** a JSON edit (VP §17), and every boss
-power is validated by both `campaign_sim.js` and the Lua integration tests.
+power is validated by both `campaign_sim.js` and Lua integration tests.
 
 ---
 
-## PR F — Collapse the remaining "two sources" debt
+## After powers: generator freshness (was PR F)
 
 **Goal.** One campaign, one card set, one place to fix a bug.
 
-**Problem it solves.** The web copy drift we fixed for the HTML shells still
-exists in spirit elsewhere: `build/web/game_data.json` vs the `GAME_DATA` blob,
-and the CSV vs the web JSON (regeneration exists but is easy to forget).
-
 **Scope.**
-- Add a CI-able check: `refresh_campaign_data.py --verify` and
-  `refresh_web_data.py` must produce a clean `git diff` (i.e. the checked-in
-  artifacts are never stale). Wire it into the test suite / a `make verify`.
-- Consider deleting `build/web/game_data.json` + the `GAME_DATA` blob duplication
-  by having the page fetch one file (keep it working offline/`file://`-safe).
+- CI check: `refresh_campaign_data.py --verify` and `refresh_web_data.py`
+  leave a clean `git diff`.
+- Optionally drop `GAME_DATA` vs `game_data.json` duplication while keeping
+  `file://` playable.
 
-**Done when.** `git status` is clean after running all generators, and CI fails
-if a content change is committed without regenerating.
+**Done when.** `git status` is clean after generators; CI fails on stale blobs.
 
 ---
 
 ## Out of scope / risks to keep visible
 
-- **Full shared runtime (WASM/WebView)** is gated behind PR C's decision — do
-  not start it speculatively.
+- **Full shared runtime (WASM/WebView)** — decided against for the HTML host
+  (`ENGINE_STRATEGY.md`). Do not start it speculatively.
 - **Rewriting the Lua engine for "prettiness"** is forbidden (VP §13); adapters
   only.
-- **PR #9 is a moving target** — it must be rebased/merged before PR B can rely
-  on its panel wiring.
+- **PR #9 panel wiring** — if it still exists as a separate branch, rebase onto
+  the adapter in `campaign_data.lua`; do not reintroduce literals.
 
 ## Overall "done" (VP §17, abbreviated)
 
