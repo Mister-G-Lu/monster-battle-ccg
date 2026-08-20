@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 1,
+  "starterCollection": [
+    110011,
+    110011,
+    110051,
+    110041,
+    120021,
+    120021,
+    120031,
+    130031,
+    130031,
+    130041,
+    140021,
+    140021,
+    140031,
+    150011,
+    150011,
+    150061
+  ],
+  "tokens": {
+    "sapling": {
+      "token": true,
+      "id": "tok_sapling",
+      "name": "Sapling",
+      "kind": "nature",
+      "cost": 1,
+      "attack": 1,
+      "hp": 1,
+      "powers": []
+    },
+    "whelp": {
+      "token": true,
+      "id": "tok_whelp",
+      "name": "Beast Whelp",
+      "kind": "nature",
+      "cost": 1,
+      "attack": 1,
+      "hp": 2,
+      "powers": []
+    },
+    "wraith": {
+      "token": true,
+      "id": "tok_wraith",
+      "name": "Wraithguard",
+      "kind": "balance",
+      "cost": 3,
+      "attack": 2,
+      "hp": 2,
+      "powers": []
+    }
+  },
+  "regions": [
+    {
+      "id": "act1",
+      "name": "Act I — Whispering Woods",
+      "sub": "The forest has grown teeth.",
+      "faction": "nature",
+      "icon": "🌿",
+      "nodes": [
+        {
+          "id": "w1",
+          "type": "skirmish",
+          "name": "Forest Trail",
+          "icon": "⚔️",
+          "enemyName": "Thicket Prowlers",
+          "pool": {
+            "kinds": [
+              "nature"
+            ],
+            "lvMin": 1,
+            "lvMax": 2,
+            "size": 9
+          },
+          "hp": 14,
+          "exp": 10,
+          "desc": "Vines shift where no wind blows. Something is hunting travelers."
+        },
+        {
+          "id": "w2",
+          "type": "skirmish",
+          "name": "Wolf Den",
+          "icon": "⚔️",
+          "enemyName": "Gnarl Pack",
+          "pool": {
+            "kinds": [
+              "nature"
+            ],
+            "lvMin": 2,
+            "lvMax": 3,
+            "size": 9
+          },
+          "hp": 16,
+          "exp": 12,
+          "desc": "Wolves with bark for hide circle the hollow oak."
+        },
+        {
+          "id": "w3",
+          "type": "skirmish",
+          "name": "Moonlit Grove",
+          "icon": "⚔️",
+          "enemyName": "Grove Wardens",
+          "pool": {
+            "kinds": [
+              "nature"
+            ],
+            "lvMin": 3,
+            "lvMax": 3,
+            "size": 9
+          },
+          "hp": 18,
+          "exp": 14,
+          "desc": "The wardens no longer distinguish friend from intruder."
+        },
+        {
+          "id": "w4",
+          "type": "elite",
+          "name": "Boarlord's Camp",
+          "icon": "🛡️",
+          "enemyName": "Boarlord Gruff",
+          "deckIds": [
+            140013,
+            140013,
+            140023,
+            140023,
+            140033,
+            140033,
+            140053,
+            140053,
+            140042,
+            140042,
+            140072,
+            140072
+          ],
+          "hp": 30,
+          "exp": 22,
+          "desc": "A bristling war-camp in the ferns. The Boarlord never hunts alone.",
+          "power": {
+            "id": "muster",
+            "name": "Muster",
+            "desc": "On enemy turns 3 and 4, the Boarlord calls a Beast Whelp (1/2) into an empty lane."
+          }
+        },
+        {
+          "id": "w5",
+          "type": "boss",
+          "name": "The Heartroot",
+          "icon": "🌳",
+          "enemyName": "Verdant Tyrant",
+          "bossTitle": "BOSS — Warden of the Woods",
+          "deckIds": [
+            140024,
+            140024,
+            140034,
+            140043,
+            140073,
+            140153,
+            140153,
+            140173,
+            140163,
+            140183
+          ],
+          "hp": 26,
+          "exp": 40,
+          "desc": "The forest itself rises — a mountain of thorn and bloom that wants you gone.",
+          "power": {
+            "id": "overgrowth",
+            "name": "Overgrowth",
+            "desc": "While the Tyrant still holds cards it grows a Sapling (1/1) in an empty lane each enemy turn (two per turn from round 5). It heals 1 HP while any Sapling lives: cut them down (the blow carries through!) to starve it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "act2",
+      "name": "Act II — Sunken Caverns",
+      "sub": "The bandits dug too deep.",
+      "faction": "chaos",
+      "icon": "🕳️",
+      "nodes": [
+        {
+          "id": "c1",
+          "type": "skirmish",
+          "name": "Cave Mouth",
+          "icon": "⚔️",
+          "enemyName": "Scuttling Brood",
+          "pool": {
+            "kinds": [
+              "chaos"
+            ],
+            "lvMin": 2,
+            "lvMax": 3,
+            "size": 9
+          },
+          "hp": 20,
+          "exp": 14,
+          "desc": "The dark between the stalagmites has eyes. Dozens of them."
+        },
+        {
+          "id": "c2",
+          "type": "skirmish",
+          "name": "Fungal Depths",
+          "icon": "⚔️",
+          "enemyName": "Spore Hosts",
+          "pool": {
+            "kinds": [
+              "chaos"
+            ],
+            "lvMin": 3,
+            "lvMax": 4,
+            "size": 9
+          },
+          "hp": 22,
+          "exp": 16,
+          "desc": "Every breath tastes of rot. The mushrooms are wearing the miners."
+        },
+        {
+          "id": "c3",
+          "type": "skirmish",
+          "name": "Smugglers' Tunnel",
+          "icon": "⚔️",
+          "enemyName": "Gilded Fang Bandits",
+          "pool": {
+            "kinds": [
+              "fortune"
+            ],
+            "lvMin": 3,
+            "lvMax": 4,
+            "size": 9
+          },
+          "hp": 24,
+          "exp": 18,
+          "desc": "The Fang found a shortcut through the caves — and a toll with your name on it."
+        },
+        {
+          "id": "c4",
+          "type": "elite",
+          "name": "Fangmaster Vault",
+          "icon": "🛡️",
+          "enemyName": "Fangmaster Vex",
+          "deckIds": [
+            120023,
+            120023,
+            120033,
+            120033,
+            120043,
+            120043,
+            120103,
+            120103,
+            120053,
+            120053,
+            120061,
+            120061
+          ],
+          "hp": 32,
+          "exp": 28,
+          "desc": "Vex counts your crystals with a knife-smile. Every coin you drop is his.",
+          "power": {
+            "id": "plunder",
+            "name": "Plunder",
+            "desc": "From enemy turn 2 onward, Vex steals 1 crystal from you at the start of each of his turns — he ramps faster than you."
+          }
+        },
+        {
+          "id": "c5",
+          "type": "boss",
+          "name": "The Drowned Throne",
+          "icon": "💀",
+          "enemyName": "Hollow King",
+          "bossTitle": "BOSS — His Hunger Unending",
+          "deckIds": [
+            150013,
+            150013,
+            150063,
+            150063,
+            150053,
+            150053,
+            150103,
+            150103,
+            150033,
+            150173
+          ],
+          "hp": 26,
+          "exp": 55,
+          "desc": "A crown floating on black water. What wears it is always, always hungry.",
+          "power": {
+            "id": "hunger",
+            "name": "Hungering Dark",
+            "desc": "From enemy turn 4, the dark wakes: ALL of your creatures lose 1 HP each enemy turn, and for each one devoured the Hollow King heals 1 HP. Keep your creatures alive and it stays hungry."
+          }
+        }
+      ]
+    },
+    {
+      "id": "act3",
+      "name": "Act III — Emberpeak",
+      "sub": "The mountain is a forge, and you are the ore.",
+      "faction": "war",
+      "icon": "🔥",
+      "nodes": [
+        {
+          "id": "e1",
+          "type": "skirmish",
+          "name": "Ash Foothills",
+          "icon": "⚔️",
+          "enemyName": "Ash Scouts",
+          "pool": {
+            "kinds": [
+              "war"
+            ],
+            "lvMin": 3,
+            "lvMax": 3,
+            "size": 9
+          },
+          "hp": 26,
+          "exp": 18,
+          "desc": "Scouts in soot-grey armor. They have already lit the signal fires."
+        },
+        {
+          "id": "e2",
+          "type": "skirmish",
+          "name": "War Camp",
+          "icon": "⚔️",
+          "enemyName": "Ember Warband",
+          "pool": {
+            "kinds": [
+              "war"
+            ],
+            "lvMin": 3,
+            "lvMax": 4,
+            "size": 9
+          },
+          "hp": 28,
+          "exp": 20,
+          "desc": "Drums, whetstones, and a hundred veterans who have never lost a pass."
+        },
+        {
+          "id": "e3",
+          "type": "skirmish",
+          "name": "Magma Bridges",
+          "icon": "⚔️",
+          "enemyName": "Flame Dancers",
+          "pool": {
+            "kinds": [
+              "war"
+            ],
+            "lvMin": 4,
+            "lvMax": 4,
+            "size": 9
+          },
+          "hp": 30,
+          "exp": 22,
+          "desc": "They fight barefoot on liquid rock, and they never blink."
+        },
+        {
+          "id": "e4",
+          "type": "elite",
+          "name": "Alpha’s Ridge",
+          "icon": "🛡️",
+          "enemyName": "Flamehide Alpha",
+          "deckIds": [
+            110014,
+            110014,
+            110024,
+            110024,
+            110054,
+            110054,
+            110043,
+            110043,
+            110063,
+            110063,
+            110031,
+            110031
+          ],
+          "hp": 34,
+          "exp": 34,
+          "desc": "The pack leader, scarred by a hundred forge-fires. Its roar sets blood boiling.",
+          "power": {
+            "id": "bloodlust",
+            "name": "Bloodlust",
+            "desc": "From round 4, the Alpha howls — every enemy creature permanently gains +1 ATK."
+          }
+        },
+        {
+          "id": "e5",
+          "type": "boss",
+          "name": "The Caldera Gate",
+          "icon": "🌋",
+          "enemyName": "Ember Colossus",
+          "bossTitle": "BOSS — Furnace of War",
+          "deckIds": [
+            110054,
+            110054,
+            110103,
+            110103,
+            110063,
+            110063,
+            110031,
+            110031,
+            110171,
+            110171
+          ],
+          "hp": 27,
+          "exp": 70,
+          "desc": "A siege engine that climbed out of the lava, wearing the mountain as armor.",
+          "power": {
+            "id": "flamewave",
+            "name": "Molten Core",
+            "desc": "Every 3rd enemy turn, a Flame Wave burns ALL your creatures for 2 — keep something in hand to refill. Below half HP the Colossus ENRAGES: all its creatures permanently gain +1 ATK."
+          }
+        }
+      ]
+    },
+    {
+      "id": "act4",
+      "name": "Act IV — Shadowspire",
+      "sub": "The road ends where the light does.",
+      "faction": "balance",
+      "icon": "🌑",
+      "nodes": [
+        {
+          "id": "s1",
+          "type": "skirmish",
+          "name": "Broken Stair",
+          "icon": "⚔️",
+          "enemyName": "Vault Wardens",
+          "pool": {
+            "kinds": [
+              "balance"
+            ],
+            "lvMin": 4,
+            "lvMax": 4,
+            "size": 9
+          },
+          "hp": 30,
+          "exp": 22,
+          "desc": "The stairs to the spire are guarded by things that were once statues."
+        },
+        {
+          "id": "s2",
+          "type": "skirmish",
+          "name": "Hall of Mirrors",
+          "icon": "⚔️",
+          "enemyName": "Shade Twins",
+          "pool": {
+            "kinds": [
+              "balance",
+              "chaos"
+            ],
+            "lvMin": 4,
+            "lvMax": 4,
+            "size": 9
+          },
+          "hp": 32,
+          "exp": 25,
+          "desc": "Every reflection moves a half-second before you do."
+        },
+        {
+          "id": "s3",
+          "type": "elite",
+          "name": "The Silent Gate",
+          "icon": "🛡️",
+          "enemyName": "Vault Sentinel",
+          "deckIds": [
+            130012,
+            130012,
+            130022,
+            130022,
+            130032,
+            130032,
+            130042,
+            130042,
+            130052,
+            130052,
+            130061,
+            130061
+          ],
+          "hp": 32,
+          "exp": 42,
+          "desc": "It has kept this gate since before the Shadow came. It will keep you, too.",
+          "power": {
+            "id": "warding",
+            "name": "Warding",
+            "desc": "The Sentinel's wards blunt heavy blows: its creatures take 1 less damage from attacks of 3 or more. Glancing blows slip through."
+          }
+        },
+        {
+          "id": "s4",
+          "type": "boss",
+          "final": true,
+          "name": "The Shadow Throne",
+          "icon": "🌑",
+          "enemyName": "Shadow Sovereign",
+          "bossTitle": "FINAL BOSS — The Road Ends",
+          "deckIds": [
+            130191,
+            130191,
+            130061,
+            130043,
+            110103,
+            140155,
+            130092,
+            150023,
+            150172
+          ],
+          "hp": 34,
+          "exp": 120,
+          "desc": "Every foe you cut down on this road casts a shadow here. They have been waiting to return the favor.",
+          "power": {
+            "id": "toll",
+            "name": "Umbral Toll",
+            "desc": "From enemy turn 3, the Sovereign drains 1 HP from you each turn and heals itself the same. Below half HP the sky goes dark: ECLIPSE — it summons two Wraithguard (2/2)."
+          }
+        }
+      ]
+    }
+  ]
+}
