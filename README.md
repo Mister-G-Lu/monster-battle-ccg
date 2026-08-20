@@ -21,12 +21,41 @@ A fully offline, single-player version of the English Card Battle game (original
 ### Play Web Prototype
 Open `build/web/game.html` in any browser to test the card battle system with real game data (1,580 cards from the original CSVs).
 
-### Build from Source
+### Rebuild the APK
+The historical `build_and_verify.py` pipeline requires its original Windows
+apktool workspace. For a portable rebuild from an existing working APK, use:
+
 ```bash
-# Requires: Python 3.12+, Java 17+, Lua 5.1, apktool, androguard
-python scripts/build_and_verify.py
+# Requires Python 3 and a Java JDK (keytool + jarsigner)
+python scripts/rebuild_from_apk.py English.apk build/English_offline.apk
 ```
-This runs 73 automated checks (syntax, encryption round-trip, APK structure, manifest, signing, game logic) and outputs `English_offline.apk`.
+
+The output is signed with a local offline key, so uninstall an older/original
+installation before installing it. The patcher encrypts every Lua file under
+`src/` and replaces it in `assets/src.mu`.
+
+### Debug a BlueStacks startup failure
+The game writes high-level startup breadcrumbs and full Lua tracebacks to
+`offline_debug.log` in its Cocos writable directory. It also renders a visible
+error panel when Lua reaches its exception handler, rather than silently
+returning to BlueStacks. After reproducing the problem with Android Platform
+Tools connected to the emulator, collect a shareable report with:
+
+```bash
+./scripts/collect_android_logs.sh com.mu77.english
+```
+
+This creates `build/android-diagnostics/<timestamp>/` containing full logcat,
+a startup-focused filtered log, device properties, package metadata, and the
+app log when Android storage permissions permit access. The offline build
+never attempts to upload crash reports to the retired original service.
+
+### Language behavior
+This is intentionally an English-only offline build. The text loader now
+always loads `client_lang_en-US.csv`, regardless of the Android/BlueStacks
+locale; this prevents a Chinese-language emulator from selecting Chinese UI
+strings. The English CSV has also been audited to remove its remaining
+Chinese-visible strings.
 
 ## File Structure
 
