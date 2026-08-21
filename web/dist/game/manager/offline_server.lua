@@ -1110,7 +1110,7 @@ offline_server.handlers["req_pve_battle_start"] = function(self, req)
 end
 
 function offline_server:OnPveOver(battle, cmd_over, play_id, difficulty, pcfg)
-    if battle.win_user_id == "player" then
+    if battle.win_user_id == battle.own.user_id then
         local key = tostring(play_id) .. tostring(difficulty)
         local first_clear = not self.save.pve_cleared[key]
         self.save.pve_cleared[key] = true
@@ -1219,7 +1219,7 @@ end
 
 function offline_server:OnCampaignOver(battle, cmd_over, node)
     local csave = self:GetCampaignSave()
-    if battle.win_user_id == "player" then
+    if battle.win_user_id == battle.own.user_id then
         local result = campaign_service.apply_victory(csave, node)
         -- campaign EXP also feeds the Android level/EXP progression
         self:AddExp(result.exp_gain)
@@ -1352,7 +1352,7 @@ offline_server.handlers["req_adventure_battle_start"] = function(self, req)
 end
 
 function offline_server:OnAdventureOver(battle, cmd_over, id, cfg)
-    if battle.win_user_id == "player" then
+    if battle.win_user_id == battle.own.user_id then
         local adv = self.save.adventure
         local pass_ids = adv.pass_ids or {}
         local passed = false
@@ -1603,7 +1603,7 @@ offline_server.handlers["req_guide_battle"] = function(self, req)
         pve_win_target = 0,
         own_deck = own_deck,
         enemy_deck = enemy_deck,
-        enemy_name = "[AI] Will",
+        enemy_name = tonumber(battle_process) == 1 and "[AI] Will" or "[AI] Challenger",
         on_battle_over = function(battle, cmd_over)
             cmd_over.pve_info = { difficulty = 1 }
         end,
@@ -1789,7 +1789,7 @@ end
 
 function offline_server:OnArenaOver(battle, battle_type, cmd_over)
     local a = self.save.arena
-    if battle.win_user_id == "player" then
+    if battle.win_user_id == battle.own.user_id then
         a.win_count = (a.win_count or 0) + 1
         a.elo_value = (a.elo_value or 1000) + 20
         self.save.wins = self.save.wins + 1
@@ -1865,6 +1865,12 @@ end
 -- tie battle tracking into StartBattle
 function offline_server:StartBattle(opts)
     opts.battle_id = opts.battle_id or ("battle_" .. os.time() .. "_" .. math.random(1000, 9999))
+    -- Tag the player's side with the logged-in user id. The client picks its
+    -- side in cmd_battle_init by comparing player1.user_id against
+    -- user_logic.user_id, so the own actor MUST carry the real login id —
+    -- otherwise every battle renders with the two sides swapped.
+    opts.own_user_id = opts.own_user_id or (self.save and self.save.user_id)
+    opts.own_name = opts.own_name or (self.save and self.save.name)
     local battle = offline_battle.New(opts, function(cmd)
         network:DispatchCommand("cmd_battle", cmd)
     end)

@@ -68,3 +68,13 @@ sim_save/
 sim_save_int/
 sim_save_guide/
 sim_save_web/
+
+# Python-only APK rebuild artifacts
+build/offline_python.key
+build/offline_python.crt
+build/English_offline_prev.apk
+build/English_offline_unsigned_py.apk
+build/English_offline_unsigned_py.apk.signed
+build/English_offline_new.apk
+build/offline_check.rsa
+build/offline_check.sf
