@@ -24,12 +24,12 @@ A fully offline, single-player version of the English Card Battle game — origi
 ### Install on Android
 
 1. Uninstall the original game (different signing key required)
-2. Install `English_offline.apk` (repo root — the output of `scripts/build_and_verify.py`)
+2. Install `English_offline.apk` (repo root — the output of `scripts/rebuild_offline_apk.py`; rebuilt from the current `src/` sources)
 3. Launch — the game starts as a guest, fully offline
 
-> ⚠️ The checked-in APK may predate the latest fixes: rebuild with
-> `scripts/build_and_verify.py` (requires Java 17) and install the
-> `English_offline.apk` it writes to the repo root.
+> Rebuilding re-signs the APK with the build key. If you had an older build
+> installed, uninstall it first, then install the rebuilt
+> `English_offline.apk`.
 
 ## The Shadow Road campaign (native)
 
@@ -58,6 +58,23 @@ In battle, both commanders' HP is shown in the battle scene (the server pushes
 `cmd_battle_hero`; the campaign HUD renders it).
 
 ## Rebuild from Source
+
+The Java-free pipeline rebuilds the APK from a known-good base APK with only
+Python (overlays `src/` into `assets/src.mu`, refreshes the CSVs in
+`assets/res/data/` and `assets/data.mu` from `csv_data/`, then re-signs with
+a v1 JAR signature — no JDK, apktool or androguard needed):
+
+```bash
+pip install cryptography   # only for the PKCS#7 signature block
+python scripts/rebuild_offline_apk.py          # -> English_offline.apk
+python scripts/setup_test_env.py               # decrypt test fixtures from the new APK
+luajit tests/guide_battle_test.lua             # client-side battle regression (sides, standby, watchdog)
+```
+
+The signing key is generated once (`build/offline_python.key`, gitignored), so
+rebuilds keep the same signature.
+
+The original Windows pipeline still works where Java is available:
 
 ```bash
 # Requires: Python 3.12+, Java 17 (keytool + jarsigner), apktool, androguard

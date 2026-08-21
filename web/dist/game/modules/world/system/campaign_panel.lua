@@ -294,6 +294,23 @@ function meta:CardName(card_id)
     return tostring(card_id)
 end
 
+-- "ATK x / HP y" for the recruit chooser (same values the battle cards
+-- render: main attack power + hp from the card config).
+function meta:CardStats(card_id)
+    local cfg = data_template.card_config and data_template.card_config[tostring(card_id)]
+    if not cfg then return "" end
+    local attack = 0
+    for _, p in ipairs(cfg.power_list or {}) do
+        local n = tostring(p.name or "")
+        if n == "melee" or n == "ranged" or n == "magic" then
+            attack = tonumber(p.value) or 0
+            break
+        end
+    end
+    local hp = tonumber(cfg.hp) or 0
+    return string.format("ATK %d / HP %d", attack, hp)
+end
+
 function meta:ShowRecruitChooser(node_id)
     if self.recruit_layer then
         return
@@ -321,7 +338,10 @@ function meta:ShowRecruitChooser(node_id)
             return
         end
         for i, id in ipairs(offer_ids) do
-            local label = cc.Label:createWithSystemFont(self:CardName(id), "Arial", 26)
+            local stats = self:CardStats(id)
+            local title = self:CardName(id)
+            if stats ~= "" then title = title .. "  (" .. stats .. ")" end
+            local label = cc.Label:createWithSystemFont(title, "Arial", 26)
             label:setAnchorPoint(cc.p(0.5, 0.5))
             label:setPosition(cc.p(size.width / 2, size.height - 200 - (i - 1) * 60))
             label:setColor(ui_helper:GetColor3B(0xffd76a))

@@ -269,7 +269,7 @@ check(over ~= nil, "cmd_battle_over emitted")
 check(over.campaign_info ~= nil, "cmd_battle_over carries campaign_info")
 check(over.campaign_info.node_id == "w1", "campaign_info names the node")
 
-if b.win_user_id == "player" then
+if b.win_user_id == b.own.user_id then
     check(cam.cleared["w1"] == true, "w1 marked cleared on victory")
     check(cam.pending_recruit == "w1", "first clear opens a recruit draft")
 

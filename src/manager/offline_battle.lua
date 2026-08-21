@@ -107,7 +107,11 @@ function offline_battle.New(opts, emit)
         self.enemy_hp = self.enemy_max_hp
     end
 
-    self.own = Actor.New("player", opts.own_name or "Player")
+    -- The own actor carries the logged-in user's id (offline_server passes
+    -- save.user_id) so the client's cmd_battle_init side selection matches:
+    -- every own-side event must be tagged with the same id the client has in
+    -- user_logic.user_id, or the battle renders with the sides swapped.
+    self.own = Actor.New(opts.own_user_id or "player", opts.own_name or "Player")
     self.enemy = Actor.New("enemy", opts.enemy_name or "Enemy")
     self.own.is_ai = false
     self.enemy.is_ai = true
@@ -313,7 +317,7 @@ function offline_battle:Start()
     })
 
     self:PushCommand("cmd_battle_init", {
-        first_actor = "player",
+        first_actor = self.own.user_id,
         player1 = self:BuildActorMessage(self.own),
         player2 = self:BuildActorMessage(self.enemy),
     })
@@ -325,7 +329,7 @@ function offline_battle:Start()
         self:PushHeroSync()
     end
 
-    self:BeginPrep("player")
+    self:BeginPrep(self.own.user_id)
 end
 
 function offline_battle:BuildActorMessage(actor)
@@ -348,7 +352,7 @@ function offline_battle:BuildActorMessage(actor)
     }
 end
 
--- Begin the preparation phase for a player ("player" or "enemy")
+-- Begin the preparation phase for an actor (own or enemy actor user_id)
 function offline_battle:BeginPrep(user_id)
     local actor = user_id == self.own.user_id and self.own or self.enemy
     actor.is_sacrifice = true
@@ -372,7 +376,7 @@ function offline_battle:CheckGameOver()
     -- Campaign hero-HP duel: only commander HP decides the battle.
     if self.hero_mode then
         if self.enemy_hp <= 0 then
-            self:FinishBattle("player")
+            self:FinishBattle(self.own.user_id)
             return true
         end
         if self.own_hp <= 0 then
@@ -385,7 +389,7 @@ function offline_battle:CheckGameOver()
     -- PvE win condition: kill target reached
     if self.opts.battle_object_type == "pve" and self.pve_win_target and self.pve_win_target > 0 then
         if self.pve_win_cur_value >= self.pve_win_target then
-            self:FinishBattle("player")
+            self:FinishBattle(self.own.user_id)
             return true
         end
     end
@@ -397,7 +401,7 @@ function offline_battle:CheckGameOver()
     end
     -- Enemy lost all monsters (non-pve win condition)
     if self.enemy:GetMonsterTotal() == 0 then
-        self:FinishBattle("player")
+        self:FinishBattle(self.own.user_id)
         return true
     end
     return false
@@ -607,7 +611,7 @@ function offline_battle:HandleAttack(req)
             local p_pct = self.own_hp / math.max(1, self.own_max_hp)
             local e_pct = self.enemy_hp / math.max(1, self.enemy_max_hp)
             if p_pct >= e_pct then
-                self:FinishBattle("player")
+                self:FinishBattle(self.own.user_id)
             else
                 self:FinishBattle("enemy")
             end
@@ -626,7 +630,7 @@ function offline_battle:HandleAttack(req)
             end
         end
         if own_count >= enemy_count then
-            self:FinishBattle("player")
+            self:FinishBattle(self.own.user_id)
         else
             self:FinishBattle("enemy")
         end
@@ -674,7 +678,7 @@ function offline_battle:HandleAttack(req)
     self.own.cur_crystal = self.own.cur_crystal + 1
     self.enemy.cur_crystal = self.enemy.cur_crystal + 1
     self:PushCommand("cmd_battle_round", { round = self.round, effect_list = {} })
-    self:BeginPrep("player")
+    self:BeginPrep(self.own.user_id)
     return nil
 end
 

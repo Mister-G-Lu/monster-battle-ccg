@@ -198,7 +198,8 @@ check(campaign_service.skip_recruit(s) == true, "skip accepts a pending recruit"
 check(s.exp == w1.exp + campaign_service.SKIP_RECRUIT_EXP, "skip grants +15 EXP")
 check(campaign_service.skip_recruit(s) == false, "second skip rejected (nothing pending)")
 campaign_service.reset(s)
-check(s.vitality == 30 and #s.collection == 21 and s.wins == 0, "reset restores the fresh campaign")
+check(s.vitality == 30 and #s.collection == #campaign.STARTER_COLLECTION and s.wins == 0,
+    "reset restores the fresh campaign (" .. #s.collection .. " cards)")
 
 -- ===========================================================================
 section("8. info payload")
@@ -303,15 +304,26 @@ if fixtures_ready then
     check(b ~= nil, "battle created")
     check(b.enemy.user_name == w1.enemy_name, "enemy named from the canonical node (" .. tostring(b.enemy.user_name) .. ")")
 
-    -- play the battle greedily to completion
+    -- play the battle greedily to completion (same bot as
+    -- campaign_battle_test: stop sacrificing once a monster is affordable,
+    -- deploy monsters AND items, then attack with everything)
     local function play_greedy(battle, seed)
         math.randomseed(seed)
         local turns = 0
         while not battle.is_over and turns < 60 do
             turns = turns + 1
             local guard2 = 0
-            while battle.own.is_sacrifice and guard2 < 8 do
+            while battle.own.is_sacrifice and guard2 < 12 do
                 guard2 = guard2 + 1
+                local affordable = false
+                for p = 1, 4 do
+                    local c = battle.own:GetHandCard(p)
+                    if c and c.type == "monster" and c.cost and c.cost <= battle.own.cur_crystal
+                        and battle.own:GetCurMonsterSlotPos() > 0 then
+                        affordable = true
+                    end
+                end
+                if affordable then break end
                 local sac = nil
                 for p = 1, 4 do
                     if battle.own:GetHandCard(p) then sac = p break end
@@ -321,10 +333,20 @@ if fixtures_ready then
             end
             for p = 1, 4 do
                 local c = battle.own:GetHandCard(p)
-                if c and c.type == "monster" and c.cost and c.cost <= battle.own.cur_crystal then
-                    local slot = battle.own:GetCurMonsterSlotPos()
-                    if slot > 0 then
-                        battle:HandleMove({ src_pos = p, is_enemy = false, target_pos = slot })
+                if c and c.cost and c.cost <= battle.own.cur_crystal then
+                    if c.type == "monster" then
+                        local slot = battle.own:GetCurMonsterSlotPos()
+                        if slot > 0 then
+                            battle:HandleMove({ src_pos = p, is_enemy = false, target_pos = slot })
+                        end
+                    else
+                        for s = 1, 3 do
+                            local slot = battle.own:GetBattleCard(s)
+                            if slot and slot.monster then
+                                battle:HandleMove({ src_pos = p, is_enemy = false, target_pos = s })
+                                break
+                            end
+                        end
                     end
                 end
             end
@@ -336,7 +358,7 @@ if fixtures_ready then
     -- retry until the player wins so the reward/recruit path is exercised
     local b = server.current_battle
     local attempt = 0
-    while b.win_user_id ~= "player" and attempt < 5 do
+    while b.win_user_id ~= b.own.user_id and attempt < 5 do
         attempt = attempt + 1
         if b.is_over then
             server.handlers["req_campaign_battle_start"](server, { node_id = "w1" })
@@ -345,7 +367,7 @@ if fixtures_ready then
         play_greedy(b, 3 + attempt)
     end
     check(b.is_over, "campaign battle reaches game over")
-    check(b.win_user_id == "player", "campaign battle won by the player (" .. tostring(b.win_user_id) .. ")")
+    check(b.win_user_id == b.own.user_id, "campaign battle won by the player (" .. tostring(b.win_user_id) .. ")")
 
     -- the service applied the win rewards end-to-end
     local csave = server:GetCampaignSave()

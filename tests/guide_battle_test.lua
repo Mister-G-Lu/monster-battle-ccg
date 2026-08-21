@@ -73,7 +73,17 @@ cc.PLATFORM_OS_IPAD = 1
 cc.Application = { getInstance = function() return {
     getCurrentLanguage = function() return cc.LANGUAGE_ENGLISH end,
     getTargetPlatform = function() return cc.PLATFORM_OS_WINDOWS end } end }
-cc.FileUtils = { getInstance = function() return { getWritablePath = function() return "sim_save_guide/" end } end }
+cc.FileUtils = { getInstance = function() return {
+    getWritablePath = function() return "sim_save_guide/" end,
+    getStringFromFile = function(self, path)
+        local base = string.match(path, "([^/\\]+)$")
+        local f = io.open("csv_plain/" .. base, "r")
+        if not f then return "" end
+        local c = f:read("*a")
+        f:close()
+        return c
+    end,
+} end }
 cc.UserDefault = { getInstance = function() return {
     getStringForKey = function() return "" end,
     getIntegerForKey = function(_,d) return d or 0 end,

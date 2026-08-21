@@ -14,7 +14,8 @@ lua-campaign:
 	else echo "SKIP lua campaign tests (no lua/luajit)"; exit 0; fi; \
 	$$LUA tests/campaign_test.lua && $$LUA tests/campaign_balance_diag.lua && \
 	$$LUA tests/level_w1_test.lua && $$LUA tests/campaign_service_test.lua && \
-	$$LUA tests/campaign_battle_test.lua && $$LUA tests/web_bridge_test.lua
+	$$LUA tests/campaign_battle_test.lua && $$LUA tests/campaign_client_test.lua && \
+	$$LUA tests/guide_battle_test.lua && $$LUA tests/web_bridge_test.lua
 
 web-ui:
 	@if command -v node >/dev/null 2>&1; then \
