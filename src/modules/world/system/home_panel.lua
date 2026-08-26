@@ -37,11 +37,17 @@ function meta:ctor()
     ui_helper:BindTimeLine(self.mail_btn_newtip, "interface/world/newtip.csb")
     self.mail_btn_newtip:PlayAnimation("loop", true)
 
-    -- Battle: original PVP + PVE both opened the same campaign in offline
-    -- mode. Keep one Play button (the PVE node) and hide the duplicate PVP
-    -- entry so the home bar isn't two doors to the same room.
+    -- Battle: the stock home bar has two doors to a fight — "Battle"
+    -- (pvpbtn) and "Adventure" (pvebtn).  Offline there is exactly one
+    -- destination, The Shadow Road, so keep ONE visible door and hide the
+    -- duplicate.  "Battle" is the button players actually tap, so it is the
+    -- one that stays and it opens the campaign map directly.  "Adventure"
+    -- only takes over if this .csb has no pvpbtn.
     self.pvp_btn = self:getChildByName("pvpbtn")
-    if self.pvp_btn then self.pvp_btn:setVisible(false) end
+    self.pve_btn = self:getChildByName("pvebtn")
+    self.campaign_btn = self.pvp_btn or self.pve_btn
+    if self.pvp_btn then self.pvp_btn:setVisible(true) end
+    if self.pve_btn then self.pve_btn:setVisible(self.pvp_btn == nil) end
 
     -- Events / challenge rooms need a second player. Hide in single-player.
     self.event_btn = self:getChildByName("event")
@@ -78,10 +84,6 @@ function meta:ctor()
         end
     end
 
-    -- PVE / campaign — the single Play destination
-    self.pve_btn = self:getChildByName("pvebtn")
-    if self.pve_btn then self.pve_btn:setVisible(true) end
-
     -- Rankings — a one-row dummy ladder. Hide; record lives in PVE / arena.
     self.rank_btn = self:getChildByName("ladder")
     if self.rank_btn then self.rank_btn:setVisible(false) end
@@ -108,10 +110,23 @@ function meta:ctor()
 
     self:RegisterEvent()
     graphic:DispatchEvent("refresh_new_mail", mail_logic.new_mail_num)
-    -- PVE is always the campaign entry in this build — never hide it behind
-    -- the old "unlock after first arena match" gate.
-    if self.pve_btn then self.pve_btn:setVisible(true) end
+    -- The campaign door is always available in this build — never hide it
+    -- behind the old "unlock after first arena match" gate.
+    if self.campaign_btn then self.campaign_btn:setVisible(true) end
     self:RegisterWidgetEvent()
+end
+
+-- The Shadow Road is the only fight in this offline build, so the home bar's
+-- Battle button opens the campaign map straight away — no matchmaking, no
+-- stock PvE mission list in between.
+function meta:OpenCampaign()
+    if self.campaign_node then
+        self.campaign_node:Show()
+        return
+    end
+    -- the campaign layer failed to build; fall back to the stock PvE list
+    print("[HOME] campaign panel unavailable, falling back to the PvE list")
+    pve_logic:ShowPve()
 end
 
 function meta:Update(elapsed_time)
@@ -169,14 +184,16 @@ function meta:RegisterWidgetEvent()
     ui_helper:AddClick(self.mail_btn, function ()
         mail_logic:Query()
     end)
-    -- PVE / Play -> The Shadow Road campaign map
+    -- Battle -> The Shadow Road campaign map.  Both stock doors are bound so
+    -- whichever one this .csb exposes lands in the campaign, not in a menu.
+    if self.pvp_btn then
+        ui_helper:AddClick(self.pvp_btn, function ()
+            self:OpenCampaign()
+        end)
+    end
     if self.pve_btn then
         ui_helper:AddClick(self.pve_btn, function ()
-            if self.campaign_node then
-                self.campaign_node:Show()
-            else
-                pve_logic:ShowPve()
-            end
+            self:OpenCampaign()
         end)
     end
 

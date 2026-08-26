@@ -11,15 +11,14 @@ local defines = require "manager.defines"
 local TAB_TYPE = defines.DECK_TAB_TYPE
 
 local meta = {}
--- 初始化
 function meta:Init()
-    self.pve_id = 0          --玩法ID
-    self.attack_type = 2   --上阵类型
-    self.image = {}           --玩法镜像卡组
-    self.difficulty = 0       --玩法当前选择难度
-    self.cur_difficulty = 0   --玩法当前难度
+    self.pve_id = 0
+    self.attack_type = 2
+    self.image = {}
+    self.difficulty = 0
+    self.cur_difficulty = 0
     self.play_id = 0
-    self.system_card_list = {}       --卡组
+    self.system_card_list = {}
     self.system_card_list.item_list = {}
     self.system_card_list.monster_list = {}
     self.pve_count = 2
@@ -28,27 +27,24 @@ function meta:Init()
     self.next_refresh_time = 0
     self.cur_min = 0
 
-    --登陆时候获取Pve数据
-    self.login_pve_data = {}  --正常pve
-    self.adv_progress = 1     --学院考试
-    self.adv_passid = {}      --学院考试通过的id
+    self.login_pve_data = {}
+    self.adv_progress = 1
+    self.adv_passid = {}
 end
 function meta:CheckUserRankInfo()
 
 end
 
---开始战斗
 function meta:StartFight(palyid,difficultys,aatcktype)
 
     network:Send("req_pve_battle_start",{play_id = palyid, difficulty=difficultys,attack_type = aatcktype },function(result,recv_msg)
         if result == "success" then
-            print("跳转战斗")
+            print("entering battle")
         end
 
     end)
 end
 
---考试战斗
 function meta:StartExam(idex)
     network:Send("req_adventure_battle_start", {id = idex}, function (result, recv_msg)
         if result == "success" then
@@ -74,7 +70,6 @@ function meta:Update(elapsed_time)
         self.req_refresh = true
         self:RefreshCount(
         function ()
-            --通知刷新了
             graphic:DispatchEvent("refresh_pve_time")
             self.req_refresh = false
         end,
@@ -100,35 +95,21 @@ function meta:RefreshCount(compleate_func, error_func)
     end)
 end
 
---拉取鼠潮信息
+-- Gerbip Tide is archived: modules/pve/pve_gerbil_tide_panel.lua no longer
+-- ships, so this must not dispatch "show_gerbil_tide_panel" (nothing listens,
+-- and the panel it used to require is gone).  The entry point that called it
+-- is gone too; this stays as a safe no-op so a stale caller cannot crash the
+-- world scene.  See archive/gerbip_tide/README.md.
 function meta:Query(play_ids)
-    local images = {}
-    self.play_id = play_ids
-
-    for k,v in pairs(self.login_pve_data) do
-        if v.play_id == play_ids then
-            self.cur_difficulty = v.difficulty
-            self.difficulty = v.difficulty
-            self.image  =  v.image
-            self:InitSystemCard(self.difficulty)
-            break
-        end
-    end
-    
-    -- 显示ui
-    graphic:DispatchEvent("show_gerbil_tide_panel")
-    graphic:DispatchEvent("switch_world_status",false)
+    print("[PVE] Gerbip Tide is archived; ignoring play_id " .. tostring(play_ids))
 end
 
---学院考试
 function meta:QueryExam()
-    --显示ui
     graphic:DispatchEvent("show_exam_panel")
     graphic:DispatchEvent("switch_world_status", false)
 end
 
 function meta:InitSystemCard(difficulty)
-	--获得系统卡组
 	self.system_card_list.monster_list = {}
 	self.system_card_list.item_list = {}
     for k,v in pairs(data_template.pve_play_config) do
@@ -170,7 +151,6 @@ function meta:GetCurExamLevel(pass_ids)
     local cur_level = 1
     local hasLevel = false
 
-    --待优化
     local all_count = 0
     for k,v in pairs(pro_config) do
         all_count = all_count + 1
@@ -249,7 +229,6 @@ function meta:RegisterMsgHandler()
     end)
 end
 
---登陆时候获取PVE信息
 function meta:ReqPveInfoOnLogin(compleate_func, error_func)
     network:Send("req_pve_play_info", function (result, recv_msg)
         if result == "success" then

@@ -15,10 +15,11 @@ lua-campaign:
 	$$LUA tests/campaign_test.lua && $$LUA tests/campaign_balance_diag.lua && \
 	$$LUA tests/level_w1_test.lua && $$LUA tests/campaign_service_test.lua && \
 	$$LUA tests/campaign_battle_test.lua && $$LUA tests/campaign_client_test.lua && \
-	$$LUA tests/guide_battle_test.lua && $$LUA tests/web_bridge_test.lua
+	$$LUA tests/guide_battle_test.lua && $$LUA tests/battle_stall_test.lua && \
+	$$LUA tests/home_battle_button_test.lua && $$LUA tests/web_bridge_test.lua
 
 web-ui:
 	@if command -v node >/dev/null 2>&1; then \
 		node --test web/tests/lua_list.test.mjs web/tests/ui.test.mjs && \
-		(cd web && node tests/bridge_recruit.mjs); \
+		(cd web && node tests/bridge_recruit.mjs && node tests/dist_boot.mjs); \
 	else echo "SKIP web UI tests (no node)"; fi

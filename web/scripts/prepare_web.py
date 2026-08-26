@@ -20,6 +20,9 @@ GAME_OUT = PUBLIC / "game"
 CSV_OUT = PUBLIC / "csv"
 BRIDGE = WEB / "lua" / "web_bridge.lua"
 
+sys.path.insert(0, str(ROOT / "scripts"))
+from archived_sources import is_archived  # noqa: E402
+
 
 def ensure_decrypted() -> None:
     if DECRYPTED.exists() and CSV_PLAIN.exists():
@@ -39,10 +42,14 @@ def copy_tree(src: Path, dst: Path, exts: set[str]) -> list[str]:
     for p in sorted(src.rglob("*")):
         if p.is_file() and p.suffix in exts:
             rel = p.relative_to(src)
+            rel_str = str(rel).replace("\\", "/")
+            # archived modules are not served to the browser either
+            if is_archived(rel_str):
+                continue
             out = dst / rel
             out.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(p, out)
-            rels.append(str(rel).replace("\\", "/"))
+            rels.append(rel_str)
     return rels
 
 

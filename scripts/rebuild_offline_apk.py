@@ -42,6 +42,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from xxtea_decrypt import encrypt_file, decrypt_file  # noqa: E402
+from archived_sources import is_archived  # noqa: E402
 
 MAGIC = b"gclR3cu9"
 BASE64_NAME = "META-INF/MANIFEST.MF"
@@ -63,16 +64,27 @@ def ok(msg: str) -> None:
 def patched_sources() -> dict[str, Path]:
     files = {}
     for path in (ROOT / "src").rglob("*.lua"):
-        files[str(path.relative_to(ROOT)).replace("\\", "/")] = path
+        rel = str(path.relative_to(ROOT)).replace("\\", "/")
+        # src/ must never carry an archived module (they live under archive/)
+        if is_archived(rel):
+            fail(f"archived module must not live in src/: {rel}")
+        files[rel] = path
     return files
 
 
-def build_src_mu(base_data: bytes) -> bytes:
+def build_src_mu(base_data: bytes, archived: list[str] | None = None) -> bytes:
+    """Rebuild src.mu: repo src/ overlay, minus anything archived."""
+    if archived is None:
+        archived = []
     source_files = patched_sources()
     out = io.BytesIO()
     with zipfile.ZipFile(io.BytesIO(base_data), "r") as old, zipfile.ZipFile(out, "w") as new:
         seen = set()
         for info in old.infolist():
+            # archived modules are dropped from the APK, not just patched over
+            if is_archived(info.filename):
+                archived.append(info.filename)
+                continue
             data = old.read(info.filename)
             if info.filename in source_files:
                 data = encrypt_file(source_files[info.filename].read_bytes(), with_magic=True)
@@ -336,8 +348,11 @@ def main() -> int:
             fail("base APK has no assets/src.mu")
         src_mu_old = apk.read("assets/src.mu")
         data_mu_old = apk.read("assets/data.mu")
-    src_mu_new = build_src_mu(src_mu_old)
+    archived: list[str] = []
+    src_mu_new = build_src_mu(src_mu_old, archived)
     ok(f"src.mu rebuilt ({len(src_mu_old)} -> {len(src_mu_new)} bytes)")
+    if archived:
+        ok(f"{len(archived)} archived module(s) dropped: {', '.join(sorted(archived))}")
 
     print("[2/5] Refreshing CSVs from csv_data/...")
     data_mu_new, replaced = refresh_data_mu(data_mu_old)

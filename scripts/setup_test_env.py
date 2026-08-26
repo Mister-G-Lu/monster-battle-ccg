@@ -36,6 +36,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import xxtea_decrypt as xx  # noqa: E402
+from archived_sources import is_archived  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DECRYPTED = REPO_ROOT / "decrypted"
@@ -57,6 +58,10 @@ def extract_mu(apk_zip: zipfile.ZipFile, mu_name: str, strip: str) -> None:
                 continue
             rel = name[len(strip):].lstrip("/")
             if not rel:
+                continue
+            # archived modules stay out of the fixtures, exactly as they stay
+            # out of the shipped APK (see scripts/archived_sources.py)
+            if is_archived(rel):
                 continue
             raw = inner.read(name)
             try:
