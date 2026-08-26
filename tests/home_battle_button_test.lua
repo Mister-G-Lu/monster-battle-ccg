@@ -1,14 +1,13 @@
 -- home_battle_button_test.lua
--- Regression: the home bar's "Battle" button must lead straight to
--- The Shadow Road campaign map.
+-- Home-level UI regression: the visible "Adventure" door must lead straight
+-- to The Shadow Road as a world-system panel.
 --
 -- `client_lang_en-US.csv` labels interface/world/main_panel.csb pvpbtn.desc
--- as "Battle" and pvebtn.desc as "Adventure".  The stock build sends pvpbtn
--- to PvP matchmaking and pvebtn to the PvE mission list (Gerbip Tide); this
--- offline build has exactly one destination, so:
---   * the visible door is the one labelled "Battle" (pvpbtn)
---   * the duplicate "Adventure" door is hidden
---   * tapping either one opens the campaign panel, never the PvE list
+-- as "Battle" and pvebtn.desc as "Adventure". The offline game's campaign
+-- belongs behind Adventure. It must be routed through world_scene's
+-- switch_system_module event rather than built as a hidden child of home;
+-- otherwise returning from a pushed battle can reveal the empty legacy PvE
+-- screen. The hidden Battle compatibility door is wired to the same route.
 --
 -- Run under LuaJIT after scripts/setup_test_env.py:
 --     luajit tests/home_battle_button_test.lua
@@ -82,7 +81,8 @@ package.loaded["manager.ui_helper"] = {
 local graphic_dispatched = {}
 package.loaded["manager.graphic"] = {
     DispatchEvent = function(_, name, ...)
-        graphic_dispatched[name] = (graphic_dispatched[name] or 0) + 1
+        graphic_dispatched[name] = graphic_dispatched[name] or {}
+        table.insert(graphic_dispatched[name], { ... })
     end,
     RegisterEvent = function() end,
 }
@@ -93,25 +93,9 @@ package.loaded["manager.configuration"] = {
     SetShowHelp = function(_, v) configuration_state.show_help = v end,
 }
 
-local pve_shown = 0
-package.loaded["logic.pve"] = {
-    play_id = nil, difficulty = nil, login_pve_data = {}, adv_passid = {},
-    ShowPve = function() pve_shown = pve_shown + 1 end,
-    Query = function() end,
-}
 package.loaded["logic.mail"] = { new_mail_num = 0, Query = function() end }
 package.loaded["logic.user"] = { task_hint = false, achi_hint = false }
 
--- The campaign panel is the destination under test; stand in for it so the
--- test can observe Show() without a real Cocos scene.
-local campaign_shown = 0
-local campaign_stub = {}
-campaign_stub.setVisible = function(_, v) campaign_stub.visible = v end
-campaign_stub.Show = function() campaign_shown = campaign_shown + 1 end
-campaign_stub.Update = function() end
-package.loaded["modules.world.system.campaign_panel"] = {
-    new = function() return campaign_stub end,
-}
 package.loaded["modules.world.system.arena_panel"] = {
     new = function()
         return { setVisible = function() end, Update = function() end }
@@ -135,37 +119,40 @@ check(panel.pvp_btn ~= nil, "main_panel.csb exposes the Battle button (pvpbtn)")
 check(panel.pve_btn ~= nil, "main_panel.csb exposes the Adventure button (pvebtn)")
 
 -- ---------------------------------------------------------------------------
-section("2. The Battle button is the campaign door")
-check(panel.campaign_btn == panel.pvp_btn,
-    "the campaign door is pvpbtn, the button labelled \"Battle\"")
-check(panel.pvp_btn.visible == true, "Battle button is visible")
-check(panel.pve_btn.visible == false,
-    "the duplicate Adventure door is hidden (one door, one destination)")
+section("2. Adventure is the campaign door")
+check(panel.campaign_btn == panel.pve_btn,
+    "the campaign door is pvebtn, the button labelled \"Adventure\"")
+check(panel.pve_btn.visible == true, "Adventure button is visible")
+check(panel.pvp_btn.visible == false,
+    "duplicate Battle button is hidden when Adventure is available")
 
 -- ---------------------------------------------------------------------------
-section("3. Tapping Battle opens the campaign map")
-check(click_handlers["pvpbtn"] ~= nil, "the Battle button has a click handler")
-if click_handlers["pvpbtn"] then
-    click_handlers["pvpbtn"]()
-end
-check(campaign_shown == 1, "tapping Battle opened the campaign panel (Show called once)")
-check(pve_shown == 0, "tapping Battle never opened the stock PvE mission list")
-
--- the hidden duplicate is wired to the same place, so a .csb that exposes it
--- instead of pvpbtn still lands in the campaign
+section("3. Tapping Adventure opens the world-system campaign")
+check(click_handlers["pvebtn"] ~= nil, "the Adventure button has a click handler")
 if click_handlers["pvebtn"] then
     click_handlers["pvebtn"]()
 end
-check(campaign_shown == 2, "the Adventure door, if tapped, also opens the campaign")
-check(pve_shown == 0, "no path reaches pve_logic:ShowPve() while the campaign loads")
+local switches = graphic_dispatched["switch_system_module"] or {}
+check(#switches == 1, "Adventure dispatched one world-system switch")
+check(switches[1] and switches[1][1] == "campaign",
+    "Adventure routes to the campaign world-system panel")
+
+-- The hidden compatibility door is wired too. A layout with no Adventure
+-- button still reaches the same system panel rather than the legacy PvE list.
+if click_handlers["pvpbtn"] then
+    click_handlers["pvpbtn"]()
+end
+switches = graphic_dispatched["switch_system_module"] or {}
+check(#switches == 2 and switches[2][1] == "campaign",
+    "Battle compatibility door also routes to campaign")
 
 -- ---------------------------------------------------------------------------
-section("4. Fallback when the campaign panel cannot be built")
-local fallback = setmetatable({}, { __index = home_panel })
-fallback.campaign_node = nil
-home_panel.OpenCampaign(fallback)
-check(pve_shown == 1,
-    "with no campaign panel the Battle button falls back to the PvE list")
+section("4. Direct OpenCampaign never falls back to the legacy PvE module")
+local standalone = setmetatable({}, { __index = home_panel })
+home_panel.OpenCampaign(standalone)
+switches = graphic_dispatched["switch_system_module"] or {}
+check(#switches == 3 and switches[3][1] == "campaign",
+    "OpenCampaign always selects campaign through world_scene")
 
 -- ---------------------------------------------------------------------------
 print("\n" .. string.rep("=", 60))

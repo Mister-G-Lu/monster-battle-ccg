@@ -498,6 +498,65 @@ for i = 1, 3 do
 end
 
 -- ===========================================================================
+-- SECTION 24: CAMPAIGN ADVENTURE RETURN CONTRACT
+-- ===========================================================================
+section("24. Campaign Adventure round-trip")
+
+-- Exercise the same server contract the native Adventure panel consumes after
+-- a battle result. This is intentionally in the broad offline integration
+-- suite: it catches a payload that may be valid for the battle engine but
+-- unusable by the result UI / returned campaign map.
+local campaign_service = require("manager.campaign_service")
+campaign_service.reset(offline_server:GetCampaignSave())
+offline_server:Save()
+
+local campaign_info_before
+network:Send("req_campaign_info", {}, function(_, message) campaign_info_before = message end)
+check(campaign_info_before and campaign_info_before.current_node == "w1",
+    "Adventure starts on campaign node w1")
+check(campaign_info_before and #campaign_info_before.regions == 4,
+    "Adventure response includes all 4 regions")
+
+local commands_before_campaign = #cmds
+local campaign_start
+network:Send("req_campaign_battle_start", { node_id = "w1" },
+    function(result, message) campaign_start = { result = result, message = message } end)
+check(campaign_start and campaign_start.result == "success", "Adventure starts native w1 battle")
+local campaign_battle = offline_server.current_battle
+check(campaign_battle and campaign_battle.hero_mode, "Adventure battle uses campaign commander mode")
+
+-- The detailed campaign suites play the battle; here finish through the real
+-- server callback to assert the post-battle response and map refresh contract.
+campaign_battle:FinishBattle(campaign_battle.own.user_id)
+local campaign_over = nil
+for i = #cmds, commands_before_campaign + 1, -1 do
+    if cmds[i].cmd_battle_over then
+        campaign_over = cmds[i].cmd_battle_over
+        break
+    end
+end
+check(campaign_over and campaign_over.campaign_info and campaign_over.campaign_info.node_id == "w1",
+    "campaign result identifies w1 for map refresh")
+check(campaign_over and type(campaign_over.mvp_card_info) == "table",
+    "campaign result supplies an empty MVP table for the native result UI")
+check(campaign_over and type(campaign_over.reward_info) == "table" and #campaign_over.reward_info == 1,
+    "campaign victory supplies a displayable EXP reward")
+
+local campaign_info_after
+network:Send("req_campaign_info", {}, function(_, message) campaign_info_after = message end)
+check(campaign_info_after and campaign_info_after.cleared.w1 == true,
+    "Adventure map records w1 as cleared after its battle")
+check(campaign_info_after and campaign_info_after.current_node == "w2",
+    "Adventure map advances to w2 after its battle")
+check(campaign_info_after and campaign_info_after.pending_recruit == "w1",
+    "Adventure map exposes the pending recruit after first clear")
+
+local campaign_offers
+network:Send("req_campaign_recruit_offers", { node_id = "w1" }, function(_, message) campaign_offers = message end)
+check(campaign_offers and #(campaign_offers.offers or {}) == 3,
+    "Adventure recruit draft is available after returning from battle")
+
+-- ===========================================================================
 -- RESULTS
 -- ===========================================================================
 print("\n" .. string.rep("=", 60))

@@ -1,12 +1,14 @@
 -- campaign_client_test.lua
--- Client-side half of the Shadow Road battle button: req_campaign_battle_start
+-- Client-side half of the Shadow Road Adventure flow: req_campaign_battle_start
 -- through the REAL offline server, with the client (logic.battle) consuming
--- the same command queue the device consumes.  Verifies what the Android
--- player sees when they tap Battle -> a campaign node:
+-- the same command queue the device consumes. Verifies what the Android
+-- player sees when they tap Adventure -> a campaign node:
 --   * cmd_battle_start pushes the battle scene for battle_type "campaign"
 --   * cmd_battle_init does NOT swap sides (own = logged-in user id)
 --   * cmd_battle_hero syncs both commanders' HP -> "update_hero_hp"
 --   * battle over dispatches "refresh_campaign" so the map refreshes
+--   * closing the result explicitly selects the campaign world-system panel
+--     instead of exposing the legacy empty Adventure list
 -- Run under LuaJIT after scripts/setup_test_env.py:
 --     luajit tests/campaign_client_test.lua
 
@@ -111,9 +113,10 @@ if not dump then function dump(...) end end
 -- capture the graphic events the campaign panel / battle HUD subscribe to
 local dispatched = {}
 local pushed_scenes = {}
+local popped_scenes = 0
 package.loaded["manager.global"] = {
     PushScene = function(self, name) table.insert(pushed_scenes, name) end,
-    PopScene = function(self) end,
+    PopScene = function(self) popped_scenes = popped_scenes + 1 end,
     ChangeScene = function(self, name) table.insert(pushed_scenes, name) end,
 }
 package.loaded["manager.graphic"] = {
@@ -336,7 +339,12 @@ network:Connect("campaign-client-test", 28800)
 
 local data_template = require "manager.data_template"
 data_template:Init()
-data_template:LoadFromCSV()
+local data_load_count = 0
+while not data_template.is_load_complete and data_load_count < 200 do
+    data_template:LoadFromCSV()
+    data_load_count = data_load_count + 1
+end
+check(data_template.is_load_complete, "campaign client data tables load")
 
 local login_user_id = nil
 network:Send("req_login_game",
@@ -361,7 +369,7 @@ offline_server:Save()
 local observed = { hero = {} }
 
 -- ---------------------------------------------------------------------------
-section("2. Battle button: req_campaign_battle_start -> battle scene")
+section("2. Adventure node: req_campaign_battle_start -> battle scene")
 local start_res
 network:Send("req_campaign_battle_start", { node_id = "w1" }, function(result, recv_msg)
     start_res = { result = result, recv = recv_msg }
@@ -411,6 +419,17 @@ if last_refresh then
     check(info.node_id == "w1", "campaign_info carries node_id w1 (got " .. tostring(info.node_id) .. ")")
     check(info.victory == true or info.victory == false, "campaign_info has a victory flag")
 end
+
+-- ---------------------------------------------------------------------------
+section("5. Result close returns to Adventure campaign")
+local routes_before = #(dispatched["switch_system_module"] or {})
+battle_logic:ExitBattle()
+check(popped_scenes == 1, "ExitBattle pops the battle scene exactly once")
+local routes = dispatched["switch_system_module"] or {}
+check(#routes == routes_before + 1, "ExitBattle dispatches a world-system route")
+local last_route = routes[#routes]
+check(last_route and last_route[1] == "campaign",
+    "campaign result returns to the campaign panel, not legacy Adventure")
 
 -- ---------------------------------------------------------------------------
 print("\n" .. string.rep("=", 60))

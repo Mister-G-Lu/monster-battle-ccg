@@ -1,9 +1,11 @@
 -- campaign_panel.lua
 -- Programmatic campaign map for "The Shadow Road" (the handcrafted campaign
--- defined in content/campaign_data.json). Lives as a full-screen layer child
--- of the home panel (same pattern as arena_panel) and drives the native
--- battle engine via req_campaign_battle_start — the campaign is served by
--- the app's own offline service (campaign_service.lua), not by a web app.
+-- defined in content/campaign_data.json). This is a first-class world-system
+-- panel, not a child hidden inside the home .csb: that keeps the Adventure
+-- view alive while a battle scene is pushed and restores it after the battle
+-- is popped. It drives the native battle engine via req_campaign_battle_start
+-- — the campaign is served by the app's own offline service
+-- (campaign_service.lua), not by a web app.
 --
 -- Because this build has no Cocos Studio .csb for the campaign, the map is
 -- drawn with plain Cocos nodes (LayerColor + system-font labels + one-by-one
@@ -34,6 +36,19 @@ end
 function meta:ctor()
     local size = win_size()
     self.win_size = size
+    -- A cc.Layer has no useful intrinsic size. Give the world-system panel a
+    -- real viewport so it remains visible when returned to after a battle.
+    pcall(function () self:setContentSize(size) end)
+
+    -- Keep a renderable zero-progress model before the first request. The
+    -- offline transport is synchronous today, but this also prevents an empty
+    -- Adventure screen if a save read or a future asynchronous request fails.
+    self.cleared = {}
+    self.info_map = {
+        collection = {}, vitality = 30, bosses_slain = 0,
+        wins = 0, losses = 0, complete = false,
+    }
+    self.rendered_node_count = 0
 
     -- full-screen dim background (also swallows stray touches)
     local bg = cc.LayerColor:create(cc.Color(18, 18, 31, 255))
@@ -64,9 +79,11 @@ function meta:ctor()
     self.info:setColor(ui_helper:GetColor3B(0xbbbbbb))
     self:addChild(self.info, 5)
 
-    -- back button
+    -- Back returns through the world-system router. Simply hiding a nested
+    -- layer used to leave the underlying Adventure module hidden after a
+    -- battle, which is how players landed on an apparently blank screen.
     self.back_btn = self:_MakeButton("Back", size.width - 70, size.height - 40, function ()
-        self:Hide()
+        self:ReturnHome()
     end)
     -- reset button
     self.reset_btn = self:_MakeButton("Reset", size.width - 140, size.height - 40, function ()
@@ -83,9 +100,6 @@ function meta:ctor()
     self.scroll:setTouchEnabled(true)
     self.scroll:setBounceEnabled(true)
     self:addChild(self.scroll, 5)
-
-    self.cleared = {}
-    self.info_map = {}
 
     graphic:RegisterEvent("refresh_campaign", function (campaign_info)
         -- a finished campaign battle: pass through the fresh recruit draft
@@ -123,20 +137,34 @@ end
 
 function meta:Show()
     self:setVisible(true)
+    -- Draw the canonical road before asking the service for persisted state.
+    -- It is both faster on device and a graceful fallback for a bad save.
+    self:Render()
     self:Refresh()
 end
 
 function meta:Hide()
+    self:HideRecruitChooser()
     self:setVisible(false)
+end
+
+function meta:ReturnHome()
+    self:Hide()
+    graphic:DispatchEvent("switch_system_module", "home")
 end
 
 function meta:Refresh()
     network:Send("req_campaign_info", {}, function (result, recv)
-        if result ~= "success" then return end
-        self.cleared = (recv and recv.cleared) or {}
-        self.info_map = recv or {}
+        if result ~= "success" or type(recv) ~= "table" then
+            -- Never replace the canonical fallback map with an empty panel.
+            -- The player can still see the road and retry by reopening it.
+            self.info:setString("Campaign progress is unavailable. Showing the road.")
+            return
+        end
+        self.cleared = recv.cleared or {}
+        self.info_map = recv
         self:Render()
-        if recv and recv.pending_recruit then
+        if recv.pending_recruit then
             self:ShowRecruitChooser(recv.pending_recruit)
         end
     end)
@@ -163,54 +191,67 @@ end
 
 function meta:Render()
     local size = self.win_size
+    local info_map = self.info_map or {}
     self.stats:setString(string.format(
         "HP %d   Bosses %d/4   Deck %d   %dW-%dL",
-        tonumber(self.info_map.vitality) or 30,
-        tonumber(self.info_map.bosses_slain) or 0,
-        #(self.info_map.collection or {}),
-        tonumber(self.info_map.wins) or 0,
-        tonumber(self.info_map.losses) or 0))
+        tonumber(info_map.vitality) or 30,
+        tonumber(info_map.bosses_slain) or 0,
+        #(info_map.collection or {}),
+        tonumber(info_map.wins) or 0,
+        tonumber(info_map.losses) or 0))
 
-    if self.info_map.complete then
+    if info_map.complete then
         self.title:setString("The Shadow Road - Complete")
     else
         self.title:setString("The Shadow Road")
     end
 
-    -- rebuild scroll content (clear the inner container, NOT the scrollview
+    -- Rebuild scroll content (clear the inner container, NOT the scrollview
     -- itself — ScrollView:addChild routes to the inner container, and calling
-    -- removeAllChildren on the scrollview would drop the container too)
-    pcall(function ()
-        self.scroll:getInnerContainer():removeAllChildren()
-    end)
+    -- removeAllChildren on the scrollview would drop the container too).
+    local inner = self.scroll and self.scroll:getInnerContainer()
+    if inner and inner.removeAllChildren then
+        inner:removeAllChildren()
+    end
+    -- Add labels directly to the inner container. Some older Cocos bindings
+    -- inherit ScrollView:addChild from Node instead of forwarding it, which
+    -- leaves rows behind the scroll clip (or fails to clear them on refresh).
+    self._scroll_content = inner or self.scroll
     local cur = self:CurrentNodeId()
     local total_h = 0
     local y = 0
+    self.rendered_node_count = 0
 
-    for _, region in ipairs(campaign_data.REGIONS) do
-        total_h = total_h + HEADER_H + (#region.nodes * ROW_H) + 8
+    for _, region in ipairs(campaign_data.REGIONS or {}) do
+        total_h = total_h + HEADER_H + (#(region.nodes or {}) * ROW_H) + 8
     end
     self.scroll:setInnerContainerSize(cc.size(size.width - 40, math.max(total_h, size.height - 160)))
 
     local inner_h = math.max(total_h, size.height - 160)
     y = inner_h
 
-    for _, region in ipairs(campaign_data.REGIONS) do
-        local header = cc.Label:createWithSystemFont(region.name .. "  -  " .. region.sub, "Arial", 20)
+    for _, region in ipairs(campaign_data.REGIONS or {}) do
+        local region_name = tostring(region.name or "Unknown Region")
+        local region_sub = tostring(region.sub or "")
+        local header_text = region_name
+        if region_sub ~= "" then header_text = header_text .. "  -  " .. region_sub end
+        local header = cc.Label:createWithSystemFont(header_text, "Arial", 20)
         header:setAnchorPoint(cc.p(0, 1))
         header:setPosition(cc.p(0, y))
         header:setColor(ui_helper:GetColor3B(0x53d769))
-        self.scroll:addChild(header)
+        self._scroll_content:addChild(header)
         y = y - HEADER_H
 
-        for _, node in ipairs(region.nodes) do
+        for _, node in ipairs(region.nodes or {}) do
             self:_AddNodeRow(node, y)
+            self.rendered_node_count = self.rendered_node_count + 1
             y = y - ROW_H
         end
         y = y - 8
     end
 
-    -- current-node info bar
+    -- Current-node info bar. A completed road must replace any stale node
+    -- description, otherwise reopening it can look as though it never loaded.
     local cur_node = campaign_data.node_by_id(cur)
     if cur_node then
         local txt = cur_node.name .. ": " .. cur_node.desc
@@ -218,6 +259,10 @@ function meta:Render()
             txt = txt .. "  [Power: " .. cur_node.power.name .. "]"
         end
         self.info:setString(txt)
+    elseif info_map.complete then
+        self.info:setString("The Shadow Road is clear. Replay a cleared node or return home.")
+    else
+        self.info:setString("Choose the highlighted encounter to continue.")
     end
 
     pcall(function () self.scroll:scrollToTop(0, true) end)
@@ -248,7 +293,7 @@ function meta:_AddNodeRow(node, y)
     else
         label:setColor(ui_helper:GetColor3B(0xeeeeee))
     end
-    self.scroll:addChild(label)
+    (self._scroll_content or self.scroll):addChild(label)
 
     -- tap to fight
     local listener = cc.EventListenerTouchOneByOne:create()

@@ -23,15 +23,20 @@ end
 
 function meta:Init(result,reward_info)
 
+    -- Offline/campaign battle messages intentionally omit optional legacy
+    -- result fields. Keep the result panel usable instead of raising on a
+    -- nil reward or MVP payload and leaving the player on a blank scene.
+    reward_info = reward_info or {}
     self:setVisible(true)
     self.node = nil
     self.back_btn = nil
     self.action_node = nil
     self.reward_count = 0
-    self.item_height = 60    --资源奖励位置
+    self.item_height = 60    --
     self.max_item_count = 0
-    self.node_height = 720 - 50 --奖励 总节点 位置
+    self.node_height = 720 - 50 --
     self.reward_list = {}
+    self.reward_action_over = false
     self.have_mvp = false
     self.is_pvp = false
     self.light_skeleton = nil
@@ -49,7 +54,7 @@ function meta:Init(result,reward_info)
     self.result_animation_node = skeleton
     self.end_animation:addChild(skeleton,99)
     self:RegisterSpineEvent()
-    --铃铛
+    --
     self.skeleton_lingdang = skeleton_lingdang
     skeleton_lingdang:setToSetupPose()
     skeleton_lingdang:setPosition({x = 0, y = 0})
@@ -91,13 +96,13 @@ function meta:Init(result,reward_info)
     end
     self.node:getChildByName("light_node"):addChild(self.light_skeleton)
 
-    --测试数据***********************************
+    --
 
     self.mvp_info = {}
     -- self.mvp_info.model_id = 110012
     -- self.mvp_info.mvp_value_1 = 100
     -- self.mvp_info.mvp_value_2 = 99
-    self.mvp_info = reward_info.mvp_card_info
+    self.mvp_info = reward_info.mvp_card_info or {}
 
     if next(self.mvp_info) ~= nil then
         self.have_mvp = true
@@ -125,7 +130,7 @@ function meta:Init(result,reward_info)
     -- rr.attr_id = 500001
     -- rr.value = 20
     -- table.insert(self.reward_list, rr)
-    self.reward_list = reward_info.reward_info
+    self.reward_list = reward_info.reward_info or {}
 
     if self.cur_elo ~= self.last_elo and arena_logic.arena_stage ~= constants.ARENA_STAGE.casual then
         self.is_pvp = true
@@ -138,7 +143,7 @@ function meta:Init(result,reward_info)
     self:RegisterWidgeEvent()
 end
 
---熟练度
+--
 function meta:ShowExpBar()
 
     self.exp_bar_node = require("modules.battle.battle_dexterity_template").new()
@@ -155,15 +160,21 @@ function meta:ShowMvp(mvp_info)
     self:addChild(self.mvp_node)
 end
 
---奖励
+--
 function meta:ShowReward(reward_list)
     if reward_list and #reward_list > 0 then
         self.reward_node = require("modules.battle.battle_result_reward_panel").new()
         self.reward_node:Init(self.have_mvp,reward_list)
         self:addChild(self.reward_node)
+    else
+        -- The stock result sequence waits for reward_action_over before its
+        -- touch layer exits. A campaign defeat legitimately has no loot, so
+        -- complete that step immediately rather than trapping the player on
+        -- an empty result screen.
+        self.reward_action_over = true
     end
 end
---天梯分数
+--
 function meta:ShowElo()
     self.elo_bar_panel = require("modules.battle.battle_result_elo_template").new()
     self.elo_bar_panel:Init(self.cur_elo,self.last_elo)
@@ -230,7 +241,7 @@ function meta:RegisterEvent()
         self.reward_action_over =true
     end)
 
-    --合成
+    --
     self:RegisterGraphic("card_synthesis", function ()
         self.mvp_node:setVisible(false)
         battle_logic:ExitBattle()
@@ -270,7 +281,7 @@ function meta:RegisterSpineEvent()
 end
 
 function meta:RegisterWidgeEvent()
-    --是否是PVP
+    --
     ui_helper:AddClick(self.touch_layer,function()
 
         if self.reward_action_over then

@@ -1221,8 +1221,13 @@ function offline_server:OnCampaignOver(battle, cmd_over, node)
     local csave = self:GetCampaignSave()
     if battle.win_user_id == battle.own.user_id then
         local result = campaign_service.apply_victory(csave, node)
-        -- campaign EXP also feeds the Android level/EXP progression
+        -- Campaign EXP also feeds the Android level/EXP progression. Include
+        -- the same EXP in the result payload for the stock result overlay;
+        -- the overlay is display-only here (the reward was already applied).
         self:AddExp(result.exp_gain)
+        cmd_over.reward_info = {
+            { type = "resource", attr_id = 400001, value = result.exp_gain },
+        }
         cmd_over.campaign_info = {
             node_id = node.id,
             victory = true,

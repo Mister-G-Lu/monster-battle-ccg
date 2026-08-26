@@ -536,7 +536,17 @@ end
 
 -- Leave battle
 function meta:ExitBattle()
+    local return_to_campaign = self.battle_type == "campaign"
     global:PopScene()
+
+    -- A campaign battle starts from the Adventure world-system panel. Make
+    -- that destination explicit when the result screen closes; relying on a
+    -- hidden child of the home .csb was what could leave players staring at
+    -- the empty legacy Adventure panel after a battle.
+    if return_to_campaign then
+        graphic:DispatchEvent("switch_system_module", "campaign")
+    end
+
     if self.battle_type == "challenge" then
         challenge_logic:BattleWait()
     end

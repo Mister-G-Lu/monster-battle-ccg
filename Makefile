@@ -15,6 +15,7 @@ lua-campaign:
 	$$LUA tests/campaign_test.lua && $$LUA tests/campaign_balance_diag.lua && \
 	$$LUA tests/level_w1_test.lua && $$LUA tests/campaign_service_test.lua && \
 	$$LUA tests/campaign_battle_test.lua && $$LUA tests/campaign_client_test.lua && \
+	$$LUA tests/campaign_ui_test.lua && $$LUA tests/integration_test.lua && \
 	$$LUA tests/guide_battle_test.lua && $$LUA tests/battle_stall_test.lua && \
 	$$LUA tests/home_battle_button_test.lua && $$LUA tests/web_bridge_test.lua
 
