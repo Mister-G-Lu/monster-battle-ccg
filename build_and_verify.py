@@ -60,6 +60,9 @@ CHANGED = {
     "src/utils/csv.lua": os.path.join(DECRYPTED, "utils", "csv.lua"),
     "src/modules/world/system/home_panel.lua": os.path.join(DECRYPTED, "modules", "world", "system", "home_panel.lua"),
     "src/modules/world/system/campaign_panel.lua": os.path.join(DECRYPTED, "modules", "world", "system", "campaign_panel.lua"),
+    # Bug fixes: adventure button and booster-pack black screen
+    "src/modules/world/world_panel.lua": os.path.join(DECRYPTED, "modules", "world", "world_panel.lua"),
+    "src/modules/chest/open_chest_panel.lua": os.path.join(DECRYPTED, "modules", "chest", "open_chest_panel.lua"),
 }
 
 errors = []
