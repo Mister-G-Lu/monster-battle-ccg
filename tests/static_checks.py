@@ -10,6 +10,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+
 ROOT = Path(__file__).resolve().parents[1]
 CHINESE_RE = re.compile(r"[\u4e00-\u9fff]")
 ALLOWED_CHINESE_FILES = {
@@ -30,6 +32,12 @@ def check_no_chinese_artifacts() -> list[str]:
         skip_parts = {
             "decrypted", "csv_plain", "sim_save", "sim_save_int", "sim_save_web",
             "node_modules", "dist",
+            # web/public/ is the staging dir prepare_web.py fills from
+            # decrypted/ + csv_plain/ (gitignored, like decrypted/ itself)
+            "public",
+            # archive/ holds byte-identical copies of stock game Lua, Chinese
+            # comments included, so restoring them is an exact copy
+            "archive",
         }
         if any(p in skip_parts for p in rel.parts):
             continue
@@ -103,6 +111,62 @@ def check_web_recruit_ui() -> list[str]:
     return errors
 
 
+def check_archived_sources() -> list[str]:
+    """Archived game modules must stay archived: recoverable, but unshipped
+    and unreferenced (see scripts/archived_sources.py)."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from archived_sources import ARCHIVED_SOURCES  # noqa: E402
+
+    errors: list[str] = []
+    archive_dir = ROOT / "archive"
+    lua_roots = [ROOT / "src", ROOT / "web" / "dist" / "game"]
+
+    for rel in sorted(ARCHIVED_SOURCES):
+        # 1. never shipped from src/
+        if (ROOT / "src" / rel).exists():
+            errors.append(f"archived module must not live in src/: {rel}")
+        # 2. never shipped in the browser build
+        if (ROOT / "web" / "dist" / "game" / rel).exists():
+            errors.append(f"archived module still ships in web/dist/game/: {rel}")
+        # 3. recoverable from archive/
+        if not list(archive_dir.rglob(Path(rel).name)):
+            errors.append(f"archived module has no copy under archive/: {rel}")
+        # 4. nothing live may require it
+        dotted = rel[:-4].replace("/", ".") if rel.endswith(".lua") else rel
+        needle = f'"{dotted}"'
+        for root in lua_roots:
+            if not root.is_dir():
+                continue
+            for path in root.rglob("*.lua"):
+                if needle in path.read_text(encoding="utf-8", errors="ignore"):
+                    errors.append(
+                        f"{path.relative_to(ROOT)} requires archived module {dotted}"
+                    )
+
+    # 5. the shipped APK must not carry them either (namelist only — no decrypt)
+    apk = ROOT / "English_offline.apk"
+    if apk.is_file():
+        import io
+        import zipfile
+
+        with zipfile.ZipFile(apk) as outer:
+            if "assets/src.mu" in outer.namelist():
+                with zipfile.ZipFile(io.BytesIO(outer.read("assets/src.mu"))) as inner:
+                    packed = set(inner.namelist())
+                for rel in sorted(ARCHIVED_SOURCES):
+                    if f"src/{rel}" in packed:
+                        errors.append(f"English_offline.apk still ships {rel}")
+
+    # 6. the browser manifest must not list them either
+    manifest = ROOT / "web" / "dist" / "game-manifest.json"
+    if manifest.is_file():
+        listed = set(json.loads(manifest.read_text(encoding="utf-8")).get("lua", []))
+        for rel in sorted(ARCHIVED_SOURCES):
+            if rel in listed:
+                errors.append(f"web/dist/game-manifest.json still lists {rel}")
+    return errors
+
+
 def check_balance_audit() -> list[str]:
     result = subprocess.run(
         [sys.executable, str(ROOT / "scripts/analyze_balance.py"), "--fail-on-critical"],
@@ -138,6 +202,7 @@ def main() -> int:
         check_balance_audit,
         check_web_recruit_ui,
         check_landing_serves_web_game,
+        check_archived_sources,
     ):
         errors.extend(check())
     errors.extend(extra)

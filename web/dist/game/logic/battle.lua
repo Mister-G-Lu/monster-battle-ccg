@@ -23,6 +23,16 @@ local BATTLE_RESULT = constants.BATTLE_RESULT
 local EVENT_TYPE = constants.BATTLE_EVENT_TYPE
 local POWER_NAME = constants.POWER_NAME
 
+-- Offline watchdog budgets (seconds).  Every animation in the battle scene is
+-- allowed to take its time; these only fire when a callback never arrives,
+-- which on a device with a missing animation resource means "never".
+-- First stuck sub-event gets a generous budget; once we know this device does
+-- not report animation completion, stop paying the full price per event.
+local SUB_EVENT_FIRST_TIMEOUT = 2.0
+local SUB_EVENT_RETRY_TIMEOUT = 0.12
+-- Hard ceiling on being locked out of the player's own turn.
+local OFF_TURN_TIMEOUT = 15.0
+
 -- Battle stage
 meta.STAGE = {
     init  = 1,        -- 1.battle init
@@ -70,6 +80,11 @@ function meta:Clean()
     self._standby_block_time = 0
     self._auto_standby_wait = 0
     self._enemy_think_time = 0
+    -- sub-event / off-turn watchdog state (see Update)
+    self._sub_event_block_time = 0
+    self._sub_event_rescues = 0
+    self._off_turn_time = 0
+    self._off_turn_progress = nil
 end
 
 function meta:PushBattleQueue(name, data)
@@ -127,9 +142,41 @@ function meta:Update(elapsed_time)
         end
     end
 
+    -- Sub-event watchdog.  cmd_battle_attack clears sub_event_complete and
+    -- only the animation callback sets it again.  On a device whose battle
+    -- animations never report completion that callback never arrives, the
+    -- head of battle_command_queue is re-dispatched every frame and returns
+    -- immediately, and the battle freezes mid-combat.  The player cannot
+    -- break out either: cur_stage is wait/enemy, so ReqBattleAttack() is a
+    -- no-op.  Bound the wait and let the queue move on.
+    if not self.sub_event_complete then
+        self._sub_event_block_time = (self._sub_event_block_time or 0) + elapsed_time
+        local sub_limit = (self._sub_event_rescues or 0) > 0
+            and SUB_EVENT_RETRY_TIMEOUT or SUB_EVENT_FIRST_TIMEOUT
+        if self._sub_event_block_time > sub_limit then
+            self._sub_event_rescues = (self._sub_event_rescues or 0) + 1
+            print("[BATTLE] WARNING: sub-event animation never completed after "
+                .. string.format("%.2f", sub_limit) .. "s, forcing the queue on (rescue #"
+                .. self._sub_event_rescues .. ")")
+            self._sub_event_block_time = 0
+            self.sub_event_complete = true
+        end
+    else
+        self._sub_event_block_time = 0
+    end
+
     -- Enemy think bubble: if the queue is frozen on a missing animation
-    -- during their turn, drop the deploy lock so AI commands can run.
-    if self.cur_stage == self.STAGE.enemy and self.is_play_animation then
+    -- during their turn (or during the combat phase that follows it), drop
+    -- the deploy lock so AI commands can run.
+    --
+    -- Exception: while the standby handshake is in flight, clearing the lock
+    -- here would only make cmd_battle_standby re-dispatch and reset its own
+    -- timer, starving the standby watchdog below.  Let that one finish it.
+    local head_command = self.battle_command_queue[1]
+    local standby_in_flight = (self._standby_block_time or 0) > 0
+        or (head_command and head_command.name == "cmd_battle_standby")
+    if (self.cur_stage == self.STAGE.enemy or self.cur_stage == self.STAGE.wait)
+        and self.is_play_animation and not standby_in_flight then
         self._enemy_think_time = (self._enemy_think_time or 0) + elapsed_time
         if self._enemy_think_time > 3.0 then
             print("[BATTLE] enemy think stall; clearing animation lock")
@@ -139,6 +186,45 @@ function meta:Update(elapsed_time)
         end
     else
         self._enemy_think_time = 0
+    end
+
+    -- Last-resort guard: never stay locked out of the player's turn.  The
+    -- watchdogs above keep the queue draining, but if the server's own-prep
+    -- command is somehow lost the battle scene would sit on the enemy's turn
+    -- with no way back.  Hand control to the player instead.
+    --
+    -- Measured against playback *progress*, not wall clock: a long boss fight
+    -- legitimately keeps the player off-turn for many seconds while commands
+    -- replay, so only a queue that is not moving at all counts as stuck.
+    if self.cur_stage == self.STAGE.enemy or self.cur_stage == self.STAGE.wait then
+        local pending = self.battle_command_queue[1]
+        local pending_events = pending and pending.data and pending.data.event_list
+        local progress = string.format("%d|%s|%d",
+            #self.battle_command_queue,
+            tostring(pending and pending.name),
+            pending_events and #pending_events or 0)
+        if progress == self._off_turn_progress then
+            self._off_turn_time = (self._off_turn_time or 0) + elapsed_time
+        else
+            self._off_turn_progress = progress
+            self._off_turn_time = 0
+        end
+        if self._off_turn_time > OFF_TURN_TIMEOUT then
+            self._off_turn_time = 0
+            print("[BATTLE] WARNING: battle queue made no progress for "
+                .. OFF_TURN_TIMEOUT .. "s, clearing battle locks")
+            self.is_play_animation = false
+            self._anim_block_time = 0
+            self._standby_block_time = 0
+            self.sub_event_complete = true
+            if #self.battle_command_queue == 0 then
+                -- nothing left to play back: give the turn back
+                self:SetBattleStage(self.STAGE.own)
+            end
+        end
+    else
+        self._off_turn_time = 0
+        self._off_turn_progress = nil
     end
 
     if self.is_play_animation then
