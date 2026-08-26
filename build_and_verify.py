@@ -55,9 +55,11 @@ CHANGED = {
     "src/logic/guide.lua": os.path.join(DECRYPTED, "logic", "guide.lua"),
     "src/logic/battle.lua": os.path.join(DECRYPTED, "logic", "battle.lua"),
     "src/modules/battle/match_panel.lua": os.path.join(DECRYPTED, "modules", "battle", "match_panel.lua"),
+    "src/modules/battle/battle_result_panel.lua": os.path.join(DECRYPTED, "modules", "battle", "battle_result_panel.lua"),
     "src/manager/text_loader.lua": os.path.join(DECRYPTED, "manager", "text_loader.lua"),
     "src/utils/csv.lua": os.path.join(DECRYPTED, "utils", "csv.lua"),
     "src/modules/world/system/home_panel.lua": os.path.join(DECRYPTED, "modules", "world", "system", "home_panel.lua"),
+    "src/modules/world/system/campaign_panel.lua": os.path.join(DECRYPTED, "modules", "world", "system", "campaign_panel.lua"),
 }
 
 errors = []

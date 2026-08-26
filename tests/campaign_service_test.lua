@@ -369,6 +369,28 @@ if fixtures_ready then
     check(b.is_over, "campaign battle reaches game over")
     check(b.win_user_id == b.own.user_id, "campaign battle won by the player (" .. tostring(b.win_user_id) .. ")")
 
+    -- The stock result UI dereferences both of these fields. They are an
+    -- integration contract for the post-battle Adventure return, not optional
+    -- decoration: nil values used to leave the native result flow blank/stuck.
+    local last_over = nil
+    for i = #dispatched, 1, -1 do
+        local d = dispatched[i]
+        if d.kind == "cmd_battle" and d.msg and d.msg.cmd_battle_over then
+            last_over = d.msg.cmd_battle_over
+            break
+        end
+    end
+    check(last_over ~= nil, "campaign battle emits cmd_battle_over")
+    if last_over then
+        check(type(last_over.mvp_card_info) == "table",
+            "campaign result carries an empty MVP table when no MVP exists")
+        check(type(last_over.reward_info) == "table",
+            "campaign result carries a reward list")
+        local reward = last_over.reward_info[1] or {}
+        check(reward.type == "resource" and reward.attr_id == 400001 and reward.value == w1.exp,
+            "campaign result exposes the w1 EXP reward to the native result UI")
+    end
+
     -- the service applied the win rewards end-to-end
     local csave = server:GetCampaignSave()
     check(csave.cleared["w1"] == true, "w1 cleared by OnCampaignOver")

@@ -416,7 +416,9 @@ function offline_battle:FinishBattle(winner_id)
         reward_info = {},
         pve_info = nil,
         adventure_info = nil,
-        mvp_card_info = nil,
+        -- The stock result panel calls next(mvp_card_info); campaign battles
+        -- have no MVP payload, so it must still be a table rather than nil.
+        mvp_card_info = {},
     }
     if self.opts.on_battle_over then
         self.opts.on_battle_over(self, cmd_over)

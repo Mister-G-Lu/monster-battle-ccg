@@ -129,11 +129,50 @@ function mockEngine(overrides = {}) {
   return engine;
 }
 
-describe('recruit-draft chooser', () => {
+describe('campaign map and recruit-draft UI', () => {
   let root;
   beforeEach(() => {
     installDom();
     root = new FakeNode('div');
+  });
+
+  it('renders a playable Adventure road and starts its selected encounter', () => {
+    const engine = mockEngine();
+    engine._state.info.pending_recruit = null;
+    const ui = new UI(root, engine);
+    ui.screen = 'campaign';
+    ui.render();
+
+    assert.match(root.textContent, /The Shadow Road/);
+    assert.match(root.textContent, /Whispering Woods/);
+    assert.match(root.textContent, /Forest Trail/);
+    assert.match(root.textContent, /Deep Thicket/);
+    const nodes = find(root, (n) => n.classList.contains('node'));
+    assert.equal(nodes.length, 2);
+    assert.equal(nodes[0].disabled, false);
+    assert.equal(nodes[1].disabled, false);
+
+    nodes[1].onclick();
+    assert.deepEqual(engine._state.startCalls, ['w2']);
+    assert.equal(ui.screen, 'battle');
+    assert.match(root.textContent, /Victory/);
+  });
+
+  it('returns to the populated Adventure road after a post-battle result', () => {
+    const engine = mockEngine();
+    engine._state.info.pending_recruit = null;
+    const ui = new UI(root, engine);
+    ui.screen = 'battle';
+    ui.activeNode = { id: 'w1', name: 'Forest Trail' };
+    ui.render();
+
+    const back = find(root, (n) => n.tagName === 'BUTTON' && /Return to the Road/.test(n.textContent))[0];
+    assert.ok(back);
+    back.onclick();
+
+    assert.equal(ui.screen, 'campaign');
+    assert.match(root.textContent, /Whispering Woods/);
+    assert.equal(find(root, (n) => n.classList.contains('node')).length, 2);
   });
 
   it('shows the 3-card draft after a first-clear victory (does not auto-skip)', () => {

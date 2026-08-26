@@ -3,7 +3,6 @@ local graphic = require "manager.graphic"
 local configuration = require "manager.configuration"
 
 local mail_logic = require "logic.mail"
-local pve_logic = require "logic.pve"
 local user_logic = require "logic.user"
 
 local meta = class("home_panel",function ()
@@ -17,19 +16,10 @@ function meta:ctor()
     self:addChild(arena_node)
     self.arena_node = arena_node
 
-    -- Campaign map (The Shadow Road) — the Play/Battle destination. The
-    -- campaign is served by the app's own offline service and fought on the
-    -- native battle engine; the stock PvE mission list is no longer the
-    -- entry point (kept only as a pcall fallback).
-    self.campaign_node = nil
-    local ok, campaign_node = pcall(function ()
-        return require("modules.world.system.campaign_panel").new()
-    end)
-    if ok and campaign_node then
-        campaign_node:setVisible(false)
-        self:addChild(campaign_node)
-        self.campaign_node = campaign_node
-    end
+    -- The Shadow Road is a real world-system module. Do not construct it as
+    -- a child of this .csb: a pushed battle scene can then return to a hidden
+    -- child while the stock Adventure panel takes focus, producing an empty
+    -- screen. OpenCampaign routes through world_scene instead.
     -- Mail entry
     self.mail_btn = self:getChildByName("mailbox")
     -- new mail tips animation
@@ -37,17 +27,15 @@ function meta:ctor()
     ui_helper:BindTimeLine(self.mail_btn_newtip, "interface/world/newtip.csb")
     self.mail_btn_newtip:PlayAnimation("loop", true)
 
-    -- Battle: the stock home bar has two doors to a fight — "Battle"
-    -- (pvpbtn) and "Adventure" (pvebtn).  Offline there is exactly one
-    -- destination, The Shadow Road, so keep ONE visible door and hide the
-    -- duplicate.  "Battle" is the button players actually tap, so it is the
-    -- one that stays and it opens the campaign map directly.  "Adventure"
-    -- only takes over if this .csb has no pvpbtn.
+    -- The stock home bar has two doors to a fight: "Battle" (pvpbtn) and
+    -- "Adventure" (pvebtn). The Shadow Road is an adventure campaign, so
+    -- Adventure is the visible canonical entry. Battle remains wired as a
+    -- compatibility fallback for layouts that do not expose pvebtn.
     self.pvp_btn = self:getChildByName("pvpbtn")
     self.pve_btn = self:getChildByName("pvebtn")
-    self.campaign_btn = self.pvp_btn or self.pve_btn
-    if self.pvp_btn then self.pvp_btn:setVisible(true) end
-    if self.pve_btn then self.pve_btn:setVisible(self.pvp_btn == nil) end
+    self.campaign_btn = self.pve_btn or self.pvp_btn
+    if self.pve_btn then self.pve_btn:setVisible(true) end
+    if self.pvp_btn then self.pvp_btn:setVisible(self.pve_btn == nil) end
 
     -- Events / challenge rooms need a second player. Hide in single-player.
     self.event_btn = self:getChildByName("event")
@@ -116,25 +104,17 @@ function meta:ctor()
     self:RegisterWidgetEvent()
 end
 
--- The Shadow Road is the only fight in this offline build, so the home bar's
--- Battle button opens the campaign map straight away — no matchmaking, no
--- stock PvE mission list in between.
+-- The Shadow Road is the only offline Adventure. Route through world_scene so
+-- its full-screen panel is a sibling of home, survives a pushed battle scene,
+-- and can be selected again when the result screen exits. Never fall back to
+-- the archived stock PvE list: it has no campaign content to show.
 function meta:OpenCampaign()
-    if self.campaign_node then
-        self.campaign_node:Show()
-        return
-    end
-    -- the campaign layer failed to build; fall back to the stock PvE list
-    print("[HOME] campaign panel unavailable, falling back to the PvE list")
-    pve_logic:ShowPve()
+    graphic:DispatchEvent("switch_system_module", "campaign")
 end
 
 function meta:Update(elapsed_time)
     -- self.reward_tip_node:setVisible(daily_logic.login_reward > 0)
     self.arena_node:Update(elapsed_time)
-    if self.campaign_node then
-        self.campaign_node:Update(elapsed_time)
-    end
 end
 
 
@@ -184,8 +164,9 @@ function meta:RegisterWidgetEvent()
     ui_helper:AddClick(self.mail_btn, function ()
         mail_logic:Query()
     end)
-    -- Battle -> The Shadow Road campaign map.  Both stock doors are bound so
-    -- whichever one this .csb exposes lands in the campaign, not in a menu.
+    -- Adventure -> The Shadow Road campaign map. Both stock doors are bound
+    -- so whichever one this .csb exposes lands in the campaign, not in the
+    -- archived stock PvE menu.
     if self.pvp_btn then
         ui_helper:AddClick(self.pvp_btn, function ()
             self:OpenCampaign()
